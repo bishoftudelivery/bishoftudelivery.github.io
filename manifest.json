@@ -1,13 +1,14 @@
 {
-  "name": "ቢሾፍቱ ዴሊቨሪ",
+  "name": "ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery",
   "short_name": "BishoftuEats",
-  "description": "ቢሾፍቱ ውስጥ ምግብ ማድረሻ - Food Delivery in Bishoftu",
+  "description": "Food Delivery Service in Bishoftu - Order burgers, pizza, juice, fish & chips",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff4500",
   "orientation": "portrait",
+  "categories": ["food", "shopping"],
   "icons": [
     {
       "src": "/icons/icon-72x72.png?v=13",
