@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="am" data-version="13.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#ff4500">
+    <meta name="description" content="ቢሾፍቱ ውስጥ ምግብ ማድረሻ - Food Delivery Service in Bishoftu">
+    <link rel="manifest" href="/manifest.json?v=13">
+    
+    <!-- iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BishoftuEats">
+    <link rel="apple-touch-icon" href="/icons/icon-152x152.png?v=13">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/icons/favicon.ico?v=13">
+    
+    <style>
+        :root { --primary: #ff4500; --dark: #1a1a1a; --bg: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--bg); padding-bottom: 100px; direction: ltr; }
+        header { background: white; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .streak-fire { display: flex; justify-content: center; gap: 8px; margin: 5px 0; }
+        .fire { font-size: 24px; filter: grayscale(100%); opacity: 0.2; transition: 0.5s; }
+        .fire.active { filter: grayscale(0%); opacity: 1; animation: burn 1.5s infinite; }
+        @keyframes burn { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        .container { max-width: 600px; margin: auto; padding: 15px; }
+        .res-title { background: var(--primary); color: white; padding: 10px; border-radius: 8px; margin: 20px 0 10px; font-size: 1.2rem; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; }
+        .card img { width: 100%; height: 110px; object-fit: cover; background: linear-gradient(45deg, #f5f5f5, #e0e0e0); }
+        .card-info { padding: 10px; }
+        .card-title { font-size: 0.85rem; font-weight: 600; margin: 0; min-height: 35px; }
+        .card-price { color: var(--primary); font-weight: bold; font-size: 0.9rem; }
+        .card input { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; accent-color: var(--primary); }
+
+        /* Modal Style */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
+        .modal-content { background: white; margin: 15% auto; padding: 20px; border-radius: 15px; width: 85%; max-width: 400px; text-align: center; }
+        .payment-info { background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 15px 0; text-align: left; font-size: 0.9rem; }
+        
+        .floating-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: white; padding: 15px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000; }
+        .btn { background: var(--primary); color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
+        input[type="text"], input[type="tel"] { width: 100%; padding: 12px; margin: 5px 0 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        
+        /* PWA Popup */
+        .pwa-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 10001;
+            width: 85%;
+            max-width: 300px;
+            text-align: center;
+            animation: popupIn 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+        
+        @keyframes popupIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .pwa-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .pwa-title {
+            margin: 0 0 8px 0;
+            color: var(--dark);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .pwa-message {
+            margin: 0 0 20px 0;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .pwa-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .pwa-btn {
+            flex: 1;
+            padding: 12px 0;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .pwa-yes {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .pwa-no {
+            background: #f0f0f0;
+            color: #666;
+        }
+        
+        /* Location Request Modal */
+        .location-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            z-index: 10002;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+        }
+        
+        .location-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .location-title {
+            margin: 0 0 10px 0;
+            color: var(--dark);
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .location-message {
+            margin: 0 0 25px 0;
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .location-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .location-btn {
+            flex: 1;
+            padding: 14px 0;
+            border-radius: 10px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .location-allow {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .location-deny {
+            background: #f0f0f0;
+            color: #666;
+        }
+        
+        /* Offline Indicator */
+        #offlineIndicator {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: #ff4444;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            z-index: 10000;
+            display: none;
+        }
+        
+        /* Delivery Fee Notice */
+        .delivery-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 10001;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            animation: fadeInOut 3s ease;
+            display: none;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Offline Indicator -->
+<div id="offlineIndicator">📶 ኦፍላይን ሁነዋል</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<!-- Location Request Modal -->
+<div id="locationModal" class="location-modal">
+    <div class="location-icon">📍</div>
+    <div class="location-title">አካባቢዎን ያሳውቁ</div>
+    <div class="location-message">
+        ምግብዎን በፍጥነት ለማድረስ የእርስዎን አካባቢ ማወቅ አለብን።
+        <br><br>
+        <small style="color: #999; font-size: 0.85rem;">
+            ⚠️ እባክዎ የአካባቢ አገልግሎትዎን ያብሩ!
+            <br>📍 ከቴሌግራም ትዕዛዝ ጋር ብቻ ይላካል
+        </small>
+    </div>
+    <div class="location-buttons">
+        <button class="location-btn location-allow" onclick="requestLocation()">አረጋግጥ</button>
+        <button class="location-btn location-deny" onclick="denyLocation()">አልፈልግም</button>
+    </div>
+</div>
+
+<!-- PWA Popup -->
+<div id="pwaPopup" class="pwa-popup">
+    <div class="pwa-icon">📱</div>
+    <div class="pwa-title">አፕ አርግ</div>
+    <div class="pwa-message">ወደ ስልክዎ መነሻ ማውጫ ይጨምሩ ፈጣን መዳረሻ ያግኙ</div>
+    <div class="pwa-buttons">
+        <button class="pwa-btn pwa-yes" onclick="installPWA()">አርግ</button>
+        <button class="pwa-btn pwa-no" onclick="dismissPWA()">አትርግ</button>
+    </div>
+</div>
+
+<header>
+    <h1 style="margin:0; color:var(--dark);">ቢሾፍቱ <span style="color:var(--primary)">ዴሊቨሪ</span></h1>
+    <div class="streak-fire" id="fireIcons">
+        <span class="fire" id="s1">🔥</span><span class="fire" id="s2">🔥</span><span class="fire" id="s3">🔥</span>
+    </div>
+    <div id="statusMsg" style="font-size: 0.75rem; color: #666;">በየቀኑ በማዘዝ የሽልማት እሳቱን ያቀጣጥሉ!</div>
+</header>
+
+<div class="container">
+    <div style="background: white; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+        <label>ሙሉ ስም</label>
+        <input type="text" id="custName" placeholder="ስምዎን ያስገቡ">
+        <label>ስልክ ቁጥር</label>
+        <input type="tel" id="custPhone" placeholder="09...">
+        <label>መለያ ቦታ (Landmark)</label>
+        <input type="text" id="custLandmark" placeholder="ለምሳሌ፡ እታለም ሆቴል ጀርባ">
+    </div>
+
+    <!-- Delivery Fee Notice -->
+    <div class="delivery-notice">
+        ⚡ <strong>100 ብር የመላኪያ ክፍያ ይከፈላል!</strong> (የመላኪያ ክፍያ በጠቅላላ ዋጋ ላይ ይጨመራል)
+    </div>
+
+    <div class="res-title">እታለም ኢንተርናሽናል ሆቴል</div>
+    <div class="menu-grid">
+        <!-- Burger Items -->
+        <div class="card"><img src="/assets/double-special-burger.webp?v=13" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700"><div class="card-info"><p class="card-title">Double Special Burger</p><p class="card-price">700 ETB</p></div></div>
+        <div class="card"><img src="/assets/special-burger.webp?v=13" alt="Special Burger"><input type="checkbox" value="Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p><p class="card-price">500 ETB</p></div></div>
+        <div class="card"><img src="/assets/double-beef-burger.webp?v=13" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger" data-price="480"><div class="card-info"><p class="card-title">Double Beef Burger</p><p class="card-price">480 ETB</p></div></div>
+        <div class="card"><img src="/assets/cheese-burger.webp?v=13" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger" data-price="450"><div class="card-info"><p class="card-title">Cheese Burger</p><p class="card-price">450 ETB</p></div></div>
+        <div class="card"><img src="/assets/normal-burger.webp?v=13" alt="Normal Burger"><input type="checkbox" value="Normal Burger" data-price="410"><div class="card-info"><p class="card-title">Normal Burger</p><p class="card-price">410 ETB</p></div></div>
+        <div class="card"><img src="/assets/tuna-burger.webp?v=13" alt="Tuna Burger"><input type="checkbox" value="Tuna Burger" data-price="350"><div class="card-info"><p class="card-title">Tuna Burger</p><p class="card-price">350 ETB</p></div></div>
+        <div class="card"><img src="/assets/vegetable-burger.webp?v=13" alt="Vegetable Burger"><input type="checkbox" value="Vegetable Burger" data-price="250"><div class="card-info"><p class="card-title">Vegetable Burger</p><p class="card-price">250 ETB</p></div></div>
+        <div class="card"><img src="/assets/sandwich-club.webp?v=13" alt="Sandwich Club"><input type="checkbox" value="Sandwich Club" data-price="400"><div class="card-info"><p class="card-title">Sandwich Club</p><p class="card-price">400 ETB</p></div></div>
+        
+        <!-- Chips -->
+        <div class="card"><img src="/assets/chips.webp?v=13" alt="Chips"><input type="checkbox" value="Chips" data-price="250"><div class="card-info"><p class="card-title">Chips (ቺፕስ)</p><p class="card-price">250 ETB</p></div></div>
+        
+        <!-- Pizza Items -->
+        <div class="card"><img src="/assets/etalem-special-pizza.webp?v=13" alt="Etalem Special Pizza"><input type="checkbox" value="Etalem Special Pizza" data-price="650"><div class="card-info"><p class="card-title">Etalem Special Pizza</p><p class="card-price">650 ETB</p></div></div>
+        <div class="card"><img src="/assets/beef-pizza.webp?v=13" alt="Beef Pizza"><input type="checkbox" value="Beef Pizza" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza</p><p class="card-price">600 ETB</p></div></div>
+        <div class="card"><img src="/assets/margaritta-pizza.webp?v=13" alt="Margaritta Pizza"><input type="checkbox" value="Margaritta Pizza" data-price="650"><div class="card-info"><p class="card-title">Margaritta Pizza</p><p class="card-price">650 ETB</p></div></div>
+        <div class="card"><img src="/assets/chicken-pizza.webp?v=13" alt="Chicken Pizza"><input type="checkbox" value="Chicken Pizza" data-price="700"><div class="card-info"><p class="card-title">Chicken Pizza</p><p class="card-price">700 ETB</p></div></div>
+        <div class="card"><img src="/assets/tuna-pizza.webp?v=13" alt="Tuna Pizza"><input type="checkbox" value="Tuna Pizza" data-price="550"><div class="card-info"><p class="card-title">Tuna Pizza</p><p class="card-price">550 ETB</p></div></div>
+        <div class="card"><img src="/assets/vegetable-pizza.webp?v=13" alt="Vegetable Pizza"><input type="checkbox" value="Vegetable Pizza" data-price="350"><div class="card-info"><p class="card-title">Vegetable Pizza</p><p class="card-price">350 ETB</p></div></div>
+        
+        <!-- Juice Items -->
+        <div class="card"><img src="/assets/etalem-special-juice.webp?v=13" alt="Etalem Special Juice"><input type="checkbox" value="Etalem Special Juice" data-price="200"><div class="card-info"><p class="card-title">Etalem Special Juice</p><p class="card-price">200 ETB</p></div></div>
+        <div class="card"><img src="/assets/strawberry-juice.webp?v=13" alt="Strawberry Juice"><input type="checkbox" value="Strawberry Juice" data-price="250"><div class="card-info"><p class="card-title">Strawberry Juice</p><p class="card-price">250 ETB</p></div></div>
+        <div class="card"><img src="/assets/mixed-juice.webp?v=13" alt="Mixed Juice"><input type="checkbox" value="Mixed Juice" data-price="200"><div class="card-info"><p class="card-title">Mixed Juice</p><p class="card-price">200 ETB</p></div></div>
+        
+        <!-- Fish Items -->
+        <div class="card"><img src="/assets/fish-kotelet.webp?v=13" alt="Fish Kotelet"><input type="checkbox" value="Fish Kotelet" data-price="400"><div class="card-info"><p class="card-title">Fish Kotelet</p><p class="card-price">400 ETB</p></div></div>
+        <div class="card"><img src="/assets/grilled-fish.webp?v=13" alt="Grilled Fish"><input type="checkbox" value="Grilled Fish" data-price="400"><div class="card-info"><p class="card-title">Grilled Fish</p><p class="card-price">400 ETB</p></div></div>
+    </div>
+
+    <div class="res-title">ካሜቲ (Kameti's Kitchen)</div>
+    <div class="menu-grid">
+        <!-- Kameti Burger Items -->
+        <div class="card"><img src="/assets/kameti-special-burger.webp?v=13" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p><p class="card-price">500 ETB</p></div></div>
+        <div class="card"><img src="/assets/kameti-cheese-burger.webp?v=13" alt="Kameti Cheese Burger"><input type="checkbox" value="Kameti Cheese Burger" data-price="480"><div class="card-info"><p class="card-title">Cheese Burger</p><p class="card-price">480 ETB</p></div></div>
+        <div class="card"><img src="/assets/kameti-beef-burger.webp?v=13" alt="Kameti Beef Burger"><input type="checkbox" value="Kameti Beef Burger" data-price="450"><div class="card-info"><p class="card-title">Beef Burger</p><p class="card-price">450 ETB</p></div></div>
+        
+        <!-- Kameti Pizza Items -->
+        <div class="card"><img src="/assets/kameti-large-pizza.webp?v=13" alt="Kameti Large Pizza"><input type="checkbox" value="Kameti Large Pizza" data-price="700"><div class="card-info"><p class="card-title">Large Pizza</p><p class="card-price">700 ETB</p></div></div>
+        <div class="card"><img src="/assets/kameti-medium-pizza.webp?v=13" alt="Kameti Medium Pizza"><input type="checkbox" value="Kameti Medium Pizza" data-price="600"><div class="card-info"><p class="card-title">Medium Pizza</p><p class="card-price">600 ETB</p></div></div>
+        <div class="card"><img src="/assets/kameti-tuna-pizza.webp?v=13" alt="Kameti Tuna Pizza"><input type="checkbox" value="Kameti Tuna Pizza" data-price="480"><div class="card-info"><p class="card-title">Tuna Pizza</p><p class="card-price">480 ETB</p></div></div>
+        
+        <!-- Kameti Juice -->
+        <div class="card"><img src="/assets/kameti-special-juice.webp?v=13" alt="Kameti Special Juice"><input type="checkbox" value="Kameti Special Juice" data-price="230"><div class="card-info"><p class="card-title">Special Juice</p><p class="card-price">230 ETB</p></div></div>
+        
+        <!-- Kameti Chips (150 ETB) -->
+        <div class="card"><img src="/assets/chips.webp?v=13" alt="Kameti's Chips"><input type="checkbox" value="Kameti's Chips" data-price="150"><div class="card-info"><p class="card-title">Kameti's Chips</p><p class="card-price">150 ETB</p></div></div>
+    </div>
+</div>
+
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <h2 style="color:var(--primary)">የክፍያ መረጃ</h2>
+        <p>ትዕዛዝዎን ለማረጋገጥ እባክዎ ክፍያውን ቀድመው ይፈጽሙ።</p>
+        <div class="payment-info">
+            <b>ባንክ፡</b> የኢትዮጵያ ንግድ ባንክ (CBE)<br>
+            <b>ሂሳብ ቁጥር፡</b> 1000446752387<br>
+            <b>ስም፡</b> ቢሾፍቱ ዴሊቨሪ<br>
+            <b>ስልክ፡</b> 0962636940<br>
+            <hr>
+            <b>የምግብ ዋጋ፡ <span id="foodTotal">0</span> ETB</b><br>
+            <b>የመላኪያ ክፍያ፡ 100 ETB</b><br>
+            <b>ጠቅላላ ዋጋ፡ <span id="modalTotal">0</span> ETB</b>
+        </div>
+        <p style="font-size: 0.8rem; color:red;">* ክፍያውን ከፈጸሙ በኋላ "በቴሌግራም ላክ" የሚለውን ይጫኑ።</p>
+        <button class="btn" onclick="sendToTelegram()">ትዕዛዙን በቴሌግራም ላክ</button>
+        <button onclick="closeModal()" style="background:none; border:none; margin-top:10px; color:#666; cursor:pointer;">ተመለስ</button>
+    </div>
+</div>
+
+<div class="floating-footer">
+    <button class="btn" onclick="openCheckout()">ትዕዛዝ አጠናቅ (Checkout)</button>
+</div>
+
+<script>
+    const BOT_USERNAME = "Bishoftu_Delivery_bot";
+    let orderData = {};
+    let userLat = null;
+    let userLng = null;
+    let deferredPrompt = null;
+    const DELIVERY_FEE = 100;
+    // UPDATED: No need for SITE_URL when using root domain
+    
+    // Elements
+    const offlineIndicator = document.getElementById('offlineIndicator');
+    const toast = document.getElementById('toast');
+    const pwaPopup = document.getElementById('pwaPopup');
+    const locationModal = document.getElementById('locationModal');
+    
+    // Initialize app
+    window.onload = () => {
+        updateStreakUI();
+        initPWA();
+        
+        // 1. Ask for location immediately
+        setTimeout(() => {
+            showLocationModal();
+        }, 1000);
+        
+        // 2. Show PWA popup after 10 seconds
+        setTimeout(() => {
+            showPWApopup();
+        }, 10000);
+        
+        // Check online/offline status
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        updateOnlineStatus();
+    };
+    
+    // Show location modal
+    function showLocationModal() {
+        // Don't show if already asked in this session
+        const locationAsked = sessionStorage.getItem('locationAsked');
+        if (locationAsked) return;
+        
+        locationModal.style.display = 'block';
+        sessionStorage.setItem('locationAsked', 'true');
+    }
+    
+    // Request location permission
+    function requestLocation() {
+        locationModal.style.display = 'none';
+        
+        if (!navigator.geolocation) {
+            showToast('❌ አካባቢ አገልግሎት የለም', 3000);
+            return;
+        }
+        
+        showToast('📍 አካባቢዎ እየተመዘገበ...', 2000);
+        
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        };
+        
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                userLat = position.coords.latitude;
+                userLng = position.coords.longitude;
+                console.log('✅ Location acquired:', userLat, userLng);
+                showToast('✅ አካባቢዎ ተመዝግቧል!', 3000);
+                
+                sessionStorage.setItem('userLocation', JSON.stringify({
+                    lat: userLat,
+                    lng: userLng
+                }));
+            },
+            (error) => {
+                console.log('❌ Location error:', error.message);
+                let errorMsg = '❌ አካባቢ ማወቅ አልተቻለም';
+                
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        errorMsg = '❌ አካባቢ ፈቃድ አልተሰጠም';
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        errorMsg = '❌ አካባቢ መረጃ የለም';
+                        break;
+                    case error.TIMEOUT:
+                        errorMsg = '❌ አካባቢ መጠየቅ ጊዜው አልፏል';
+                        break;
+                }
+                
+                showToast(errorMsg, 4000);
+            },
+            options
+        );
+    }
+    
+    // Deny location
+    function denyLocation() {
+        locationModal.style.display = 'none';
+        showToast('👌 እሺ፣ አካባቢ አልተጠየቀም', 2000);
+    }
+    
+    // Show PWA popup after 10 seconds
+    function showPWApopup() {
+        const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+        const isDismissed = localStorage.getItem('pwaPopupDismissed') === 'true';
+        
+        if (isInstalled || isStandalone || isDismissed) return;
+        
+        pwaPopup.style.display = 'block';
+        console.log("📱 PWA popup shown after 10 seconds");
+    }
+    
+    // Install PWA
+    function installPWA() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(choice => {
+                if (choice.outcome === 'accepted') {
+                    console.log('✅ User accepted PWA install');
+                    localStorage.setItem('pwaInstalled', 'true');
+                    hidePWApopup();
+                    showToast('✅ አፕዎ ተጫኗል!', 3000);
+                } else {
+                    console.log('❌ User dismissed install prompt');
+                    dismissPWA();
+                }
+                deferredPrompt = null;
+            });
+        } else {
+            showManualInstall();
+        }
+    }
+    
+    // Dismiss PWA
+    function dismissPWA() {
+        hidePWApopup();
+        localStorage.setItem('pwaPopupDismissed', 'true');
+        showToast('👌 እሺ፣ በኋላ ላይ እንደገና እናሳይዎታለን', 2000);
+    }
+    
+    function hidePWApopup() {
+        pwaPopup.style.display = 'none';
+    }
+    
+    function showManualInstall() {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const isAndroid = /Android/.test(navigator.userAgent);
+        
+        let instructions = '';
+        
+        if (isIOS) {
+            instructions = '📱 ለአይፎን/አይፓድ:\n' +
+                       '1. በሳፋሪ ላይ የማጋራት አዶን ይጫኑ (⬆️)\n' +
+                       '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
+                       '3. "አክል" የሚለውን ይጫኑ';
+        } else if (isAndroid) {
+            instructions = '📱 ለአንድሮይድ:\n' +
+                       '1. በቻሮም ላይ ሶስት ነጥብ (⋮) ይጫኑ\n' +
+                       '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
+                       '3. "አክል" የሚለውን ይጫኑ';
+        } else {
+            instructions = '📱 እባክዎ ስልክዎን ይጠቀሙ';
+        }
+        
+        alert('📋 እንዴት አፕን እንደሚጨምሩ:\n\n' + instructions);
+        hidePWApopup();
+    }
+    
+    // Show toast
+    function showToast(message, duration = 3000) {
+        toast.textContent = message;
+        toast.style.display = 'block';
+        toast.style.animation = 'none';
+        setTimeout(() => {
+            toast.style.animation = 'fadeInOut 3s ease';
+        }, 10);
+        
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, duration);
+    }
+    
+    // Initialize PWA
+    function initPWA() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js?v=13')
+                .then(reg => {
+                    console.log('✅ Service Worker registered');
+                })
+                .catch(err => {
+                    console.log('❌ Service Worker failed:', err);
+                });
+        }
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('📱 PWA install prompt available');
+        });
+        
+        window.addEventListener('appinstalled', () => {
+            console.log('🎉 PWA installed');
+            hidePWApopup();
+            localStorage.setItem('pwaInstalled', 'true');
+            showToast('✅ አፕዎ ተጫኗል!', 3000);
+        });
+    }
+    
+    // Update online/offline status
+    function updateOnlineStatus() {
+        offlineIndicator.style.display = navigator.onLine ? 'none' : 'block';
+    }
+    
+    // Update streak UI
+    function updateStreakUI() {
+        const s = parseInt(localStorage.getItem('userStreak')) || 0;
+        for(let i=1; i<=3; i++) {
+            const elem = document.getElementById('s'+i);
+            if (elem) {
+                elem.classList.toggle('active', i <= s);
+            }
+        }
+    }
+    
+    function openCheckout() {
+        const name = document.getElementById('custName').value.trim();
+        const phone = document.getElementById('custPhone').value.trim();
+        const landmark = document.getElementById('custLandmark').value.trim() || "አልተጠቀሰም";
+        
+        if(!name || !phone) {
+            alert("እባክዎ ስም እና ስልክ ያስገቡ!");
+            return;
+        }
+        
+        let foodTotal = 0;
+        let selected = [];
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
+            selected.push(box.value);
+            foodTotal += parseInt(box.getAttribute('data-price'));
+        });
+        
+        if(selected.length === 0) {
+            alert("እባክዎ ቢያንስ አንድ ምግብ ይምረጡ!");
+            return;
+        }
+        
+        const total = foodTotal + DELIVERY_FEE;
+        orderData = { name, phone, landmark, items: selected.join(", "), foodTotal, total };
+        document.getElementById('foodTotal').innerText = foodTotal;
+        document.getElementById('modalTotal').innerText = total;
+        document.getElementById('paymentModal').style.display = "block";
+    }
+    
+    function closeModal() { 
+        document.getElementById('paymentModal').style.display = "none"; 
+    }
+    
+    // Send to Telegram
+    function sendToTelegram() {
+        localStorage.setItem('lastOrder', JSON.stringify(orderData));
+        
+        // Try to get location from sessionStorage
+        if (!userLat || !userLng) {
+            const savedLocation = sessionStorage.getItem('userLocation');
+            if (savedLocation) {
+                const loc = JSON.parse(savedLocation);
+                userLat = loc.lat;
+                userLng = loc.lng;
+            }
+        }
+        
+        // Build the message starting with /order
+        const message = createOrderMessage();
+        
+        // Telegram URL
+        const encodedMessage = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/${BOT_USERNAME}?text=${encodedMessage}`;
+        
+        console.log("📱 Telegram URL:", telegramUrl);
+        console.log("📦 Message to send:", message);
+        
+        // Open Telegram with the message
+        window.open(telegramUrl, '_blank');
+        
+        // Show confirmation
+        setTimeout(() => {
+            alert("✅ ትዕዛዝዎ ተልኳል!\n\n" +
+                  "ወደ ቴሌግራም ተላክዎታል። መልእክቱ ከተከፈተ በኋላ 'SEND' የሚለውን ይጫኑ።");
+            closeModal();
+            clearForm();
+        }, 500);
+    }
+    
+    // Create order message with /order command
+    function createOrderMessage() {
+        let locationInfo = "";
+        let mapUrl = "";
+        
+        if (userLat && userLng) {
+            locationInfo = `📍 Location: ${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
+            mapUrl = `🗺️ Map: https://www.google.com/maps?q=${userLat},${userLng}`;
+        } else {
+            locationInfo = "📍 Location: Not provided";
+            mapUrl = "";
+        }
+        
+        // Streak Logic
+        if(orderData.foodTotal >= 600) {
+            let streak = parseInt(localStorage.getItem('userStreak')) || 0;
+            let last = localStorage.getItem('lastDate');
+            let today = new Date().toDateString();
+            if(last !== today) {
+                streak = (last === new Date(Date.now() - 86400000).toDateString()) ? streak + 1 : 1;
+                localStorage.setItem('userStreak', streak);
+                localStorage.setItem('lastDate', today);
+                updateStreakUI();
+            }
+        }
+        
+        return `/order\n` +
+               `👤 Name: ${orderData.name}\n` +
+               `📞 Phone: ${orderData.phone}\n` +
+               `🏠 Landmark: ${orderData.landmark}\n` +
+               `${locationInfo}\n` +
+               `\n🛒 Items:\n${orderData.items}\n\n` +
+               `💰 Food Total: ${orderData.foodTotal} ETB\n` +
+               `🚚 Delivery Fee: ${DELIVERY_FEE} ETB\n` +
+               `💵 Total: ${orderData.total} ETB\n\n` +
+               `${mapUrl}\n` +
+               `⏰ Time: ${new Date().toLocaleString('am-ET')}\n` +
+               `🔢 Order ID: BD${Date.now().toString().slice(-8)}`;
+    }
+    
+    function clearForm() {
+        document.getElementById('custName').value = '';
+        document.getElementById('custPhone').value = '';
+        document.getElementById('custLandmark').value = '';
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    }
+</script>
+</body>
+</html>
