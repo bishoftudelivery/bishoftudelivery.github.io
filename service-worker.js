@@ -1,89 +1,82 @@
-// Cache name with version
 const CACHE_NAME = 'bishoftu-delivery-v13';
-const BASE_PATH = '/';
+const STATIC_CACHE = 'static-v13';
+const DYNAMIC_CACHE = 'dynamic-v13';
 
-// Files to cache
-const urlsToCache = [
-  BASE_PATH,
-  BASE_PATH + 'index.html',
-  BASE_PATH + 'manifest.json',
-  BASE_PATH + 'service-worker.js',
-  BASE_PATH + 'offline.html',
-  
-  // Icons
-  BASE_PATH + 'icons/icon-72x72.png',
-  BASE_PATH + 'icons/icon-96x96.png',
-  BASE_PATH + 'icons/icon-128x128.png',
-  BASE_PATH + 'icons/icon-144x144.png',
-  BASE_PATH + 'icons/icon-152x152.png',
-  BASE_PATH + 'icons/icon-192x192.png',
-  BASE_PATH + 'icons/icon-512x512.png',
-  BASE_PATH + 'icons/favicon.ico'
-];
-
-// Install service worker
+// Install event
 self.addEventListener('install', event => {
-  console.log('📦 Installing Service Worker v13');
+  console.log('[Service Worker] Installing...');
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('📁 Caching app files...');
-        return cache.addAll(urlsToCache);
-      })
-      .then(() => self.skipWaiting())
+    caches.open(STATIC_CACHE).then(cache => {
+      return cache.addAll([
+        '/',
+        '/index.html',
+        './manifest.json'
+      ]);
+    })
   );
+  self.skipWaiting();
 });
 
-// Activate
+// Activate event
 self.addEventListener('activate', event => {
-  console.log('✅ Service Worker v13 activated');
+  console.log('[Service Worker] Activating...');
   event.waitUntil(
-    caches.keys().then(cacheNames => {
+    caches.keys().then(keys => {
       return Promise.all(
-        cacheNames.map(cache => {
-          if (cache !== CACHE_NAME) {
-            return caches.delete(cache);
+        keys.map(key => {
+          if (key !== STATIC_CACHE && key !== DYNAMIC_CACHE && key !== CACHE_NAME) {
+            console.log('[Service Worker] Removing old cache:', key);
+            return caches.delete(key);
           }
         })
       );
-    }).then(() => self.clients.claim())
+    })
+  );
+  return self.clients.claim();
+});
+
+// Fetch event - Network First Strategy
+self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+  
+  // Skip non-GET requests
+  if (event.request.method !== 'GET' || url.protocol === 'chrome-extension:') {
+    return;
+  }
+
+  event.respondWith(
+    fetch(event.request)
+      .then(networkResponse => {
+        // Cache the fresh response
+        if (networkResponse.ok) {
+          const responseClone = networkResponse.clone();
+          caches.open(DYNAMIC_CACHE).then(cache => {
+            cache.put(event.request, responseClone);
+          });
+        }
+        return networkResponse;
+      })
+      .catch(() => {
+        // If network fails, try cache
+        return caches.match(event.request).then(cachedResponse => {
+          if (cachedResponse) {
+            console.log('[SW] Serving from cache (offline):', event.request.url);
+            return cachedResponse;
+          }
+          
+          // Return offline page or error
+          return new Response('You are offline. Please check your connection.', {
+            status: 503,
+            headers: { 'Content-Type': 'text/plain' }
+          });
+        });
+      })
   );
 });
 
-// Fetch
-self.addEventListener('fetch', event => {
-  const requestUrl = new URL(event.request.url);
-  
-  // Handle root requests
-  if (requestUrl.pathname === '/' || requestUrl.pathname === '') {
-    event.respondWith(
-      caches.match('/index.html')
-        .then(cachedResponse => cachedResponse || fetch(event.request))
-        .catch(() => caches.match('/offline.html'))
-    );
-    return;
+// Listen for messages
+self.addEventListener('message', event => {
+  if (event.data === 'skipWaiting') {
+    self.skipWaiting();
   }
-  
-  // Default caching
-  event.respondWith(
-    caches.match(event.request)
-      .then(cachedResponse => {
-        return cachedResponse || fetch(event.request)
-          .then(response => {
-            // Cache successful responses
-            if (response.status === 200) {
-              const responseToCache = response.clone();
-              caches.open(CACHE_NAME)
-                .then(cache => cache.put(event.request, responseToCache));
-            }
-            return response;
-          })
-          .catch(() => {
-            // If offline and request is HTML, show offline page
-            if (event.request.headers.get('accept').includes('text/html')) {
-              return caches.match('/offline.html');
-            }
-          });
-      })
-  );
 });
