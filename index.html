@@ -1,29 +1,105 @@
 <!DOCTYPE html>
-<html lang="am" data-version="12.0">
+<html lang="am" data-version="13.0" data-lang="am">
 <head>
     <meta name="google-site-verification" content="Yo225u8qpEADrbmyCChQZ9zOZ9pNeUwm1meyq8ChHh4" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title id="page-title">ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery</title>
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#ff4500">
     <meta name="description" content="ቢሾፍቱ ውስጥ ምግብ ማድረሻ - Food Delivery Service in Bishoftu">
-    <link rel="manifest" href="./manifest.json?v=12">
+    <link rel="manifest" href="./manifest.json?v=13">
     
     <!-- iOS Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="BishoftuEats">
-    <link rel="apple-touch-icon" href="./icons/icon-152x152.png?v=12">
+    <link rel="apple-touch-icon" href="./icons/icon-152x152.png?v=13">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=12">
+    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=13">
     
     <style>
         :root { --primary: #ff4500; --dark: #1a1a1a; --bg: #f8f9fa; }
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--bg); padding-bottom: 100px; direction: ltr; }
-        header { background: white; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        
+        /* Navigation */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: white;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s;
+        }
+        .nav-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        .nav-btn:hover {
+            background: #ff450010;
+        }
+        
+        /* Page Content */
+        .page-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .page-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Language Switcher */
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 5px;
+            z-index: 1001;
+        }
+        .lang-btn {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .lang-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        header { background: white; padding: 15px; text-align: center; position: relative; z-index: 998; }
         .streak-fire { display: flex; justify-content: center; gap: 8px; margin: 5px 0; }
         .fire { font-size: 24px; filter: grayscale(100%); opacity: 0.2; transition: 0.5s; }
         .fire.active { filter: grayscale(0%); opacity: 1; animation: burn 1.5s infinite; }
@@ -48,6 +124,104 @@
         .floating-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: white; padding: 15px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000; }
         .btn { background: var(--primary); color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
         input[type="text"], input[type="tel"] { width: 100%; padding: 12px; margin: 5px 0 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        
+        /* Info Pages Styling */
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .step-card {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .tracking-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .step-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-weight: bold;
+            z-index: 2;
+        }
+        .timeline-step.active .step-dot {
+            background: var(--primary);
+        }
+        .timeline-step.completed .step-dot {
+            background: #28a745;
+        }
+        .timeline-step.completed .step-dot:after {
+            content: '✓';
+        }
+        
+        /* Contact Cards */
+        .contact-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+        }
+        .telegram-track-btn {
+            background: #0088cc;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .telegram-track-btn:hover {
+            background: #0077b3;
+        }
         
         /* PWA Popup */
         .pwa-popup {
@@ -226,163 +400,592 @@
             0%, 100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
             10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
+        
+        /* RTL support for Oromo */
+        body[data-lang="om"] {
+            direction: rtl;
+        }
+        body[data-lang="om"] .lang-switcher {
+            left: 15px;
+            right: auto;
+        }
+        body[data-lang="om"] .step-card {
+            border-left: none;
+            border-right: 4px solid var(--primary);
+        }
+        body[data-lang="om"] .step-number {
+            margin-right: 0;
+            margin-left: 15px;
+        }
+        body[data-lang="om"] .timeline-step {
+            flex-direction: row-reverse;
+        }
+        body[data-lang="om"] .step-dot {
+            margin-right: 0;
+            margin-left: 15px;
+        }
     </style>
-
 </head>
 <body>
 
 <!-- Offline Indicator -->
-<div id="offlineIndicator">📶 ኦፍላይን ሁነዋል</div>
+<div id="offlineIndicator" data-am="📶 ኦፍላይን ሁነዋል" data-om="📶 Ilaalcha hin jiru">📶 ኦፍላይን ሁነዋል</div>
 
 <!-- Toast Notification -->
 <div class="toast" id="toast"></div>
 
+<!-- Language Switcher -->
+<div class="lang-switcher">
+    <button class="lang-btn active" onclick="switchLanguage('am')">አማርኛ</button>
+    <button class="lang-btn" onclick="switchLanguage('om')">Afaan Oromoo</button>
+</div>
+
+<!-- Main Navigation -->
+<nav class="main-nav">
+    <button class="nav-btn active" onclick="showPage('home')" data-am="🏠 ኦርደር" data-om="🏠 Ordeer">🏠 ኦርደር</button>
+    <button class="nav-btn" onclick="showPage('track')" data-am="📦 ትዕዛዝ ፈልግ" data-om="📦 Ordeer Barbaadi">📦 ትዕዛዝ ፈልግ</button>
+    <button class="nav-btn" onclick="showPage('about')" data-am="📖 ስለኛ" data-om="📖 Waa'ee Keenya">📖 ስለኛ</button>
+    <button class="nav-btn" onclick="showPage('contact')" data-am="📞 አግኙን" data-om="📞 Nu Qunnamuu">📞 አግኙን</button>
+</nav>
+
 <!-- Location Request Modal -->
 <div id="locationModal" class="location-modal">
     <div class="location-icon">📍</div>
-    <div class="location-title">አካባቢዎን ያሳውቁ</div>
-    <div class="location-message">
-        ምግብዎን በፍጥነት ለማድረስ የእርስዎን አካባቢ ማወቅ አለብን።
-        <br><br>
-        <small style="color: #999; font-size: 0.85rem;">
-            ⚠️ እባክዎ የአካባቢ አገልግሎትዎን ያብሩ!
-            <br>📍 ከቴሌግራም ትዕዛዝ ጋር ብቻ ይላካል
-        </small>
-    </div>
+    <div class="location-title" data-am="አካባቢዎን ያሳውቁ" data-om="Bakka keessan agarsiisaa">አካባቢዎን ያሳውቁ</div>
+    <div class="location-message" data-am="ምግብዎን በፍጥነት ለማድረስ የእርስዎን አካባቢ ማወቅ አለብን።<br><br><small style='color: #999; font-size: 0.85rem;'>⚠️ እባክዎ የአካባቢ አገልግሎትዎን ያብሩ!<br>📍 ከቴሌግራም ትዕዛዝ ጋር ብቻ ይላካል</small>" data-om="Nyaata keessan ariifachiifachuuf bakka keessan beekuu barbaanna.<br><br><small style='color: #999; font-size: 0.85rem;'>⚠️ Tajaajila bakkaa keessan dammaqsaa!<br>📍 Telegiraamiin qofa ergama</small>">ምግብዎን በፍጥነት ለማድረስ የእርስዎን አካባቢ ማወቅ አለብን።<br><br><small style="color: #999; font-size: 0.85rem;">⚠️ እባክዎ የአካባቢ አገልግሎትዎን ያብሩ!<br>📍 ከቴሌግራም ትዕዛዝ ጋር ብቻ ይላካል</small></div>
     <div class="location-buttons">
-        <button class="location-btn location-allow" onclick="requestLocation()">አረጋግጥ</button>
-        <button class="location-btn location-deny" onclick="denyLocation()">አልፈልግም</button>
+        <button class="location-btn location-allow" onclick="requestLocation()" data-am="አረጋግጥ" data-om="Mirkaneessi">አረጋግጥ</button>
+        <button class="location-btn location-deny" onclick="denyLocation()" data-am="አልፈልግም" data-om="Hin barbaadu">አልፈልግም</button>
     </div>
 </div>
 
 <!-- PWA Popup -->
 <div id="pwaPopup" class="pwa-popup">
     <div class="pwa-icon">📱</div>
-    <div class="pwa-title">አፕ አርግ</div>
-    <div class="pwa-message">ወደ ስልክዎ መነሻ ማውጫ ይጨምሩ ፈጣን መዳረሻ ያግኙ</div>
+    <div class="pwa-title" data-am="አፕ አርግ" data-om="App sirreessi">አፕ አርግ</div>
+    <div class="pwa-message" data-am="ወደ ስልክዎ መነሻ ማውጫ ይጨምሩ ፈጣን መዳረሻ ያግኙ" data-om="Gaafa keessan irratti app ergaa sirreessaa saami argadhu">ወደ ስልክዎ መነሻ ማውጫ ይጨምሩ ፈጣን መዳረሻ ያግኙ</div>
     <div class="pwa-buttons">
-        <button class="pwa-btn pwa-yes" onclick="installPWA()">ጫን</button>
-        <button class="pwa-btn pwa-no" onclick="dismissPWA()">አትጫን</button>
+        <button class="pwa-btn pwa-yes" onclick="installPWA()" data-am="ጫን" data-om="Sirreessi">ጫን</button>
+        <button class="pwa-btn pwa-no" onclick="dismissPWA()" data-am="አትጫን" data-om="Hin sirreessin">አትጫን</button>
     </div>
 </div>
 
-<header>
-    <h1 style="margin:0; color:var(--dark);">ቢሾፍቱ <span style="color:var(--primary)">ዴሊቨሪ</span></h1>
-    <div class="streak-fire" id="fireIcons">
-        <span class="fire" id="s1">🔥</span><span class="fire" id="s2">🔥</span><span class="fire" id="s3">🔥</span>
-    </div>
-    <div id="statusMsg" style="font-size: 0.75rem; color: #666;">በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!</div>
-</header>
+<!-- HOME PAGE -->
+<div id="homePage" class="page-content active">
+    <header>
+        <h1 style="margin:0; color:var(--dark);" id="site-title" data-am="ቢሾፍቱ <span style='color:var(--primary)'>ዴሊቨሪ</span>" data-om="Bishooftu <span style='color:var(--primary)'>Ergaa</span>">ቢሾፍቱ <span style="color:var(--primary)">ዴሊቨሪ</span></h1>
+        <div class="streak-fire" id="fireIcons">
+            <span class="fire" id="s1">🔥</span><span class="fire" id="s2">🔥</span><span class="fire" id="s3">🔥</span>
+        </div>
+        <div id="statusMsg" style="font-size: 0.75rem; color: #666;" data-am="በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!" data-om="Guyyaa guyyaan dhaadannoo godhaa ibidda tasgabbeessaa!">በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!</div>
+    </header>
 
-<div class="container">
-    <div style="background: white; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
-        <label>ሙሉ ስም</label>
-        <input type="text" id="custName" placeholder="ስምዎን ያስገቡ">
-        <label>ስልክ ቁጥር</label>
-        <input type="tel" id="custPhone" placeholder="09...">
-        <label>መለያ ቦታ (Landmark)</label>
-        <input type="text" id="custLandmark" placeholder="ለምሳሌ፡ እታለም ሆቴል ጀርባ">
-    </div>
+    <div class="container">
+        <div style="background: white; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+            <label data-am="ሙሉ ስም" data-om="Maqaa guutuu">ሙሉ ስም</label>
+            <input type="text" id="custName" placeholder="ስምዎን ያስገቡ" data-am-placeholder="ስምዎን ያስገቡ" data-om-placeholder="Maqaa kee galchi">
+            <label data-am="ስልክ ቁጥር" data-om="Lakkoofsa bilbilaa">ስልክ ቁጥር</label>
+            <input type="tel" id="custPhone" placeholder="09..." data-am-placeholder="09..." data-om-placeholder="09...">
+            <label data-am="መለያ ቦታ (Landmark)" data-om="Bakka beekamaa (Landmark)">መለያ ቦታ (Landmark)</label>
+            <input type="text" id="custLandmark" placeholder="ለምሳሌ፡ እታለም ሆቴል ጀርባ" data-am-placeholder="ለምሳሌ፡ እታለም ሆቴል ጀርባ" data-om-placeholder="Fakkeenyaf: Etalem Hoteel duubatti">
+        </div>
 
-    <!-- Delivery Fee Notice -->
-    <div class="delivery-notice">
-        ⚡ <strong>100 ብር የመላኪያ ክፍያ ይከፈላል!</strong> (የመላኪያ ክፍያ በጠቅላላ ዋጋ ላይ ይጨመራል)
-    </div>
+        <!-- Delivery Fee Notice -->
+        <div class="delivery-notice" data-am="⚡ <strong>100 ብር የመላኪያ ክፍያ ይከፈላል!</strong> (የመላኪያ ክፍያ በጠቅላላ ዋጋ ላይ ይጨመራል)" data-om="⚡ <strong>100 Birraa kaffaltii ergaa baafatama!</strong> (Kaffaltii ergaa gatii walakkaa irratti dabalama)">
+            ⚡ <strong>100 ብር የመላኪያ ክፍያ ይከፈላል!</strong> (የመላኪያ ክፍያ በጠቅላላ ዋጋ ላይ ይጨመራል)
+        </div>
 
-    <div class="res-title">እታለም ኢንተርናሽናል ሆቴል</div>
-    <div class="menu-grid">
-        <!-- Burger Items -->
-        <div class="card"><img src="./assets/double-special-burger.webp?v=12" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700"><div class="card-info"><p class="card-title">Double Special Burger</p><p class="card-price">700 ETB</p></div></div>
-        <div class="card"><img src="./assets/special-burger.webp?v=12" alt="Special Burger"><input type="checkbox" value="Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p><p class="card-price">500 ETB</p></div></div>
-        <div class="card"><img src="./assets/double-beef-burger.webp?v=12" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger" data-price="480"><div class="card-info"><p class="card-title">Double Beef Burger</p><p class="card-price">480 ETB</p></div></div>
-        <div class="card"><img src="./assets/cheese-burger.webp?v=12" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger" data-price="450"><div class="card-info"><p class="card-title">Cheese Burger</p><p class="card-price">450 ETB</p></div></div>
-        <div class="card"><img src="./assets/normal-burger.webp?v=12" alt="Normal Burger"><input type="checkbox" value="Normal Burger" data-price="410"><div class="card-info"><p class="card-title">Normal Burger</p><p class="card-price">410 ETB</p></div></div>
-        <div class="card"><img src="./assets/tuna-burger.webp?v=12" alt="Tuna Burger"><input type="checkbox" value="Tuna Burger" data-price="350"><div class="card-info"><p class="card-title">Tuna Burger</p><p class="card-price">350 ETB</p></div></div>
-        <div class="card"><img src="./assets/vegetable-burger.webp?v=12" alt="Vegetable Burger"><input type="checkbox" value="Vegetable Burger" data-price="250"><div class="card-info"><p class="card-title">Vegetable Burger</p><p class="card-price">250 ETB</p></div></div>
-        <div class="card"><img src="./assets/sandwich-club.webp?v=12" alt="Sandwich Club"><input type="checkbox" value="Sandwich Club" data-price="400"><div class="card-info"><p class="card-title">Sandwich Club</p><p class="card-price">400 ETB</p></div></div>
-        
-        <!-- Chips -->
-        <div class="card"><img src="./assets/chips.webp?v=12" alt="Chips"><input type="checkbox" value="Chips" data-price="250"><div class="card-info"><p class="card-title">Chips (ቺፕስ)</p><p class="card-price">250 ETB</p></div></div>
-        
-        <!-- Pizza Items -->
-        <div class="card"><img src="./assets/etalem-special-pizza.webp?v=12" alt="Etalem Special Pizza"><input type="checkbox" value="Etalem Special Pizza" data-price="650"><div class="card-info"><p class="card-title">Etalem Special Pizza</p><p class="card-price">650 ETB</p></div></div>
-        <div class="card"><img src="./assets/beef-pizza.webp?v=12" alt="Beef Pizza"><input type="checkbox" value="Beef Pizza" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza</p><p class="card-price">600 ETB</p></div></div>
-        <div class="card"><img src="./assets/margaritta-pizza.webp?v=12" alt="Margaritta Pizza"><input type="checkbox" value="Margaritta Pizza" data-price="650"><div class="card-info"><p class="card-title">Margaritta Pizza</p><p class="card-price">650 ETB</p></div></div>
-        <div class="card"><img src="./assets/chicken-pizza.webp?v=12" alt="Chicken Pizza"><input type="checkbox" value="Chicken Pizza" data-price="700"><div class="card-info"><p class="card-title">Chicken Pizza</p><p class="card-price">700 ETB</p></div></div>
-        <div class="card"><img src="./assets/tuna-pizza.webp?v=12" alt="Tuna Pizza"><input type="checkbox" value="Tuna Pizza" data-price="550"><div class="card-info"><p class="card-title">Tuna Pizza</p><p class="card-price">550 ETB</p></div></div>
-        <div class="card"><img src="./assets/vegetable-pizza.webp?v=12" alt="Vegetable Pizza"><input type="checkbox" value="Vegetable Pizza" data-price="350"><div class="card-info"><p class="card-title">Vegetable Pizza</p><p class="card-price">350 ETB</p></div></div>
-        
-        <!-- Juice Items -->
-        <div class="card"><img src="./assets/etalem-special-juice.webp?v=12" alt="Etalem Special Juice"><input type="checkbox" value="Etalem Special Juice" data-price="200"><div class="card-info"><p class="card-title">Etalem Special Juice</p><p class="card-price">200 ETB</p></div></div>
-        <div class="card"><img src="./assets/strawberry-juice.webp?v=12" alt="Strawberry Juice"><input type="checkbox" value="Strawberry Juice" data-price="250"><div class="card-info"><p class="card-title">Strawberry Juice</p><p class="card-price">250 ETB</p></div></div>
-        <div class="card"><img src="./assets/mixed-juice.webp?v=12" alt="Mixed Juice"><input type="checkbox" value="Mixed Juice" data-price="200"><div class="card-info"><p class="card-title">Mixed Juice</p><p class="card-price">200 ETB</p></div></div>
-        
-        <!-- Fish Items -->
-        <div class="card"><img src="./assets/fish-kotelet.webp?v=12" alt="Fish Kotelet"><input type="checkbox" value="Fish Kotelet" data-price="400"><div class="card-info"><p class="card-title">Fish Kotelet</p><p class="card-price">400 ETB</p></div></div>
-        <div class="card"><img src="./assets/grilled-fish.webp?v=12" alt="Grilled Fish"><input type="checkbox" value="Grilled Fish" data-price="400"><div class="card-info"><p class="card-title">Grilled Fish</p><p class="card-price">400 ETB</p></div></div>
-    </div>
+        <div class="res-title" data-am="እታለም ኢንተርናሽናል ሆቴል" data-om="Etalem Interneeshinaal Hoteela">እታለም ኢንተርናሽናል ሆቴል</div>
+        <div class="menu-grid">
+            <!-- Burger Items -->
+            <div class="card"><img src="./assets/double-special-burger.webp?v=13" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700"><div class="card-info"><p class="card-title">Double Special Burger</p><p class="card-price">700 ETB</p></div></div>
+            <div class="card"><img src="./assets/special-burger.webp?v=13" alt="Special Burger"><input type="checkbox" value="Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p><p class="card-price">500 ETB</p></div></div>
+            <div class="card"><img src="./assets/double-beef-burger.webp?v=13" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger" data-price="480"><div class="card-info"><p class="card-title">Double Beef Burger</p><p class="card-price">480 ETB</p></div></div>
+            <div class="card"><img src="./assets/cheese-burger.webp?v=13" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger" data-price="450"><div class="card-info"><p class="card-title">Cheese Burger</p><p class="card-price">450 ETB</p></div></div>
+            <div class="card"><img src="./assets/normal-burger.webp?v=13" alt="Normal Burger"><input type="checkbox" value="Normal Burger" data-price="410"><div class="card-info"><p class="card-title">Normal Burger</p><p class="card-price">410 ETB</p></div></div>
+            <div class="card"><img src="./assets/tuna-burger.webp?v=13" alt="Tuna Burger"><input type="checkbox" value="Tuna Burger" data-price="350"><div class="card-info"><p class="card-title">Tuna Burger</p><p class="card-price">350 ETB</p></div></div>
+            <div class="card"><img src="./assets/vegetable-burger.webp?v=13" alt="Vegetable Burger"><input type="checkbox" value="Vegetable Burger" data-price="250"><div class="card-info"><p class="card-title">Vegetable Burger</p><p class="card-price">250 ETB</p></div></div>
+            <div class="card"><img src="./assets/sandwich-club.webp?v=13" alt="Sandwich Club"><input type="checkbox" value="Sandwich Club" data-price="400"><div class="card-info"><p class="card-title">Sandwich Club</p><p class="card-price">400 ETB</p></div></div>
+            
+            <!-- Chips -->
+            <div class="card"><img src="./assets/chips.webp?v=13" alt="Chips"><input type="checkbox" value="Chips" data-price="250"><div class="card-info"><p class="card-title">Chips (ቺፕስ)</p><p class="card-price">250 ETB</p></div></div>
+            
+            <!-- Pizza Items -->
+            <div class="card"><img src="./assets/etalem-special-pizza.webp?v=13" alt="Etalem Special Pizza"><input type="checkbox" value="Etalem Special Pizza" data-price="650"><div class="card-info"><p class="card-title">Etalem Special Pizza</p><p class="card-price">650 ETB</p></div></div>
+            <div class="card"><img src="./assets/beef-pizza.webp?v=13" alt="Beef Pizza"><input type="checkbox" value="Beef Pizza" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza</p><p class="card-price">600 ETB</p></div></div>
+            <div class="card"><img src="./assets/margaritta-pizza.webp?v=13" alt="Margaritta Pizza"><input type="checkbox" value="Margaritta Pizza" data-price="650"><div class="card-info"><p class="card-title">Margaritta Pizza</p><p class="card-price">650 ETB</p></div></div>
+            <div class="card"><img src="./assets/chicken-pizza.webp?v=13" alt="Chicken Pizza"><input type="checkbox" value="Chicken Pizza" data-price="700"><div class="card-info"><p class="card-title">Chicken Pizza</p><p class="card-price">700 ETB</p></div></div>
+            <div class="card"><img src="./assets/tuna-pizza.webp?v=13" alt="Tuna Pizza"><input type="checkbox" value="Tuna Pizza" data-price="550"><div class="card-info"><p class="card-title">Tuna Pizza</p><p class="card-price">550 ETB</p></div></div>
+            <div class="card"><img src="./assets/vegetable-pizza.webp?v=13" alt="Vegetable Pizza"><input type="checkbox" value="Vegetable Pizza" data-price="350"><div class="card-info"><p class="card-title">Vegetable Pizza</p><p class="card-price">350 ETB</p></div></div>
+            
+            <!-- Juice Items -->
+            <div class="card"><img src="./assets/etalem-special-juice.webp?v=13" alt="Etalem Special Juice"><input type="checkbox" value="Etalem Special Juice" data-price="200"><div class="card-info"><p class="card-title">Etalem Special Juice</p><p class="card-price">200 ETB</p></div></div>
+            <div class="card"><img src="./assets/strawberry-juice.webp?v=13" alt="Strawberry Juice"><input type="checkbox" value="Strawberry Juice" data-price="250"><div class="card-info"><p class="card-title">Strawberry Juice</p><p class="card-price">250 ETB</p></div></div>
+            <div class="card"><img src="./assets/mixed-juice.webp?v=13" alt="Mixed Juice"><input type="checkbox" value="Mixed Juice" data-price="200"><div class="card-info"><p class="card-title">Mixed Juice</p><p class="card-price">200 ETB</p></div></div>
+            
+            <!-- Fish Items -->
+            <div class="card"><img src="./assets/fish-kotelet.webp?v=13" alt="Fish Kotelet"><input type="checkbox" value="Fish Kotelet" data-price="400"><div class="card-info"><p class="card-title">Fish Kotelet</p><p class="card-price">400 ETB</p></div></div>
+            <div class="card"><img src="./assets/grilled-fish.webp?v=13" alt="Grilled Fish"><input type="checkbox" value="Grilled Fish" data-price="400"><div class="card-info"><p class="card-title">Grilled Fish</p><p class="card-price">400 ETB</p></div></div>
+        </div>
 
-    <div class="res-title">ካሜቲ (Kameti's Kitchen)</div>
-    <div class="menu-grid">
-        <!-- Kameti Burger Items -->
-        <div class="card"><img src="./assets/kameti-special-burger.webp?v=12" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p><p class="card-price">500 ETB</p></div></div>
-        <div class="card"><img src="./assets/kameti-cheese-burger.webp?v=12" alt="Kameti Cheese Burger"><input type="checkbox" value="Kameti Cheese Burger" data-price="480"><div class="card-info"><p class="card-title">Cheese Burger</p><p class="card-price">480 ETB</p></div></div>
-        <div class="card"><img src="./assets/kameti-beef-burger.webp?v=12" alt="Kameti Beef Burger"><input type="checkbox" value="Kameti Beef Burger" data-price="450"><div class="card-info"><p class="card-title">Beef Burger</p><p class="card-price">450 ETB</p></div></div>
-        
-        <!-- Kameti Pizza Items -->
-        <div class="card"><img src="./assets/kameti-large-pizza.webp?v=12" alt="Kameti Large Pizza"><input type="checkbox" value="Kameti Large Pizza" data-price="700"><div class="card-info"><p class="card-title">Large Pizza</p><p class="card-price">700 ETB</p></div></div>
-        <div class="card"><img src="./assets/kameti-medium-pizza.webp?v=12" alt="Kameti Medium Pizza"><input type="checkbox" value="Kameti Medium Pizza" data-price="600"><div class="card-info"><p class="card-title">Medium Pizza</p><p class="card-price">600 ETB</p></div></div>
-        <div class="card"><img src="./assets/kameti-tuna-pizza.webp?v=12" alt="Kameti Tuna Pizza"><input type="checkbox" value="Kameti Tuna Pizza" data-price="480"><div class="card-info"><p class="card-title">Tuna Pizza</p><p class="card-price">480 ETB</p></div></div>
-        
-        <!-- Kameti Juice -->
-        <div class="card"><img src="./assets/kameti-special-juice.webp?v=12" alt="Kameti Special Juice"><input type="checkbox" value="Kameti Special Juice" data-price="230"><div class="card-info"><p class="card-title">Special Juice</p><p class="card-price">230 ETB</p></div></div>
-        
-        <!-- Kameti Chips (150 ETB) -->
-        <div class="card"><img src="./assets/chips.webp?v=12" alt="Kameti's Chips"><input type="checkbox" value="Kameti's Chips" data-price="150"><div class="card-info"><p class="card-title">Kameti's Chips</p><p class="card-price">150 ETB</p></div></div>
+        <div class="res-title" data-am="ካሜቲ (Kameti's Kitchen)" data-om="Kameetii (Kameti's Kitchen)">ካሜቲ (Kameti's Kitchen)</div>
+        <div class="menu-grid">
+            <!-- Kameti Burger Items -->
+            <div class="card"><img src="./assets/kameti-special-burger.webp?v=13" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p><p class="card-price">500 ETB</p></div></div>
+            <div class="card"><img src="./assets/kameti-cheese-burger.webp?v=13" alt="Kameti Cheese Burger"><input type="checkbox" value="Kameti Cheese Burger" data-price="480"><div class="card-info"><p class="card-title">Cheese Burger</p><p class="card-price">480 ETB</p></div></div>
+            <div class="card"><img src="./assets/kameti-beef-burger.webp?v=13" alt="Kameti Beef Burger"><input type="checkbox" value="Kameti Beef Burger" data-price="450"><div class="card-info"><p class="card-title">Beef Burger</p><p class="card-price">450 ETB</p></div></div>
+            
+            <!-- Kameti Pizza Items -->
+            <div class="card"><img src="./assets/kameti-large-pizza.webp?v=13" alt="Kameti Large Pizza"><input type="checkbox" value="Kameti Large Pizza" data-price="700"><div class="card-info"><p class="card-title">Large Pizza</p><p class="card-price">700 ETB</p></div></div>
+            <div class="card"><img src="./assets/kameti-medium-pizza.webp?v=13" alt="Kameti Medium Pizza"><input type="checkbox" value="Kameti Medium Pizza" data-price="600"><div class="card-info"><p class="card-title">Medium Pizza</p><p class="card-price">600 ETB</p></div></div>
+            <div class="card"><img src="./assets/kameti-tuna-pizza.webp?v=13" alt="Kameti Tuna Pizza"><input type="checkbox" value="Kameti Tuna Pizza" data-price="480"><div class="card-info"><p class="card-title">Tuna Pizza</p><p class="card-price">480 ETB</p></div></div>
+            
+            <!-- Kameti Juice -->
+            <div class="card"><img src="./assets/kameti-special-juice.webp?v=13" alt="Kameti Special Juice"><input type="checkbox" value="Kameti Special Juice" data-price="230"><div class="card-info"><p class="card-title">Special Juice</p><p class="card-price">230 ETB</p></div></div>
+            
+            <!-- Kameti Chips (150 ETB) -->
+            <div class="card"><img src="./assets/chips.webp?v=13" alt="Kameti's Chips"><input type="checkbox" value="Kameti's Chips" data-price="150"><div class="card-info"><p class="card-title">Kameti's Chips</p><p class="card-price">150 ETB</p></div></div>
+        </div>
     </div>
 </div>
 
+<!-- TRACK PAGE -->
+<div id="trackPage" class="page-content">
+    <header>
+        <h1 style="margin:0; color:var(--dark);" data-am="የትዕዛዝ ሁኔታ" data-om="Haala Ordeeraa">የትዕዛዝ ሁኔታ</h1>
+        <div style="font-size: 0.75rem; color: #666;" data-am="ትዕዛዝዎን ይከታተሉ" data-om="Ordeeraa keessan hordofaa">ትዕዛዝዎን ይከታተሉ</div>
+    </header>
+
+    <div class="container">
+        <div class="tracking-card">
+            <h2 style="color:var(--primary); margin-top:0;" data-am="ትዕዛዝ ፈልግ" data-om="Ordeer Barbaadi">ትዕዛዝ ፈልግ</h2>
+            <input type="text" id="orderId" placeholder="የትዕዛዝ መለያ (ምሳሌ: BD12345678)" data-am-placeholder="የትዕዛዝ መለያ (ምሳሌ: BD12345678)" data-om-placeholder="ID Ordeeraa (Fakkeenya: BD12345678)" style="width:100%; padding:12px; margin-bottom:15px; border-radius:8px; border:1px solid #ddd;">
+            <button class="btn" onclick="trackOrder()" data-am="ትዕዛዝ ፈልግ" data-om="Ordeer Barbaadi">ትዕዛዝ ፈልግ</button>
+        </div>
+
+        <div id="trackingResult" style="display:none;">
+            <div class="info-card">
+                <h3 data-am="የትዕዛዝ ዝርዝሮች" data-om="Gadadoo Ordeeraa">የትዕዛዝ ዝርዝሮች</h3>
+                <p><strong data-am="የትዕዛዝ መለያ፡" data-om="ID Ordeeraa:">የትዕዛዝ መለያ፡</strong> <span id="displayOrderId">---</span></p>
+                <p><strong data-am="ሰው፡" data-om="Nama:">ሰው፡</strong> <span id="displayCustomerName">---</span></p>
+                <p><strong data-am="ስልክ፡" data-om="Bilbila:">ስልክ፡</strong> <span id="displayCustomerPhone">---</span></p>
+                <p><strong data-am="ጊዜ፡" data-om="Yeroo:">ጊዜ፡</strong> <span id="displayOrderTime">---</span></p>
+            </div>
+
+            <div class="info-card">
+                <h3 data-am="የትዕዛዝ ሁኔታ" data-om="Haala Ordeeraa">የትዕዛዝ ሁኔታ</h3>
+                <div class="timeline">
+                    <div class="timeline-step completed" id="step1">
+                        <div class="step-dot">1</div>
+                        <div>
+                            <h4 style="margin:0;" data-am="ትዕዛዝ ተቀብሏል" data-om="Ordeer fudhatame">ትዕዛዝ ተቀብሏል</h4>
+                            <p style="margin:0; font-size:0.85rem; color:#666;" id="timeReceived">--:--</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step" id="step2">
+                        <div class="step-dot">2</div>
+                        <div>
+                            <h4 style="margin:0;" data-am="በማብሰል ላይ" data-om="Kan oolan">በማብሰል ላይ</h4>
+                            <p style="margin:0; font-size:0.85rem; color:#666;" id="timeCooking">--:--</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step" id="step3">
+                        <div class="step-dot">3</div>
+                        <div>
+                            <h4 style="margin:0;" data-am="በመላኪያ ላይ" data-om="Kan ergaa jiru">በመላኪያ ላይ</h4>
+                            <p style="margin:0; font-size:0.85rem; color:#666;" id="timeDelivery">--:--</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step" id="step4">
+                        <div class="step-dot">4</div>
+                        <div>
+                            <h4 style="margin:0;" data-am="ደርሷል" data-om="Ga'ee">ደርሷል</h4>
+                            <p style="margin:0; font-size:0.85rem; color:#666;" id="timeDelivered">--:--</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Telegram Tracking Button -->
+            <div class="contact-card">
+                <h3 data-am="🐎 የመላኪያ አገልጋይን ከተገናኙ" data-om="🐎 Ergaa Eegaa Waliin Walqunnamaa">🐎 የመላኪያ አገልጋይን ከተገናኙ</h3>
+                <p data-am="የመላኪያ አገልጋዩን በቴሌግራም ለመከታተል፡" data-om="Ergaa eegaa Telegiraamiin hordofuuf:">የመላኪያ አገልጋዩን በቴሌግራም ለመከታተል፡</p>
+                
+                <button class="telegram-track-btn" onclick="openTelegramForTracking()">
+                    <span>📱</span>
+                    <span data-am="ቴሌግራም ላይ ከመላኪያ አገልጋይ ጋር ተገናኝ" data-om="Ergaa Eegaa Waliin Telegiraamii Walqunnami">ቴሌግራም ላይ ከመላኪያ አገልጋይ ጋር ተገናኝ</span>
+                </button>
+                
+                <p style="font-size:0.85rem; color:#666; margin-top:10px;" data-am="📍 አስተዳዳሪዎ በቴሌግራም የአካባቢን ምስል ያጋራል" data-om="📍 Hoggansa keessan Telegiraamii irratti bakka agarsiisa">📍 አስተዳዳሪዎ በቴሌግራም የአካባቢን ምስል ያጋራል</p>
+            </div>
+
+            <div class="info-card">
+                <h3 data-am="እርዳታ ያስፈልግዎታል?" data-om="Gargaarsa barbaadduu?">እርዳታ ያስፈልግዎታል?</h3>
+                <p data-am="ትዕዛዝዎን ማግኘት ካልቻሉ ወይም ሌላ ጥያቄ ካለዎት፡" data-om="Yoo ordeeraa keessan argachuu hin dandeenye ykn gaaffii biraa qabaattan:">ትዕዛዝዎን ማግኘት ካልቻሉ ወይም ሌላ ጥያቄ ካለዎት፡</p>
+                <button class="btn" onclick="contactSupport()" data-am="📞 ድጋፍ ያግኙ" data-om="📞 Gargaarsa Argadhu">📞 ድጋፍ ያግኙ</button>
+            </div>
+        </div>
+
+        <div id="noOrderFound" style="text-align:center; padding:40px 20px; display:none;">
+            <div style="font-size:50px; margin-bottom:20px;">🔍</div>
+            <h3 data-am="ትዕዛዝ አልተገኘም" data-om="Ordeer hin argamne">ትዕዛዝ አልተገኘም</h3>
+            <p data-am="የትዕዛዝ መለያዎን ያረጋግጡ ወይም አዲስ ትዕዛዝ ያድርጉ" data-om="ID ordeeraa keessan mirkaneessaa ykn ordeer haaraa godhaa">የትዕዛዝ መለያዎን ያረጋግጡ ወይም አዲስ ትዕዛዝ ያድርጉ</p>
+            <button class="btn" onclick="showPage('home')" style="margin-top:20px;" data-am="አዲስ ትዕዛዝ ያድርጉ" data-om="Ordeer Haaraa Godhaa">አዲስ ትዕዛዝ ያድርጉ</button>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="aboutPage" class="page-content">
+    <header>
+        <h1 style="margin:0; color:var(--dark);" data-am="ስለ ቢሾፍቱ ዴሊቨሪ" data-om="Waa'ee Bishooftu Ergaa">ስለ ቢሾፍቱ ዴሊቨሪ</h1>
+        <div style="font-size: 0.75rem; color: #666;" data-am="እንዴት እንደምንሰራ" data-om="Akkam nuti hojjennu">እንዴት እንደምንሰራ</div>
+    </header>
+
+    <div class="container">
+        <div class="info-card">
+            <h2 data-am="እንዴት እንሰራለን" data-om="Akkam Nuti Hojjennu">እንዴት እንሰራለን</h2>
+            
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div>
+                    <h3 style="margin:0;" data-am="ምግብ ይምረጡ" data-om="Nyaata Filadhu">ምግብ ይምረጡ</h3>
+                    <p data-am="ከእታለም ኢንተርናሽናል ሆቴል ወይም ካሜቲ ኪችን የተሻለ ምግብ ይምረጡ" data-om="Etalem Interneeshinaal Hoteela ykn Kameetii Kitchen irraa nyaata filadhu">ከእታለም ኢንተርናሽናል ሆቴል ወይም ካሜቲ ኪችን የተሻለ ምግብ ይምረጡ</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div>
+                    <h3 style="margin:0;" data-am="መረጃ ያስገቡ" data-om="Odeeffannoo Galchi">መረጃ ያስገቡ</h3>
+                    <p data-am="ስም፣ ስልክ እና መለያ ቦታዎን ያስገቡ (አካባቢዎ ለፈጣን ማድረሻ ይረዳል)" data-om="Maqaa, bilbila fi bakka beekamaa galchi (Bakka keessan ariifachiifachuuf ni gargaara)">ስም፣ ስልክ እና መለያ ቦታዎን ያስገቡ (አካባቢዎ ለፈጣን ማድረሻ ይረዳል)</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div>
+                    <h3 style="margin:0;" data-am="በቴሌግራም ይላኩ" data-om="Telegiraamiin Ergi">በቴሌግራም ይላኩ</h3>
+                    <p data-am="ትዕዛዝዎ በቴሌግራም በራስ-ሰር ወደ አስተዳዳሪዎቻችን ይላካል" data-om="Ordeeraa keessan Telegiraamiin ofii ofii hoggantota keenya bira geessa">ትዕዛዝዎ በቴሌግራም በራስ-ሰር ወደ አስተዳዳሪዎቻችን ይላካል</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div>
+                    <h3 style="margin:0;" data-am="ምግብዎን ተቀበሉ" data-om="Nyaata Keessan Fudhadhaa">ምግብዎን ተቀበሉ</h3>
+                    <p data-am="በ30-45 ደቂቃ ውስጥ ምግብዎ ይደርስዎታል. በቴሌግራም የመላኪያ ሁኔታን ይከታተሉ" data-om="Daqiiqaa 30-45 keessatti nyaata keessan siniif ga'a. Telegiraamiin ergaa hordofaa">በ30-45 ደቂቃ ውስጥ ምግብዎ ይደርስዎታል. በቴሌግራም የመላኪያ ሁኔታን ይከታተሉ</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2 data-am="የመላኪያ መረጃ" data-om="Odeeffannoo Ergaa">የመላኪያ መረጃ</h2>
+            <ul style="padding-left:20px;">
+                <li data-am="✅ የመላኪያ ክፍያ: 100 ብር" data-om="✅ Kaffaltii Ergaa: 100 Birra">✅ የመላኪያ ክፍያ: 100 ብር</li>
+                <li data-am="✅ የማድረሻ ጊዜ: 30-45 ደቂቃ" data-om="✅ Yeroo Ga'umsaa: 30-45 Daqiiqaa">✅ የማድረሻ ጊዜ: 30-45 ደቂቃ</li>
+                <li data-am="✅ አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ" data-om="✅ Bakka Tajaajilaa: Bishooftu Keessaa">✅ አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ</li>
+                <li data-am="✅ የሚሰራው: በየቀኑ 8:00 AM - 10:00 PM" data-om="✅ Yeroo Hojii: Guyyaa guyyaan 8:00 AM - 10:00 PM">✅ የሚሰራው: በየቀኑ 8:00 AM - 10:00 PM</li>
+                <li data-am="✅ የክፍያ መንገድ: ባንክ ማስተላለፊያ (CBE)" data-om="✅ Kaffaltii Manna: Baankii (CBE)">✅ የክፍያ መንገድ: ባንክ ማስተላለፊያ (CBE)</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h2 data-am="የግላዊነት ፖሊሲ" data-om="Iccitii Qulqullinaa">የግላዊነት ፖሊሲ</h2>
+            <p data-am="የእርስዎን መረጃ ለሶስተኛ ወገን አንሰጥም። ትዕዛዝዎ በቴሌግራም ለአስተዳዳሪዎቻችን ብቻ ይላካል።" data-om="Odeeffannoo keessan dursaa sadaffaa hin kenninu. Ordeeraa keessan Telegiraamiin hoggantota keenya qofa geessa.">የእርስዎን መረጃ ለሶስተኛ ወገን አንሰጥም። ትዕዛዝዎ በቴሌግራም ለአስተዳዳሪዎቻችን ብቻ ይላካል።</p>
+            <p data-am="የክፍያ መረጃዎን አንጠብቅም። ሁሉም ክፍያዎች በባንክ ማስተላለፊያ ይከናወናሉ።" data-om="Odeeffannoo kaffaltii keessan hin eegnu. Kaffaltiin hundi baankiin hojietama.">የክፍያ መረጃዎን አንጠብቅም። ሁሉም ክፍያዎች በባንክ ማስተላለፊያ ይከናወናሉ።</p>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div id="contactPage" class="page-content">
+    <header>
+        <h1 style="margin:0; color:var(--dark);" data-am="አግኙን" data-om="Nu Qunnamuu">አግኙን</h1>
+        <div style="font-size: 0.75rem; color: #666;" data-am="ከእኛ ጋር ያገናኙ" data-om="Nu Waliin Walqunnamuu">ከእኛ ጋር ያገናኙ</div>
+    </header>
+
+    <div class="container">
+        <div class="contact-card">
+            <h2 data-am="📞 ቀጥታ ማነጋገሪያ" data-om="📞 Walqunnamtii Gaggaarii">📞 ቀጥታ ማነጋገሪያ</h2>
+            <p><strong data-am="ስልክ፡" data-om="Bilbila:">ስልክ፡</strong> 0962636940</p>
+            <p><strong data-am="የስራ ሰዓት፡" data-om="Yeroo Hojii:">የስራ ሰዓት፡</strong> 8:00 AM - 10:00 PM</p>
+            
+            <button class="btn" onclick="callSupport()" style="margin-top:15px;" data-am="📞 ይደውሉ" data-om="📞 Bilbilaa">📞 ይደውሉ</button>
+        </div>
+
+        <div class="contact-card">
+            <h2 data-am="📱 ቴሌግራም" data-om="📱 Telegiraamii">📱 ቴሌግራም</h2>
+            <p data-am="ለፈጣን ድጋፍ እና የትዕዛዝ መከታተል በቴሌግራም ይጠይቁን።" data-om="Gargaarsa ariifachiisaafi hordoffii ordeeraa Telegiraamiin nu gaafadhaa.">ለፈጣን ድጋፍ እና የትዕዛዝ መከታተል በቴሌግራም ይጠይቁን።</p>
+            
+            <button class="telegram-track-btn" onclick="openTelegramForSupport()">
+                <span>📱</span>
+                <span data-am="በቴሌግራም ይጠይቁን" data-om="Telegiraamiin Nu Gaafadhaa">በቴሌግራም ይጠይቁን</span>
+            </button>
+            
+            <p style="font-size:0.85rem; color:#666; margin-top:10px;" data-am="📍 አስተዳዳሪዎች በቴሌግራም በቀጥታ ይመልሳሉ" data-om="📍 Hoggantotni Telegiraamii irratti gaaffii deebisu">📍 አስተዳዳሪዎች በቴሌግራም በቀጥታ ይመልሳሉ</p>
+        </div>
+
+        <div class="contact-card">
+            <h2 data-am="🏦 የባንክ መረጃ" data-om="🏦 Odeeffannoo Baankii">🏦 የባንክ መረጃ</h2>
+            <p><strong data-am="ባንክ፡" data-om="Baankii:">ባንክ፡</strong> የኢትዮጵያ ንግድ ባንክ (CBE)</p>
+            <p><strong data-am="ሂሳብ ቁጥር፡" data-om="Lakkoofsa Herregaa:">ሂሳብ ቁጥር፡</strong> 1000446752387</p>
+            <p><strong data-am="ስም፡" data-om="Maqaa:">ስም፡</strong> ቢሾፍቱ ዴሊቨሪ</p>
+        </div>
+
+        <div class="contact-card">
+            <h2 data-am="📍 አድራሻ" data-om="📍 Teessoo">📍 አድራሻ</h2>
+            <p data-am="ቢሾፍቱ፣ ኢትዮጵያ" data-om="Bishooftu, Itoophiyaa">ቢሾፍቱ፣ ኢትዮጵያ</p>
+            <p><strong data-am="አገልግሎት አካባቢ፡" data-om="Bakka Tajaajilaa:">አገልግሎት አካባቢ፡</strong> <span data-am="ቢሾፍቱ ውስጥ ብቻ" data-om="Bishooftu Keessaa Qofa">ቢሾፍቱ ውስጥ ብቻ</span></p>
+        </div>
+
+        <div class="info-card">
+            <h2 data-am="❓ ተደጋግሞ የሚጠየቁ ጥያቄዎች" data-om="❓ Gaaffilee Kan Irra Deddeebi'an">❓ ተደጋግሞ የሚጠየቁ ጥያቄዎች</h2>
+            
+            <div style="margin-bottom:15px;">
+                <h4 style="margin:0;" data-am="Q: ክፍያውን እንዴት እንደሚፈጽሙ?" data-om="Q: Kaffaltiin akkamitti dabarfamuu danda'a?">Q: ክፍያውን እንዴት እንደሚፈጽሙ?</h4>
+                <p data-am="A: በባንክ ማስተላለፊያ (CBE) ወደ ሂሳብ ቁጥር 1000446752387 ያስተላልፉ።" data-om="A: Baankii (CBE) herregaa lakkoofsa 1000446752387 geessaa.">A: በባንክ ማስተላለፊያ (CBE) ወደ ሂሳብ ቁጥር 1000446752387 ያስተላልፉ።</p>
+            </div>
+            
+            <div style="margin-bottom:15px;">
+                <h4 style="margin:0;" data-am="Q: ምግቡ ምን ያህል ጊዜ ይፈጅብታል?" data-om="Q: Nyaataan yeroon meeqaatti ga'a?">Q: ምግቡ ምን ያህል ጊዜ ይፈጅብታል?</h4>
+                <p data-am="A: በ30-45 ደቂቃ ውስጥ። በቴሌግራም መላኪያውን ማየት ይችላሉ።" data-om="A: Daqiiqaa 30-45 keessatti. Telegiraamiin ergaa arguudha.">A: በ30-45 ደቂቃ ውስጥ። በቴሌግራም መላኪያውን ማየት ይችላሉ።</p>
+            </div>
+            
+            <div>
+                <h4 style="margin:0;" data-am="Q: ትዕዛዜን እንዴት እከታተላለሁ?" data-om="Q: Ordeeraa kiyya akkamitti hordoftu?">Q: ትዕዛዜን እንዴት እከታተላለሁ?</h4>
+                <p data-am="A: በዚህ አፕ ውስጥ ትዕዛዝ ፈልግ ወይም በቴሌግራም ከአስተዳዳሪዎቻችን ጋር ተገናኝ።" data-om="A: App kana keessatti 'Ordeer Barbaadi' cuqi ykn Telegiraamiin hoggantota keenya waliin walqunnami.">A: በዚህ አፕ ውስጥ ትዕዛዝ ፈልግ ይባላል ወይም በቴሌግራም ከአስተዳዳሪዎቻችን ጋር ተገናኝ።</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAYMENT MODAL -->
 <div id="paymentModal" class="modal">
     <div class="modal-content">
-        <h2 style="color:var(--primary)">የክፍያ መረጃ</h2>
-        <p>ትዕዛዝዎን ለማረጋገጥ እባክዎ ክፍያውን ቀድመው ይፈጽሙ።</p>
+        <h2 style="color:var(--primary)" id="modal-title" data-am="የክፍያ መረጃ" data-om="Odeeffannoo kaffaltii">የክፍያ መረጃ</h2>
+        <p id="modal-desc" data-am="ትዕዛዝዎን ለማረጋገጥ እባክዎ ክፍያውን ቀድመው ይፈጽሙ።" data-om="Dhaadannoo kee mirkaneessuuf, kaffaltii dura dabarfadhu.">ትዕዛዝዎን ለማረጋገጥ እባክዎ ክፍያውን ቀድመው ይፈጽሙ።</p>
         <div class="payment-info">
-            <b>ባንክ፡</b> የኢትዮጵያ ንግድ ባንክ (CBE)<br>
-            <b>ሂሳብ ቁጥር፡</b> 1000446752387<br>
-            <b>ስም፡</b> ቢሾፍቱ ዴሊቨሪ<br>
-            <b>ስልክ፡</b> 0962636940<br>
+            <b data-am="ባንክ፡" data-om="Baankii:">ባንክ፡</b> የኢትዮጵያ ንግድ ባንክ (CBE)<br>
+            <b data-am="ሂሳብ ቁጥር፡" data-om="Lakkoofsa herregaa:">ሂሳብ ቁጥር፡</b> 1000446752387<br>
+            <b data-am="ስም፡" data-om="Maqaa:">ስም፡</b> ቢሾፍቱ ዴሊቨሪ<br>
+            <b data-am="ስልክ፡" data-om="Bilbila:">ስልክ፡</b> 0962636940<br>
             <hr>
-            <b>የምግብ ዋጋ፡ <span id="foodTotal">0</span> ETB</b><br>
-            <b>የመላኪያ ክፍያ፡ 100 ETB</b><br>
-            <b>ጠቅላላ ዋጋ፡ <span id="modalTotal">0</span> ETB</b>
+            <b data-am="የምግብ ዋጋ፡" data-om="Gatii nyaataa:">የምግብ ዋጋ፡</b> <span id="foodTotal">0</span> ETB<br>
+            <b data-am="የመላኪያ ክፍያ፡" data-om="Kaffaltii ergaa:">የመላኪያ ክፍያ፡</b> 100 ETB<br>
+            <b data-am="ጠቅላላ ዋጋ፡" data-om="Gatii guutuu:">ጠቅላላ ዋጋ፡</b> <span id="modalTotal">0</span> ETB
         </div>
-        <p style="font-size: 0.8rem; color:red;">* ክፍያውን ከፈጸሙ በኋላ "በቴሌግራም ላክ" የሚለውን ይጫኑ።</p>
-        <button class="btn" onclick="sendToTelegram()">ትዕዛዙን በቴሌግራም ላክ</button>
-        <button onclick="closeModal()" style="background:none; border:none; margin-top:10px; color:#666; cursor:pointer;">ተመለስ</button>
+        <p style="font-size: 0.8rem; color:red;" id="modal-note" data-am="* ክፍያውን ከፈጸሙ በኋላ 'በቴሌግራም ላክ' የሚለውን ይጫኑ።" data-om="* Kaffaltii ergisan booda 'Telegiraamiin ergi' jedhu cuqi.">* ክፍያውን ከፈጸሙ በኋላ "በቴሌግራም ላክ" የሚለውን ይጫኑ።</p>
+        <button class="btn" onclick="sendToTelegram()" id="send-telegram-btn" data-am="ትዕዛዙን በቴሌግራም ላክ" data-om="Dhaadannoo Telegiraamiin ergi">ትዕዛዙን በቴሌግራም ላክ</button>
+        <button onclick="closeModal()" style="background:none; border:none; margin-top:10px; color:#666; cursor:pointer;" id="back-btn" data-am="ተመለስ" data-om="Duuli">ተመለስ</button>
     </div>
 </div>
 
 <div class="floating-footer">
-    <button class="btn" onclick="openCheckout()">ትዕዛዝ አጠናቅ (Checkout)</button>
+    <button class="btn" onclick="openCheckout()" id="checkout-btn" data-am="ትዕዛዝ አጠናቅ (Checkout)" data-om="Dhaadannoo Xumuri (Checkout)">ትዕዛዝ አጠናቅ (Checkout)</button>
 </div>
 
 <script>
     const BOT_USERNAME = "Bishoftu_Delivery_bot";
+    const TELEGRAM_ADMIN_USERNAME = "Bishoftu_Delivery_bot"; // Your Telegram username
     let orderData = {};
     let userLat = null;
     let userLng = null;
     let deferredPrompt = null;
     const DELIVERY_FEE = 100;
     const SITE_URL = "https://mikemoke4444-gif.github.io/delivery_app/";
+    let currentLang = localStorage.getItem('preferredLang') || 'am';
+    let currentPage = 'home';
 
     // Elements
     const offlineIndicator = document.getElementById('offlineIndicator');
     const toast = document.getElementById('toast');
-    const pwaPopup = document.getElementById('pwaPopup');
-    const locationModal = document.getElementById('locationModal');
+
+    // Language switching function
+    function switchLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('preferredLang', lang);
+        
+        // Update HTML lang attribute and data-lang
+        document.documentElement.lang = lang;
+        document.documentElement.setAttribute('data-lang', lang);
+        
+        // Update button states
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent === (lang === 'am' ? 'አማርኛ' : 'Afaan Oromoo')) {
+                btn.classList.add('active');
+            }
+        });
+        
+        // Update all translatable elements
+        updateTextContent();
+        
+        // Show confirmation
+        showToast(lang === 'am' ? 'ቋንቋ ተቀይሯል!' : 'Afaan jijjiirame!', 2000);
+    }
+
+    // Update text content based on language
+    function updateTextContent() {
+        // Update elements with data attributes
+        document.querySelectorAll('[data-am]').forEach(el => {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                const placeholder = currentLang === 'am' ? 
+                    el.getAttribute('data-am-placeholder') : 
+                    el.getAttribute('data-om-placeholder');
+                if (placeholder) el.placeholder = placeholder;
+            } else {
+                const text = currentLang === 'am' ? 
+                    el.getAttribute('data-am') : 
+                    el.getAttribute('data-om');
+                if (text) el.innerHTML = text;
+            }
+        });
+        
+        // Update page title
+        const title = currentLang === 'am' ? 
+            'ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery' : 
+            'Bishooftu Ergaa | Bishoftu Delivery';
+        document.title = title;
+        document.getElementById('page-title').textContent = title;
+    }
+
+    // Show page function
+    function showPage(page) {
+        currentPage = page;
+        
+        // Hide all pages
+        document.querySelectorAll('.page-content').forEach(p => {
+            p.classList.remove('active');
+        });
+        
+        // Show selected page
+        document.getElementById(page + 'Page').classList.add('active');
+        
+        // Update navigation buttons
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`.nav-btn[onclick="showPage('${page}')"]`).classList.add('active');
+        
+        // Update footer button
+        const checkoutBtn = document.getElementById('checkout-btn');
+        if (page === 'home') {
+            checkoutBtn.style.display = 'block';
+            checkoutBtn.textContent = currentLang === 'am' ? 'ትዕዛዝ አጠናቅ (Checkout)' : 'Dhaadannoo Xumuri (Checkout)';
+            checkoutBtn.onclick = openCheckout;
+        } else {
+            checkoutBtn.style.display = 'none';
+        }
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+
+    // Telegram tracking function
+    function openTelegramForTracking() {
+        const orderId = document.getElementById('orderId').value.trim() || 'BD' + Date.now().toString().slice(-8);
+        const message = currentLang === 'am' ?
+            `📍 የትዕዛዝ መከታተል\n\n` +
+            `የትዕዛዝ መለያ: ${orderId}\n` +
+            `ሰው: ${document.getElementById('displayCustomerName').textContent || '---'}\n` +
+            `ስልክ: ${document.getElementById('displayCustomerPhone').textContent || '---'}\n` +
+            `\nእባክዎ የአካባቢ ምስልዎን ያጋሩ!` :
+            `📍 Ordeeraa Hordofuu\n\n` +
+            `ID Ordeeraa: ${orderId}\n` +
+            `Nama: ${document.getElementById('displayCustomerName').textContent || '---'}\n` +
+            `Bilbila: ${document.getElementById('displayCustomerPhone').textContent || '---'}\n` +
+            `\nMee suuraa bakkaa keessan qoodaa!`;
+        
+        const encodedMessage = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/${TELEGRAM_ADMIN_USERNAME}?text=${encodedMessage}`;
+        window.open(telegramUrl, '_blank');
+        
+        showToast(currentLang === 'am' ? 
+            '📱 ወደ ቴሌግራም ተላክዎታል!' : 
+            '📱 Telegiraamiin ergame!', 3000);
+    }
+
+    // Open Telegram for support
+    function openTelegramForSupport() {
+        const message = currentLang === 'am' ?
+            '👋 ሰላም! ከቢሾፍቱ ዴሊቨሪ እገዛ እፈልጋለሁ።' :
+            '👋 Akkam! Bishooftu Ergaa irraa gargaarsa barbaada.';
+        
+        const encodedMessage = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/${TELEGRAM_ADMIN_USERNAME}?text=${encodedMessage}`;
+        window.open(telegramUrl, '_blank');
+    }
+
+    // Call support
+    function callSupport() {
+        window.location.href = 'tel:+251962636940';
+    }
+
+    // Contact support
+    function contactSupport() {
+        openTelegramForSupport();
+    }
+
+    // Track order
+    function trackOrder() {
+        const orderId = document.getElementById('orderId').value.trim();
+        
+        if (!orderId) {
+            showToast(currentLang === 'am' ? 
+                'እባክዎ የትዕዛዝ መለያ ያስገቡ!' : 
+                'ID ordeeraa galchaa!', 3000);
+            return;
+        }
+        
+        // Show tracking result
+        document.getElementById('trackingResult').style.display = 'block';
+        document.getElementById('noOrderFound').style.display = 'none';
+        
+        // Display order info
+        document.getElementById('displayOrderId').textContent = orderId;
+        
+        // Try to get from localStorage
+        const lastOrder = localStorage.getItem('lastOrder');
+        if (lastOrder) {
+            try {
+                const order = JSON.parse(lastOrder);
+                document.getElementById('displayCustomerName').textContent = order.name;
+                document.getElementById('displayCustomerPhone').textContent = order.phone;
+            } catch (e) {
+                console.log('Error parsing last order:', e);
+            }
+        }
+        
+        // Set current time
+        const now = new Date();
+        document.getElementById('displayOrderTime').textContent = 
+            `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+        document.getElementById('timeReceived').textContent = 
+            `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+        
+        // Simulate order progress
+        setTimeout(() => {
+            document.getElementById('step2').classList.add('active');
+            document.getElementById('timeCooking').textContent = currentLang === 'am' ? 'በማብሰል ላይ...' : 'Kan oolan...';
+        }, 2000);
+        
+        setTimeout(() => {
+            document.getElementById('step2').classList.add('completed');
+            document.getElementById('step3').classList.add('active');
+            document.getElementById('timeDelivery').textContent = currentLang === 'am' ? 'በመንገድ ላይ...' : 'Kan ergaa jiru...';
+            
+            // Show Telegram tracking option
+            showToast(currentLang === 'am' ?
+                '🐎 መላኪያው በመንገድ ላይ! በቴሌግራም ይከታተሉ!' :
+                '🐎 Ergaan karaa irra jira! Telegiraamiin hordofaa!', 4000);
+        }, 5000);
+    }
 
     // Initialize app
     window.onload = () => {
+        // Set initial language
+        switchLanguage(currentLang);
         updateStreakUI();
         initPWA();
         
@@ -400,28 +1003,39 @@
         window.addEventListener('online', updateOnlineStatus);
         window.addEventListener('offline', updateOnlineStatus);
         updateOnlineStatus();
+        
+        // Check for updates
+        checkForUpdates();
     };
+
+    // Check for updates
+    function checkForUpdates() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.ready.then(reg => {
+                reg.update();
+            });
+        }
+    }
 
     // Show location modal
     function showLocationModal() {
-        // Don't show if already asked in this session
         const locationAsked = sessionStorage.getItem('locationAsked');
         if (locationAsked) return;
         
-        locationModal.style.display = 'block';
+        document.getElementById('locationModal').style.display = 'block';
         sessionStorage.setItem('locationAsked', 'true');
     }
 
     // Request location permission
     function requestLocation() {
-        locationModal.style.display = 'none';
+        document.getElementById('locationModal').style.display = 'none';
         
         if (!navigator.geolocation) {
-            showToast('❌ አካባቢ አገልግሎት የለም', 3000);
+            showToast(currentLang === 'am' ? '❌ አካባቢ አገልግሎት የለም' : '❌ Tajaajila bakkaa hin jiru', 3000);
             return;
         }
         
-        showToast('📍 አካባቢዎ እየተመዘገበ...', 2000);
+        showToast(currentLang === 'am' ? '📍 አካባቢዎ እየተመዘገበ...' : '📍 Bakka keessan kan barreeffamu...', 2000);
         
         const options = {
             enableHighAccuracy: true,
@@ -433,8 +1047,7 @@
             (position) => {
                 userLat = position.coords.latitude;
                 userLng = position.coords.longitude;
-                console.log('✅ Location acquired:', userLat, userLng);
-                showToast('✅ አካባቢዎ ተመዝግቧል!', 3000);
+                showToast(currentLang === 'am' ? '✅ አካባቢዎ ተመዝግቧል!' : '✅ Bakka keessan barreeffame!', 3000);
                 
                 sessionStorage.setItem('userLocation', JSON.stringify({
                     lat: userLat,
@@ -442,18 +1055,17 @@
                 }));
             },
             (error) => {
-                console.log('❌ Location error:', error.message);
-                let errorMsg = '❌ አካባቢ ማወቅ አልተቻለም';
+                let errorMsg = currentLang === 'am' ? '❌ አካባቢ ማወቅ አልተቻለም' : '❌ Bakka beekuu hindandeenye';
                 
                 switch(error.code) {
                     case error.PERMISSION_DENIED:
-                        errorMsg = '❌ አካባቢ ፈቃድ አልተሰጠም';
+                        errorMsg = currentLang === 'am' ? '❌ አካባቢ ፈቃድ አልተሰጠም' : '❌ Hayyama bakkaa hin kennine';
                         break;
                     case error.POSITION_UNAVAILABLE:
-                        errorMsg = '❌ አካባቢ መረጃ የለም';
+                        errorMsg = currentLang === 'am' ? '❌ አካባቢ መረጃ የለም' : '❌ Odeeffannoo bakkaa hin jiru';
                         break;
                     case error.TIMEOUT:
-                        errorMsg = '❌ አካባቢ መጠየቅ ጊዜው አልፏል';
+                        errorMsg = currentLang === 'am' ? '❌ አካባቢ መጠየቅ ጊዜው አልፏል' : '❌ Yeroo gaafannoo bakkaa darbee';
                         break;
                 }
                 
@@ -465,8 +1077,8 @@
 
     // Deny location
     function denyLocation() {
-        locationModal.style.display = 'none';
-        showToast('👌 እሺ፣ አካባቢ አልተጠየቀም', 2000);
+        document.getElementById('locationModal').style.display = 'none';
+        showToast(currentLang === 'am' ? '👌 እሺ፣ አካባቢ አልተጠየቀም' : '👌 OK, bakka hin gaafanne', 2000);
     }
 
     // Show PWA popup after 10 seconds
@@ -477,8 +1089,7 @@
         
         if (isInstalled || isStandalone || isDismissed) return;
         
-        pwaPopup.style.display = 'block';
-        console.log("📱 PWA popup shown after 10 seconds");
+        document.getElementById('pwaPopup').style.display = 'block';
     }
 
     // Install PWA
@@ -487,12 +1098,10 @@
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then(choice => {
                 if (choice.outcome === 'accepted') {
-                    console.log('✅ User accepted PWA install');
                     localStorage.setItem('pwaInstalled', 'true');
                     hidePWApopup();
-                    showToast('✅ አፕዎ ተጫኗል!', 3000);
+                    showToast(currentLang === 'am' ? '✅ አፕዎ ተጫኗል!' : '✅ App keessan sirreessame!', 3000);
                 } else {
-                    console.log('❌ User dismissed install prompt');
                     dismissPWA();
                 }
                 deferredPrompt = null;
@@ -506,11 +1115,11 @@
     function dismissPWA() {
         hidePWApopup();
         localStorage.setItem('pwaPopupDismissed', 'true');
-        showToast('👌 እሺ፣ በኋላ ላይ እንደገና እናሳይዎታለን', 2000);
+        showToast(currentLang === 'am' ? '👌 እሺ፣ በኋላ ላይ እንደገና እናሳይዎታለን' : '👌 OK, booda irratti ni agarsiifna', 2000);
     }
 
     function hidePWApopup() {
-        pwaPopup.style.display = 'none';
+        document.getElementById('pwaPopup').style.display = 'none';
     }
 
     function showManualInstall() {
@@ -520,20 +1129,31 @@
         let instructions = '';
         
         if (isIOS) {
-            instructions = '📱 ለአይፎን/አይፓድ:\n' +
-                       '1. በሳፋሪ ላይ የማጋራት አዶን ይጫኑ (⬆️)\n' +
-                       '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
-                       '3. "አክል" የሚለውን ይጫኑ';
+            instructions = currentLang === 'am' ? 
+                '📱 ለአይፎን/አይፓድ:\n' +
+                '1. በሳፋሪ ላይ የማጋራት አዶን ይጫኑ (⬆️)\n' +
+                '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
+                '3. "አክል" የሚለውን ይጫኑ' :
+                '📱 iPhone/iPad:\n' +
+                '1. Share button (⬆️) cuqi\n' +
+                '2. "Add to Home Screen" filadhu\n' +
+                '3. "Add" cuqi';
         } else if (isAndroid) {
-            instructions = '📱 ለአንድሮይድ:\n' +
-                       '1. በቻሮም ላይ ሶስት ነጥብ (⋮) ይጫኑ\n' +
-                       '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
-                       '3. "አክል" የሚለውን ይጫኑ';
+            instructions = currentLang === 'am' ? 
+                '📱 ለአንድሮይድ:\n' +
+                '1. በቻሮም ላይ ሶስት ነጥብ (⋮) ይጫኑ\n' +
+                '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
+                '3. "አክል" የሚለውን ይጫኑ' :
+                '📱 Android:\n' +
+                '1. Dots sadi (⋮) cuqi\n' +
+                '2. "Add to Home Screen" filadhu\n' +
+                '3. "Add" cuqi';
         } else {
-            instructions = '📱 እባክዎ ስልክዎን ይጠቀሙ';
+            instructions = currentLang === 'am' ? '📱 እባክዎ ስልክዎን ይጠቀሙ' : '📱 Mobil keessan fayyadamaa';
         }
         
-        alert('📋 እንዴት አፕን እንደሚጨምሩ:\n\n' + instructions);
+        alert(currentLang === 'am' ? '📋 እንዴት አፕን እንደሚጨምሩ:\n\n' + instructions : 
+              '📋 App maal akka dabalattu:\n\n' + instructions);
         hidePWApopup();
     }
 
@@ -554,7 +1174,7 @@
     // Initialize PWA
     function initPWA() {
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./service-worker.js?v=12')
+            navigator.serviceWorker.register('./service-worker.js?v=13')
                 .then(reg => {
                     console.log('✅ Service Worker registered');
                 })
@@ -566,20 +1186,25 @@
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            console.log('📱 PWA install prompt available');
         });
 
         window.addEventListener('appinstalled', () => {
-            console.log('🎉 PWA installed');
             hidePWApopup();
             localStorage.setItem('pwaInstalled', 'true');
-            showToast('✅ አፕዎ ተጫኗል!', 3000);
+            showToast(currentLang === 'am' ? '✅ አፕዎ ተጫኗል!' : '✅ App keessan sirreessame!', 3000);
         });
     }
 
     // Update online/offline status
     function updateOnlineStatus() {
-        offlineIndicator.style.display = navigator.onLine ? 'none' : 'block';
+        const isOnline = navigator.onLine;
+        offlineIndicator.style.display = isOnline ? 'none' : 'block';
+        
+        if (!isOnline) {
+            offlineIndicator.textContent = currentLang === 'am' ? 
+                '📶 ኦፍላይን ሁነዋል' : 
+                '📶 Ilaalcha hin jiru';
+        }
     }
 
     // Update streak UI
@@ -596,10 +1221,13 @@
     function openCheckout() {
         const name = document.getElementById('custName').value.trim();
         const phone = document.getElementById('custPhone').value.trim();
-        const landmark = document.getElementById('custLandmark').value.trim() || "አልተጠቀሰም";
+        const landmark = document.getElementById('custLandmark').value.trim() || 
+            (currentLang === 'am' ? "አልተጠቀሰም" : "Kan hin beekamne");
         
         if(!name || !phone) {
-            alert("እባክዎ ስም እና ስልክ ያስገቡ!");
+            alert(currentLang === 'am' ? 
+                "እባክዎ ስም እና ስልክ ያስገቡ!" : 
+                "Maqaa fi bilbila galchaa!");
             return;
         }
 
@@ -611,7 +1239,9 @@
         });
 
         if(selected.length === 0) {
-            alert("እባክዎ ቢያንስ አንድ ምግብ ይምረጡ!");
+            alert(currentLang === 'am' ? 
+                "እባክዎ ቢያንስ አንድ ምግብ ይምረጡ!" : 
+                "Yoo xinna tokko nyaata filadhu!");
             return;
         }
 
@@ -626,12 +1256,10 @@
         document.getElementById('paymentModal').style.display = "none"; 
     }
 
-    // FIXED: Send to Telegram with /order command
+    // Send to Telegram
     function sendToTelegram() {
-        // Save order data
         localStorage.setItem('lastOrder', JSON.stringify(orderData));
         
-        // Try to get location from sessionStorage if not already set
         if (!userLat || !userLng) {
             const savedLocation = sessionStorage.getItem('userLocation');
             if (savedLocation) {
@@ -641,35 +1269,22 @@
             }
         }
         
-        // Build the message starting with /order
         const message = createOrderMessage();
-        
-        // FIXED: Use correct Telegram URL format - NO "?start="
-        // Telegram Web URLs work differently. We need to use "?text=" parameter
         const encodedMessage = encodeURIComponent(message);
-        
-        // METHOD 1: Direct message to bot (most reliable)
         const telegramUrl = `https://t.me/${BOT_USERNAME}?text=${encodedMessage}`;
         
-        // METHOD 2: Alternative format (for some Telegram versions)
-        // const telegramUrl = `tg://msg?text=${encodedMessage}&to=${BOT_USERNAME}`;
-        
-        console.log("📱 Telegram URL:", telegramUrl);
-        console.log("📦 Message to send:", message);
-        
-        // Open Telegram with the message
         window.open(telegramUrl, '_blank');
         
-        // Show confirmation
         setTimeout(() => {
-            alert("✅ ትዕዛዝዎ ተልኳል!\n\n" +
-                  "ወደ ቴሌግራም ተላክዎታል። መልእክቱ ከተከፈተ በኋላ 'SEND' የሚለውን ይጫኑ።");
+            alert(currentLang === 'am' ? 
+                "✅ ትዕዛዝዎ ተልኳል!\n\nወደ ቴሌግራም ተላክዎታል። መልእክቱ ከተከፈተ በኋላ 'SEND' የሚለውን ይጫኑ።" :
+                "✅ Dhaadannoo keessan ergame!\n\nTelegiraamiin ergame. Ergaa bane booda 'SEND' cuqi.");
             closeModal();
             clearForm();
         }, 500);
     }
 
-    // Create order message with /order command
+    // Create order message
     function createOrderMessage() {
         let locationInfo = "";
         let mapUrl = "";
@@ -678,7 +1293,7 @@
             locationInfo = `📍 Location: ${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
             mapUrl = `🗺️ Map: https://www.google.com/maps?q=${userLat},${userLng}`;
         } else {
-            locationInfo = "📍 Location: Not provided";
+            locationInfo = "📍 Location: " + (currentLang === 'am' ? "አልተሰጠም" : "Kan hin kennine");
             mapUrl = "";
         }
         
@@ -695,7 +1310,6 @@
             }
         }
         
-        // FIXED: Start with /order command (required by bot)
         return `/order\n` +
                `👤 Name: ${orderData.name}\n` +
                `📞 Phone: ${orderData.phone}\n` +
