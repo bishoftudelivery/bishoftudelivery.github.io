@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="am" data-version="13.0" data-lang="am">
+<html lang="am" data-version="13.1" data-lang="am">
 <head>
     <meta name="google-site-verification" content="Yo225u8qpEADrbmyCChQZ9zOZ9pNeUwm1meyq8ChHh4" />
     <meta charset="UTF-8">
@@ -23,45 +23,144 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=13">
     
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        :root { --primary: #ff4500; --dark: #1a1a1a; --bg: #f8f9fa; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--bg); padding-bottom: 100px; direction: ltr; }
+        :root { 
+            --primary: #ff4500; 
+            --primary-light: #ff6b35;
+            --primary-dark: #cc3700;
+            --secondary: #28a745;
+            --secondary-light: #34ce57;
+            --dark: #1a1a1a; 
+            --light-dark: #333;
+            --bg: #f8f9fa; 
+            --card-bg: #ffffff;
+            --text: #333;
+            --text-light: #666;
+            --text-lighter: #999;
+            --border: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-light: 0 2px 8px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-lg: 16px;
+            --transition: all 0.3s ease;
+        }
+        
+        /* Modern Color Scheme */
+        .primary-bg { background: var(--primary); color: white; }
+        .secondary-bg { background: var(--secondary); color: white; }
+        .light-bg { background: var(--bg); }
+        .white-bg { background: white; }
+        
+        body { 
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, Arial, sans-serif; 
+            margin: 0; 
+            background: var(--bg); 
+            padding-bottom: 100px; 
+            direction: ltr; 
+            overflow-x: hidden; 
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Testing Notice */
+        .testing-notice {
+            background: linear-gradient(90deg, #ffeb3b, #ffd54f);
+            color: #333;
+            padding: 10px 15px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-bottom: 2px solid #ff9800;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(255, 152, 0, 0.2);
+        }
+        
+        /* Pull to Refresh Container */
+        #refreshContainer {
+            position: fixed;
+            top: -60px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+            z-index: 9999;
+            transition: top 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 69, 0, 0.3);
+        }
+        
+        .refresh-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .refresh-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
         
         /* Navigation */
         .main-nav {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            padding: 10px 15px;
+            gap: 8px;
+            padding: 12px 15px;
             background: white;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border);
             position: sticky;
-            top: 0;
+            top: 42px;
             z-index: 999;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         .nav-btn {
             background: none;
             border: none;
-            padding: 8px 15px;
+            padding: 10px 18px;
             border-radius: 20px;
             font-size: 0.85rem;
             cursor: pointer;
-            color: #666;
-            transition: all 0.3s;
+            color: var(--text-light);
+            transition: var(--transition);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         .nav-btn.active {
             background: var(--primary);
             color: white;
+            box-shadow: var(--shadow-light);
         }
         .nav-btn:hover {
             background: #ff450010;
+            transform: translateY(-1px);
         }
         
         /* Page Content */
         .page-content {
             display: none;
             animation: fadeIn 0.3s ease;
+            min-height: 100vh;
         }
         .page-content.active {
             display: block;
@@ -74,21 +173,25 @@
         /* Language Switcher */
         .lang-switcher {
             position: absolute;
-            top: 15px;
+            top: 55px;
             right: 15px;
             display: flex;
             gap: 5px;
             z-index: 1001;
+            background: white;
+            padding: 4px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
         }
         .lang-btn {
             background: white;
             border: 2px solid #ddd;
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.8rem;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
+            font-weight: 600;
+            transition: var(--transition);
         }
         .lang-btn.active {
             background: var(--primary);
@@ -99,68 +202,434 @@
             transform: scale(1.05);
         }
         
-        header { background: white; padding: 15px; text-align: center; position: relative; z-index: 998; }
-        .streak-fire { display: flex; justify-content: center; gap: 8px; margin: 5px 0; }
-        .fire { font-size: 24px; filter: grayscale(100%); opacity: 0.2; transition: 0.5s; }
-        .fire.active { filter: grayscale(0%); opacity: 1; animation: burn 1.5s infinite; }
-        @keyframes burn { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        /* Header */
+        header { 
+            background: white; 
+            padding: 20px 15px 15px; 
+            text-align: center; 
+            position: relative; 
+            z-index: 998; 
+            margin-top: 15px; 
+            border-bottom: 1px solid var(--border);
+        }
+        .streak-fire { 
+            display: flex; 
+            justify-content: center; 
+            gap: 8px; 
+            margin: 8px 0; 
+        }
+        .fire { 
+            font-size: 24px; 
+            filter: grayscale(100%); 
+            opacity: 0.2; 
+            transition: 0.5s; 
+        }
+        .fire.active { 
+            filter: grayscale(0%); 
+            opacity: 1; 
+            animation: burn 1.5s infinite; 
+        }
+        @keyframes burn { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.2); } 
+        }
 
-        .container { max-width: 600px; margin: auto; padding: 15px; }
-        .res-title { background: var(--primary); color: white; padding: 10px; border-radius: 8px; margin: 20px 0 10px; font-size: 1.2rem; }
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .container { 
+            max-width: 600px; 
+            margin: auto; 
+            padding: 15px; 
+        }
         
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; }
-        .card img { width: 100%; height: 110px; object-fit: cover; background: linear-gradient(45deg, #f5f5f5, #e0e0e0); }
-        .card-info { padding: 10px; }
-        .card-title { font-size: 0.85rem; font-weight: 600; margin: 0; min-height: 35px; }
-        .card-price { color: var(--primary); font-weight: bold; font-size: 0.9rem; }
-        .card input { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; accent-color: var(--primary); }
-
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Restaurant Title */
+        .res-title { 
+            background: linear-gradient(90deg, var(--primary), var(--primary-light)); 
+            color: white; 
+            padding: 12px 15px; 
+            border-radius: var(--radius-sm); 
+            margin: 20px 0 15px; 
+            font-size: 1.1rem; 
+            font-weight: 600;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Menu Grid */
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+            margin-bottom: 20px;
+        }
+        
+        /* Card Styles */
+        .card { 
+            background: var(--card-bg); 
+            border-radius: var(--radius); 
+            overflow: hidden; 
+            box-shadow: var(--shadow-light); 
+            position: relative; 
+            display: flex; 
+            flex-direction: column;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .card img { 
+            width: 100%; 
+            height: 130px; 
+            object-fit: cover; 
+            background: linear-gradient(45deg, #f5f5f5, #e0e0e0); 
+        }
+        .card-info { 
+            padding: 12px; 
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-title { 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            margin: 0 0 8px 0; 
+            min-height: 40px; 
+            color: var(--dark);
+            line-height: 1.4;
+        }
+        .card-price { 
+            color: var(--primary); 
+            font-weight: 700; 
+            font-size: 1rem; 
+            margin-top: auto;
+        }
+        .card input { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            width: 22px; 
+            height: 22px; 
+            accent-color: var(--primary);
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        /* Trending Badge */
+        .trending-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(90deg, var(--secondary), var(--secondary-light));
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        /* Payment Option Selector */
+        .payment-option {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 15px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .payment-option:hover {
+            border-color: var(--primary-light);
+            background: #ff450005;
+        }
+        .payment-option.selected {
+            border-color: var(--primary);
+            background: #ff450008;
+        }
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .payment-details {
+            flex: 1;
+        }
+        .payment-title {
+            font-weight: 600;
+            margin: 0 0 3px 0;
+            color: var(--dark);
+        }
+        .payment-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        /* Top Trending Section */
+        .top-trending {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary);
+            box-shadow: var(--shadow-light);
+        }
+        .trending-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .trending-header i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        .trending-header h3 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+        .trending-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .trending-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            background: white;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-light);
+        }
+        .trending-rank {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .trending-info {
+            flex: 1;
+        }
+        .trending-name {
+            font-weight: 600;
+            margin: 0 0 3px 0;
+            color: var(--dark);
+        }
+        .trending-price {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .trending-orders {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
         /* Modal Style */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
-        .modal-content { background: white; margin: 15% auto; padding: 20px; border-radius: 15px; width: 85%; max-width: 400px; text-align: center; }
-        .payment-info { background: #f0f0f0; padding: 15px; border-radius: 10px; margin: 15px 0; text-align: left; font-size: 0.9rem; }
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(3px);
+            animation: fadeIn 0.2s ease;
+        }
+        .modal-content { 
+            background: white; 
+            margin: 10% auto; 
+            padding: 25px; 
+            border-radius: var(--radius-lg); 
+            width: 85%; 
+            max-width: 400px; 
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: modalSlide 0.3s ease;
+        }
+        @keyframes modalSlide {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .payment-info { 
+            background: #f8f9fa; 
+            padding: 18px; 
+            border-radius: var(--radius-sm); 
+            margin: 20px 0; 
+            text-align: left; 
+            font-size: 0.95rem;
+            border-left: 4px solid var(--primary);
+        }
         
-        .floating-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: white; padding: 15px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000; }
-        .btn { background: var(--primary); color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
-        input[type="text"], input[type="tel"] { width: 100%; padding: 12px; margin: 5px 0 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        /* Floating Footer */
+        .floating-footer { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            background: white; 
+            padding: 15px; 
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1); 
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Buttons */
+        .btn { 
+            background: linear-gradient(90deg, var(--primary), var(--primary-light)); 
+            color: white; 
+            border: none; 
+            width: 100%; 
+            padding: 16px; 
+            border-radius: var(--radius-sm); 
+            font-size: 1rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        .btn-secondary:hover {
+            background: var(--secondary-light);
+        }
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-outline:hover {
+            background: #ff450008;
+        }
+        
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+        input[type="text"], input[type="tel"], textarea, select { 
+            width: 100%; 
+            padding: 14px; 
+            margin: 5px 0 0; 
+            border: 1.5px solid var(--border); 
+            border-radius: var(--radius-sm); 
+            box-sizing: border-box; 
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        input[type="text"]:focus, input[type="tel"]:focus, textarea:focus, select:focus { 
+            outline: none; 
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.1);
+        }
         
         /* Info Pages Styling */
         .info-card {
             background: white;
             padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-light);
+            border-top: 4px solid var(--primary);
         }
         .step-card {
             display: flex;
             align-items: flex-start;
             margin-bottom: 20px;
-            padding: 15px;
+            padding: 18px;
             background: #f8f9fa;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+        .step-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-light);
         }
         .step-number {
             background: var(--primary);
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 15px;
-            font-weight: bold;
+            font-weight: 700;
             flex-shrink: 0;
+            font-size: 0.9rem;
         }
         .tracking-card {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
+            padding: 25px;
+            border-radius: var(--radius);
             margin-bottom: 20px;
             text-align: center;
+            box-shadow: var(--shadow-light);
         }
         .timeline {
             position: relative;
@@ -173,8 +642,8 @@
             position: relative;
         }
         .step-dot {
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: #ddd;
             color: white;
@@ -183,14 +652,16 @@
             justify-content: center;
             margin-right: 15px;
             flex-shrink: 0;
-            font-weight: bold;
+            font-weight: 700;
             z-index: 2;
+            transition: var(--transition);
         }
         .timeline-step.active .step-dot {
             background: var(--primary);
+            box-shadow: 0 0 0 5px rgba(255, 69, 0, 0.2);
         }
         .timeline-step.completed .step-dot {
-            background: #28a745;
+            background: var(--secondary);
         }
         .timeline-step.completed .step-dot:after {
             content: '✓';
@@ -200,16 +671,17 @@
         .contact-card {
             background: white;
             padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
             border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow-light);
         }
         .telegram-track-btn {
-            background: #0088cc;
+            background: linear-gradient(90deg, #0088cc, #00a8ff);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
             font-size: 1rem;
             cursor: pointer;
             display: flex;
@@ -218,9 +690,13 @@
             gap: 10px;
             width: 100%;
             margin: 10px 0;
+            font-weight: 600;
+            transition: var(--transition);
         }
         .telegram-track-btn:hover {
-            background: #0077b3;
+            background: linear-gradient(90deg, #0077b3, #0097e6);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
         }
         
         /* PWA Popup */
@@ -231,12 +707,12 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             z-index: 10001;
             width: 85%;
-            max-width: 300px;
+            max-width: 320px;
             text-align: center;
             animation: popupIn 0.3s ease;
             border: 2px solid var(--primary);
@@ -248,23 +724,23 @@
         }
         
         .pwa-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
+            font-size: 50px;
+            margin-bottom: 15px;
             color: var(--primary);
         }
         
         .pwa-title {
-            margin: 0 0 8px 0;
+            margin: 0 0 10px 0;
             color: var(--dark);
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.3rem;
+            font-weight: 700;
         }
         
         .pwa-message {
-            margin: 0 0 20px 0;
-            color: #666;
-            font-size: 0.9rem;
-            line-height: 1.4;
+            margin: 0 0 25px 0;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         .pwa-buttons {
@@ -274,16 +750,17 @@
         
         .pwa-btn {
             flex: 1;
-            padding: 12px 0;
-            border-radius: 8px;
+            padding: 14px 0;
+            border-radius: var(--radius-sm);
             border: none;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             font-size: 0.95rem;
+            transition: var(--transition);
         }
         
         .pwa-yes {
-            background: var(--primary);
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
             color: white;
         }
         
@@ -300,33 +777,33 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             z-index: 10002;
             width: 90%;
-            max-width: 350px;
+            max-width: 380px;
             text-align: center;
         }
         
         .location-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
+            font-size: 60px;
+            margin-bottom: 20px;
             color: var(--primary);
         }
         
         .location-title {
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
             color: var(--dark);
-            font-size: 1.3rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 700;
         }
         
         .location-message {
             margin: 0 0 25px 0;
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
         }
         
         .location-buttons {
@@ -336,16 +813,17 @@
         
         .location-btn {
             flex: 1;
-            padding: 14px 0;
-            border-radius: 10px;
+            padding: 15px 0;
+            border-radius: var(--radius-sm);
             border: none;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             font-size: 1rem;
+            transition: var(--transition);
         }
         
         .location-allow {
-            background: var(--primary);
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
             color: white;
         }
         
@@ -357,48 +835,107 @@
         /* Offline Indicator */
         #offlineIndicator {
             position: fixed;
-            top: 10px;
+            top: 40px;
             left: 10px;
             background: #ff4444;
             color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
+            padding: 8px 15px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
             z-index: 10000;
             display: none;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(255, 68, 68, 0.3);
         }
         
         /* Delivery Fee Notice */
         .delivery-notice {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 10px 0;
-            font-size: 0.9rem;
+            background: linear-gradient(90deg, #e3f2fd, #bbdefb);
+            border-left: 4px solid #2196f3;
+            color: #0d47a1;
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            margin: 15px 0;
+            font-size: 0.95rem;
             text-align: center;
+            box-shadow: var(--shadow-light);
         }
         
         /* Toast Notification */
         .toast {
             position: fixed;
-            top: 60px;
+            top: 90px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--primary);
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
             color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
+            padding: 14px 24px;
+            border-radius: var(--radius);
             z-index: 10001;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
             animation: fadeInOut 3s ease;
             display: none;
+            font-weight: 500;
+            text-align: center;
+            max-width: 90%;
         }
         
         @keyframes fadeInOut {
             0%, 100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
             10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        
+        /* Order Summary */
+        .order-summary {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow-light);
+            border-top: 4px solid var(--primary);
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .summary-row.total {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            padding-top: 15px;
+        }
+        
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background: white;
+            border-radius: var(--radius-sm);
+            padding: 15px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+        .stat-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
         }
         
         /* RTL support for Oromo */
@@ -424,9 +961,60 @@
             margin-right: 0;
             margin-left: 15px;
         }
+        body[data-lang="om"] .trending-item {
+            flex-direction: row-reverse;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .floating-footer {
+                flex-direction: column;
+            }
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            .container {
+                padding: 12px;
+            }
+            .modal-content {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+        
+        /* Animation for adding items */
+        @keyframes itemAdded {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .item-added {
+            animation: itemAdded 0.3s ease;
+        }
     </style>
 </head>
 <body>
+
+<!-- Testing Notice -->
+<div class="testing-notice" data-am="🧪 ይህ የተጠቃሚ ፍላጎት ማሰባሰቢያ ነው። ለቢሾፍቱ ምግብ ማድረሻ ሀሳብ ነው።" data-om="🧪 Kun tajaajila nyaataa Bishooftu irratti madaala fedha fayyadamaa. Yaada qofaa dha.">
+    🧪 This is a user interest–gathering test for a potential food delivery idea in Bishoftu.
+</div>
+
+<!-- Pull to Refresh Container -->
+<div id="refreshContainer">
+    <div class="refresh-content">
+        <div class="refresh-spinner" id="refreshSpinner"></div>
+        <span id="refreshText" data-am="ይቀናል... ለማደስ ከላይ ይሳቡ" data-om="Deebi'aa... Harka keessan deebisuu fedhaa">ይቀናል... ለማደስ ከላይ ይሳቡ</span>
+    </div>
+</div>
 
 <!-- Offline Indicator -->
 <div id="offlineIndicator" data-am="📶 ኦፍላይን ሁነዋል" data-om="📶 Ilaalcha hin jiru">📶 ኦፍላይን ሁነዋል</div>
@@ -473,29 +1061,89 @@
 <!-- HOME PAGE -->
 <div id="homePage" class="page-content active">
     <header>
-        <h1 style="margin:0; color:var(--dark);" id="site-title" data-am="ቢሾፍቱ <span style='color:var(--primary)'>ዴሊቨሪ</span>" data-om="Bishooftu <span style='color:var(--primary)'>Ergaa</span>">ቢሾፍቱ <span style="color:var(--primary)">ዴሊቨሪ</span></h1>
+        <h1 style="margin:0; color:var(--dark); font-size: 1.8rem;" id="site-title" data-am="ቢሾፍቱ <span style='color:var(--primary)'>ዴሊቨሪ</span>" data-om="Bishooftu <span style='color:var(--primary)'>Ergaa</span>">ቢሾፍቱ <span style="color:var(--primary)">ዴሊቨሪ</span></h1>
         <div class="streak-fire" id="fireIcons">
             <span class="fire" id="s1">🔥</span><span class="fire" id="s2">🔥</span><span class="fire" id="s3">🔥</span>
         </div>
-        <div id="statusMsg" style="font-size: 0.75rem; color: #666;" data-am="በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!" data-om="Guyyaa guyyaan dhaadannoo godhaa ibidda tasgabbeessaa!">በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!</div>
+        <div id="statusMsg" style="font-size: 0.8rem; color: var(--text-light);" data-am="በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!" data-om="Guyyaa guyyaan dhaadannoo godhaa ibidda tasgabbeessaa!">በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!</div>
     </header>
 
-    <div class="container">
-        <div style="background: white; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
-            <label data-am="ሙሉ ስም" data-om="Maqaa guutuu">ሙሉ ስም</label>
-            <input type="text" id="custName" placeholder="ስምዎን ያስገቡ" data-am-placeholder="ስምዎን ያስገቡ" data-om-placeholder="Maqaa kee galchi">
-            <label data-am="ስልክ ቁጥር" data-om="Lakkoofsa bilbilaa">ስልክ ቁጥር</label>
-            <input type="tel" id="custPhone" placeholder="09..." data-am-placeholder="09..." data-om-placeholder="09...">
-            <label data-am="መለያ ቦታ (Landmark)" data-om="Bakka beekamaa (Landmark)">መለያ ቦታ (Landmark)</label>
-            <input type="text" id="custLandmark" placeholder="ለምሳሌ፡ እታለም ሆቴል ጀርባ" data-am-placeholder="ለምሳሌ፡ እታለም ሆቴል ጀርባ" data-om-placeholder="Fakkeenyaf: Etalem Hoteel duubatti">
+    
+
+        <!-- Top 3 Trending Foods -->
+        <div class="top-trending">
+            <div class="trending-header">
+                <i class="fas fa-fire"></i>
+                <h3 data-am="3 ምግቦች" data-om="Nyaata 3 ">የሚገመገሙ 3 ምግቦች</h3>
+            </div>
+            <div class="trending-items" id="trendingItems">
+                <!-- Trending items will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div style="background: white; padding: 20px; border-radius: var(--radius); margin-bottom: 20px; box-shadow: var(--shadow-light);">
+            <div class="form-group">
+                <label class="form-label" data-am="ሙሉ ስም" data-om="Maqaa guutuu">ሙሉ ስም</label>
+                <input type="text" id="custName" placeholder="ስምዎን ያስገቡ" data-am-placeholder="ስምዎን ያስገቡ" data-om-placeholder="Maqaa kee galchi">
+            </div>
+            <div class="form-group">
+                <label class="form-label" data-am="ስልክ ቁጥር" data-om="Lakkoofsa bilbilaa">ስልክ ቁጥር</label>
+                <input type="tel" id="custPhone" placeholder="09..." data-am-placeholder="09..." data-om-placeholder="09...">
+            </div>
+            <div class="form-group">
+                <label class="form-label" data-am="መለያ ቦታ (Landmark)" data-om="Bakka beekamaa (Landmark)">መለያ ቦታ (Landmark)</label>
+                <input type="text" id="custLandmark" placeholder="ለምሳሌ፡ እታለም ሆቴል ጀርባ" data-am-placeholder="ለምሳሌ፡ እታለም ሆቴል ጀርባ" data-om-placeholder="Fakkeenyaf: Etalem Hoteel duubatti">
+            </div>
         </div>
 
         <!-- Delivery Fee Notice -->
-        <div class="delivery-notice" data-am="⚡ <strong>100 ብር የመላኪያ ክፍያ ይከፈላል!</strong> (የመላኪያ ክፍያ በጠቅላላ ዋጋ ላይ ይጨመራል)" data-om="⚡ <strong>100 Birraa kaffaltii ergaa baafatama!</strong> (Kaffaltii ergaa gatii walakkaa irratti dabalama)">
-            ⚡ <strong>100 ብር የመላኪያ ክፍያ ይከፈላል!</strong> (የመላኪያ ክፍያ በጠቅላላ ዋጋ ላይ ይጨመራል)
+        <div class="delivery-notice" id="deliveryNotice" data-am="⚡ <strong>የመላኪያ ክፍያ: 99 ብር</strong><br>✅ የመጀመሪያ ማድረሻ ነፃ!<br>📍 በ1 ኪ.ሜ ክበብ ውስጥ ከሆኑ 50 ብር ብቻ!" data-om="⚡ <strong>Kaffaltii ergaa: 99 Birraa</strong><br>✅ Ergaa jalqabaa bilisaa!<br>📍 Yoo kilomeetira 1 keessatti jiraattan 50 Birraa qofa!">
+            ⚡ <strong>Delivery Fee: 99 Birr</strong><br>✅ First delivery FREE!<br>📍 Only 50 Birr if within 1 km radius!
         </div>
 
-        <div class="res-title" data-am="እታለም ኢንተርናሽናል ሆቴል" data-om="Etalem Interneeshinaal Hoteela">እታለም ኢንተርናሽናል ሆቴል</div>
+        <!-- Payment Options -->
+        <div class="info-card">
+            <h3 style="margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-credit-card"></i>
+                <span data-am="የክፍያ ዘዴ ይምረጡ" data-om="Kaffaltii Mala Filadhu">የክፍያ ዘዴ ይምረጡ</span>
+            </h3>
+            
+            <div class="payment-option" onclick="selectPayment('cash')" id="cashPayment">
+                <div class="payment-icon" style="background: #28a74520; color: #28a745;">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="payment-details">
+                    <div class="payment-title" data-am="ክፍያ ከመላኪያ በኋላ" data-om="Kaffaltii Ergaa Booda">ክፍያ ከመላኪያ በኋላ</div>
+                    <div class="payment-desc" data-am="ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ" data-om="Nyaata fudhachuu keessan booda qarshii kaffala">ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ</div>
+                </div>
+                <i class="fas fa-check-circle" style="color: #28a745; font-size: 1.2rem; display: none;"></i>
+            </div>
+            
+            <div class="payment-option" onclick="selectPayment('telegram')" id="telegramPayment">
+                <div class="payment-icon" style="background: #0088cc20; color: #0088cc;">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <div class="payment-details">
+                    <div class="payment-title" data-am="በቴሌግራም" data-om="Telegiraamiin">በቴሌግራም</div>
+                    <div class="payment-desc" data-am="የባንክ ሂሳብ ቁጥር በቴሌግራም ይላካል" data-om">የባንክ ሂሳብ ቁጥር በቴሌግራም ይላካል</div>
+                </div>
+                <i class="fas fa-check-circle" style="color: #0088cc; font-size: 1.2rem; display: none;"></i>
+            </div>
+        </div>
+
+        <!-- Restaurant Sections -->
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-utensils"></i>
+                <span data-am="ምግቦች" data-om="Nyaatota">ምግቦች</span>
+            </h2>
+            <span style="font-size: 0.9rem; color: var(--text-light);" data-am="ምረጥ" data-om="Filadhu">ምረጥ</span>
+        </div>
+
+        <div class="res-title">
+            <i class="fas fa-hotel"></i>
+            <span data-am="እታለም ኢንተርናሽናል ሆቴል" data-om="Etalem Interneeshinaal Hoteela">እታለም ኢንተርናሽናል ሆቴል</span>
+        </div>
         <div class="menu-grid">
             <!-- Burger Items -->
             <div class="card"><img src="./assets/double-special-burger.webp?v=13" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700"><div class="card-info"><p class="card-title">Double Special Burger</p><p class="card-price">700 ETB</p></div></div>
@@ -529,7 +1177,10 @@
         </div>
 
         <!-- NEW MENU ITEMS ADDED HERE -->
-        <div class="res-title" data-am="Classic Noodles" data-om="Menu Haaraa">አዲስ ምናሌ</div>
+        <div class="res-title">
+            <i class="fas fa-star"></i>
+            <span data-am="አዲስ ምናሌ" data-om="Menu Haaraa">አዲስ ምናሌ</span>
+        </div>
         <div class="menu-grid">
             <!-- New Burger Items -->
             <div class="card"><img src="./assets/classic-king-burger.webp?v=13" alt="Classic King Burger"><input type="checkbox" value="Classic King Burger (freshly grounded beef, chicken and fish, lettuce, tomato, onion and sliced cheddar cheese, served with French fries and ketchup)" data-price="810"><div class="card-info"><p class="card-title">Classic King Burger</p><p class="card-price">810 ETB</p></div></div>
@@ -553,30 +1204,33 @@
             <!-- New Pizza Items -->
             <div class="card"><img src="./assets/special-classic-pizza.webp?v=13" alt="Special Classic Pizza"><input type="checkbox" value="Special Classic Pizza (minced chicken and beef, boiled egg, garlic, olive oil, fresh tomato sauce)" data-price="795"><div class="card-info"><p class="card-title">Special Classic Pizza</p><p class="card-price">795 ETB</p></div></div>
             
-            <div class="card"><img src="./assets/chicken-pizza-L.webp?v=13" alt="Chicken Pizza L"><input type="checkbox" value="Chicken Pizza L (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Chicken Pizza </p><p class="card-price">600 ETB</p></div></div>
+            <div class="card"><img src="./assets/chicken-pizza-L.webp?v=13" alt="Chicken Pizza L"><input type="checkbox" value="Chicken Pizza L (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Chicken Pizza L</p><p class="card-price">600 ETB</p></div></div>
             
+            <div class="card"><img src="./assets/chicken-pizza-S.webp?v=13" alt="Chicken Pizza S"><input type="checkbox" value="Chicken Pizza S (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="500"><div class="card-info"><p class="card-title">Chicken Pizza S</p><p class="card-price">500 ETB</p></div></div>
             
-            <div class="card"><img src="./assets/pepperoni-pizza-L.webp?v=13" alt="Pepperoni Pizza L"><input type="checkbox" value="Pepperoni Pizza L (beef, ham, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Pepperoni Pizza </p><p class="card-price">600 ETB</p></div></div>
+            <div class="card"><img src="./assets/pepperoni-pizza-L.webp?v=13" alt="Pepperoni Pizza L"><input type="checkbox" value="Pepperoni Pizza L (beef, ham, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Pepperoni Pizza L</p><p class="card-price">600 ETB</p></div></div>
             
+            <div class="card"><img src="./assets/pepperoni-pizza-S.webp?v=13" alt="Pepperoni Pizza S"><input type="checkbox" value="Pepperoni Pizza S (beef, ham, cheese, oregano)" data-price="500"><div class="card-info"><p class="card-title">Pepperoni Pizza S</p><p class="card-price">500 ETB</p></div></div>
             
+            <div class="card"><img src="./assets/beef-pizza-L.webp?v=13" alt="Beef Pizza L"><input type="checkbox" value="Beef Pizza L (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza L</p><p class="card-price">600 ETB</p></div></div>
             
-            <div class="card"><img src="./assets/beef-pizza-L.webp?v=13" alt="Beef Pizza L"><input type="checkbox" value="Beef Pizza L (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza </p><p class="card-price">600 ETB</p></div></div>
-           
+            <div class="card"><img src="./assets/beef-pizza-S.webp?v=13" alt="Beef Pizza S"><input type="checkbox" value="Beef Pizza S (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="500"><div class="card-info"><p class="card-title">Beef Pizza S</p><p class="card-price">500 ETB</p></div></div>
             
-            <div class="card"><img src="./assets/hawaiian-pizza-L.webp?v=13" alt="Hawaiian Pizza L"><input type="checkbox" value="Hawaiian Pizza L (beef sausage, pineapple, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Hawaiian Pizza </p><p class="card-price">600 ETB</p></div></div>
+            <div class="card"><img src="./assets/hawaiian-pizza-L.webp?v=13" alt="Hawaiian Pizza L"><input type="checkbox" value="Hawaiian Pizza L (beef sausage, pineapple, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Hawaiian Pizza L</p><p class="card-price">600 ETB</p></div></div>
             
+            <div class="card"><img src="./assets/hawaiian-pizza-S.webp?v=13" alt="Hawaiian Pizza S"><input type="checkbox" value="Hawaiian Pizza S (beef sausage, pineapple, cheese, oregano)" data-price="500"><div class="card-info"><p class="card-title">Hawaiian Pizza S</p><p class="card-price">500 ETB</p></div></div>
             
+            <div class="card"><img src="./assets/tuna-pizza-L.webp?v=13" alt="Tuna Pizza L"><input type="checkbox" value="Tuna Pizza L (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="600"><div class="card-info"><p class="card-title">Tuna Pizza L</p><p class="card-price">600 ETB</p></div></div>
             
-            <div class="card"><img src="./assets/tuna-pizza-L.webp?v=13" alt="Tuna Pizza L"><input type="checkbox" value="Tuna Pizza L (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="600"><div class="card-info"><p class="card-title">Tuna Pizza </p><p class="card-price">600 ETB</p></div></div>
+            <div class="card"><img src="./assets/tuna-pizza-S.webp?v=13" alt="Tuna Pizza S"><input type="checkbox" value="Tuna Pizza S (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="500"><div class="card-info"><p class="card-title">Tuna Pizza S</p><p class="card-price">500 ETB</p></div></div>
             
-          
-            <div class="card"><img src="./assets/margarita-pizza-L.webp?v=13" alt="Margarita Pizza L"><input type="checkbox" value="Margarita Pizza L (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Margarita Pizza </p><p class="card-price">600 ETB</p></div></div>
+            <div class="card"><img src="./assets/margarita-pizza-L.webp?v=13" alt="Margarita Pizza L"><input type="checkbox" value="Margarita Pizza L (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Margarita Pizza L</p><p class="card-price">600 ETB</p></div></div>
             
+            <div class="card"><img src="./assets/margarita-pizza-S.webp?v=13" alt="Margarita Pizza S"><input type="checkbox" value="Margarita Pizza S (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="500"><div class="card-info"><p class="card-title">Margarita Pizza S</p><p class="card-price">500 ETB</p></div></div>
             
+            <div class="card"><img src="./assets/vegetable-pizza-L.webp?v=13" alt="Vegetable Pizza L"><input type="checkbox" value="Vegetable Pizza L (sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="600"><div class="card-info"><p class="card-title">Vegetable Pizza L</p><p class="card-price">600 ETB</p></div></div>
             
-            <div class="card"><img src="./assets/vegetable-pizza-L.webp?v=13" alt="Vegetable Pizza "><input type="checkbox" value="Vegetable Pizza L(sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="600"><div class="card-info"><p class="card-title">Vegetable Pizza </p><p class="card-price">600 ETB</p></div></div>
-            
-            
+            <div class="card"><img src="./assets/vegetable-pizza-S.webp?v=13" alt="Vegetable Pizza S"><input type="checkbox" value="Vegetable Pizza S (sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="500"><div class="card-info"><p class="card-title">Vegetable Pizza S</p><p class="card-price">500 ETB</p></div></div>
             
             <!-- New Noodle Items -->
             <div class="card"><img src="./assets/stir-fry-chicken-noodles.webp?v=13" alt="Stir Fry Chicken Noodles"><input type="checkbox" value="Stir Fry Chicken Noodles (Freshly homemade noodles with marinated chicken breast(chopped) with egg/without egg, and different fresh vegetable and spice served with chili and soya sauce)" data-price="650"><div class="card-info"><p class="card-title">Stir Fry Chicken Noodles</p><p class="card-price">650 ETB</p></div></div>
@@ -589,7 +1243,10 @@
         </div>
 
         <!-- Kameti's Kitchen Section (Kept as is) -->
-        <div class="res-title" data-am="ካሜቲ (Kameti's Kitchen)" data-om="Kameetii (Kameti's Kitchen)">ካሜቲ (Kameti's Kitchen)</div>
+        <div class="res-title">
+            <i class="fas fa-utensil-spoon"></i>
+            <span data-am="ካሜቲ (Kameti's Kitchen)" data-om="Kameetii (Kameti's Kitchen)">ካሜቲ (Kameti's Kitchen)</span>
+        </div>
         <div class="menu-grid">
             <!-- Kameti Burger Items -->
             <div class="card"><img src="./assets/kameti-special-burger.webp?v=13" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p><p class="card-price">500 ETB</p></div></div>
@@ -613,15 +1270,21 @@
 <!-- TRACK PAGE -->
 <div id="trackPage" class="page-content">
     <header>
-        <h1 style="margin:0; color:var(--dark);" data-am="የትዕዛዝ ሁኔታ" data-om="Haala Ordeeraa">የትዕዛዝ ሁኔታ</h1>
-        <div style="font-size: 0.75rem; color: #666;" data-am="ትዕዛዝዎን ይከታተሉ" data-om="Ordeeraa keessan hordofaa">ትዕዛዝዎን ይከታተሉ</div>
+        <h1 style="margin:0; color:var(--dark); font-size: 1.8rem;" data-am="የትዕዛዝ ሁኔታ" data-om="Haala Ordeeraa">የትዕዛዝ ሁኔታ</h1>
+        <div style="font-size: 0.8rem; color: var(--text-light);" data-am="ትዕዛዝዎን ይከታተሉ" data-om="Ordeeraa keessan hordofaa">ትዕዛዝዎን ይከታተሉ</div>
     </header>
 
     <div class="container">
         <div class="tracking-card">
-            <h2 style="color:var(--primary); margin-top:0;" data-am="ትዕዛዝ ፈልግ" data-om="Ordeer Barbaadi">ትዕዛዝ ፈልግ</h2>
-            <input type="text" id="orderId" placeholder="የትዕዛዝ መለያ (ምሳሌ: BD12345678)" data-am-placeholder="የትዕዛዝ መለያ (ምሳሌ: BD12345678)" data-om-placeholder="ID Ordeeraa (Fakkeenya: BD12345678)" style="width:100%; padding:12px; margin-bottom:15px; border-radius:8px; border:1px solid #ddd;">
-            <button class="btn" onclick="trackOrder()" data-am="ትዕዛዝ ፈልግ" data-om="Ordeer Barbaadi">ትዕዛዝ ፈልግ</button>
+            <h2 style="color:var(--primary); margin-top:0; display: flex; align-items: center; gap: 8px;" data-am="ትዕዛዝ ፈልግ" data-om="Ordeer Barbaadi">
+                <i class="fas fa-search"></i>
+                <span>ትዕዛዝ ፈልግ</span>
+            </h2>
+            <input type="text" id="orderId" placeholder="የትዕዛዝ መለያ (ምሳሌ: BD12345678)" data-am-placeholder="የትዕዛዝ መለያ (ምሳሌ: BD12345678)" data-om-placeholder="ID Ordeeraa (Fakkeenya: BD12345678)" style="width:100%; padding:14px; margin-bottom:15px; border-radius:var(--radius-sm); border:1.5px solid var(--border);">
+            <button class="btn" onclick="trackOrder()" data-am="ትዕዛዝ ፈልግ" data-om="Ordeer Barbaadi">
+                <i class="fas fa-search"></i>
+                <span>ትዕዛዝ ፈልግ</span>
+            </button>
         </div>
 
         <div id="trackingResult" style="display:none;">
@@ -640,28 +1303,28 @@
                         <div class="step-dot">1</div>
                         <div>
                             <h4 style="margin:0;" data-am="ትዕዛዝ ተቀብሏል" data-om="Ordeer fudhatame">ትዕዛዝ ተቀብሏል</h4>
-                            <p style="margin:0; font-size:0.85rem; color:#666;" id="timeReceived">--:--</p>
+                            <p style="margin:0; font-size:0.85rem; color:var(--text-light);" id="timeReceived">--:--</p>
                         </div>
                     </div>
                     <div class="timeline-step" id="step2">
                         <div class="step-dot">2</div>
                         <div>
                             <h4 style="margin:0;" data-am="በማብሰል ላይ" data-om="Kan oolan">በማብሰል ላይ</h4>
-                            <p style="margin:0; font-size:0.85rem; color:#666;" id="timeCooking">--:--</p>
+                            <p style="margin:0; font-size:0.85rem; color:var(--text-light);" id="timeCooking">--:--</p>
                         </div>
                     </div>
                     <div class="timeline-step" id="step3">
                         <div class="step-dot">3</div>
                         <div>
                             <h4 style="margin:0;" data-am="በመላኪያ ላይ" data-om="Kan ergaa jiru">በመላኪያ ላይ</h4>
-                            <p style="margin:0; font-size:0.85rem; color:#666;" id="timeDelivery">--:--</p>
+                            <p style="margin:0; font-size:0.85rem; color:var(--text-light);" id="timeDelivery">--:--</p>
                         </div>
                     </div>
                     <div class="timeline-step" id="step4">
                         <div class="step-dot">4</div>
                         <div>
                             <h4 style="margin:0;" data-am="ደርሷል" data-om="Ga'ee">ደርሷል</h4>
-                            <p style="margin:0; font-size:0.85rem; color:#666;" id="timeDelivered">--:--</p>
+                            <p style="margin:0; font-size:0.85rem; color:var(--text-light);" id="timeDelivered">--:--</p>
                         </div>
                     </div>
                 </div>
@@ -673,25 +1336,33 @@
                 <p data-am="የመላኪያ አገልጋዩን በቴሌግራም ለመከታተል፡" data-om="Ergaa eegaa Telegiraamiin hordofuuf:">የመላኪያ አገልጋዩን በቴሌግራም ለመከታተል፡</p>
                 
                 <button class="telegram-track-btn" onclick="openTelegramForTracking()">
-                    <span>📱</span>
+                    <i class="fab fa-telegram"></i>
                     <span data-am="ቴሌግራም ላይ ከመላኪያ አገልጋይ ጋር ተገናኝ" data-om="Ergaa Eegaa Waliin Telegiraamii Walqunnami">ቴሌግራም ላይ ከመላኪያ አገልጋይ ጋር ተገናኝ</span>
                 </button>
                 
-                <p style="font-size:0.85rem; color:#666; margin-top:10px;" data-am="📍 አስተዳዳሪዎ በቴሌግራም የአካባቢን ምስል ያጋራል" data-om="📍 Hoggansa keessan Telegiraamii irratti bakka agarsiisa">📍 አስተዳዳሪዎ በቴሌግራም የአካባቢን ምስል ያጋራል</p>
+                <p style="font-size:0.85rem; color:var(--text-light); margin-top:10px;" data-am="📍 አስተዳዳሪዎ በቴሌግራም የአካባቢን ምስል ያጋራል" data-om="📍 Hoggansa keessan Telegiraamii irratti bakka agarsiisa">📍 አስተዳዳሪዎ በቴሌግራም የአካባቢን ምስል ያጋራል</p>
             </div>
 
             <div class="info-card">
                 <h3 data-am="እርዳታ ያስፈልግዎታል?" data-om="Gargaarsa barbaadduu?">እርዳታ ያስፈልግዎታል?</h3>
                 <p data-am="ትዕዛዝዎን ማግኘት ካልቻሉ ወይም ሌላ ጥያቄ ካለዎት፡" data-om="Yoo ordeeraa keessan argachuu hin dandeenye ykn gaaffii biraa qabaattan:">ትዕዛዝዎን ማግኘት ካልቻሉ ወይም ሌላ ጥያቄ ካለዎት፡</p>
-                <button class="btn" onclick="contactSupport()" data-am="📞 ድጋፍ ያግኙ" data-om="📞 Gargaarsa Argadhu">📞 ድጋፍ ያግኙ</button>
+                <button class="btn" onclick="contactSupport()" data-am="📞 ድጋፍ ያግኙ" data-om="📞 Gargaarsa Argadhu">
+                    <i class="fas fa-headset"></i>
+                    <span>📞 ድጋፍ ያግኙ</span>
+                </button>
             </div>
         </div>
 
         <div id="noOrderFound" style="text-align:center; padding:40px 20px; display:none;">
-            <div style="font-size:50px; margin-bottom:20px;">🔍</div>
+            <div style="font-size:60px; margin-bottom:20px; color: var(--primary-light);">
+                <i class="fas fa-search"></i>
+            </div>
             <h3 data-am="ትዕዛዝ አልተገኘም" data-om="Ordeer hin argamne">ትዕዛዝ አልተገኘም</h3>
             <p data-am="የትዕዛዝ መለያዎን ያረጋግጡ ወይም አዲስ ትዕዛዝ ያድርጉ" data-om="ID ordeeraa keessan mirkaneessaa ykn ordeer haaraa godhaa">የትዕዛዝ መለያዎን ያረጋግጡ ወይም አዲስ ትዕዛዝ ያድርጉ</p>
-            <button class="btn" onclick="showPage('home')" style="margin-top:20px;" data-am="አዲስ ትዕዛዝ ያድርጉ" data-om="Ordeer Haaraa Godhaa">አዲስ ትዕዛዝ ያድርጉ</button>
+            <button class="btn" onclick="showPage('home')" style="margin-top:20px;" data-am="አዲስ ትዕዛዝ ያድርጉ" data-om="Ordeer Haaraa Godhaa">
+                <i class="fas fa-utensils"></i>
+                <span>አዲስ ትዕዛዝ ያድርጉ</span>
+            </button>
         </div>
     </div>
 </div>
@@ -699,8 +1370,8 @@
 <!-- ABOUT PAGE -->
 <div id="aboutPage" class="page-content">
     <header>
-        <h1 style="margin:0; color:var(--dark);" data-am="ስለ ቢሾፍቱ ዴሊቨሪ" data-om="Waa'ee Bishooftu Ergaa">ስለ ቢሾፍቱ ዴሊቨሪ</h1>
-        <div style="font-size: 0.75rem; color: #666;" data-am="እንዴት እንደምንሰራ" data-om="Akkam nuti hojjennu">እንዴት እንደምንሰራ</div>
+        <h1 style="margin:0; color:var(--dark); font-size: 1.8rem;" data-am="ስለ ቢሾፍቱ ዴሊቨሪ" data-om="Waa'ee Bishooftu Ergaa">ስለ ቢሾፍቱ ዴሊቨሪ</h1>
+        <div style="font-size: 0.8rem; color: var(--text-light);" data-am="እንዴት እንደምንሰራ" data-om="Akkam nuti hojjennu">እንዴት እንደምንሰራ</div>
     </header>
 
     <div class="container">
@@ -743,11 +1414,11 @@
         <div class="info-card">
             <h2 data-am="የመላኪያ መረጃ" data-om="Odeeffannoo Ergaa">የመላኪያ መረጃ</h2>
             <ul style="padding-left:20px;">
-                <li data-am="✅ የመላኪያ ክፍያ: 100 ብር" data-om="✅ Kaffaltii Ergaa: 100 Birra">✅ የመላኪያ ክፍያ: 100 ብር</li>
+                <li data-am="✅ የመላኪያ ክፍያ: 99 ብር (የመጀመሪያ ማድረሻ ነፃ)" data-om="✅ Kaffaltii Ergaa: 99 Birraa (Ergaa jalqabaa bilisaa)">✅ የመላኪያ ክፍያ: 99 ብር (የመጀመሪያ ማድረሻ ነፃ)</li>
+                <li data-am="✅ በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር ብቻ" data-om="✅ Kilomeetira 1 keessatti: 50 Birraa qofa">✅ በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር ብቻ</li>
                 <li data-am="✅ የማድረሻ ጊዜ: 30-45 ደቂቃ" data-om="✅ Yeroo Ga'umsaa: 30-45 Daqiiqaa">✅ የማድረሻ ጊዜ: 30-45 ደቂቃ</li>
                 <li data-am="✅ አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ" data-om="✅ Bakka Tajaajilaa: Bishooftu Keessaa">✅ አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ</li>
                 <li data-am="✅ የሚሰራው: በየቀኑ 8:00 AM - 10:00 PM" data-om="✅ Yeroo Hojii: Guyyaa guyyaan 8:00 AM - 10:00 PM">✅ የሚሰራው: በየቀኑ 8:00 AM - 10:00 PM</li>
-                <li data-am="✅ የክፍያ መንገድ: ባንክ ማስተላለፊያ (CBE)" data-om="✅ Kaffaltii Manna: Baankii (CBE)">✅ የክፍያ መንገድ: ባንክ ማስተላለፊያ (CBE)</li>
             </ul>
         </div>
 
@@ -762,8 +1433,8 @@
 <!-- CONTACT PAGE -->
 <div id="contactPage" class="page-content">
     <header>
-        <h1 style="margin:0; color:var(--dark);" data-am="አግኙን" data-om="Nu Qunnamuu">አግኙን</h1>
-        <div style="font-size: 0.75rem; color: #666;" data-am="ከእኛ ጋር ያገናኙ" data-om="Nu Waliin Walqunnamuu">ከእኛ ጋር ያገናኙ</div>
+        <h1 style="margin:0; color:var(--dark); font-size: 1.8rem;" data-am="አግኙን" data-om="Nu Qunnamuu">አግኙን</h1>
+        <div style="font-size: 0.8rem; color: var(--text-light);" data-am="ከእኛ ጋር ያገናኙ" data-om="Nu Waliin Walqunnamuu">ከእኛ ጋር ያገናኙ</div>
     </header>
 
     <div class="container">
@@ -772,7 +1443,10 @@
             <p><strong data-am="ስልክ፡" data-om="Bilbila:">ስልክ፡</strong> 0962636940</p>
             <p><strong data-am="የስራ ሰዓት፡" data-om="Yeroo Hojii:">የስራ ሰዓት፡</strong> 8:00 AM - 10:00 PM</p>
             
-            <button class="btn" onclick="callSupport()" style="margin-top:15px;" data-am="📞 ይደውሉ" data-om="📞 Bilbilaa">📞 ይደውሉ</button>
+            <button class="btn" onclick="callSupport()" style="margin-top:15px;" data-am="📞 ይደውሉ" data-om="📞 Bilbilaa">
+                <i class="fas fa-phone"></i>
+                <span>📞 ይደውሉ</span>
+            </button>
         </div>
 
         <div class="contact-card">
@@ -780,18 +1454,11 @@
             <p data-am="ለፈጣን ድጋፍ እና የትዕዛዝ መከታተል በቴሌግራም ይጠይቁን።" data-om="Gargaarsa ariifachiisaafi hordoffii ordeeraa Telegiraamiin nu gaafadhaa.">ለፈጣን ድጋፍ እና የትዕዛዝ መከታተል በቴሌግራም ይጠይቁን።</p>
             
             <button class="telegram-track-btn" onclick="openTelegramForSupport()">
-                <span>📱</span>
+                <i class="fab fa-telegram"></i>
                 <span data-am="በቴሌግራም ይጠይቁን" data-om="Telegiraamiin Nu Gaafadhaa">በቴሌግራም ይጠይቁን</span>
             </button>
             
-            <p style="font-size:0.85rem; color:#666; margin-top:10px;" data-am="📍 አስተዳዳሪዎች በቴሌግራም በቀጥታ ይመልሳሉ" data-om="📍 Hoggantotni Telegiraamii irratti gaaffii deebisu">📍 አስተዳዳሪዎች በቴሌግራም በቀጥታ ይመልሳሉ</p>
-        </div>
-
-        <div class="contact-card">
-            <h2 data-am="🏦 የባንክ መረጃ" data-om="🏦 Odeeffannoo Baankii">🏦 የባንክ መረጃ</h2>
-            <p><strong data-am="ባንክ፡" data-om="Baankii:">ባንክ፡</strong> የኢትዮጵያ ንግድ ባንክ (CBE)</p>
-            <p><strong data-am="ሂሳብ ቁጥር፡" data-om="Lakkoofsa Herregaa:">ሂሳብ ቁጥር፡</strong> 1000446752387</p>
-            <p><strong data-am="ስም፡" data-om="Maqaa:">ስም፡</strong> ቢሾፍቱ ዴሊቨሪ</p>
+            <p style="font-size:0.85rem; color:var(--text-light); margin-top:10px;" data-am="📍 አስተዳዳሪዎች በቴሌግራም በቀጥታ ይመልሳሉ" data-om="📍 Hoggantotni Telegiraamii irratti gaaffii deebisu">📍 አስተዳዳሪዎች በቴሌግራም በቀጥታ ይመልሳሉ</p>
         </div>
 
         <div class="contact-card">
@@ -805,7 +1472,7 @@
             
             <div style="margin-bottom:15px;">
                 <h4 style="margin:0;" data-am="Q: ክፍያውን እንዴት እንደሚፈጽሙ?" data-om="Q: Kaffaltiin akkamitti dabarfamuu danda'a?">Q: ክፍያውን እንዴት እንደሚፈጽሙ?</h4>
-                <p data-am="A: በባንክ ማስተላለፊያ (CBE) ወደ ሂሳብ ቁጥር 1000446752387 ያስተላልፉ።" data-om="A: Baankii (CBE) herregaa lakkoofsa 1000446752387 geessaa.">A: በባንክ ማስተላለፊያ (CBE) ወደ ሂሳብ ቁጥር 1000446752387 ያስተላልፉ።</p>
+                <p data-am="A: ክፍያውን በገንዘብ ከመላኪያ በኋላ መፈጸም ይችላሉ። የባንክ ሂሳብ ቁጥር የሚሰጠው በቴሌግራም ብቻ ነው።" data-om="A: Kaffaltiin qarshii ergaa booda danda'ama. Lakkoofsa herregaa baankii Telegiraamiin qofa kenname.">A: Payment can be made in cash after delivery. Bank account details are provided ONLY via Telegram.</p>
             </div>
             
             <div style="margin-bottom:15px;">
@@ -824,43 +1491,165 @@
 <!-- PAYMENT MODAL -->
 <div id="paymentModal" class="modal">
     <div class="modal-content">
-        <h2 style="color:var(--primary)" id="modal-title" data-am="የክፍያ መረጃ" data-om="Odeeffannoo kaffaltii">የክፍያ መረጃ</h2>
-        <p id="modal-desc" data-am="ትዕዛዝዎን ለማረጋገጥ እባክዎ ክፍያውን ቀድመው ይፈጽሙ።" data-om="Dhaadannoo kee mirkaneessuuf, kaffaltii dura dabarfadhu.">ትዕዛዝዎን ለማረጋገጥ እባክዎ ክፍያውን ቀድመው ይፈጽሙ።</p>
-        <div class="payment-info">
-            <b data-am="ባንክ፡" data-om="Baankii:">ባንክ፡</b> የኢትዮጵያ ንግድ ባንክ (CBE)<br>
-            <b data-am="ሂሳብ ቁጥር፡" data-om="Lakkoofsa herregaa:">ሂሳብ ቁጥር፡</b> 1000446752387<br>
-            <b data-am="ስም፡" data-om="Maqaa:">ስም፡</b> ቢሾፍቱ ዴሊቨሪ<br>
-            <b data-am="ስልክ፡" data-om="Bilbila:">ስልክ፡</b> 0962636940<br>
-            <hr>
-            <b data-am="የምግብ ዋጋ፡" data-om="Gatii nyaataa:">የምግብ ዋጋ፡</b> <span id="foodTotal">0</span> ETB<br>
-            <b data-am="የመላኪያ ክፍያ፡" data-om="Kaffaltii ergaa:">የመላኪያ ክፍያ፡</b> 100 ETB<br>
-            <b data-am="ጠቅላላ ዋጋ፡" data-om="Gatii guutuu:">ጠቅላላ ዋጋ፡</b> <span id="modalTotal">0</span> ETB
+        <h2 style="color:var(--primary); display: flex; align-items: center; gap: 8px;" id="modal-title" data-am="የትዕዛዝ ማረጋገጫ" data-om="Mirkanaa Ordeeraa">
+            <i class="fas fa-receipt"></i>
+            <span>የትዕዛዝ ማረጋገጫ</span>
+        </h2>
+        <p id="modal-desc" data-am="ትዕዛዝዎን ለማረጋገጥ እባክዎ በቴሌግራም ያረጋግጡ።" data-om="Dhaadannoo kee mirkaneessuuf, Telegiraamiin mirkaneessi.">ክፍያ መረጃ የሚሰጠው በቴሌግራም ብቻ ነው።</p>
+        
+        <div class="order-summary">
+            <div class="summary-row">
+                <span data-am="የምግብ ዋጋ፡" data-om="Gatii nyaataa:">የምግብ ዋጋ፡</span>
+                <span id="foodTotal">0</span> ETB
+            </div>
+            <div class="summary-row">
+                <span data-am="የመላኪያ ክፍያ፡" data-om="Kaffaltii ergaa:">የመላኪያ ክፍያ፡</span>
+                <span id="deliveryFeeDisplay">99</span> ETB
+            </div>
+            <div class="summary-row total">
+                <span data-am="ጠቅላላ ዋጋ፡" data-om="Gatii guutuu:">ጠቅላላ ዋጋ፡</span>
+                <span id="modalTotal">0</span> ETB
+            </div>
         </div>
-        <p style="font-size: 0.8rem; color:red;" id="modal-note" data-am="* ክፍያውን ከፈጸሙ በኋላ 'በቴሌግራም ላክ' የሚለውን ይጫኑ።" data-om="* Kaffaltii ergisan booda 'Telegiraamiin ergi' jedhu cuqi.">* ክፍያውን ከፈጸሙ በኋላ "በቴሌግራም ላክ" የሚለውን ይጫኑ።</p>
-        <button class="btn" onclick="sendToTelegram()" id="send-telegram-btn" data-am="ትዕዛዙን በቴሌግራም ላክ" data-om="Dhaadannoo Telegiraamiin ergi">ትዕዛዙን በቴሌግራም ላክ</button>
-        <button onclick="closeModal()" style="background:none; border:none; margin-top:10px; color:#666; cursor:pointer;" id="back-btn" data-am="ተመለስ" data-om="Duuli">ተመለስ</button>
+        
+        <div class="payment-info">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                <i class="fas fa-info-circle" style="color: var(--primary);"></i>
+                <strong data-am="የተመረጠ የክፍያ ዘዴ፡" data-om="Mala Kaffaltii Filatame:">የተመረጠ የክፍያ ዘዴ፡</strong>
+            </div>
+            <div id="selectedPaymentMethod" style="padding: 10px; background: white; border-radius: var(--radius-sm); margin: 10px 0; border: 1px solid var(--border);">
+                <i class="fas fa-money-bill-wave" style="color: #28a745; margin-right: 8px;"></i>
+                <span data-am="ክፍያ ከመላኪያ በኋላ" data-om="Kaffaltii Ergaa Booda">ክፍያ ከመላኪያ በኋላ</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #666; margin: 10px 0 0 0;">
+                <i class="fas fa-exclamation-triangle" style="color: #ff9800; margin-right: 5px;"></i>
+                <span data-am="የባንክ ሂሳብ ቁጥር በቴሌግራም ብቻ ይሰጣል" data-om="Lakkoofsa herregaa baankii Telegiraamiin qofa kenname">የባንክ ሂሳብ ቁጥር በቴሌግራም ብቻ ይሰጣል</span>
+            </p>
+        </div>
+        
+        <p style="font-size: 0.85rem; color:var(--text-light); margin: 15px 0;" id="modal-note" data-am="* ትዕዛዝዎን ለማረጋገጥ 'በቴሌግራም ላክ' የሚለውን ይጫኑ።" data-om="* Dhaadannoo mirkaneessuuf 'Telegiraamiin ergi' jedhu cuqi.">* Click "Send via Telegram" to confirm your order.</p>
+        
+        <div style="display: flex; gap: 10px;">
+            <button class="btn" onclick="sendToTelegram()" id="send-telegram-btn" data-am="በቴሌግራም ላክ" data-om="Telegiraamiin Ergi">
+                <i class="fab fa-telegram"></i>
+                <span>በቴሌግራም ላክ</span>
+            </button>
+            <button class="btn btn-outline" onclick="closeModal()" id="back-btn" data-am="ተመለስ" data-om="Duuli">
+                <i class="fas fa-arrow-left"></i>
+                <span>ተመለስ</span>
+            </button>
+        </div>
     </div>
 </div>
 
 <div class="floating-footer">
-    <button class="btn" onclick="openCheckout()" id="checkout-btn" data-am="ትዕዛዝ አጠናቅ (Checkout)" data-om="Dhaadannoo Xumuri (Checkout)">ትዕዛዝ አጠናቅ (Checkout)</button>
+    <button class="btn" onclick="openCheckout()" id="checkout-btn" data-am="ትዕዛዝ አጠናቅ (Checkout)" data-om="Dhaadannoo Xumuri (Checkout)">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
+        <span>ትዕዛዝ አጠናቅ</span>
+    </button>
+    <button class="btn btn-secondary" onclick="showOrderSummary()" id="summary-btn" style="display: none;" data-am="የትዕዛዝ ድምር" data-om="Gatii Ordeeraa">
+        <i class="fas fa-receipt"></i>
+        <span>ድምር አሳይ</span>
+    </button>
 </div>
 
 <script>
     const BOT_USERNAME = "Bishoftu_Delivery_bot";
-    const TELEGRAM_ADMIN_USERNAME = "Bishoftu_Delivery_bot"; // Your Telegram username
+    const TELEGRAM_ADMIN_USERNAME = "Bishoftu_Delivery_bot";
     let orderData = {};
     let userLat = null;
     let userLng = null;
     let deferredPrompt = null;
-    const DELIVERY_FEE = 100;
+    const BASE_DELIVERY_FEE = 99;
+    const FIRST_DELIVERY_FREE = true; // First delivery free flag
+    const WITHIN_1KM_FEE = 50;
+    let deliveryFee = BASE_DELIVERY_FEE;
+    let isFirstOrder = localStorage.getItem('firstOrderMade') !== 'true';
     const SITE_URL = "https://mikemoke4444-gif.github.io/delivery_app/";
     let currentLang = localStorage.getItem('preferredLang') || 'am';
     let currentPage = 'home';
+    let selectedPayment = 'cash'; // Default payment method
+    
+    // Top 3 trending foods with order counts
+    const trendingFoods = [
+        { name: "Double Special Burger", price: 700, orders: 6, image: "./assets/double-special-burger.webp" },
+        { name: "Special Classic Pizza", price: 795, orders: 8, image: "./assets/special-classic-pizza.webp" },
+        { name: "Classic King Burger", price: 810, orders: 13, image: "./assets/classic-king-burger.webp" }
+    ];
+    
+    // Pull to refresh variables
+    let startY = 0;
+    let currentY = 0;
+    let isRefreshing = false;
+    const refreshContainer = document.getElementById('refreshContainer');
+    const refreshSpinner = document.getElementById('refreshSpinner');
+    const refreshText = document.getElementById('refreshText');
 
     // Elements
     const offlineIndicator = document.getElementById('offlineIndicator');
     const toast = document.getElementById('toast');
+
+    // Initialize trending foods
+    function initTrendingFoods() {
+        const trendingContainer = document.getElementById('trendingItems');
+        trendingContainer.innerHTML = '';
+        
+        trendingFoods.forEach((food, index) => {
+            const trendingItem = document.createElement('div');
+            trendingItem.className = 'trending-item';
+            trendingItem.innerHTML = `
+                <div class="trending-rank">${index + 1}</div>
+                <div class="trending-info">
+                    <div class="trending-name">${food.name}</div>
+                    <div class="trending-price">${food.price} ETB</div>
+                    <div class="trending-orders">${food.orders} ${currentLang === 'am' ? 'ትዕዛዞች' : 'Ordeeron'}</div>
+                </div>
+                <button class="btn" style="padding: 8px 12px; font-size: 0.8rem;" onclick="addTrendingItem('${food.name}', ${food.price})">
+                    <i class="fas fa-plus"></i>
+                    <span>${currentLang === 'am' ? 'ጨምር' : 'Dabaladhu'}</span>
+                </button>
+            `;
+            trendingContainer.appendChild(trendingItem);
+        });
+        
+        // Add trending badges to menu items
+        document.querySelectorAll('.card').forEach(card => {
+            const title = card.querySelector('.card-title').textContent;
+            const isTrending = trendingFoods.some(food => food.name === title);
+            if (isTrending) {
+                const badge = document.createElement('div');
+                badge.className = 'trending-badge';
+                badge.innerHTML = `<i class="fas fa-fire"></i> ${currentLang === 'am' ? 'ታዋቂ' : 'Kan Daddarfame'}`;
+                card.appendChild(badge);
+            }
+        });
+    }
+    
+    // Add trending item to cart
+    function addTrendingItem(itemName, price) {
+        // Find the checkbox for this item
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (let checkbox of checkboxes) {
+            if (checkbox.value.includes(itemName)) {
+                checkbox.checked = true;
+                
+                // Animate the card
+                const card = checkbox.closest('.card');
+                card.classList.add('item-added');
+                setTimeout(() => {
+                    card.classList.remove('item-added');
+                }, 300);
+                
+                updateCartCount();
+                showToast(`${currentLang === 'am' ? '✅ ተጨመረ:' : '✅ Dabalame:'} ${itemName}`, 2000);
+                return;
+            }
+        }
+        
+        // If exact match not found, show message
+        showToast(currentLang === 'am' ? '⚠️ አትሙ በምናሌው ውስጥ አልተገኘም' : '⚠️ Nyaanni menu keessatti hin argamne', 3000);
+    }
 
     // Language switching function
     function switchLanguage(lang) {
@@ -882,8 +1671,14 @@
         // Update all translatable elements
         updateTextContent();
         
+        // Reinitialize trending foods with new language
+        initTrendingFoods();
+        
+        // Update cart count
+        updateCartCount();
+        
         // Show confirmation
-        showToast(lang === 'am' ? 'ቋንቋ ተቀይሯል!' : 'Afaan jijjiirame!', 2000);
+        showToast(lang === 'am' ? '✅ ቋንቋ ተቀይሯል!' : '✅ Afaan jijjiirame!', 2000);
     }
 
     // Update text content based on language
@@ -909,6 +1704,42 @@
             'Bishooftu Ergaa | Bishoftu Delivery';
         document.title = title;
         document.getElementById('page-title').textContent = title;
+        
+        // Update refresh text
+        if (refreshText) {
+            refreshText.textContent = currentLang === 'am' ? 
+                'ይቀናል... ለማደስት ከላይ ይሳቡ' : 
+                'Deebi\'aa... Harka keessan deebisuu fedhaa';
+        }
+    }
+
+    // Select payment method
+    function selectPayment(method) {
+        selectedPayment = method;
+        
+        // Update UI
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.classList.remove('selected');
+            option.querySelector('.fa-check-circle').style.display = 'none';
+        });
+        
+        const selectedOption = document.getElementById(method + 'Payment');
+        selectedOption.classList.add('selected');
+        selectedOption.querySelector('.fa-check-circle').style.display = 'block';
+        
+        // Update payment method in modal
+        const paymentMethodDisplay = document.getElementById('selectedPaymentMethod');
+        if (method === 'cash') {
+            paymentMethodDisplay.innerHTML = `
+                <i class="fas fa-money-bill-wave" style="color: #28a745; margin-right: 8px;"></i>
+                <span>${currentLang === 'am' ? 'ክፍያ ከመላኪያ በኋላ' : 'Kaffaltii Ergaa Booda'}</span>
+            `;
+        } else {
+            paymentMethodDisplay.innerHTML = `
+                <i class="fab fa-telegram" style="color: #0088cc; margin-right: 8px;"></i>
+                <span>${currentLang === 'am' ? 'በቴሌግራም' : 'Telegiraamiin'}</span>
+            `;
+        }
     }
 
     // Show page function
@@ -931,16 +1762,126 @@
         
         // Update footer button
         const checkoutBtn = document.getElementById('checkout-btn');
+        const summaryBtn = document.getElementById('summary-btn');
         if (page === 'home') {
-            checkoutBtn.style.display = 'block';
-            checkoutBtn.textContent = currentLang === 'am' ? 'ትዕዛዝ አጠናቅ (Checkout)' : 'Dhaadannoo Xumuri (Checkout)';
+            checkoutBtn.style.display = 'flex';
+            summaryBtn.style.display = 'none';
+            checkoutBtn.innerHTML = `
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cartCount">${getCartCount()}</span>
+                <span>${currentLang === 'am' ? 'ትዕዛዝ አጠናቅ' : 'Dhaadannoo Xumuri'}</span>
+            `;
             checkoutBtn.onclick = openCheckout;
         } else {
             checkoutBtn.style.display = 'none';
+            summaryBtn.style.display = 'none';
         }
         
         // Scroll to top
         window.scrollTo(0, 0);
+    }
+
+    // Update cart count
+    function updateCartCount() {
+        const count = getCartCount();
+        document.getElementById('cartCount').textContent = count;
+        
+        // Show/hide summary button
+        const summaryBtn = document.getElementById('summary-btn');
+        if (count > 0 && currentPage === 'home') {
+            summaryBtn.style.display = 'flex';
+            summaryBtn.innerHTML = `
+                <i class="fas fa-receipt"></i>
+                <span>${count} ${currentLang === 'am' ? 'እቃዎች' : 'Qabeenya'}</span>
+            `;
+        } else {
+            summaryBtn.style.display = 'none';
+        }
+    }
+    
+    function getCartCount() {
+        return document.querySelectorAll('input[type="checkbox"]:checked').length;
+    }
+
+    // Show order summary
+    function showOrderSummary() {
+        let foodTotal = 0;
+        let selected = [];
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
+            selected.push(box.value);
+            foodTotal += parseInt(box.getAttribute('data-price'));
+        });
+
+        if(selected.length === 0) {
+            showToast(currentLang === 'am' ? 
+                "እባክዎ ቢያንስ አንድ ምግብ ይምረጡ!" : 
+                "Yoo xinna tokko nyaata filadhu!", 3000);
+            return;
+        }
+        
+        calculateDeliveryFee();
+        const total = foodTotal + deliveryFee;
+        
+        // Create summary modal
+        const summaryHTML = `
+            <div class="modal" id="summaryModal" style="display: block;">
+                <div class="modal-content" style="max-width: 450px;">
+                    <h2 style="color:var(--primary); display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>${currentLang === 'am' ? 'የትዕዛዝ ድምር' : 'Gatii Ordeeraa'}</span>
+                    </h2>
+                    
+                    <div style="max-height: 300px; overflow-y: auto; margin: 15px 0;">
+                        ${selected.map((item, index) => `
+                            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border);">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 500;">${item.split('(')[0]}</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-light);">${item.split('(')[1] ? '(' + item.split('(')[1] : ''}</div>
+                                </div>
+                                <div style="font-weight: 600; color: var(--primary);">
+                                    ${document.querySelector(`input[value="${item}"]`).getAttribute('data-price')} ETB
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="order-summary" style="margin: 20px 0;">
+                        <div class="summary-row">
+                            <span>${currentLang === 'am' ? 'የምግብ ድምር፡' : 'Gatii Nyaataa:'}</span>
+                            <span>${foodTotal} ETB</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>${currentLang === 'am' ? 'የመላኪያ ክፍያ፡' : 'Kaffaltii Ergaa:'}</span>
+                            <span>${deliveryFee} ETB</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>${currentLang === 'am' ? 'ጠቅላላ ድምር፡' : 'Gatii Guutuu:'}</span>
+                            <span>${total} ETB</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn" onclick="document.getElementById('summaryModal').style.display='none'; openCheckout();">
+                            <i class="fas fa-check-circle"></i>
+                            <span>${currentLang === 'am' ? 'ቀጠል' : 'Ittisa'}</span>
+                        </button>
+                        <button class="btn btn-outline" onclick="document.getElementById('summaryModal').style.display='none'">
+                            <i class="fas fa-times"></i>
+                            <span>${currentLang === 'am' ? 'ዝጋ' : 'Cufi'}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Remove existing summary modal if any
+        const existingModal = document.getElementById('summaryModal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+        
+        // Add new modal
+        document.body.insertAdjacentHTML('beforeend', summaryHTML);
     }
 
     // Telegram tracking function
@@ -963,8 +1904,8 @@
         window.open(telegramUrl, '_blank');
         
         showToast(currentLang === 'am' ? 
-            '📱 ወደ ቴሌግራም ተላክዎታል!' : 
-            '📱 Telegiraamiin ergame!', 3000);
+            '✅ ወደ ቴሌግራም ተላክዎታል!' : 
+            '✅ Telegiraamiin ergame!', 3000);
     }
 
     // Open Telegram for support
@@ -994,8 +1935,8 @@
         
         if (!orderId) {
             showToast(currentLang === 'am' ? 
-                'እባክዎ የትዕዛዝ መለያ ያስገቡ!' : 
-                'ID ordeeraa galchaa!', 3000);
+                '⚠️ እባክዎ የትዕዛዝ መለያ ያስገቡ!' : 
+                '⚠️ ID ordeeraa galchaa!', 3000);
             return;
         }
         
@@ -1049,6 +1990,32 @@
         switchLanguage(currentLang);
         updateStreakUI();
         initPWA();
+        initPullToRefresh();
+        initTrendingFoods();
+        
+        // Set default payment method
+        selectPayment('cash');
+        
+        // Update cart count
+        updateCartCount();
+        
+        // Add event listeners to checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', updateCartCount);
+        });
+        
+        // Update stats with random numbers (for demo)
+        setInterval(() => {
+            const ordersToday = document.getElementById('ordersToday');
+            const activeRiders = document.getElementById('activeRiders');
+            if (ordersToday) {
+                const current = parseInt(ordersToday.textContent);
+                ordersToday.textContent = current + Math.floor(Math.random() * 3);
+            }
+            if (activeRiders) {
+                activeRiders.textContent = 2 + Math.floor(Math.random() * 2);
+            }
+        }, 10000);
         
         // 1. Ask for location immediately
         setTimeout(() => {
@@ -1068,6 +2035,114 @@
         // Check for updates
         checkForUpdates();
     };
+
+    // Initialize Pull to Refresh
+    function initPullToRefresh() {
+        document.addEventListener('touchstart', handleTouchStart, { passive: true });
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('touchend', handleTouchEnd);
+    }
+
+    function handleTouchStart(e) {
+        if (window.scrollY === 0 && !isRefreshing) {
+            startY = e.touches[0].clientY;
+            currentY = startY;
+        }
+    }
+
+    function handleTouchMove(e) {
+        if (!startY || isRefreshing) return;
+        
+        currentY = e.touches[0].clientY;
+        const deltaY = currentY - startY;
+        
+        if (window.scrollY === 0 && deltaY > 0) {
+            e.preventDefault();
+            const pullProgress = Math.min(deltaY / 100, 1);
+            refreshContainer.style.top = `${Math.min(deltaY - 60, 0)}px`;
+            
+            // Update text based on pull distance
+            if (deltaY > 80) {
+                refreshText.textContent = currentLang === 'am' ? 
+                    'ይልቀቅ... ለማደስት አርፉ' : 
+                    'Dhiisii... Deebisuu fedhaa';
+            } else {
+                refreshText.textContent = currentLang === 'am' ? 
+                    'ይቀናል... ለማደስት ከላይ ይሳቡ' : 
+                    'Deebi\'aa... Harka keessan deebisuu fedhaa';
+            }
+        }
+    }
+
+    function handleTouchEnd() {
+        if (!startY || isRefreshing) return;
+        
+        const deltaY = currentY - startY;
+        
+        if (deltaY > 80) {
+            // Trigger refresh
+            startRefresh();
+        } else {
+            // Reset
+            resetRefresh();
+        }
+        
+        startY = 0;
+        currentY = 0;
+    }
+
+    function startRefresh() {
+        isRefreshing = true;
+        refreshContainer.style.top = '0';
+        refreshSpinner.style.display = 'block';
+        refreshText.textContent = currentLang === 'am' ? 
+            'በማደስ ላይ...' : 
+            'Kan deebisan...';
+        
+        // Simulate refresh action
+        setTimeout(() => {
+            completeRefresh();
+        }, 1500);
+    }
+
+    function completeRefresh() {
+        isRefreshing = false;
+        
+        // Perform actual refresh actions
+        updateStreakUI();
+        checkForUpdates();
+        
+        // Update trending foods order counts (simulated)
+        trendingFoods.forEach(food => {
+            food.orders += Math.floor(Math.random() * 5);
+        });
+        initTrendingFoods();
+        
+        // Show success message
+        refreshText.textContent = currentLang === 'am' ? 
+            '✅ ተደስቷል!' : 
+            '✅ Milkaa\'e!';
+        refreshSpinner.style.display = 'none';
+        
+        // Show toast
+        showToast(currentLang === 'am' ? 
+            '✅ አፕዎ ተደስቷል!' : 
+            '✅ App keessan deebifame!', 2000);
+        
+        // Hide refresh container after delay
+        setTimeout(() => {
+            resetRefresh();
+        }, 1000);
+    }
+
+    function resetRefresh() {
+        refreshContainer.style.top = '-60px';
+        refreshSpinner.style.display = 'none';
+        refreshText.textContent = currentLang === 'am' ? 
+            'ይቀናል... ለማደስት ከላይ ይሳቡ' : 
+            'Deebi\'aa... Harka keessan deebisuu fedhaa';
+        isRefreshing = false;
+    }
 
     // Check for updates
     function checkForUpdates() {
@@ -1114,6 +2189,10 @@
                     lat: userLat,
                     lng: userLng
                 }));
+                
+                // Calculate if within 1km radius (simplified calculation)
+                // This is a simplified version - you'd need actual restaurant coordinates
+                calculateDeliveryFee();
             },
             (error) => {
                 let errorMsg = currentLang === 'am' ? '❌ አካባቢ ማወቅ አልተቻለም' : '❌ Bakka beekuu hindandeenye';
@@ -1134,6 +2213,52 @@
             },
             options
         );
+    }
+
+    // Calculate delivery fee based on location and first order status
+    function calculateDeliveryFee() {
+        // Reset to base fee
+        deliveryFee = BASE_DELIVERY_FEE;
+        
+        // Check if first order (free delivery)
+        if (isFirstOrder && FIRST_DELIVERY_FREE) {
+            deliveryFee = 0;
+        }
+        // If user has location, check if within 1km (simplified)
+        else if (userLat && userLng) {
+            // Simplified distance calculation - you'd need actual restaurant coordinates
+            // For now, we'll use a random check for demo purposes
+            const isWithin1km = Math.random() > 0.5; // 50% chance for demo
+            if (isWithin1km) {
+                deliveryFee = WITHIN_1KM_FEE;
+            }
+        }
+        
+        // Update delivery fee display
+        document.getElementById('deliveryFeeDisplay').textContent = deliveryFee;
+        
+        // Update delivery notice
+        updateDeliveryNotice();
+    }
+
+    // Update delivery notice based on calculated fee
+    function updateDeliveryNotice() {
+        const notice = document.getElementById('deliveryNotice');
+        if (!notice) return;
+        
+        if (deliveryFee === 0) {
+            notice.innerHTML = currentLang === 'am' ? 
+                '🎉 <strong>የመጀመሪያ ማድረሻ ነፃ!</strong>' :
+                '🎉 <strong>Ergaa jalqabaa bilisaa!</strong>';
+        } else if (deliveryFee === WITHIN_1KM_FEE) {
+            notice.innerHTML = currentLang === 'am' ? 
+                '📍 <strong>በ1 ኪ.ሜ ክበብ ውስጥ ከሆኑ 50 ብር ብቻ!</strong>' :
+                '📍 <strong>Yoo kilomeetira 1 keessatti jiraattan 50 Birraa qofa!</strong>';
+        } else {
+            notice.innerHTML = currentLang === 'am' ? 
+                '⚡ <strong>የመላኪያ ክፍያ: 99 ብር</strong>' :
+                '⚡ <strong>Kaffaltii ergaa: 99 Birraa</strong>';
+        }
     }
 
     // Deny location
@@ -1202,7 +2327,7 @@
         } else if (isAndroid) {
             instructions = currentLang === 'am' ? 
                 '📱 ለአንድሮይድ:\n' +
-                '1. በቻሮም ላይ ሶስት ነጥብ (⋮) ይጫኑ\n' +
+                '1.   ሶስት ነጥብ (⋮) ይጫኑ\n' +
                 '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
                 '3. "አክል" የሚለውን ይጫኑ' :
                 '📱 Android:\n' +
@@ -1287,8 +2412,8 @@
         
         if(!name || !phone) {
             alert(currentLang === 'am' ? 
-                "እባክዎ ስም እና ስልክ ያስገቡ!" : 
-                "Maqaa fi bilbila galchaa!");
+                "⚠️ እባክዎ ስም እና ስልክ ያስገቡ!" : 
+                "⚠️ Maqaa fi bilbila galchaa!");
             return;
         }
 
@@ -1301,14 +2426,28 @@
 
         if(selected.length === 0) {
             alert(currentLang === 'am' ? 
-                "እባክዎ ቢያንስ አንድ ምግብ ይምረጡ!" : 
-                "Yoo xinna tokko nyaata filadhu!");
+                "⚠️ እባክዎ ቢያንስ አንድ ምግብ ይምረጡ!" : 
+                "⚠️ Yoo xinna tokko nyaata filadhu!");
             return;
         }
 
-        const total = foodTotal + DELIVERY_FEE;
-        orderData = { name, phone, landmark, items: selected.join(", "), foodTotal, total };
+        // Calculate delivery fee
+        calculateDeliveryFee();
+        const total = foodTotal + deliveryFee;
+        
+        orderData = { 
+            name, 
+            phone, 
+            landmark, 
+            items: selected.join(", "), 
+            foodTotal, 
+            deliveryFee, 
+            total,
+            paymentMethod: selectedPayment
+        };
+        
         document.getElementById('foodTotal').innerText = foodTotal;
+        document.getElementById('deliveryFeeDisplay').textContent = deliveryFee;
         document.getElementById('modalTotal').innerText = total;
         document.getElementById('paymentModal').style.display = "block";
     }
@@ -1320,6 +2459,12 @@
     // Send to Telegram
     function sendToTelegram() {
         localStorage.setItem('lastOrder', JSON.stringify(orderData));
+        
+        // Mark first order as completed
+        if (isFirstOrder) {
+            localStorage.setItem('firstOrderMade', 'true');
+            isFirstOrder = false;
+        }
         
         if (!userLat || !userLng) {
             const savedLocation = sessionStorage.getItem('userLocation');
@@ -1378,11 +2523,13 @@
                `${locationInfo}\n` +
                `\n🛒 Items:\n${orderData.items}\n\n` +
                `💰 Food Total: ${orderData.foodTotal} ETB\n` +
-               `🚚 Delivery Fee: ${DELIVERY_FEE} ETB\n` +
-               `💵 Total: ${orderData.total} ETB\n\n` +
+               `🚚 Delivery Fee: ${orderData.deliveryFee} ETB\n` +
+               `💵 Total: ${orderData.total} ETB\n` +
+               `💳 Payment Method: ${orderData.paymentMethod === 'cash' ? 'Cash on Delivery' : 'Telegram'}\n\n` +
                `${mapUrl}\n` +
                `⏰ Time: ${new Date().toLocaleString('am-ET')}\n` +
-               `🔢 Order ID: BD${Date.now().toString().slice(-8)}`;
+               `🔢 Order ID: BD${Date.now().toString().slice(-8)}\n\n` +
+               `🧪 This is a TEST order for user interest gathering`;
     }
 
     function clearForm() {
@@ -1390,6 +2537,7 @@
         document.getElementById('custPhone').value = '';
         document.getElementById('custLandmark').value = '';
         document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        updateCartCount();
     }
 </script>
 </body>
