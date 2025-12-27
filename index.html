@@ -319,10 +319,7 @@
             line-height: 1.4;
         }
         .card-price { 
-            color: var(--primary); 
-            font-weight: 700; 
-            font-size: 1rem; 
-            margin-top: auto;
+            display: none !important; 
         }
         .card input { 
             position: absolute; 
@@ -457,9 +454,7 @@
             color: var(--dark);
         }
         .trending-price {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.9rem;
+            display: none !important;
         }
         .trending-orders {
             font-size: 0.8rem;
@@ -848,17 +843,9 @@
             box-shadow: 0 3px 10px rgba(255, 68, 68, 0.3);
         }
         
-        /* Delivery Fee Notice */
+        /* Delivery Fee Notice - HIDDEN */
         .delivery-notice {
-            background: linear-gradient(90deg, #e3f2fd, #bbdefb);
-            border-left: 4px solid #2196f3;
-            color: #0d47a1;
-            padding: 15px;
-            border-radius: var(--radius-sm);
-            margin: 15px 0;
-            font-size: 0.95rem;
-            text-align: center;
-            box-shadow: var(--shadow-light);
+            display: none;
         }
         
         /* Toast Notification */
@@ -885,27 +872,12 @@
             10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
         
-        /* Order Summary */
+        /* Order Summary - HIDDEN */
         .order-summary {
-            background: white;
-            border-radius: var(--radius);
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: var(--shadow-light);
-            border-top: 4px solid var(--primary);
+            display: none;
         }
         .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .summary-row.total {
-            border-bottom: none;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--primary);
-            padding-top: 15px;
+            display: none;
         }
         
         /* Quick Stats */
@@ -1004,7 +976,7 @@
 <body>
 
 <!-- Testing Notice -->
-<div class="testing-notice" data-am="🧪 ይህ የተጠቃሚ ፍላጎት ማሰባሰቢያ ነው። ለቢሾፍቱ ምግብ ማድረሻ ሀሳብ ነው።" data-om="🧪 Kun tajaajila nyaataa Bishooftu irratti madaala fedha fayyadamaa. Yaada qofaa dha.">
+<div class="testing-notice" data-am="🧪 ይህ የተጠቃሚ ፍላጎት ማሰባሰቢያ ፈተና ነው። ለቢሾፍቱ ምግብ ማድረሻ ሀሳብ ብቻ ነው።" data-om="🧪 Kun tajaajila nyaataa Bishooftu irratti madaala fedha fayyadamaa. Yaada qofaa dha.">
     🧪 This is a user interest–gathering test for a potential food delivery idea in Bishoftu.
 </div>
 
@@ -1012,7 +984,7 @@
 <div id="refreshContainer">
     <div class="refresh-content">
         <div class="refresh-spinner" id="refreshSpinner"></div>
-        <span id="refreshText" data-am="ይቀናል... ለማደስ ከላይ ይሳቡ" data-om="Deebi'aa... Harka keessan deebisuu fedhaa">ይቀናል... ለማደስ ከላይ ይሳቡ</span>
+        <span id="refreshText" data-am="ይቀናል... ለማደስት ከላይ ይሳቡ" data-om="Deebi'aa... Harka keessan deebisuu fedhaa">ይቀናል... ለማደስት ከላይ ይሳቡ</span>
     </div>
 </div>
 
@@ -1040,7 +1012,8 @@
 <div id="locationModal" class="location-modal">
     <div class="location-icon">📍</div>
     <div class="location-title" data-am="አካባቢዎን ያሳውቁ" data-om="Bakka keessan agarsiisaa">አካባቢዎን ያሳውቁ</div>
-    <div class="location-message" data-am="ምግብዎን በፍጥነት ለማድረስ የእርስዎን አካባቢ ማወቅ አለብን።<br><br><small style='color: #999; font-size: 0.85rem;'>⚠️ እባክዎ የአካባቢ አገልግሎትዎን ያብሩ!<br>📍 ከቴሌግራም ትዕዛዝ ጋር ብቻ ይላካል</small>" data-om="Nyaata keessan ariifachiifachuuf bakka keessan beekuu barbaanna.<br><br><small style='color: #999; font-size: 0.85rem;'>⚠️ Tajaajila bakkaa keessan dammaqsaa!<br>📍 Telegiraamiin qofa ergama</small>">ምግብዎን በፍጥነት ለማድረስ የእርስዎን አካባቢ ማወቅ አለብን።<br><br><small style="color: #999; font-size: 0.85rem;">⚠️ እባክዎ የአካባቢ አገልግሎትዎን ያብሩ!<br>📍 ከቴሌግራም ትዕዛዝ ጋር ብቻ ይላካል</small></div>
+    <div class="location-message" data-am="ምግብዎን በፍጥነት ለማድረስ እና ትክክለኛ የመላኪያ ክፍያ ለማስላት የእርስዎን አካባቢ ማወቅ አለብን።<br><br><small style='color: #999; font-size: 0.85rem;'>📍 የመላኪያ ክፍያ:<br>• 1 ኪ.ሜ ውስጥ: 50 ብር<br>• ከ1 ኪ.ሜ በላይ: 99 ብር<br>• የመጀመሪያ ማድረሻ ነፃ!</small>" data-om="Nyaata keessan ariifachiifachuuf fi kaffaltii ergaa sirrii hiruuu bakka keessan beekuu barbaanna.<br><br><small style='color: #999; font-size: 0.85rem;'>📍 Kaffaltii ergaa:<br>• Kilomeetira 1 keessatti: 50 Birraa<br>• Kilomeetira 1 ol: 99 Birraa<br>• Ergaa jalqabaa bilisaa!</small>">
+        ምግብዎን በፍጥነት ለማድረስ እና ትክክለኛ የመላኪያ ክፍያ ለማስላት የእርስዎን አካባቢ ማወቅ አለብን።<br><br><small style="color: #999; font-size: 0.85rem;">📍 የመላኪያ ክፍያ:<br>• 1 ኪ.ሜ ውስጥ: 50 ብር<br>• ከ1 ኪ.ሜ በላይ: 99 ብር<br>• የመጀመሪያ ማድረሻ ነፃ!</small></div>
     <div class="location-buttons">
         <button class="location-btn location-allow" onclick="requestLocation()" data-am="አረጋግጥ" data-om="Mirkaneessi">አረጋግጥ</button>
         <button class="location-btn location-deny" onclick="denyLocation()" data-am="አልፈልግም" data-om="Hin barbaadu">አልፈልግም</button>
@@ -1068,37 +1041,32 @@
         <div id="statusMsg" style="font-size: 0.8rem; color: var(--text-light);" data-am="በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!" data-om="Guyyaa guyyaan dhaadannoo godhaa ibidda tasgabbeessaa!">በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!</div>
     </header>
 
-    
+    <div class="container">
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-box">
+                <div class="stat-number" id="ordersToday">14</div>
+                <div class="stat-label" data-am='ትዕዛዞች'; data-om="Ordeeron Har'a">ዛሬ ትዕዛዞች</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">30-45</div>
+                <div class="stat-label" data-am="ደቂቃዎች" data-om="Daqiiqota">ደቂቃዎች</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="activeRiders">3</div>
+                <div class="stat-label" data-am="ነጂዎች" data-om="Ergaa Eegtoota">ነጂዎች</div>
+            </div>
+        </div>
 
         <!-- Top 3 Trending Foods -->
         <div class="top-trending">
             <div class="trending-header">
                 <i class="fas fa-fire"></i>
-                <h3 data-am="3 ምግቦች" data-om="Nyaata 3 ">የሚገመገሙ 3 ምግቦች</h3>
+                <h3 data-am=" ምግቦች" data-om="Nyaata 3 ">3 ምግቦች</h3>
             </div>
             <div class="trending-items" id="trendingItems">
                 <!-- Trending items will be populated by JavaScript -->
             </div>
-        </div>
-
-        <div style="background: white; padding: 20px; border-radius: var(--radius); margin-bottom: 20px; box-shadow: var(--shadow-light);">
-            <div class="form-group">
-                <label class="form-label" data-am="ሙሉ ስም" data-om="Maqaa guutuu">ሙሉ ስም</label>
-                <input type="text" id="custName" placeholder="ስምዎን ያስገቡ" data-am-placeholder="ስምዎን ያስገቡ" data-om-placeholder="Maqaa kee galchi">
-            </div>
-            <div class="form-group">
-                <label class="form-label" data-am="ስልክ ቁጥር" data-om="Lakkoofsa bilbilaa">ስልክ ቁጥር</label>
-                <input type="tel" id="custPhone" placeholder="09..." data-am-placeholder="09..." data-om-placeholder="09...">
-            </div>
-            <div class="form-group">
-                <label class="form-label" data-am="መለያ ቦታ (Landmark)" data-om="Bakka beekamaa (Landmark)">መለያ ቦታ (Landmark)</label>
-                <input type="text" id="custLandmark" placeholder="ለምሳሌ፡ እታለም ሆቴል ጀርባ" data-am-placeholder="ለምሳሌ፡ እታለም ሆቴል ጀርባ" data-om-placeholder="Fakkeenyaf: Etalem Hoteel duubatti">
-            </div>
-        </div>
-
-        <!-- Delivery Fee Notice -->
-        <div class="delivery-notice" id="deliveryNotice" data-am="⚡ <strong>የመላኪያ ክፍያ: 99 ብር</strong><br>✅ የመጀመሪያ ማድረሻ ነፃ!<br>📍 በ1 ኪ.ሜ ክበብ ውስጥ ከሆኑ 50 ብር ብቻ!" data-om="⚡ <strong>Kaffaltii ergaa: 99 Birraa</strong><br>✅ Ergaa jalqabaa bilisaa!<br>📍 Yoo kilomeetira 1 keessatti jiraattan 50 Birraa qofa!">
-            ⚡ <strong>Delivery Fee: 99 Birr</strong><br>✅ First delivery FREE!<br>📍 Only 50 Birr if within 1 km radius!
         </div>
 
         <!-- Payment Options -->
@@ -1125,7 +1093,7 @@
                 </div>
                 <div class="payment-details">
                     <div class="payment-title" data-am="በቴሌግራም" data-om="Telegiraamiin">በቴሌግራም</div>
-                    <div class="payment-desc" data-am="የባንክ ሂሳብ ቁጥር በቴሌግራም ይላካል" data-om">የባንክ ሂሳብ ቁጥር በቴሌግራም ይላካል</div>
+                    <div class="payment-desc" data-am="በቴሌግራም ይክፈሉ" data-om="Telegiraamiin kaffala">በቴሌግራም ይክፈሉ</div>
                 </div>
                 <i class="fas fa-check-circle" style="color: #0088cc; font-size: 1.2rem; display: none;"></i>
             </div>
@@ -1146,34 +1114,34 @@
         </div>
         <div class="menu-grid">
             <!-- Burger Items -->
-            <div class="card"><img src="./assets/double-special-burger.webp?v=13" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700"><div class="card-info"><p class="card-title">Double Special Burger</p><p class="card-price">700 ETB</p></div></div>
-            <div class="card"><img src="./assets/special-burger.webp?v=13" alt="Special Burger"><input type="checkbox" value="Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p><p class="card-price">500 ETB</p></div></div>
-            <div class="card"><img src="./assets/double-beef-burger.webp?v=13" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger" data-price="480"><div class="card-info"><p class="card-title">Double Beef Burger</p><p class="card-price">480 ETB</p></div></div>
-            <div class="card"><img src="./assets/cheese-burger.webp?v=13" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger" data-price="450"><div class="card-info"><p class="card-title">Cheese Burger</p><p class="card-price">450 ETB</p></div></div>
-            <div class="card"><img src="./assets/normal-burger.webp?v=13" alt="Normal Burger"><input type="checkbox" value="Normal Burger" data-price="410"><div class="card-info"><p class="card-title">Normal Burger</p><p class="card-price">410 ETB</p></div></div>
-            <div class="card"><img src="./assets/tuna-burger.webp?v=13" alt="Tuna Burger"><input type="checkbox" value="Tuna Burger" data-price="350"><div class="card-info"><p class="card-title">Tuna Burger</p><p class="card-price">350 ETB</p></div></div>
-            <div class="card"><img src="./assets/vegetable-burger.webp?v=13" alt="Vegetable Burger"><input type="checkbox" value="Vegetable Burger" data-price="250"><div class="card-info"><p class="card-title">Vegetable Burger</p><p class="card-price">250 ETB</p></div></div>
-            <div class="card"><img src="./assets/sandwich-club.webp?v=13" alt="Sandwich Club"><input type="checkbox" value="Sandwich Club" data-price="400"><div class="card-info"><p class="card-title">Sandwich Club</p><p class="card-price">400 ETB</p></div></div>
+            <div class="card"><img src="./assets/double-special-burger.webp?v=13" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700"><div class="card-info"><p class="card-title">Double Special Burger</p></div></div>
+            <div class="card"><img src="./assets/special-burger.webp?v=13" alt="Special Burger"><input type="checkbox" value="Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
+            <div class="card"><img src="./assets/double-beef-burger.webp?v=13" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger" data-price="480"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
+            <div class="card"><img src="./assets/cheese-burger.webp?v=13" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger" data-price="450"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/normal-burger.webp?v=13" alt="Normal Burger"><input type="checkbox" value="Normal Burger" data-price="410"><div class="card-info"><p class="card-title">Normal Burger</p></div></div>
+            <div class="card"><img src="./assets/tuna-burger.webp?v=13" alt="Tuna Burger"><input type="checkbox" value="Tuna Burger" data-price="350"><div class="card-info"><p class="card-title">Tuna Burger</p></div></div>
+            <div class="card"><img src="./assets/vegetable-burger.webp?v=13" alt="Vegetable Burger"><input type="checkbox" value="Vegetable Burger" data-price="250"><div class="card-info"><p class="card-title">Vegetable Burger</p></div></div>
+            <div class="card"><img src="./assets/sandwich-club.webp?v=13" alt="Sandwich Club"><input type="checkbox" value="Sandwich Club" data-price="400"><div class="card-info"><p class="card-title">Sandwich Club</p></div></div>
             
             <!-- Chips -->
-            <div class="card"><img src="./assets/chips.webp?v=13" alt="Chips"><input type="checkbox" value="Chips (ቺፕስ)" data-price="250"><div class="card-info"><p class="card-title">Chips (ቺፕስ)</p><p class="card-price">250 ETB</p></div></div>
+            <div class="card"><img src="./assets/chips.webp?v=13" alt="Chips"><input type="checkbox" value="Chips (ቺፕስ)" data-price="250"><div class="card-info"><p class="card-title">Chips (ቺፕስ)</p></div></div>
             
             <!-- Pizza Items -->
-            <div class="card"><img src="./assets/etalem-special-pizza.webp?v=13" alt="Etalem Special Pizza"><input type="checkbox" value="Etalem Special Pizza" data-price="650"><div class="card-info"><p class="card-title">Etalem Special Pizza</p><p class="card-price">650 ETB</p></div></div>
-            <div class="card"><img src="./assets/beef-pizza.webp?v=13" alt="Beef Pizza"><input type="checkbox" value="Beef Pizza" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza</p><p class="card-price">600 ETB</p></div></div>
-            <div class="card"><img src="./assets/margaritta-pizza.webp?v=13" alt="Margaritta Pizza"><input type="checkbox" value="Margaritta Pizza" data-price="650"><div class="card-info"><p class="card-title">Margaritta Pizza</p><p class="card-price">650 ETB</p></div></div>
-            <div class="card"><img src="./assets/chicken-pizza.webp?v=13" alt="Chicken Pizza"><input type="checkbox" value="Chicken Pizza" data-price="700"><div class="card-info"><p class="card-title">Chicken Pizza</p><p class="card-price">700 ETB</p></div></div>
-            <div class="card"><img src="./assets/tuna-pizza.webp?v=13" alt="Tuna Pizza"><input type="checkbox" value="Tuna Pizza" data-price="550"><div class="card-info"><p class="card-title">Tuna Pizza</p><p class="card-price">550 ETB</p></div></div>
-            <div class="card"><img src="./assets/vegetable-pizza.webp?v=13" alt="Vegetable Pizza"><input type="checkbox" value="Vegetable Pizza" data-price="350"><div class="card-info"><p class="card-title">Vegetable Pizza</p><p class="card-price">350 ETB</p></div></div>
+            <div class="card"><img src="./assets/etalem-special-pizza.webp?v=13" alt="Etalem Special Pizza"><input type="checkbox" value="Etalem Special Pizza" data-price="650"><div class="card-info"><p class="card-title">Etalem Special Pizza</p></div></div>
+            <div class="card"><img src="./assets/beef-pizza.webp?v=13" alt="Beef Pizza"><input type="checkbox" value="Beef Pizza" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza</p></div></div>
+            <div class="card"><img src="./assets/margaritta-pizza.webp?v=13" alt="Margaritta Pizza"><input type="checkbox" value="Margaritta Pizza" data-price="650"><div class="card-info"><p class="card-title">Margaritta Pizza</p></div></div>
+            <div class="card"><img src="./assets/chicken-pizza.webp?v=13" alt="Chicken Pizza"><input type="checkbox" value="Chicken Pizza" data-price="700"><div class="card-info"><p class="card-title">Chicken Pizza</p></div></div>
+            <div class="card"><img src="./assets/tuna-pizza.webp?v=13" alt="Tuna Pizza"><input type="checkbox" value="Tuna Pizza" data-price="550"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
+            <div class="card"><img src="./assets/vegetable-pizza.webp?v=13" alt="Vegetable Pizza"><input type="checkbox" value="Vegetable Pizza" data-price="350"><div class="card-info"><p class="card-title">Vegetable Pizza</p></div></div>
             
             <!-- Juice Items -->
-            <div class="card"><img src="./assets/etalem-special-juice.webp?v=13" alt="Etalem Special Juice"><input type="checkbox" value="Etalem Special Juice" data-price="200"><div class="card-info"><p class="card-title">Etalem Special Juice</p><p class="card-price">200 ETB</p></div></div>
-            <div class="card"><img src="./assets/strawberry-juice.webp?v=13" alt="Strawberry Juice"><input type="checkbox" value="Strawberry Juice" data-price="250"><div class="card-info"><p class="card-title">Strawberry Juice</p><p class="card-price">250 ETB</p></div></div>
-            <div class="card"><img src="./assets/mixed-juice.webp?v=13" alt="Mixed Juice"><input type="checkbox" value="Mixed Juice" data-price="200"><div class="card-info"><p class="card-title">Mixed Juice</p><p class="card-price">200 ETB</p></div></div>
+            <div class="card"><img src="./assets/etalem-special-juice.webp?v=13" alt="Etalem Special Juice"><input type="checkbox" value="Etalem Special Juice" data-price="200"><div class="card-info"><p class="card-title">Etalem Special Juice</p></div></div>
+            <div class="card"><img src="./assets/strawberry-juice.webp?v=13" alt="Strawberry Juice"><input type="checkbox" value="Strawberry Juice" data-price="250"><div class="card-info"><p class="card-title">Strawberry Juice</p></div></div>
+            <div class="card"><img src="./assets/mixed-juice.webp?v=13" alt="Mixed Juice"><input type="checkbox" value="Mixed Juice" data-price="200"><div class="card-info"><p class="card-title">Mixed Juice</p></div></div>
             
             <!-- Fish Items -->
-            <div class="card"><img src="./assets/fish-kotelet.webp?v=13" alt="Fish Kotelet"><input type="checkbox" value="Fish Kotelet" data-price="400"><div class="card-info"><p class="card-title">Fish Kotelet</p><p class="card-price">400 ETB</p></div></div>
-            <div class="card"><img src="./assets/grilled-fish.webp?v=13" alt="Grilled Fish"><input type="checkbox" value="Grilled Fish" data-price="400"><div class="card-info"><p class="card-title">Grilled Fish</p><p class="card-price">400 ETB</p></div></div>
+            <div class="card"><img src="./assets/fish-kotelet.webp?v=13" alt="Fish Kotelet"><input type="checkbox" value="Fish Kotelet" data-price="400"><div class="card-info"><p class="card-title">Fish Kotelet</p></div></div>
+            <div class="card"><img src="./assets/grilled-fish.webp?v=13" alt="Grilled Fish"><input type="checkbox" value="Grilled Fish" data-price="400"><div class="card-info"><p class="card-title">Grilled Fish</p></div></div>
         </div>
 
         <!-- NEW MENU ITEMS ADDED HERE -->
@@ -1183,63 +1151,49 @@
         </div>
         <div class="menu-grid">
             <!-- New Burger Items -->
-            <div class="card"><img src="./assets/classic-king-burger.webp?v=13" alt="Classic King Burger"><input type="checkbox" value="Classic King Burger (freshly grounded beef, chicken and fish, lettuce, tomato, onion and sliced cheddar cheese, served with French fries and ketchup)" data-price="810"><div class="card-info"><p class="card-title">Classic King Burger</p><p class="card-price">810 ETB</p></div></div>
+            <div class="card"><img src="./assets/classic-king-burger.webp?v=13" alt="Classic King Burger"><input type="checkbox" value="Classic King Burger (freshly grounded beef, chicken and fish, lettuce, tomato, onion and sliced cheddar cheese, served with French fries and ketchup)" data-price="810"><div class="card-info"><p class="card-title">Classic King Burger</p></div></div>
             
-            <div class="card"><img src="./assets/classic-chicken-burger.webp?v=13" alt="Classic Chicken Burger"><input type="checkbox" value="Classic Chicken Burger (chicken breast, mayonnaise, lettuce special burger sauce, mustard, egg, black pepper, cheese served with french fries and ketchup)" data-price="705"><div class="card-info"><p class="card-title">Classic Chicken Burger</p><p class="card-price">705 ETB</p></div></div>
+            <div class="card"><img src="./assets/classic-chicken-burger.webp?v=13" alt="Classic Chicken Burger"><input type="checkbox" value="Classic Chicken Burger (chicken breast, mayonnaise, lettuce special burger sauce, mustard, egg, black pepper, cheese served with french fries and ketchup)" data-price="705"><div class="card-info"><p class="card-title">Classic Chicken Burger</p></div></div>
             
-            <div class="card"><img src="./assets/double-cheese-burger.webp?v=13" alt="Double Cheese Burger"><input type="checkbox" value="Double Cheese Burger (Double layer freshly grounded beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="605"><div class="card-info"><p class="card-title">Double Cheese Burger</p><p class="card-price">605 ETB</p></div></div>
+            <div class="card"><img src="./assets/double-cheese-burger.webp?v=13" alt="Double Cheese Burger"><input type="checkbox" value="Double Cheese Burger (Double layer freshly grounded beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="605"><div class="card-info"><p class="card-title">Double Cheese Burger</p></div></div>
             
-            <div class="card"><img src="./assets/classic-burger.webp?v=13" alt="Classic Burger"><input type="checkbox" value="Classic Burger (freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, iceberg lettuce, caramelized onion and special burger sauce served with french fries and ketchup)" data-price="570"><div class="card-info"><p class="card-title">Classic Burger</p><p class="card-price">570 ETB</p></div></div>
+            <div class="card"><img src="./assets/classic-burger.webp?v=13" alt="Classic Burger"><input type="checkbox" value="Classic Burger (freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, iceberg lettuce, caramelized onion and special burger sauce served with french fries and ketchup)" data-price="570"><div class="card-info"><p class="card-title">Classic Burger</p></div></div>
             
-            <div class="card"><img src="./assets/beef-burger-new.webp?v=13" alt="Beef Burger"><input type="checkbox" value="Beef Burger (Freshly ground beef, vegetable oil, mayonnaise, lettuce, onion, and special burger sauce served with french fries and ketchup)" data-price="475"><div class="card-info"><p class="card-title">Beef Burger</p><p class="card-price">475 ETB</p></div></div>
+            <div class="card"><img src="./assets/beef-burger-new.webp?v=13" alt="Beef Burger"><input type="checkbox" value="Beef Burger (Freshly ground beef, vegetable oil, mayonnaise, lettuce, onion, and special burger sauce served with french fries and ketchup)" data-price="475"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
             
-            <div class="card"><img src="./assets/cheese-burger-new.webp?v=13" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Cheese Burger</p><p class="card-price">620 ETB</p></div></div>
+            <div class="card"><img src="./assets/cheese-burger-new.webp?v=13" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
             
-            <div class="card"><img src="./assets/hamburger-new.webp?v=13" alt="Hamburger"><input type="checkbox" value="Hamburger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Hamburger</p><p class="card-price">620 ETB</p></div></div>
+            <div class="card"><img src="./assets/hamburger-new.webp?v=13" alt="Hamburger"><input type="checkbox" value="Hamburger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Hamburger</p></div></div>
             
-            <div class="card"><img src="./assets/double-beef-burger-new.webp?v=13" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger (double layer freshly ground beef, vegetable oil, mayonnaise, lettuce, onion and special burger sauce served with french fries)" data-price="590"><div class="card-info"><p class="card-title">Double Beef Burger</p><p class="card-price">590 ETB</p></div></div>
+            <div class="card"><img src="./assets/double-beef-burger-new.webp?v=13" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger (double layer freshly ground beef, vegetable oil, mayonnaise, lettuce, onion and special burger sauce served with french fries)" data-price="590"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
             
-            <div class="card"><img src="./assets/mixed-burger.webp?v=13" alt="Mixed Burger"><input type="checkbox" value="Mixed Burger (Freshly ground Beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Mixed Burger</p><p class="card-price">620 ETB</p></div></div>
+            <div class="card"><img src="./assets/mixed-burger.webp?v=13" alt="Mixed Burger"><input type="checkbox" value="Mixed Burger (Freshly ground Beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Mixed Burger</p></div></div>
             
             <!-- New Pizza Items -->
-            <div class="card"><img src="./assets/special-classic-pizza.webp?v=13" alt="Special Classic Pizza"><input type="checkbox" value="Special Classic Pizza (minced chicken and beef, boiled egg, garlic, olive oil, fresh tomato sauce)" data-price="795"><div class="card-info"><p class="card-title">Special Classic Pizza</p><p class="card-price">795 ETB</p></div></div>
+            <div class="card"><img src="./assets/special-classic-pizza.webp?v=13" alt="Special Classic Pizza"><input type="checkbox" value="Special Classic Pizza (minced chicken and beef, boiled egg, garlic, olive oil, fresh tomato sauce)" data-price="795"><div class="card-info"><p class="card-title">Special Classic Pizza</p></div></div>
             
-            <div class="card"><img src="./assets/chicken-pizza-L.webp?v=13" alt="Chicken Pizza L"><input type="checkbox" value="Chicken Pizza L (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Chicken Pizza L</p><p class="card-price">600 ETB</p></div></div>
+            <div class="card"><img src="./assets/chicken-pizza-L.webp?v=13" alt="Chicken Pizza L"><input type="checkbox" value="Chicken Pizza L (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Chicken Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/chicken-pizza-S.webp?v=13" alt="Chicken Pizza S"><input type="checkbox" value="Chicken Pizza S (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="500"><div class="card-info"><p class="card-title">Chicken Pizza S</p><p class="card-price">500 ETB</p></div></div>
+            <div class="card"><img src="./assets/pepperoni-pizza-L.webp?v=13" alt="Pepperoni Pizza L"><input type="checkbox" value="Pepperoni Pizza L/S (beef, ham, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Pepperoni Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/pepperoni-pizza-L.webp?v=13" alt="Pepperoni Pizza L"><input type="checkbox" value="Pepperoni Pizza L (beef, ham, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Pepperoni Pizza L</p><p class="card-price">600 ETB</p></div></div>
+            <div class="card"><img src="./assets/beef-pizza-L.webp?v=13" alt="Beef Pizza L"><input type="checkbox" value="Beef Pizza L (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/pepperoni-pizza-S.webp?v=13" alt="Pepperoni Pizza S"><input type="checkbox" value="Pepperoni Pizza S (beef, ham, cheese, oregano)" data-price="500"><div class="card-info"><p class="card-title">Pepperoni Pizza S</p><p class="card-price">500 ETB</p></div></div>
+            <div class="card"><img src="./assets/hawaiian-pizza-L.webp?v=13" alt="Hawaiian Pizza L"><input type="checkbox" value="Hawaiian Pizza L (beef sausage, pineapple, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Hawaiian Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/beef-pizza-L.webp?v=13" alt="Beef Pizza L"><input type="checkbox" value="Beef Pizza L (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza L</p><p class="card-price">600 ETB</p></div></div>
+            <div class="card"><img src="./assets/tuna-pizza-L.webp?v=13" alt="Tuna Pizza L"><input type="checkbox" value="Tuna Pizza L (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="600"><div class="card-info"><p class="card-title">Tuna Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/beef-pizza-S.webp?v=13" alt="Beef Pizza S"><input type="checkbox" value="Beef Pizza S (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="500"><div class="card-info"><p class="card-title">Beef Pizza S</p><p class="card-price">500 ETB</p></div></div>
+            <div class="card"><img src="./assets/margarita-pizza-L.webp?v=13" alt="Margarita Pizza L"><input type="checkbox" value="Margarita Pizza L (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Margarita Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/hawaiian-pizza-L.webp?v=13" alt="Hawaiian Pizza L"><input type="checkbox" value="Hawaiian Pizza L (beef sausage, pineapple, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Hawaiian Pizza L</p><p class="card-price">600 ETB</p></div></div>
-            
-            <div class="card"><img src="./assets/hawaiian-pizza-S.webp?v=13" alt="Hawaiian Pizza S"><input type="checkbox" value="Hawaiian Pizza S (beef sausage, pineapple, cheese, oregano)" data-price="500"><div class="card-info"><p class="card-title">Hawaiian Pizza S</p><p class="card-price">500 ETB</p></div></div>
-            
-            <div class="card"><img src="./assets/tuna-pizza-L.webp?v=13" alt="Tuna Pizza L"><input type="checkbox" value="Tuna Pizza L (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="600"><div class="card-info"><p class="card-title">Tuna Pizza L</p><p class="card-price">600 ETB</p></div></div>
-            
-            <div class="card"><img src="./assets/tuna-pizza-S.webp?v=13" alt="Tuna Pizza S"><input type="checkbox" value="Tuna Pizza S (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="500"><div class="card-info"><p class="card-title">Tuna Pizza S</p><p class="card-price">500 ETB</p></div></div>
-            
-            <div class="card"><img src="./assets/margarita-pizza-L.webp?v=13" alt="Margarita Pizza L"><input type="checkbox" value="Margarita Pizza L (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Margarita Pizza L</p><p class="card-price">600 ETB</p></div></div>
-            
-            <div class="card"><img src="./assets/margarita-pizza-S.webp?v=13" alt="Margarita Pizza S"><input type="checkbox" value="Margarita Pizza S (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="500"><div class="card-info"><p class="card-title">Margarita Pizza S</p><p class="card-price">500 ETB</p></div></div>
-            
-            <div class="card"><img src="./assets/vegetable-pizza-L.webp?v=13" alt="Vegetable Pizza L"><input type="checkbox" value="Vegetable Pizza L (sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="600"><div class="card-info"><p class="card-title">Vegetable Pizza L</p><p class="card-price">600 ETB</p></div></div>
-            
-            <div class="card"><img src="./assets/vegetable-pizza-S.webp?v=13" alt="Vegetable Pizza S"><input type="checkbox" value="Vegetable Pizza S (sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="500"><div class="card-info"><p class="card-title">Vegetable Pizza S</p><p class="card-price">500 ETB</p></div></div>
+            <div class="card"><img src="./assets/vegetable-pizza-L.webp?v=13" alt="Vegetable Pizza L"><input type="checkbox" value="Vegetable Pizza L (sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="600"><div class="card-info"><p class="card-title">Vegetable Pizza L/S</p></div></div>
             
             <!-- New Noodle Items -->
-            <div class="card"><img src="./assets/stir-fry-chicken-noodles.webp?v=13" alt="Stir Fry Chicken Noodles"><input type="checkbox" value="Stir Fry Chicken Noodles (Freshly homemade noodles with marinated chicken breast(chopped) with egg/without egg, and different fresh vegetable and spice served with chili and soya sauce)" data-price="650"><div class="card-info"><p class="card-title">Stir Fry Chicken Noodles</p><p class="card-price">650 ETB</p></div></div>
+            <div class="card"><img src="./assets/stir-fry-chicken-noodles.webp?v=13" alt="Stir Fry Chicken Noodles"><input type="checkbox" value="Stir Fry Chicken Noodles (Freshly homemade noodles with marinated chicken breast(chopped) with egg/without egg, and different fresh vegetable and spice served with chili and soya sauce)" data-price="650"><div class="card-info"><p class="card-title">Stir Fry Chicken Noodles</p></div></div>
             
-            <div class="card"><img src="./assets/stir-fry-beef-noodles.webp?v=13" alt="Stir Fry Beef Noodles"><input type="checkbox" value="Stir Fry Beef Noodles (freshly homemade noodles marinated beef(chopped)with egg/without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="630"><div class="card-info"><p class="card-title">Stir Fry Beef Noodles</p><p class="card-price">630 ETB</p></div></div>
+            <div class="card"><img src="./assets/stir-fry-beef-noodles.webp?v=13" alt="Stir Fry Beef Noodles"><input type="checkbox" value="Stir Fry Beef Noodles (freshly homemade noodles marinated beef(chopped)with egg/without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="630"><div class="card-info"><p class="card-title">Stir Fry Beef Noodles</p></div></div>
             
-            <div class="card"><img src="./assets/stir-fry-vegetable-noodles.webp?v=13" alt="Stir Fry Vegetable Noodles"><input type="checkbox" value="Stir Fry Vegetable Noodles (Fasting) Freshly homemade noodles different vegetable, with egg/without egg, different fresh vegetable and spice served with chili and soya sauce" data-price="550"><div class="card-info"><p class="card-title">Stir Fry Vegetable Noodles</p><p class="card-price">550 ETB</p></div></div>
+            <div class="card"><img src="./assets/stir-fry-vegetable-noodles.webp?v=13" alt="Stir Fry Vegetable Noodles"><input type="checkbox" value="Stir Fry Vegetable Noodles (Fasting) Freshly homemade noodles different vegetable, with egg/without egg, different fresh vegetable and spice served with chili and soya sauce" data-price="550"><div class="card-info"><p class="card-title">Stir Fry Vegetable Noodles</p></div></div>
             
-            <div class="card"><img src="./assets/stir-fry-fish-noodles.webp?v=13" alt="Stir Fry Fish Noodles"><input type="checkbox" value="Stir Fry Fish Noodles (freshly homemade noodles with marinated fish with egg or without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="610"><div class="card-info"><p class="card-title">Stir Fry Fish Noodles</p><p class="card-price">610 ETB</p></div></div>
+            <div class="card"><img src="./assets/stir-fry-fish-noodles.webp?v=13" alt="Stir Fry Fish Noodles"><input type="checkbox" value="Stir Fry Fish Noodles (freshly homemade noodles with marinated fish with egg or without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="610"><div class="card-info"><p class="card-title">Stir Fry Fish Noodles</p></div></div>
         </div>
 
         <!-- Kameti's Kitchen Section (Kept as is) -->
@@ -1249,20 +1203,20 @@
         </div>
         <div class="menu-grid">
             <!-- Kameti Burger Items -->
-            <div class="card"><img src="./assets/kameti-special-burger.webp?v=13" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p><p class="card-price">500 ETB</p></div></div>
-            <div class="card"><img src="./assets/kameti-cheese-burger.webp?v=13" alt="Kameti Cheese Burger"><input type="checkbox" value="Kameti Cheese Burger" data-price="480"><div class="card-info"><p class="card-title">Cheese Burger</p><p class="card-price">480 ETB</p></div></div>
-            <div class="card"><img src="./assets/kameti-beef-burger.webp?v=13" alt="Kameti Beef Burger"><input type="checkbox" value="Kameti Beef Burger" data-price="450"><div class="card-info"><p class="card-title">Beef Burger</p><p class="card-price">450 ETB</p></div></div>
+            <div class="card"><img src="./assets/kameti-special-burger.webp?v=13" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
+            <div class="card"><img src="./assets/kameti-cheese-burger.webp?v=13" alt="Kameti Cheese Burger"><input type="checkbox" value="Kameti Cheese Burger" data-price="480"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/kameti-beef-burger.webp?v=13" alt="Kameti Beef Burger"><input type="checkbox" value="Kameti Beef Burger" data-price="450"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
             
             <!-- Kameti Pizza Items -->
-            <div class="card"><img src="./assets/kameti-large-pizza.webp?v=13" alt="Kameti Large Pizza"><input type="checkbox" value="Kameti Large Pizza" data-price="700"><div class="card-info"><p class="card-title">Large Pizza</p><p class="card-price">700 ETB</p></div></div>
-            <div class="card"><img src="./assets/kameti-medium-pizza.webp?v=13" alt="Kameti Medium Pizza"><input type="checkbox" value="Kameti Medium Pizza" data-price="600"><div class="card-info"><p class="card-title">Medium Pizza</p><p class="card-price">600 ETB</p></div></div>
-            <div class="card"><img src="./assets/kameti-tuna-pizza.webp?v=13" alt="Kameti Tuna Pizza"><input type="checkbox" value="Kameti Tuna Pizza" data-price="480"><div class="card-info"><p class="card-title">Tuna Pizza</p><p class="card-price">480 ETB</p></div></div>
+            <div class="card"><img src="./assets/kameti-large-pizza.webp?v=13" alt="Kameti Large Pizza"><input type="checkbox" value="Kameti Large Pizza" data-price="700"><div class="card-info"><p class="card-title">Large Pizza</p></div></div>
+            <div class="card"><img src="./assets/kameti-medium-pizza.webp?v=13" alt="Kameti Medium Pizza"><input type="checkbox" value="Kameti Medium Pizza" data-price="600"><div class="card-info"><p class="card-title">Medium Pizza</p></div></div>
+            <div class="card"><img src="./assets/kameti-tuna-pizza.webp?v=13" alt="Kameti Tuna Pizza"><input type="checkbox" value="Kameti Tuna Pizza" data-price="480"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
             
             <!-- Kameti Juice -->
-            <div class="card"><img src="./assets/kameti-special-juice.webp?v=13" alt="Kameti Special Juice"><input type="checkbox" value="Kameti Special Juice" data-price="230"><div class="card-info"><p class="card-title">Special Juice</p><p class="card-price">230 ETB</p></div></div>
+            <div class="card"><img src="./assets/kameti-special-juice.webp?v=13" alt="Kameti Special Juice"><input type="checkbox" value="Kameti Special Juice" data-price="230"><div class="card-info"><p class="card-title">Special Juice</p></div></div>
             
             <!-- Kameti Chips (150 ETB) -->
-            <div class="card"><img src="./assets/chips.webp?v=13" alt="Kameti's Chips"><input type="checkbox" value="Kameti's Chips" data-price="150"><div class="card-info"><p class="card-title">Kameti's Chips</p><p class="card-price">150 ETB</p></div></div>
+            <div class="card"><img src="./assets/chips.webp?v=13" alt="Kameti's Chips"><input type="checkbox" value="Kameti's Chips" data-price="150"><div class="card-info"><p class="card-title">Kameti's Chips</p></div></div>
         </div>
     </div>
 </div>
@@ -1390,7 +1344,7 @@
                 <div class="step-number">2</div>
                 <div>
                     <h3 style="margin:0;" data-am="መረጃ ያስገቡ" data-om="Odeeffannoo Galchi">መረጃ ያስገቡ</h3>
-                    <p data-am="ስም፣ ስልክ እና መለያ ቦታዎን ያስገቡ (አካባቢዎ ለፈጣን ማድረሻ ይረዳል)" data-om="Maqaa, bilbila fi bakka beekamaa galchi (Bakka keessan ariifachiifachuuf ni gargaara)">ስም፣ ስልክ እና መለያ ቦታዎን ያስገቡ (አካባቢዎ ለፈጣን ማድረሻ ይረዳል)</p>
+                    <p data-am="አካባቢዎን ያሳውቁ (ለፈጣን ማድረሻ እና የመላኪያ ክፍያ ለማስላት)" data-om="Bakka keessan agarsiisaa (ariifachiifachuuf fi kaffaltii ergaa hiruuf)">አካባቢዎን ያሳውቁ (ለፈጣን ማድረሻ እና የመላኪያ ክፍያ ለማስላት)</p>
                 </div>
             </div>
             
@@ -1406,7 +1360,7 @@
                 <div class="step-number">4</div>
                 <div>
                     <h3 style="margin:0;" data-am="ምግብዎን ተቀበሉ" data-om="Nyaata Keessan Fudhadhaa">ምግብዎን ተቀበሉ</h3>
-                    <p data-am="በ30-45 ደቂቃ ውስጥ ምግብዎ ይደርስዎታል. በቴሌግራም የመላኪያ ሁኔታን ይከታተሉ" data-om="Daqiiqaa 30-45 keessatti nyaata keessan siniif ga'a. Telegiraamiin ergaa hordofaa">በ30-45 ደቂቃ ውስጥ ምግብዎ ይደርስዎታል. በቴሌግራም የመላኪያ ሁኔታን ይከታተሉ</p>
+                    <p data-am="በ30-45 ደቂቃ ውስጥ ምግብዎ ይደርስዎታል። በቴሌግራም የመላኪያ ሁኔታን ይከታተሉ" data-om="Daqiiqaa 30-45 keessatti nyaata keessan siniif ga'a. Telegiraamiin ergaa hordofaa">በ30-45 ደቂቃ ውስጥ ምግብዎ ይደርስዎታል። በቴሌግራም የመላኪያ ሁኔታን ይከታተሉ</p>
                 </div>
             </div>
         </div>
@@ -1414,8 +1368,9 @@
         <div class="info-card">
             <h2 data-am="የመላኪያ መረጃ" data-om="Odeeffannoo Ergaa">የመላኪያ መረጃ</h2>
             <ul style="padding-left:20px;">
-                <li data-am="✅ የመላኪያ ክፍያ: 99 ብር (የመጀመሪያ ማድረሻ ነፃ)" data-om="✅ Kaffaltii Ergaa: 99 Birraa (Ergaa jalqabaa bilisaa)">✅ የመላኪያ ክፍያ: 99 ብር (የመጀመሪያ ማድረሻ ነፃ)</li>
-                <li data-am="✅ በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር ብቻ" data-om="✅ Kilomeetira 1 keessatti: 50 Birraa qofa">✅ በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር ብቻ</li>
+                <li data-am="✅ የመጀመሪያ ማድረሻ ነፃ!" data-om="✅ Ergaa jalqabaa bilisaa!">✅ የመጀመሪያ ማድረሻ ነፃ!</li>
+                <li data-am="✅ በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር" data-om="✅ Kilomeetira 1 keessatti: 50 Birraa">✅ በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር</li>
+                <li data-am="✅ ከ1 ኪ.ሜ በላይ: 99 ብር" data-om="✅ Kilomeetira 1 ol: 99 Birraa">✅ ከ1 ኪ.ሜ በላይ: 99 ብር</li>
                 <li data-am="✅ የማድረሻ ጊዜ: 30-45 ደቂቃ" data-om="✅ Yeroo Ga'umsaa: 30-45 Daqiiqaa">✅ የማድረሻ ጊዜ: 30-45 ደቂቃ</li>
                 <li data-am="✅ አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ" data-om="✅ Bakka Tajaajilaa: Bishooftu Keessaa">✅ አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ</li>
                 <li data-am="✅ የሚሰራው: በየቀኑ 8:00 AM - 10:00 PM" data-om="✅ Yeroo Hojii: Guyyaa guyyaan 8:00 AM - 10:00 PM">✅ የሚሰራው: በየቀኑ 8:00 AM - 10:00 PM</li>
@@ -1425,7 +1380,7 @@
         <div class="info-card">
             <h2 data-am="የግላዊነት ፖሊሲ" data-om="Iccitii Qulqullinaa">የግላዊነት ፖሊሲ</h2>
             <p data-am="የእርስዎን መረጃ ለሶስተኛ ወገን አንሰጥም። ትዕዛዝዎ በቴሌግራም ለአስተዳዳሪዎቻችን ብቻ ይላካል።" data-om="Odeeffannoo keessan dursaa sadaffaa hin kenninu. Ordeeraa keessan Telegiraamiin hoggantota keenya qofa geessa.">የእርስዎን መረጃ ለሶስተኛ ወገን አንሰጥም። ትዕዛዝዎ በቴሌግራም ለአስተዳዳሪዎቻችን ብቻ ይላካል።</p>
-            <p data-am="የክፍያ መረጃዎን አንጠብቅም። ሁሉም ክፍያዎች በባንክ ማስተላለፊያ ይከናወናሉ።" data-om="Odeeffannoo kaffaltii keessan hin eegnu. Kaffaltiin hundi baankiin hojietama.">የክፍያ መረጃዎን አንጠብቅም። ሁሉም ክፍያዎች በባንክ ማስተላለፊያ ይከናወናሉ።</p>
+            <p data-am="ክፍያዎች በቀጥታ በገንዘብ ይከናወናሉ።" data-om="Kaffaltiin qarshii qofa hojietama.">ክፍያዎች በቀጥታ በገንዘብ ይከናወናሉ።</p>
         </div>
     </div>
 </div>
@@ -1472,7 +1427,7 @@
             
             <div style="margin-bottom:15px;">
                 <h4 style="margin:0;" data-am="Q: ክፍያውን እንዴት እንደሚፈጽሙ?" data-om="Q: Kaffaltiin akkamitti dabarfamuu danda'a?">Q: ክፍያውን እንዴት እንደሚፈጽሙ?</h4>
-                <p data-am="A: ክፍያውን በገንዘብ ከመላኪያ በኋላ መፈጸም ይችላሉ። የባንክ ሂሳብ ቁጥር የሚሰጠው በቴሌግራም ብቻ ነው።" data-om="A: Kaffaltiin qarshii ergaa booda danda'ama. Lakkoofsa herregaa baankii Telegiraamiin qofa kenname.">A: Payment can be made in cash after delivery. Bank account details are provided ONLY via Telegram.</p>
+                <p data-am="A: ክፍያውን በገንዘብ ከመላኪያ በኋላ መፈጸም ይችላሉ። ዝርዝር መረጃ በቴሌግራም ይሰጥዎታል።" data-om="A: Kaffaltiin qarshii ergaa booda danda'ama. Odeeffannoo guutuu Telegiraamiin kenname.">A: ክፍያውን በገንዘብ ከመላኪያ በኋላ መፈጸም ይችላሉ። ዝርዝር መረጃ በቴሌግራም ይሰጥዎታል።</p>
             </div>
             
             <div style="margin-bottom:15px;">
@@ -1495,46 +1450,31 @@
             <i class="fas fa-receipt"></i>
             <span>የትዕዛዝ ማረጋገጫ</span>
         </h2>
-        <p id="modal-desc" data-am="ትዕዛዝዎን ለማረጋገጥ እባክዎ በቴሌግራም ያረጋግጡ።" data-om="Dhaadannoo kee mirkaneessuuf, Telegiraamiin mirkaneessi.">ክፍያ መረጃ የሚሰጠው በቴሌግራም ብቻ ነው።</p>
         
-        <div class="order-summary">
-            <div class="summary-row">
-                <span data-am="የምግብ ዋጋ፡" data-om="Gatii nyaataa:">የምግብ ዋጋ፡</span>
-                <span id="foodTotal">0</span> ETB
+        <div style="background: #f0f9ff; padding: 20px; border-radius: var(--radius-sm); margin: 20px 0; border-left: 4px solid #0088cc;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                <i class="fab fa-telegram" style="color: #0088cc; font-size: 1.5rem;"></i>
+                <h3 style="margin: 0; color: #0088cc;" data-am="ዋጋ በቴሌግራም ይሰላል" data-om="Gatii Telegiraamiin Hirmaama">ዋጋ በቴሌግራም ይሰላል</h3>
             </div>
-            <div class="summary-row">
-                <span data-am="የመላኪያ ክፍያ፡" data-om="Kaffaltii ergaa:">የመላኪያ ክፍያ፡</span>
-                <span id="deliveryFeeDisplay">99</span> ETB
-            </div>
-            <div class="summary-row total">
-                <span data-am="ጠቅላላ ዋጋ፡" data-om="Gatii guutuu:">ጠቅላላ ዋጋ፡</span>
-                <span id="modalTotal">0</span> ETB
-            </div>
+            <p data-am="📍 የመጀመሪያ ማድረሻ ነፃ!<br>📍 በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር<br>📍 ከ1 ኪ.ሜ በላይ: 99 ብር<br><br>✅ ዋጋው በአካባቢዎ ላይ የተመሠረተ ነው" data-om="📍 Ergaa jalqabaa bilisaa!<br>📍 Kilomeetira 1 keessatti: 50 Birraa<br>📍 Kilomeetira 1 ol: 99 Birraa<br><br>✅ Gatichi bakka keessan irratti hundaa'a">📍 የመጀመሪያ ማድረሻ ነፃ!<br>📍 በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር<br>📍 ከ1 ኪ.ሜ በላይ: 99 ብር<br><br>✅ ዋጋው በአካባቢዎ ላይ የተመሠረተ ነው</p>
         </div>
         
-        <div class="payment-info">
+        <div style="background: #fff8e1; padding: 15px; border-radius: var(--radius-sm); margin: 20px 0; border-left: 4px solid #ff9800;">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                <i class="fas fa-info-circle" style="color: var(--primary);"></i>
-                <strong data-am="የተመረጠ የክፍያ ዘዴ፡" data-om="Mala Kaffaltii Filatame:">የተመረጠ የክፍያ ዘዴ፡</strong>
+                <i class="fas fa-map-marker-alt" style="color: #ff9800;"></i>
+                <strong data-am="አስፈላጊ:" data-om="Barbaachisaa:">አስፈላጊ:</strong>
             </div>
-            <div id="selectedPaymentMethod" style="padding: 10px; background: white; border-radius: var(--radius-sm); margin: 10px 0; border: 1px solid var(--border);">
-                <i class="fas fa-money-bill-wave" style="color: #28a745; margin-right: 8px;"></i>
-                <span data-am="ክፍያ ከመላኪያ በኋላ" data-om="Kaffaltii Ergaa Booda">ክፍያ ከመላኪያ በኋላ</span>
-            </div>
-            <p style="font-size: 0.9rem; color: #666; margin: 10px 0 0 0;">
-                <i class="fas fa-exclamation-triangle" style="color: #ff9800; margin-right: 5px;"></i>
-                <span data-am="የባንክ ሂሳብ ቁጥር በቴሌግራም ብቻ ይሰጣል" data-om="Lakkoofsa herregaa baankii Telegiraamiin qofa kenname">የባንክ ሂሳብ ቁጥር በቴሌግራም ብቻ ይሰጣል</span>
-            </p>
+            <p style="margin: 0; font-size: 0.9rem; color: #666;" data-am="የመላኪያ ክፍያ ለማስላት አካባቢዎን ማሳወቅ አለብዎት። በቴሌግራም ላይ ሙሉ መረጃ ይሰጥዎታል።" data-om="Kaffaltii ergaa hiruuf bakka keessan agarsiisuu qabdu. Telegiraamii irratti odeeffannoo guutuu kenname.">የመላኪያ ክፍያ ለማስላት አካባቢዎን ማሳወቅ አለብዎት። በቴሌግራም ላይ ሙሉ መረጃ ይሰጥዎታል።</p>
         </div>
         
-        <p style="font-size: 0.85rem; color:var(--text-light); margin: 15px 0;" id="modal-note" data-am="* ትዕዛዝዎን ለማረጋገጥ 'በቴሌግራም ላክ' የሚለውን ይጫኑ።" data-om="* Dhaadannoo mirkaneessuuf 'Telegiraamiin ergi' jedhu cuqi.">* Click "Send via Telegram" to confirm your order.</p>
+        <p style="font-size: 0.85rem; color:var(--text-light); margin: 15px 0;" id="modal-note" data-am="* ትዕዛዝዎን ለማረጋገጥ 'ወደ ቴሌግራም ላክ' የሚለውን ይጫኑ።" data-om="* Dhaadannoo mirkaneessuuf 'Telegiraamiin ergi' jedhu cuqi.">* Click "Send via Telegram" to confirm your order.</p>
         
         <div style="display: flex; gap: 10px;">
-            <button class="btn" onclick="sendToTelegram()" id="send-telegram-btn" data-am="በቴሌግራም ላክ" data-om="Telegiraamiin Ergi">
+            <button class="btn" onclick="sendToTelegram()" id="send-telegram-btn" style="background: linear-gradient(90deg, #0088cc, #00a8ff);">
                 <i class="fab fa-telegram"></i>
-                <span>በቴሌግራም ላክ</span>
+                <span data-am="ወደ ቴሌግራም ላክ" data-om="Telegiraamiin Ergi">ወደ ቴሌግራም ላክ</span>
             </button>
-            <button class="btn btn-outline" onclick="closeModal()" id="back-btn" data-am="ተመለስ" data-om="Duuli">
+            <button class="btn btn-outline" onclick="closeModal()" id="back-btn">
                 <i class="fas fa-arrow-left"></i>
                 <span>ተመለስ</span>
             </button>
@@ -1543,14 +1483,10 @@
 </div>
 
 <div class="floating-footer">
-    <button class="btn" onclick="openCheckout()" id="checkout-btn" data-am="ትዕዛዝ አጠናቅ (Checkout)" data-om="Dhaadannoo Xumuri (Checkout)">
+    <button class="btn" onclick="openCheckout()" id="checkout-btn" data-am="ትዕዛዝ አጠናቅ" data-om="Dhaadannoo Xumuri">
         <i class="fas fa-shopping-cart"></i>
         <span id="cartCount">0</span>
         <span>ትዕዛዝ አጠናቅ</span>
-    </button>
-    <button class="btn btn-secondary" onclick="showOrderSummary()" id="summary-btn" style="display: none;" data-am="የትዕዛዝ ድምር" data-om="Gatii Ordeeraa">
-        <i class="fas fa-receipt"></i>
-        <span>ድምር አሳይ</span>
     </button>
 </div>
 
@@ -1561,21 +1497,19 @@
     let userLat = null;
     let userLng = null;
     let deferredPrompt = null;
-    const BASE_DELIVERY_FEE = 99;
-    const FIRST_DELIVERY_FREE = true; // First delivery free flag
-    const WITHIN_1KM_FEE = 50;
-    let deliveryFee = BASE_DELIVERY_FEE;
+    const FIRST_DELIVERY_FREE = true;
     let isFirstOrder = localStorage.getItem('firstOrderMade') !== 'true';
     const SITE_URL = "https://mikemoke4444-gif.github.io/delivery_app/";
     let currentLang = localStorage.getItem('preferredLang') || 'am';
     let currentPage = 'home';
-    let selectedPayment = 'cash'; // Default payment method
+    let selectedPayment = 'cash';
+    let deliveryFee = 0;
     
     // Top 3 trending foods with order counts
     const trendingFoods = [
-        { name: "Double Special Burger", price: 700, orders: 6, image: "./assets/double-special-burger.webp" },
-        { name: "Special Classic Pizza", price: 795, orders: 8, image: "./assets/special-classic-pizza.webp" },
-        { name: "Classic King Burger", price: 810, orders: 13, image: "./assets/classic-king-burger.webp" }
+        { name: "Double Special Burger", orders: 42, image: "./assets/double-special-burger.webp" },
+        { name: "Special Classic Pizza", orders: 38, image: "./assets/special-classic-pizza.webp" },
+        { name: "Classic King Burger", orders: 35, image: "./assets/classic-king-burger.webp" }
     ];
     
     // Pull to refresh variables
@@ -1602,10 +1536,9 @@
                 <div class="trending-rank">${index + 1}</div>
                 <div class="trending-info">
                     <div class="trending-name">${food.name}</div>
-                    <div class="trending-price">${food.price} ETB</div>
                     <div class="trending-orders">${food.orders} ${currentLang === 'am' ? 'ትዕዛዞች' : 'Ordeeron'}</div>
                 </div>
-                <button class="btn" style="padding: 8px 12px; font-size: 0.8rem;" onclick="addTrendingItem('${food.name}', ${food.price})">
+                <button class="btn" style="padding: 8px 12px; font-size: 0.8rem;" onclick="addTrendingItem('${food.name}')">
                     <i class="fas fa-plus"></i>
                     <span>${currentLang === 'am' ? 'ጨምር' : 'Dabaladhu'}</span>
                 </button>
@@ -1627,7 +1560,7 @@
     }
     
     // Add trending item to cart
-    function addTrendingItem(itemName, price) {
+    function addTrendingItem(itemName) {
         // Find the checkbox for this item
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         for (let checkbox of checkboxes) {
@@ -1726,20 +1659,6 @@
         const selectedOption = document.getElementById(method + 'Payment');
         selectedOption.classList.add('selected');
         selectedOption.querySelector('.fa-check-circle').style.display = 'block';
-        
-        // Update payment method in modal
-        const paymentMethodDisplay = document.getElementById('selectedPaymentMethod');
-        if (method === 'cash') {
-            paymentMethodDisplay.innerHTML = `
-                <i class="fas fa-money-bill-wave" style="color: #28a745; margin-right: 8px;"></i>
-                <span>${currentLang === 'am' ? 'ክፍያ ከመላኪያ በኋላ' : 'Kaffaltii Ergaa Booda'}</span>
-            `;
-        } else {
-            paymentMethodDisplay.innerHTML = `
-                <i class="fab fa-telegram" style="color: #0088cc; margin-right: 8px;"></i>
-                <span>${currentLang === 'am' ? 'በቴሌግራም' : 'Telegiraamiin'}</span>
-            `;
-        }
     }
 
     // Show page function
@@ -1762,10 +1681,8 @@
         
         // Update footer button
         const checkoutBtn = document.getElementById('checkout-btn');
-        const summaryBtn = document.getElementById('summary-btn');
         if (page === 'home') {
             checkoutBtn.style.display = 'flex';
-            summaryBtn.style.display = 'none';
             checkoutBtn.innerHTML = `
                 <i class="fas fa-shopping-cart"></i>
                 <span id="cartCount">${getCartCount()}</span>
@@ -1774,7 +1691,6 @@
             checkoutBtn.onclick = openCheckout;
         } else {
             checkoutBtn.style.display = 'none';
-            summaryBtn.style.display = 'none';
         }
         
         // Scroll to top
@@ -1785,103 +1701,10 @@
     function updateCartCount() {
         const count = getCartCount();
         document.getElementById('cartCount').textContent = count;
-        
-        // Show/hide summary button
-        const summaryBtn = document.getElementById('summary-btn');
-        if (count > 0 && currentPage === 'home') {
-            summaryBtn.style.display = 'flex';
-            summaryBtn.innerHTML = `
-                <i class="fas fa-receipt"></i>
-                <span>${count} ${currentLang === 'am' ? 'እቃዎች' : 'Qabeenya'}</span>
-            `;
-        } else {
-            summaryBtn.style.display = 'none';
-        }
     }
     
     function getCartCount() {
         return document.querySelectorAll('input[type="checkbox"]:checked').length;
-    }
-
-    // Show order summary
-    function showOrderSummary() {
-        let foodTotal = 0;
-        let selected = [];
-        document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
-            selected.push(box.value);
-            foodTotal += parseInt(box.getAttribute('data-price'));
-        });
-
-        if(selected.length === 0) {
-            showToast(currentLang === 'am' ? 
-                "እባክዎ ቢያንስ አንድ ምግብ ይምረጡ!" : 
-                "Yoo xinna tokko nyaata filadhu!", 3000);
-            return;
-        }
-        
-        calculateDeliveryFee();
-        const total = foodTotal + deliveryFee;
-        
-        // Create summary modal
-        const summaryHTML = `
-            <div class="modal" id="summaryModal" style="display: block;">
-                <div class="modal-content" style="max-width: 450px;">
-                    <h2 style="color:var(--primary); display: flex; align-items: center; gap: 8px;">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>${currentLang === 'am' ? 'የትዕዛዝ ድምር' : 'Gatii Ordeeraa'}</span>
-                    </h2>
-                    
-                    <div style="max-height: 300px; overflow-y: auto; margin: 15px 0;">
-                        ${selected.map((item, index) => `
-                            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border);">
-                                <div style="flex: 1;">
-                                    <div style="font-weight: 500;">${item.split('(')[0]}</div>
-                                    <div style="font-size: 0.8rem; color: var(--text-light);">${item.split('(')[1] ? '(' + item.split('(')[1] : ''}</div>
-                                </div>
-                                <div style="font-weight: 600; color: var(--primary);">
-                                    ${document.querySelector(`input[value="${item}"]`).getAttribute('data-price')} ETB
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    
-                    <div class="order-summary" style="margin: 20px 0;">
-                        <div class="summary-row">
-                            <span>${currentLang === 'am' ? 'የምግብ ድምር፡' : 'Gatii Nyaataa:'}</span>
-                            <span>${foodTotal} ETB</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>${currentLang === 'am' ? 'የመላኪያ ክፍያ፡' : 'Kaffaltii Ergaa:'}</span>
-                            <span>${deliveryFee} ETB</span>
-                        </div>
-                        <div class="summary-row total">
-                            <span>${currentLang === 'am' ? 'ጠቅላላ ድምር፡' : 'Gatii Guutuu:'}</span>
-                            <span>${total} ETB</span>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; gap: 10px;">
-                        <button class="btn" onclick="document.getElementById('summaryModal').style.display='none'; openCheckout();">
-                            <i class="fas fa-check-circle"></i>
-                            <span>${currentLang === 'am' ? 'ቀጠል' : 'Ittisa'}</span>
-                        </button>
-                        <button class="btn btn-outline" onclick="document.getElementById('summaryModal').style.display='none'">
-                            <i class="fas fa-times"></i>
-                            <span>${currentLang === 'am' ? 'ዝጋ' : 'Cufi'}</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        // Remove existing summary modal if any
-        const existingModal = document.getElementById('summaryModal');
-        if (existingModal) {
-            existingModal.remove();
-        }
-        
-        // Add new modal
-        document.body.insertAdjacentHTML('beforeend', summaryHTML);
     }
 
     // Telegram tracking function
@@ -1890,13 +1713,9 @@
         const message = currentLang === 'am' ?
             `📍 የትዕዛዝ መከታተል\n\n` +
             `የትዕዛዝ መለያ: ${orderId}\n` +
-            `ሰው: ${document.getElementById('displayCustomerName').textContent || '---'}\n` +
-            `ስልክ: ${document.getElementById('displayCustomerPhone').textContent || '---'}\n` +
             `\nእባክዎ የአካባቢ ምስልዎን ያጋሩ!` :
             `📍 Ordeeraa Hordofuu\n\n` +
             `ID Ordeeraa: ${orderId}\n` +
-            `Nama: ${document.getElementById('displayCustomerName').textContent || '---'}\n` +
-            `Bilbila: ${document.getElementById('displayCustomerPhone').textContent || '---'}\n` +
             `\nMee suuraa bakkaa keessan qoodaa!`;
         
         const encodedMessage = encodeURIComponent(message);
@@ -1947,17 +1766,9 @@
         // Display order info
         document.getElementById('displayOrderId').textContent = orderId;
         
-        // Try to get from localStorage
-        const lastOrder = localStorage.getItem('lastOrder');
-        if (lastOrder) {
-            try {
-                const order = JSON.parse(lastOrder);
-                document.getElementById('displayCustomerName').textContent = order.name;
-                document.getElementById('displayCustomerPhone').textContent = order.phone;
-            } catch (e) {
-                console.log('Error parsing last order:', e);
-            }
-        }
+        // Since form is removed, use default values
+        document.getElementById('displayCustomerName').textContent = 'Customer';
+        document.getElementById('displayCustomerPhone').textContent = 'Not Provided';
         
         // Set current time
         const now = new Date();
@@ -2189,10 +2000,6 @@
                     lat: userLat,
                     lng: userLng
                 }));
-                
-                // Calculate if within 1km radius (simplified calculation)
-                // This is a simplified version - you'd need actual restaurant coordinates
-                calculateDeliveryFee();
             },
             (error) => {
                 let errorMsg = currentLang === 'am' ? '❌ አካባቢ ማወቅ አልተቻለም' : '❌ Bakka beekuu hindandeenye';
@@ -2213,52 +2020,6 @@
             },
             options
         );
-    }
-
-    // Calculate delivery fee based on location and first order status
-    function calculateDeliveryFee() {
-        // Reset to base fee
-        deliveryFee = BASE_DELIVERY_FEE;
-        
-        // Check if first order (free delivery)
-        if (isFirstOrder && FIRST_DELIVERY_FREE) {
-            deliveryFee = 0;
-        }
-        // If user has location, check if within 1km (simplified)
-        else if (userLat && userLng) {
-            // Simplified distance calculation - you'd need actual restaurant coordinates
-            // For now, we'll use a random check for demo purposes
-            const isWithin1km = Math.random() > 0.5; // 50% chance for demo
-            if (isWithin1km) {
-                deliveryFee = WITHIN_1KM_FEE;
-            }
-        }
-        
-        // Update delivery fee display
-        document.getElementById('deliveryFeeDisplay').textContent = deliveryFee;
-        
-        // Update delivery notice
-        updateDeliveryNotice();
-    }
-
-    // Update delivery notice based on calculated fee
-    function updateDeliveryNotice() {
-        const notice = document.getElementById('deliveryNotice');
-        if (!notice) return;
-        
-        if (deliveryFee === 0) {
-            notice.innerHTML = currentLang === 'am' ? 
-                '🎉 <strong>የመጀመሪያ ማድረሻ ነፃ!</strong>' :
-                '🎉 <strong>Ergaa jalqabaa bilisaa!</strong>';
-        } else if (deliveryFee === WITHIN_1KM_FEE) {
-            notice.innerHTML = currentLang === 'am' ? 
-                '📍 <strong>በ1 ኪ.ሜ ክበብ ውስጥ ከሆኑ 50 ብር ብቻ!</strong>' :
-                '📍 <strong>Yoo kilomeetira 1 keessatti jiraattan 50 Birraa qofa!</strong>';
-        } else {
-            notice.innerHTML = currentLang === 'am' ? 
-                '⚡ <strong>የመላኪያ ክፍያ: 99 ብር</strong>' :
-                '⚡ <strong>Kaffaltii ergaa: 99 Birraa</strong>';
-        }
     }
 
     // Deny location
@@ -2327,7 +2088,7 @@
         } else if (isAndroid) {
             instructions = currentLang === 'am' ? 
                 '📱 ለአንድሮይድ:\n' +
-                '1.   ሶስት ነጥብ (⋮) ይጫኑ\n' +
+                '1. በቻሮም ላይ ሶስት ነጥብ (⋮) ይጫኑ\n' +
                 '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
                 '3. "አክል" የሚለውን ይጫኑ' :
                 '📱 Android:\n' +
@@ -2405,18 +2166,6 @@
     }
 
     function openCheckout() {
-        const name = document.getElementById('custName').value.trim();
-        const phone = document.getElementById('custPhone').value.trim();
-        const landmark = document.getElementById('custLandmark').value.trim() || 
-            (currentLang === 'am' ? "አልተጠቀሰም" : "Kan hin beekamne");
-        
-        if(!name || !phone) {
-            alert(currentLang === 'am' ? 
-                "⚠️ እባክዎ ስም እና ስልክ ያስገቡ!" : 
-                "⚠️ Maqaa fi bilbila galchaa!");
-            return;
-        }
-
         let foodTotal = 0;
         let selected = [];
         document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
@@ -2430,25 +2179,16 @@
                 "⚠️ Yoo xinna tokko nyaata filadhu!");
             return;
         }
-
-        // Calculate delivery fee
-        calculateDeliveryFee();
-        const total = foodTotal + deliveryFee;
         
         orderData = { 
-            name, 
-            phone, 
-            landmark, 
+            name: "Customer", // Default value since form removed
+            phone: "Not Provided", // Default value since form removed  
+            landmark: "Not Provided", // Default value since form removed
             items: selected.join(", "), 
-            foodTotal, 
-            deliveryFee, 
-            total,
+            foodTotal,
             paymentMethod: selectedPayment
         };
         
-        document.getElementById('foodTotal').innerText = foodTotal;
-        document.getElementById('deliveryFeeDisplay').textContent = deliveryFee;
-        document.getElementById('modalTotal').innerText = total;
         document.getElementById('paymentModal').style.display = "block";
     }
 
@@ -2490,17 +2230,62 @@
         }, 500);
     }
 
+    // Calculate distance between two coordinates in kilometers
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371; // Earth's radius in km
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    }
+
     // Create order message
     function createOrderMessage() {
         let locationInfo = "";
+        let deliveryPriceInfo = "";
         let mapUrl = "";
+        let totalItemsPrice = orderData.foodTotal;
         
         if (userLat && userLng) {
             locationInfo = `📍 Location: ${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
             mapUrl = `🗺️ Map: https://www.google.com/maps?q=${userLat},${userLng}`;
+            
+            // Restaurant coordinates (UPDATE THESE WITH YOUR ACTUAL COORDINATES)
+            const restaurantLat = 8.7527; // Example: Bishoftu coordinates
+            const restaurantLng = 38.9780;
+            
+            // Calculate distance
+            const distance = calculateDistance(userLat, userLng, restaurantLat, restaurantLng);
+            
+            // Calculate delivery fee based on distance
+            let deliveryFee = 99; // Default beyond 1km
+            let isFirstOrderFree = isFirstOrder && FIRST_DELIVERY_FREE;
+            
+            if (distance <= 1) {
+                deliveryFee = 50; // Within 1km radius
+            }
+            
+            if (isFirstOrderFree) {
+                deliveryFee = 0;
+            }
+            
+            const totalPrice = totalItemsPrice + deliveryFee;
+            
+            deliveryPriceInfo = 
+                `📏 Distance from restaurant: ${distance.toFixed(2)} km\n` +
+                `💰 Food Items Total: ${totalItemsPrice} ETB\n` +
+                `🚚 Delivery Fee: ${deliveryFee} ETB ${isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
+                `💵 TOTAL: ${totalPrice} ETB\n`;
         } else {
-            locationInfo = "📍 Location: " + (currentLang === 'am' ? "አልተሰጠም" : "Kan hin kennine");
-            mapUrl = "";
+            locationInfo = "📍 Location: Not provided";
+            deliveryPriceInfo = 
+                `💰 Food Items Total: ${totalItemsPrice} ETB\n` +
+                `🚚 Delivery Fee: To be calculated based on your location\n` +
+                `💵 TOTAL: Will be calculated in Telegram\n`;
         }
         
         // Streak Logic
@@ -2521,21 +2306,17 @@
                `📞 Phone: ${orderData.phone}\n` +
                `🏠 Landmark: ${orderData.landmark}\n` +
                `${locationInfo}\n` +
-               `\n🛒 Items:\n${orderData.items}\n\n` +
-               `💰 Food Total: ${orderData.foodTotal} ETB\n` +
-               `🚚 Delivery Fee: ${orderData.deliveryFee} ETB\n` +
-               `💵 Total: ${orderData.total} ETB\n` +
-               `💳 Payment Method: ${orderData.paymentMethod === 'cash' ? 'Cash on Delivery' : 'Telegram'}\n\n` +
-               `${mapUrl}\n` +
+               `${mapUrl}\n\n` +
+               `🛒 Items:\n${orderData.items}\n\n` +
+               `${deliveryPriceInfo}\n` +
+               `💳 Payment Method: ${orderData.paymentMethod === 'cash' ? 'Cash on Delivery' : 'Telegram'}\n` +
                `⏰ Time: ${new Date().toLocaleString('am-ET')}\n` +
                `🔢 Order ID: BD${Date.now().toString().slice(-8)}\n\n` +
                `🧪 This is a TEST order for user interest gathering`;
     }
 
     function clearForm() {
-        document.getElementById('custName').value = '';
-        document.getElementById('custPhone').value = '';
-        document.getElementById('custLandmark').value = '';
+        // Only clear checkboxes since form is removed
         document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
         updateCartCount();
     }
