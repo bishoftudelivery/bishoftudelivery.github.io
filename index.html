@@ -938,29 +938,30 @@
         }
         
         /* Responsive Design */
-        @media (max-width: 480px) {
-            .menu-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .floating-footer {
-                flex-direction: column;
-            }
-            .quick-stats {
-                grid-template-columns: 1fr;
-            }
-            .nav-btn {
-                padding: 8px 12px;
-                font-size: 0.8rem;
-            }
-            .container {
-                padding: 12px;
-            }
-            .modal-content {
-                width: 90%;
-                padding: 20px;
-            }
-        }
+      @media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: 1fr 1fr; /* TWO columns on mobile */
+        gap: 10px;
+    }
+    /* Keep other mobile adjustments */
+    .floating-footer {
+        flex-direction: column;
+    }
+    .quick-stats {
+        grid-template-columns: 1fr;
+    }
+    .nav-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    .container {
+        padding: 12px;
+    }
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+    }
+}
         
         /* Animation for adding items */
         @keyframes itemAdded {
