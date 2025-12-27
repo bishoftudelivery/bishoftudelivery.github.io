@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="am" data-version="13.2" data-lang="am">
+<html lang="am" data-version="13.3" data-lang="am">
 <head>
     <meta name="google-site-verification" content="Yo225u8qpEADrbmyCChQZ9zOZ9pNeUwm1meyq8ChHh4" />
     <meta charset="UTF-8">
@@ -278,68 +278,64 @@
             gap: 8px;
         }
         
-        /* Menu Grid */
-   /* Menu Grid - Simplified version */
-.menu-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; /* Always 2 columns */
-    gap: 12px; 
-    margin-bottom: 20px;
-}
-
-/* Card Styles */
-.card { 
-    background: white; 
-    border-radius: 12px; 
-    overflow: hidden; 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
-    position: relative; 
-    display: flex; 
-    flex-direction: column;
-    transition: all 0.3s ease;
-    border: 1px solid #e0e0e0;
-    width: 100%;
-    margin: 0; /* Remove any margin */
-}
-
-.card img { 
-    width: 100%; 
-    height: 130px; 
-    object-fit: cover; 
-    display: block;
-}
-
-.card-info { 
-    padding: 12px; 
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-title { 
-    font-size: 0.9rem; 
-    font-weight: 600; 
-    margin: 0 0 8px 0; 
-    min-height: 40px; 
-    color: #333;
-    line-height: 1.4;
-}
-
-/* For very small screens */
-@media (max-width: 320px) {
-    .menu-grid {
-        gap: 8px;
-    }
-    
-    .card img {
-        height: 110px;
-    }
-    
-    .card-title {
-        font-size: 0.8rem;
-        min-height: 36px;
-    }
-}
+        /* Menu Grid - FIXED FOR MOBILE */
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+            gap: 15px; 
+            margin-bottom: 20px;
+        }
+        
+        /* Card Styles with larger checkboxes */
+        .card { 
+            background: var(--card-bg); 
+            border-radius: var(--radius); 
+            overflow: hidden; 
+            box-shadow: var(--shadow-light); 
+            position: relative; 
+            display: flex; 
+            flex-direction: column;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .card img { 
+            width: 100%; 
+            height: 140px; 
+            object-fit: cover; 
+            background: linear-gradient(45deg, #f5f5f5, #e0e0e0); 
+        }
+        .card-info { 
+            padding: 12px; 
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-title { 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            margin: 0 0 8px 0; 
+            min-height: 42px; 
+            color: var(--dark);
+            line-height: 1.4;
+        }
+        .card-price { 
+            display: none !important; 
+        }
+        .card input { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            width: 28px; 
+            height: 28px; 
+            accent-color: var(--primary);
+            cursor: pointer;
+            z-index: 2;
+            transform: scale(1.2);
+        }
         
         /* Trending Badge */
         .trending-badge {
@@ -436,14 +432,14 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px;
+            padding: 12px;
             background: white;
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow-light);
         }
         .trending-rank {
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: var(--primary);
             color: white;
@@ -461,6 +457,7 @@
             font-weight: 600;
             margin: 0 0 3px 0;
             color: var(--dark);
+            font-size: 0.95rem;
         }
         .trending-price {
             display: none !important;
@@ -468,6 +465,27 @@
         .trending-orders {
             font-size: 0.8rem;
             color: var(--text-light);
+        }
+        
+        /* Larger Add Button for Trending Items */
+        .trending-add-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .trending-add-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
         }
         
         /* Modal Style */
@@ -937,14 +955,14 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .menu-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
                 gap: 12px;
             }
         }
         
         @media (max-width: 480px) {
             .menu-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
             .floating-footer {
@@ -974,9 +992,20 @@
                 font-size: 1rem;
                 padding: 10px 12px;
             }
+            .card img {
+                height: 130px;
+            }
+            .card-title {
+                font-size: 0.85rem;
+                min-height: 38px;
+            }
+            .trending-add-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
         }
         
-        @media (max-width: 320px) {
+        @media (max-width: 360px) {
             .menu-grid {
                 grid-template-columns: 1fr;
             }
@@ -987,6 +1016,11 @@
             .lang-btn {
                 padding: 5px 10px;
                 font-size: 0.7rem;
+            }
+            .card input {
+                width: 26px;
+                height: 26px;
+                transform: scale(1.1);
             }
         }
         
@@ -1024,7 +1058,7 @@
 <body>
 
 <!-- Testing Notice -->
-<div class="testing-notice" data-am="ፍላጎት ማሰባሰቢያ ፈተና ነው። ለቢሾፍቱ ምግብ ማድረሻ ሀሳብ ነው።" data-om="Kun tajaajila nyaataa Bishooftu irratti madaala fedha fayyadamaa. Yaada dha.">
+<div class="testing-notice" data-am="ፍላጎት ማሰባሰቢያ ፈተና ነው። ለቢሾፍቱ ምግብ ማድረሻ ሀሳብ ብቻ ነው።" data-om="Kun tajaajila nyaataa Bishooftu irratti madaala fedha fayyadamaa. Yaada qofaa dha.">
     This is a user interest gathering test for a potential food delivery idea in Bishoftu.
 </div>
 
@@ -1549,7 +1583,7 @@
 </div>
 
 <script>
-    // Restaurant coordinates (updated with correct values)
+    // Restaurant coordinates
     const RESTAURANT_COORDINATES = {
         'Etalem Hotel': { lat: 8.7592026, lng: 38.9458399 },
         'Kameti Kitchen': { lat: 8.7596178, lng: 38.9450543 },
@@ -1609,7 +1643,7 @@
                     <div class="trending-name">${food.name}</div>
                     <div class="trending-orders">${food.orders} ${currentLang === 'am' ? 'ትዕዛዞች' : 'Ordeeron'}</div>
                 </div>
-                <button class="btn" style="padding: 8px 12px; font-size: 0.8rem;" onclick="addTrendingItem('${food.name}')">
+                <button class="trending-add-btn" onclick="addTrendingItem('${food.name}')">
                     <i class="fas fa-plus"></i>
                     <span>${currentLang === 'am' ? 'ጨምር' : 'Dabaladhu'}</span>
                 </button>
