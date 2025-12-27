@@ -279,62 +279,67 @@
         }
         
         /* Menu Grid */
-        .menu-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 15px; 
-            margin-bottom: 20px;
-        }
-        
-        /* Card Styles */
-        .card { 
-            background: var(--card-bg); 
-            border-radius: var(--radius); 
-            overflow: hidden; 
-            box-shadow: var(--shadow-light); 
-            position: relative; 
-            display: flex; 
-            flex-direction: column;
-            transition: var(--transition);
-            border: 1px solid var(--border);
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-        .card img { 
-            width: 100%; 
-            height: 130px; 
-            object-fit: cover; 
-            background: linear-gradient(45deg, #f5f5f5, #e0e0e0); 
-        }
-        .card-info { 
-            padding: 12px; 
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-title { 
-            font-size: 0.9rem; 
-            font-weight: 600; 
-            margin: 0 0 8px 0; 
-            min-height: 40px; 
-            color: var(--dark);
-            line-height: 1.4;
-        }
-        .card-price { 
-            display: none !important; 
-        }
-        .card input { 
-            position: absolute; 
-            top: 10px; 
-            right: 10px; 
-            width: 22px; 
-            height: 22px; 
-            accent-color: var(--primary);
-            cursor: pointer;
-            z-index: 2;
-        }
+   /* Menu Grid - Simplified version */
+.menu-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* Always 2 columns */
+    gap: 12px; 
+    margin-bottom: 20px;
+}
+
+/* Card Styles */
+.card { 
+    background: white; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+    position: relative; 
+    display: flex; 
+    flex-direction: column;
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    margin: 0; /* Remove any margin */
+}
+
+.card img { 
+    width: 100%; 
+    height: 130px; 
+    object-fit: cover; 
+    display: block;
+}
+
+.card-info { 
+    padding: 12px; 
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title { 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    margin: 0 0 8px 0; 
+    min-height: 40px; 
+    color: #333;
+    line-height: 1.4;
+}
+
+/* For very small screens */
+@media (max-width: 320px) {
+    .menu-grid {
+        gap: 8px;
+    }
+    
+    .card img {
+        height: 110px;
+    }
+    
+    .card-title {
+        font-size: 0.8rem;
+        min-height: 36px;
+    }
+}
         
         /* Trending Badge */
         .trending-badge {
