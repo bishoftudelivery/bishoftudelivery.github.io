@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="am" data-version="14.0" data-lang="am">
+<html lang="am" data-version="13.2" data-lang="am">
 <head>
     <meta name="google-site-verification" content="Yo225u8qpEADrbmyCChQZ9zOZ9pNeUwm1meyq8ChHh4" />
     <meta charset="UTF-8">
@@ -12,46 +12,30 @@
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#ff4500">
     <meta name="description" content="ቢሾፍቱ ውስጥ ምግብ ማድረሻ - Food Delivery Service in Bishoftu">
-    <link rel="manifest" href="./manifest.json?v=14">
+    <link rel="manifest" href="./manifest.json?v=13">
     
     <!-- iOS Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="BishoftuEats">
-    <link rel="apple-touch-icon" href="./icons/icon-152x152.png?v=14">
+    <link rel="apple-touch-icon" href="./icons/icon-152x152.png?v=13">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=14">
+    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=13">
     
-    <!-- Font Awesome -->
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Tablet-like responsive design */
-        :root {
-            /* Base font size for tablets (scales down for phones) */
-            --base-font-size: 18px;
-            --tablet-font-scale: 1;
-            --phone-font-scale: 0.85;
-            --small-phone-font-scale: 0.75;
-            
-            /* Responsive spacing */
-            --spacing-xs: clamp(4px, 1vw, 8px);
-            --spacing-sm: clamp(8px, 1.5vw, 12px);
-            --spacing-md: clamp(12px, 2vw, 16px);
-            --spacing-lg: clamp(16px, 2.5vw, 20px);
-            --spacing-xl: clamp(20px, 3vw, 24px);
-            --spacing-xxl: clamp(24px, 4vw, 32px);
-            
-            /* Colors */
-            --primary: #ff4500;
+        :root { 
+            --primary: #ff4500; 
             --primary-light: #ff6b35;
             --primary-dark: #cc3700;
             --secondary: #28a745;
             --secondary-light: #34ce57;
-            --dark: #1a1a1a;
+            --dark: #1a1a1a; 
             --light-dark: #333;
-            --bg: #f8f9fa;
+            --bg: #f8f9fa; 
             --card-bg: #ffffff;
             --text: #333;
             --text-light: #666;
@@ -63,124 +47,100 @@
             --radius-sm: 8px;
             --radius-lg: 16px;
             --transition: all 0.3s ease;
-            
-            /* Button sizes that scale */
-            --btn-height: clamp(44px, 5vh, 56px);
-            --btn-font-size: clamp(16px, 2vw, 18px);
-            
-            /* Card sizes */
-            --card-min-height: clamp(140px, 15vh, 180px);
-            --card-image-height: clamp(120px, 12vh, 150px);
-            
-            /* Input sizes */
-            --input-height: clamp(44px, 5vh, 52px);
-            --input-font-size: clamp(16px, 2vw, 18px);
         }
         
-        /* Responsive font sizing */
-        body {
-            font-size: var(--base-font-size);
-        }
+        /* Modern Color Scheme */
+        .primary-bg { background: var(--primary); color: white; }
+        .secondary-bg { background: var(--secondary); color: white; }
+        .light-bg { background: var(--bg); }
+        .white-bg { background: white; }
         
-        /* Adjust for different screen sizes */
-        @media (max-width: 768px) {
-            :root {
-                --base-font-size: 16px;
-            }
-            body {
-                font-size: calc(var(--base-font-size) * var(--phone-font-scale));
-            }
-        }
-        
-        @media (max-width: 480px) {
-            :root {
-                --base-font-size: 15px;
-            }
-            body {
-                font-size: calc(var(--base-font-size) * var(--small-phone-font-scale));
-            }
-        }
-        
-        @media (min-width: 769px) and (max-width: 1024px) {
-            body {
-                font-size: calc(var(--base-font-size) * var(--tablet-font-scale));
-            }
-        }
-        
-        @media (min-width: 1025px) {
-            :root {
-                --base-font-size: 20px;
-            }
-            body {
-                font-size: calc(var(--base-font-size) * var(--tablet-font-scale));
-            }
-        }
-        
-        /* Base Styles */
-        body {
-            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
+        body { 
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, Arial, sans-serif; 
+            margin: 0; 
+            background: var(--bg); 
+            padding-bottom: 100px; 
+            direction: ltr; 
+            overflow-x: hidden; 
             color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
-            padding-bottom: calc(var(--btn-height) + var(--spacing-xl));
-            -webkit-text-size-adjust: 100%;
-            -moz-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
         
-        /* Container with responsive max-width */
-        .container {
-            width: 100%;
-            max-width: min(1200px, 95vw);
-            margin: 0 auto;
-            padding: 0 var(--spacing-md);
-            box-sizing: border-box;
-        }
-        
-        /* Header responsive styles */
-        header {
-            background: white;
-            padding: var(--spacing-lg) var(--spacing-md);
+        /* Testing Notice */
+        .testing-notice {
+            background: linear-gradient(90deg, #ffeb3b, #ffd54f);
+            color: #333;
+            padding: 10px 15px;
             text-align: center;
-            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+            border-bottom: 2px solid #ff9800;
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow-light);
+            z-index: 1001;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(255, 152, 0, 0.2);
         }
         
-        .header-title {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            margin: 0;
-            color: var(--dark);
-            font-weight: 700;
+        /* Pull to Refresh Container */
+        #refreshContainer {
+            position: fixed;
+            top: -60px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+            z-index: 9999;
+            transition: top 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 69, 0, 0.3);
+        }
+        
+        .refresh-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .refresh-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         /* Navigation */
         .main-nav {
             display: flex;
             justify-content: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-md);
+            gap: 8px;
+            padding: 12px 15px;
             background: white;
             border-bottom: 1px solid var(--border);
             position: sticky;
-            top: 0;
-            z-index: 99;
+            top: 42px;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
-        
         .nav-btn {
             background: none;
             border: none;
-            padding: var(--spacing-sm) var(--spacing-lg);
+            padding: 10px 18px;
             border-radius: 20px;
-            font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+            font-size: 0.85rem;
             cursor: pointer;
             color: var(--text-light);
             transition: var(--transition);
@@ -189,729 +149,1844 @@
             align-items: center;
             gap: 5px;
             white-space: nowrap;
-            flex-shrink: 0;
         }
-        
         .nav-btn.active {
             background: var(--primary);
             color: white;
             box-shadow: var(--shadow-light);
         }
-        
-        /* Grid system */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
-            gap: var(--spacing-md);
-            margin: var(--spacing-lg) 0;
+        .nav-btn:hover {
+            background: #ff450010;
+            transform: translateY(-1px);
         }
         
-        @media (max-width: 480px) {
-            .menu-grid {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-sm);
-            }
+        /* Page Content */
+        .page-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+            min-height: 100vh;
+        }
+        .page-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            overflow: hidden;
+        /* Language Switcher */
+        .lang-switcher {
+            position: absolute;
+            top: 55px;
+            right: 15px;
+            display: flex;
+            gap: 5px;
+            z-index: 1001;
+            background: white;
+            padding: 4px;
+            border-radius: 20px;
             box-shadow: var(--shadow-light);
+        }
+        .lang-btn {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .lang-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Header */
+        header { 
+            background: white; 
+            padding: 20px 15px 15px; 
+            text-align: center; 
+            position: relative; 
+            z-index: 998; 
+            margin-top: 15px; 
+            border-bottom: 1px solid var(--border);
+        }
+        .streak-fire { 
+            display: flex; 
+            justify-content: center; 
+            gap: 8px; 
+            margin: 8px 0; 
+        }
+        .fire { 
+            font-size: 24px; 
+            filter: grayscale(100%); 
+            opacity: 0.2; 
+            transition: 0.5s; 
+        }
+        .fire.active { 
+            filter: grayscale(0%); 
+            opacity: 1; 
+            animation: burn 1.5s infinite; 
+        }
+        @keyframes burn { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.2); } 
+        }
+
+        .container { 
+            max-width: 600px; 
+            margin: auto; 
+            padding: 15px; 
+        }
+        
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Restaurant Title */
+        .res-title { 
+            background: linear-gradient(90deg, var(--primary), var(--primary-light)); 
+            color: white; 
+            padding: 12px 15px; 
+            border-radius: var(--radius-sm); 
+            margin: 20px 0 15px; 
+            font-size: 1.1rem; 
+            font-weight: 600;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Menu Grid */
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+            margin-bottom: 20px;
+        }
+        
+        /* Card Styles */
+        .card { 
+            background: var(--card-bg); 
+            border-radius: var(--radius); 
+            overflow: hidden; 
+            box-shadow: var(--shadow-light); 
+            position: relative; 
+            display: flex; 
+            flex-direction: column;
             transition: var(--transition);
             border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            min-height: var(--card-min-height);
         }
-        
-        .card img {
-            width: 100%;
-            height: var(--card-image-height);
-            object-fit: cover;
-            background: linear-gradient(45deg, #f5f5f5, #e0e0e0);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
         }
-        
-        .card-info {
-            padding: var(--spacing-md);
+        .card img { 
+            width: 100%; 
+            height: 130px; 
+            object-fit: cover; 
+            background: linear-gradient(45deg, #f5f5f5, #e0e0e0); 
+        }
+        .card-info { 
+            padding: 12px; 
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        
-        .card-title {
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            font-weight: 600;
-            margin: 0 0 var(--spacing-sm) 0;
+        .card-title { 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            margin: 0 0 8px 0; 
+            min-height: 40px; 
+            color: var(--dark);
             line-height: 1.4;
         }
+        .card-price { 
+            display: none !important; 
+        }
+        .card input { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            width: 22px; 
+            height: 22px; 
+            accent-color: var(--primary);
+            cursor: pointer;
+            z-index: 2;
+        }
         
-        /* Buttons */
-        .btn {
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        /* Trending Badge */
+        .trending-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(90deg, var(--secondary), var(--secondary-light));
             color: white;
-            border: none;
-            width: 100%;
-            height: var(--btn-height);
-            padding: 0 var(--spacing-lg);
-            border-radius: var(--radius-sm);
-            font-size: var(--btn-font-size);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
             font-weight: 600;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        /* Payment Options in Modal */
+        .payment-option {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 15px;
+            margin: 15px 0;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            text-decoration: none;
-            box-sizing: border-box;
+            gap: 12px;
         }
-        
-        .btn:hover {
-            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+        .payment-option:hover {
+            border-color: var(--primary-light);
+            background: #ff450005;
         }
-        
-        .btn:active {
-            transform: translateY(0);
+        .payment-option.selected {
+            border-color: var(--primary);
+            background: #ff450008;
         }
-        
-        /* Floating Footer */
-        .floating-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: white;
-            padding: var(--spacing-md);
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-            z-index: 1000;
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
-            gap: var(--spacing-md);
-            box-sizing: border-box;
-        }
-        
-        @media (max-width: 480px) {
-            .floating-footer {
-                flex-direction: column;
-                gap: var(--spacing-sm);
-            }
-        }
-        
-        /* Inputs */
-        input[type="text"],
-        input[type="tel"],
-        textarea,
-        select {
-            width: 100%;
-            height: var(--input-height);
-            padding: 0 var(--spacing-md);
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius-sm);
-            box-sizing: border-box;
-            font-family: inherit;
-            font-size: var(--input-font-size);
-            transition: var(--transition);
-        }
-        
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-            z-index: 10000;
             align-items: center;
             justify-content: center;
-            padding: var(--spacing-md);
-            box-sizing: border-box;
+            font-size: 1.2rem;
+        }
+        .payment-details {
+            flex: 1;
+        }
+        .payment-title {
+            font-weight: 600;
+            margin: 0 0 3px 0;
+            color: var(--dark);
+        }
+        .payment-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.4;
         }
         
-        .modal-content {
+        /* Top Trending Section */
+        .top-trending {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary);
+            box-shadow: var(--shadow-light);
+        }
+        .trending-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .trending-header i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        .trending-header h3 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+        .trending-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .trending-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
             background: white;
-            border-radius: var(--radius-lg);
-            width: 100%;
-            max-width: min(500px, 95vw);
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: modalSlide 0.3s ease;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-light);
+        }
+        .trending-rank {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .trending-info {
+            flex: 1;
+        }
+        .trending-name {
+            font-weight: 600;
+            margin: 0 0 3px 0;
+            color: var(--dark);
+        }
+        .trending-price {
+            display: none !important;
+        }
+        .trending-orders {
+            font-size: 0.8rem;
+            color: var(--text-light);
         }
         
+        /* Modal Style */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(3px);
+            animation: fadeIn 0.2s ease;
+        }
+        .modal-content { 
+            background: white; 
+            margin: 10% auto; 
+            padding: 25px; 
+            border-radius: var(--radius-lg); 
+            width: 85%; 
+            max-width: 400px; 
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: modalSlide 0.3s ease;
+        }
         @keyframes modalSlide {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         /* Location Modal */
-        .location-modal {
+        .location-modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(3px);
+            animation: fadeIn 0.2s ease;
+        }
+        .location-content { 
+            background: white; 
+            margin: 20% auto; 
+            padding: 30px; 
+            border-radius: var(--radius-lg); 
+            width: 85%; 
+            max-width: 400px; 
             text-align: center;
-            padding: var(--spacing-xl);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: modalSlide 0.3s ease;
         }
         
-        .location-icon {
-            font-size: clamp(48px, 10vw, 64px);
-            margin-bottom: var(--spacing-lg);
-            color: var(--primary);
+        /* Phone Modal */
+        .phone-modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(3px);
+            animation: fadeIn 0.2s ease;
         }
-        
-        .location-title {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            margin: 0 0 var(--spacing-md) 0;
-            color: var(--dark);
-            font-weight: 700;
-        }
-        
-        .location-message {
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            color: var(--text-light);
-            line-height: 1.6;
-            margin: 0 0 var(--spacing-xl) 0;
-        }
-        
-        .location-buttons {
-            display: flex;
-            gap: var(--spacing-md);
-        }
-        
-        @media (max-width: 480px) {
-            .location-buttons {
-                flex-direction: column;
-            }
+        .phone-content { 
+            background: white; 
+            margin: 20% auto; 
+            padding: 30px; 
+            border-radius: var(--radius-lg); 
+            width: 85%; 
+            max-width: 400px; 
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: modalSlide 0.3s ease;
         }
         
         /* Payment Modal */
-        .payment-modal {
-            padding: var(--spacing-xl);
+        .payment-modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(3px);
+            animation: fadeIn 0.2s ease;
+        }
+        .payment-content { 
+            background: white; 
+            margin: 20% auto; 
+            padding: 30px; 
+            border-radius: var(--radius-lg); 
+            width: 85%; 
+            max-width: 400px; 
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: modalSlide 0.3s ease;
         }
         
-        .payment-options {
-            display: grid;
-            gap: var(--spacing-md);
-            margin: var(--spacing-xl) 0;
+        .payment-info { 
+            background: #f8f9fa; 
+            padding: 18px; 
+            border-radius: var(--radius-sm); 
+            margin: 20px 0; 
+            text-align: left; 
+            font-size: 0.95rem;
+            border-left: 4px solid var(--primary);
         }
         
-        .payment-option {
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
-            padding: var(--spacing-lg);
-            cursor: pointer;
+        /* Floating Footer */
+        .floating-footer { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            background: white; 
+            padding: 15px; 
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1); 
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Buttons */
+        .btn { 
+            background: linear-gradient(90deg, var(--primary), var(--primary-light)); 
+            color: white; 
+            border: none; 
+            width: 100%; 
+            padding: 16px; 
+            border-radius: var(--radius-sm); 
+            font-size: 1rem; 
+            font-weight: 600; 
+            cursor: pointer; 
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: var(--spacing-md);
+            justify-content: center;
+            gap: 8px;
         }
-        
-        .payment-option:hover {
-            border-color: var(--primary-light);
+        .btn:hover {
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
             transform: translateY(-2px);
-            box-shadow: var(--shadow-light);
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
         }
-        
-        .payment-option.selected {
-            border-color: var(--primary);
+        .btn:active {
+            transform: translateY(0);
+        }
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        .btn-secondary:hover {
+            background: var(--secondary-light);
+        }
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-outline:hover {
             background: #ff450008;
         }
         
-        .payment-icon {
-            width: clamp(40px, 8vw, 48px);
-            height: clamp(40px, 8vw, 48px);
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+        input[type="text"], input[type="tel"], textarea, select { 
+            width: 100%; 
+            padding: 14px; 
+            margin: 5px 0 0; 
+            border: 1.5px solid var(--border); 
+            border-radius: var(--radius-sm); 
+            box-sizing: border-box; 
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        input[type="text"]:focus, input[type="tel"]:focus, textarea:focus, select:focus { 
+            outline: none; 
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.1);
+        }
+        
+        /* Info Pages Styling */
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-light);
+            border-top: 4px solid var(--primary);
+        }
+        .step-card {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 18px;
+            background: #f8f9fa;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+        .step-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-light);
+        }
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            margin-right: 15px;
+            font-weight: 700;
             flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+        .tracking-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
         }
         
-        .payment-info {
-            flex: 1;
+        /* Contact Cards */
+        .contact-card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow-light);
         }
-        
-        .payment-title {
-            font-size: clamp(1rem, 2vw, 1.1rem);
+        .telegram-track-btn {
+            background: linear-gradient(90deg, #0088cc, #00a8ff);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin: 10px 0;
             font-weight: 600;
-            margin: 0 0 var(--spacing-xs) 0;
+            transition: var(--transition);
+        }
+        .telegram-track-btn:hover {
+            background: linear-gradient(90deg, #0077b3, #0097e6);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
+        }
+        
+        /* PWA Popup */
+        .pwa-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            z-index: 10001;
+            width: 85%;
+            max-width: 320px;
+            text-align: center;
+            animation: popupIn 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+        
+        @keyframes popupIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .pwa-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .pwa-title {
+            margin: 0 0 10px 0;
             color: var(--dark);
+            font-size: 1.3rem;
+            font-weight: 700;
         }
         
-        .payment-desc {
-            font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+        .pwa-message {
+            margin: 0 0 25px 0;
             color: var(--text-light);
-            margin: 0;
-            line-height: 1.4;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
-        /* Loading spinner */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s linear infinite;
+        .pwa-buttons {
+            display: flex;
+            gap: 10px;
         }
         
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .pwa-btn {
+            flex: 1;
+            padding: 14px 0;
+            border-radius: var(--radius-sm);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: var(--transition);
         }
         
-        /* Toast notification */
+        .pwa-yes {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+        
+        .pwa-no {
+            background: #f0f0f0;
+            color: #666;
+        }
+        
+        /* Offline Indicator */
+        #offlineIndicator {
+            position: fixed;
+            top: 40px;
+            left: 10px;
+            background: #ff4444;
+            color: white;
+            padding: 8px 15px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            z-index: 10000;
+            display: none;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(255, 68, 68, 0.3);
+        }
+        
+        /* Delivery Fee Notice */
+        .delivery-notice {
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            margin: 15px 0;
+            border-left: 4px solid #0088cc;
+        }
+        
+        /* Toast Notification */
         .toast {
             position: fixed;
-            top: 20px;
+            top: 90px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--dark);
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
             color: white;
-            padding: var(--spacing-md) var(--spacing-xl);
+            padding: 14px 24px;
             border-radius: var(--radius);
             z-index: 10001;
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            animation: toastInOut 3s ease;
+            animation: fadeInOut 3s ease;
             display: none;
             font-weight: 500;
             text-align: center;
             max-width: 90%;
-            box-sizing: border-box;
         }
         
-        @keyframes toastInOut {
+        @keyframes fadeInOut {
             0%, 100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
             10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
         
-        /* Restaurant titles */
-        .restaurant-title {
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            color: white;
-            padding: var(--spacing-md) var(--spacing-lg);
-            border-radius: var(--radius-sm);
-            margin: var(--spacing-xl) 0 var(--spacing-md) 0;
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
+        /* Order Summary */
+        .order-summary {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            box-shadow: var(--shadow-light);
         }
-        
-        /* Section headers */
-        .section-header {
+        .summary-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin: var(--spacing-xl) 0 var(--spacing-md) 0;
-            padding-bottom: var(--spacing-sm);
-            border-bottom: 2px solid var(--primary-light);
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        .summary-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid var(--primary);
         }
         
-        .section-title {
-            font-size: clamp(1.1rem, 3vw, 1.3rem);
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background: white;
+            border-radius: var(--radius-sm);
+            padding: 15px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+        .stat-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--dark);
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
         }
         
         /* RTL support for Oromo */
         body[data-lang="om"] {
             direction: rtl;
-            text-align: right;
+        }
+        body[data-lang="om"] .lang-switcher {
+            left: 15px;
+            right: auto;
+        }
+        body[data-lang="om"] .step-card {
+            border-left: none;
+            border-right: 4px solid var(--primary);
+        }
+        body[data-lang="om"] .step-number {
+            margin-right: 0;
+            margin-left: 15px;
         }
         
-        body[data-lang="om"] .payment-option {
-            flex-direction: row-reverse;
-            text-align: right;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
         }
         
-        /* Prevent zoom on iOS */
-        input, select, textarea {
-            font-size: 16px !important;
+        @media (max-width: 480px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .floating-footer {
+                flex-direction: column;
+            }
+            .quick-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            .container {
+                padding: 12px;
+            }
+            .modal-content {
+                width: 90%;
+                padding: 20px;
+            }
+            .stat-box {
+                padding: 12px;
+            }
+            .stat-number {
+                font-size: 1.2rem;
+            }
+            .res-title {
+                font-size: 1rem;
+                padding: 10px 12px;
+            }
         }
         
-        /* Ensure tap targets are minimum 44px */
-        button, 
-        .btn, 
-        input[type="checkbox"],
-        .payment-option {
-            min-height: 44px;
+        @media (max-width: 320px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.7rem;
+            }
         }
         
-        /* Hide scrollbar but keep functionality */
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        /* Animation for adding items */
+        @keyframes itemAdded {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .item-added {
+            animation: itemAdded 0.3s ease;
         }
         
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
+        /* Loading spinner */
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 69, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin: 20px auto;
+        }
+        
+        /* Price display */
+        .price-display {
+            background: #fff8e1;
+            padding: 10px 15px;
+            border-radius: var(--radius-sm);
+            margin: 10px 0;
+            border-left: 3px solid #ff9800;
         }
     </style>
 </head>
 <body>
 
-<!-- Location Permission Modal (FIRST THING USER SEES) -->
-<div id="locationModal" class="modal" style="display: block;">
-    <div class="modal-content location-modal">
-        <div class="location-icon">📍</div>
-        <div class="location-title" data-am="አካባቢዎን ያሳውቁ" data-om="Bakka keessan agarsiisaa">አካባቢዎን ያሳውቁ</div>
-        <div class="location-message" data-am="ለፈጣን ማድረሻ እና ትክክለኛ የመላኪያ ክፍያ ለማስላት የእርስዎን አካባቢ ማወቅ አለብን።Location ፈቃድ ይስጡ።" data-om="Ariifachiifachuuf fi kaffaltii ergaa sirrii hiruuf bakka keessan beekuu barbaanna.<br><br>Mee hayyama bakkaa kenni.">
-            ለፈጣን ማድረሻ እና ትክክለኛ የመላኪያ ክፍያ ለማስላት የእርስዎን አካባቢ ማወቅ አለብን።<br><br>እባክዎ የአካባቢ ፈቃድ ይስጡ።
-        </div>
-        <div class="location-buttons">
-            <button class="btn" onclick="requestLocationPermission()" id="allowLocationBtn">
-                <span data-am="አረጋግጥ" data-om="Mirkaneessi">አረጋግጥ</span>
-            </button>
-            <button class="btn" style="background: var(--text-light);" onclick="denyLocation()" data-am="አልፈልግም" data-om="Hin barbaadu">
-                አልፈልግም
-            </button>
-        </div>
+<!-- Testing Notice -->
+<div class="testing-notice" data-am="ፍላጎት ማሰባሰቢያ ፈተና ነው። ለቢሾፍቱ ምግብ ማድረሻ ሀሳብ ነው።" data-om="Kun tajaajila nyaataa Bishooftu irratti madaala fedha fayyadamaa. Yaada dha.">
+    This is a user interest gathering test for a potential food delivery idea in Bishoftu.
+</div>
+
+<!-- Pull to Refresh Container -->
+<div id="refreshContainer">
+    <div class="refresh-content">
+        <div class="refresh-spinner" id="refreshSpinner"></div>
+        <span id="refreshText" data-am="ይቀናል... ለማደስት ከላይ ይሳቡ" data-om="Deebi'aa... Harka keessan deebisuu fedhaa">ይቀናል... ለማደስት ከላይ ይሳቡ</span>
     </div>
 </div>
 
-<!-- Payment Method Modal (Shows after location is granted) -->
-<div id="paymentModal" class="modal">
-    <div class="modal-content payment-modal">
-        <h2 style="margin: 0 0 var(--spacing-lg) 0; color: var(--primary); text-align: center;" data-am="የክፍያ ዘዴ ይምረጡ" data-om="Kaffaltii Mala Filadhu">
-            የክፍያ ዘዴ ይምረጡ
-        </h2>
-        
-        <div class="payment-options">
-            <div class="payment-option" onclick="selectPayment('cash')" id="cashOption">
-                <div class="payment-icon" style="background: #28a74520; color: #28a745;">
-                    <i class="fas fa-money-bill-wave"></i>
-                </div>
-                <div class="payment-info">
-                    <div class="payment-title" data-am="ክፍያ ከመላኪያ በኋላ" data-om="Kaffaltii Ergaa Booda">
-                        ክፍያ ከመላኪያ በኋላ
-                    </div>
-                    <div class="payment-desc" data-am="ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ" data-om="Nyaata fudhachuu keessan booda qarshii kaffala">
-                        ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ
-                    </div>
-                </div>
-                <i class="fas fa-check-circle" style="color: #28a745; font-size: 1.2rem; display: none;"></i>
-            </div>
-            
-            <div class="payment-option" onclick="selectPayment('telegram')" id="telegramOption">
-                <div class="payment-icon" style="background: #0088cc20; color: #0088cc;">
-                    <i class="fab fa-telegram"></i>
-                </div>
-                <div class="payment-info">
-                    <div class="payment-title" data-am="በቴሌግራም" data-om="Telegiraamiin">
-                        በቴሌግራም
-                    </div>
-                    <div class="payment-desc" data-am="በቴሌግራም ይክፈሉ" data-om="Telegiraamiin kaffala">
-                        በቴሌግራም ይክፈሉ
-                    </div>
-                </div>
-                <i class="fas fa-check-circle" style="color: #0088cc; font-size: 1.2rem; display: none;"></i>
-            </div>
-        </div>
-        
-        <div style="margin: var(--spacing-xl) 0;">
-            <button class="btn" onclick="confirmPayment()" id="confirmPaymentBtn" disabled>
-                <span data-am="አረጋግጥ" data-om="Mirkaneessi">አረጋግጥ</span>
-            </button>
-        </div>
-        
-        <p style="text-align: center; font-size: 0.9rem; color: var(--text-light); margin: 0;" data-am="ትዕዛዝዎን ለማረጋገጥ ክፍያ ዘዴ መምረጥ አለብዎት።" data-om="Dhaadannoo mirkaneessuuf mala kaffaltii filachuu qabdu.">
-            ትዕዛዝዎን ለማረጋገጥ ክፍያ ዘዴ መምረጥ አለብዎት።
-        </p>
-    </div>
-</div>
+<!-- Offline Indicator -->
+<div id="offlineIndicator" data-am="ኦፍላይን ሁነዋል" data-om="Ilaalcha hin jiru">ኦፍላይን ሁነዋል</div>
 
 <!-- Toast Notification -->
 <div class="toast" id="toast"></div>
 
-<!-- Main App Content (Hidden until location granted) -->
-<div id="appContent" style="display: none;">
-    <!-- Language Switcher -->
-    <div style="position: fixed; top: var(--spacing-md); right: var(--spacing-md); z-index: 101; background: white; padding: var(--spacing-sm); border-radius: var(--radius); box-shadow: var(--shadow-light);">
-        <div style="display: flex; gap: var(--spacing-sm);">
-            <button class="lang-btn" onclick="switchLanguage('am')" style="padding: var(--spacing-sm) var(--spacing-md); border: 1px solid var(--border); background: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.9rem;">አማ</button>
-            <button class="lang-btn" onclick="switchLanguage('om')" style="padding: var(--spacing-sm) var(--spacing-md); border: 1px solid var(--border); background: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.9rem;">Orom</button>
+<!-- Language Switcher -->
+<div class="lang-switcher">
+    <button class="lang-btn active" onclick="switchLanguage('am')">አማርኛ</button>
+    <button class="lang-btn" onclick="switchLanguage('om')">Afaan Oromoo</button>
+</div>
+
+<!-- Main Navigation -->
+<nav class="main-nav">
+    <button class="nav-btn active" onclick="showPage('home')" data-am="ኦርደር" data-om="Ordeer">ኦርደር</button>
+    <button class="nav-btn" onclick="showPage('about')" data-am="ስለኛ" data-om="Waa'ee Keenya">ስለኛ</button>
+    <button class="nav-btn" onclick="showPage('contact')" data-am="አግኙን" data-om="Nu Qunnamuu">አግኙን</button>
+</nav>
+
+<!-- Location Modal -->
+<div id="locationModal" class="location-modal">
+    <div class="location-content">
+        <div style="font-size: 40px; margin-bottom: 15px; color: var(--primary);">
+            <i class="fas fa-map-marker-alt"></i>
         </div>
-    </div>
-
-    <!-- Header -->
-    <header>
-        <h1 class="header-title" id="site-title" data-am="ቢሾፍቱ ዴሊቨሪ" data-om="Bishooftu Ergaa">
-            ቢሾፍቱ ዴሊቨሪ
-        </h1>
-        <div style="font-size: 0.9rem; color: var(--text-light); margin-top: var(--spacing-sm);" id="welcomeMessage" data-am="ደህና መጡ! ምግብዎን ይምረጡ" data-om="Baga nagaan dhuftan! Nyaata filadhu">
-            ደህና መጡ! ምግብዎን ይምረጡ
+        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: var(--dark);" 
+             data-am="አካባቢዎን ያሳውቁ" 
+             data-om="Bakka keessan agarsiisaa">
+            አካባቢዎን ያሳውቁ
         </div>
-    </header>
-
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <button class="nav-btn active" onclick="showPage('menu')" data-am="🍔 ምናሌ" data-om="🍔 Menu">🍔 ምናሌ</button>
-        <button class="nav-btn" onclick="showPage('cart')" data-am="🛒 ቅርጫት" data-om="🛒 Gaaddisa">🛒 ቅርጫት</button>
-        <button class="nav-btn" onclick="showPage('track')" data-am="📦 ይከታተሉ" data-om="📦 Hordofi">📦 ይከታተሉ</button>
-        <button class="nav-btn" onclick="showPage('contact')" data-am="📞 አግኙን" data-om="📞 Nu Qunnamuu">📞 አግኙን</button>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Menu Page -->
-        <div id="menuPage" class="page active">
-            <div class="section-header">
-                <h2 class="section-title" data-am="🍽️ ምግቦች" data-om="🍽️ Nyaatota">🍽️ ምግቦች</h2>
+        <div style="margin-bottom: 25px; color: var(--text-light); line-height: 1.6;" 
+             data-am="ምግብዎን በፍጥነት ለማድረስ እና ትክክለኛ የመላኪያ ክፍያ ለማስላት የእርስዎን አካባቢ ማወቅ አለብን።" 
+             data-om="Nyaata keessan ariifachiifachuuf fi kaffaltii ergaa sirrii hiruuu bakka keessan beekuu barbaanna.">
+            ምግብዎን በፍጥነት ለማድረስ እና ትክክለኛ የመላኪያ ክፍያ ለማስላት የእርስዎን አካባቢ ማወቅ አለብን።
+        </div>
+        
+        <div style="background: #f0f9ff; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; text-align: left; border-left: 3px solid var(--primary);">
+            <div style="font-weight: 600; margin-bottom: 8px; color: var(--dark);" 
+                 data-am="የመላኪያ ክፍያ" 
+                 data-om="Kaffaltii ergaa">
+                የመላኪያ ክፍያ
             </div>
-
-            <!-- Etalem Hotel -->
-            <div class="restaurant-title">
-                <i class="fas fa-hotel"></i>
-                <span data-am="እታለም ኢንተርናሽናል ሆቴል" data-om="Etalem Interneeshinaal Hoteela">እታለም ኢንተርናሽናል ሆቴል</span>
-            </div>
-            
-            <div class="menu-grid">
-                <!-- Burgers -->
-                <div class="card" data-category="burger" data-restaurant="etalem">
-                    <div style="position: relative;">
-                        <img src="./assets/double-special-burger.webp" alt="Double Special Burger" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f5f5f5\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"14\" fill=\"%23666\" text-anchor=\"middle\" dy=\".3em\">🍔</text></svg>'">
-                        <div style="position: absolute; top: 8px; left: 8px; background: var(--primary); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">700 ብር</div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Double Special Burger</h3>
-                        <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
-                            <button class="add-to-cart-btn" onclick="addToCart('Double Special Burger', 700, 'etalem')" style="background: var(--primary); color: white; border: none; padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--radius-sm); cursor: pointer; font-size: 0.9rem;">
-                                <i class="fas fa-plus"></i>
-                                <span data-am="ጨምር" data-om="Dabaladhu">ጨምር</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Add more Etalem items similarly -->
-                
-            </div>
-
-            <!-- Kameti's Kitchen -->
-            <div class="restaurant-title">
-                <i class="fas fa-utensil-spoon"></i>
-                <span data-am="ካሜቲ ኪችን" data-om="Kameetii Kitchen">ካሜቲ ኪችን</span>
-            </div>
-            
-            <div class="menu-grid">
-                <div class="card" data-category="burger" data-restaurant="kameti">
-                    <div style="position: relative;">
-                        <img src="./assets/kameti-special-burger.webp" alt="Kameti Special Burger" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f5f5f5\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"14\" fill=\"%23666\" text-anchor=\"middle\" dy=\".3em\">🍔</text></svg>'">
-                        <div style="position: absolute; top: 8px; left: 8px; background: var(--primary); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">500 ብር</div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Kameti Special Burger</h3>
-                        <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
-                            <button class="add-to-cart-btn" onclick="addToCart('Kameti Special Burger', 500, 'kameti')" style="background: var(--primary); color: white; border: none; padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--radius-sm); cursor: pointer; font-size: 0.9rem;">
-                                <i class="fas fa-plus"></i>
-                                <span data-am="ጨምር" data-om="Dabaladhu">ጨምር</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Add more Kameti items similarly -->
-                
-            </div>
-
-            <!-- Classic Noodles -->
-            <div class="restaurant-title">
-                <i class="fas fa-star"></i>
-                <span data-am="ክላሲክ ኑድልስ" data-om="Classic Noodles">ክላሲክ ኑድልስ</span>
-            </div>
-            
-            <div class="menu-grid">
-                <div class="card" data-category="noodles" data-restaurant="noodles">
-                    <div style="position: relative;">
-                        <img src="./assets/stir-fry-chicken-noodles.webp" alt="Stir Fry Chicken Noodles" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f5f5f5\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"14\" fill=\"%23666\" text-anchor=\"middle\" dy=\".3em\">🍜</text></svg>'">
-                        <div style="position: absolute; top: 8px; left: 8px; background: var(--primary); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">650 ብር</div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">Stir Fry Chicken Noodles</h3>
-                        <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
-                            <button class="add-to-cart-btn" onclick="addToCart('Stir Fry Chicken Noodles', 650, 'noodles')" style="background: var(--primary); color: white; border: none; padding: var(--spacing-sm) var(--spacing-md); border-radius: var(--radius-sm); cursor: pointer; font-size: 0.9rem;">
-                                <i class="fas fa-plus"></i>
-                                <span data-am="ጨምር" data-om="Dabaladhu">ጨምር</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Add more Noodle items similarly -->
-                
+            <div style="font-size: 0.9rem; color: var(--text-light);">
+                <div data-am="• 1 ኪ.ሜ ውስጥ: 50 ብር" data-om="• Kilomeetira 1 keessatti: 50 Birraa">• 1 ኪ.ሜ ውስጥ: 50 ብር</div>
+                <div data-am="• ከ1 ኪ.ሜ በላይ: 99 ብር" data-om="• Kilomeetira 1 ol: 99 Birraa">• ከ1 ኪ.ሜ በላይ: 99 ብር</div>
+                <div data-am="• የመጀመሪያ ማድረሻ ነፃ!" data-om="• Ergaa jalqabaa bilisaa!">• የመጀመሪያ ማድረሻ ነፃ!</div>
             </div>
         </div>
-
-        <!-- Cart Page -->
-        <div id="cartPage" class="page" style="display: none;">
-            <div class="section-header">
-                <h2 class="section-title" data-am="🛒 የእርስዎ ቅርጫት" data-om="🛒 Gaaddisa Keessan">🛒 የእርስዎ ቅርጫት</h2>
-            </div>
-            
-            <div id="cartItems" style="min-height: 200px;">
-                <!-- Cart items will be populated here -->
-                <div style="text-align: center; padding: var(--spacing-xl); color: var(--text-light);" id="emptyCartMessage" data-am="ቅርጫትዎ ባዶ ነው" data-om="Gaaddisa keessan duwwaa dha">
-                    ቅርጫትዎ ባዶ ነው
-                </div>
-            </div>
-            
-            <div style="background: white; padding: var(--spacing-lg); border-radius: var(--radius); margin-top: var(--spacing-lg); box-shadow: var(--shadow-light);">
-                <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-md);">
-                    <span data-am="የምግብ ዋጋ" data-om="Gatii Nyaataa">የምግብ ዋጋ:</span>
-                    <span id="foodTotal">0 ብር</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-md);">
-                    <span data-am="የመላኪያ ክፍያ" data-om="Kaffaltii Ergaa">የመላኪያ ክፍያ:</span>
-                    <span id="deliveryFee">0 ብር</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: bold; padding-top: var(--spacing-md); border-top: 2px solid var(--border);">
-                    <span data-am="ጠቅላላ" data-om="Walakkaa">ጠቅላላ:</span>
-                    <span id="totalPrice">0 ብር</span>
-                </div>
-            </div>
+        
+        <div style="display: flex; gap: 10px;">
+            <button class="btn" onclick="requestLocation()" 
+                    data-am="አካባቢዬን ያሳውቁ" 
+                    data-om="Bakka kiyya agarsiisi">
+                <i class="fas fa-check"></i>
+                <span>አካባቢዬን ያሳውቁ</span>
+            </button>
+            <button class="btn btn-outline" onclick="denyLocation()" 
+                    data-am="አልፈልግም" 
+                    data-om="Hin barbaadu">
+                <i class="fas fa-times"></i>
+                <span>አልፈልግም</span>
+            </button>
         </div>
-
-        <!-- Track Page -->
-        <div id="trackPage" class="page" style="display: none;">
-            <div class="section-header">
-                <h2 class="section-title" data-am="📦 ትዕዛዝ ፈልግ" data-om="📦 Ordeer Barbaadi">📦 ትዕዛዝ ፈልግ</h2>
-            </div>
-            
-            <div style="background: white; padding: var(--spacing-xl); border-radius: var(--radius); box-shadow: var(--shadow-light);">
-                <div style="margin-bottom: var(--spacing-lg);">
-                    <label style="display: block; margin-bottom: var(--spacing-sm); font-weight: 600;" data-am="የትዕዛዝ መለያ" data-om="ID Ordeeraa">የትዕዛዝ መለያ</label>
-                    <input type="text" id="orderIdInput" placeholder="BD12345678" style="width: 100%; padding: var(--spacing-md); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 1rem;">
-                </div>
-                <button class="btn" onclick="trackOrder()">
-                    <i class="fas fa-search"></i>
-                    <span data-am="ትዕዛዝ ፈልግ" data-om="Ordeer Barbaadi">ትዕዛዝ ፈልግ</span>
-                </button>
-            </div>
-            
-            <div id="trackingResult" style="display: none; margin-top: var(--spacing-xl);">
-                <!-- Tracking result will be shown here -->
-            </div>
-        </div>
-
-        <!-- Contact Page -->
-        <div id="contactPage" class="page" style="display: none;">
-            <div class="section-header">
-                <h2 class="section-title" data-am="📞 አግኙን" data-om="📞 Nu Qunnamuu">📞 አግኙን</h2>
-            </div>
-            
-            <div style="background: white; padding: var(--spacing-xl); border-radius: var(--radius); box-shadow: var(--shadow-light);">
-                <h3 style="margin-top: 0; color: var(--primary);" data-am="በቴሌግራም ያግኙን" data-om="Telegiraamiin Nu Qunnamuu">በቴሌግራም ያግኙን</h3>
-                <p data-am="ለፈጣን ድጋፍ እና ጥያቄዎች በቴሌግራም ይጠይቁን።" data-om="Gargaarsa ariifachiisaa fi gaaffilee Telegiraamiin nu gaafadhaa.">
-                    ለፈጣን ድጋፍ እና ጥያቄዎች በቴሌግራም ይጠይቁን።
-                </p>
-                <button class="btn" onclick="openTelegramForSupport()" style="margin-top: var(--spacing-md); background: linear-gradient(90deg, #0088cc, #00a8ff);">
-                    <i class="fab fa-telegram"></i>
-                    <span data-am="ቴሌግራም ይክፈቱ" data-om="Telegiraamii Bani">ቴሌግራም ይክፈቱ</span>
-                </button>
-            </div>
-            
-            <div style="background: white; padding: var(--spacing-xl); border-radius: var(--radius); box-shadow: var(--shadow-light); margin-top: var(--spacing-lg);">
-                <h3 style="margin-top: 0; color: var(--primary);" data-am="ስልክ" data-om="Bilbila">ስልክ</h3>
-                <p>0962636940</p>
-                <button class="btn" onclick="callSupport()" style="margin-top: var(--spacing-md);">
-                    <i class="fas fa-phone"></i>
-                    <span data-am="ይደውሉ" data-om="Bilbilaa">ይደውሉ</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating Checkout Button -->
-    <div class="floating-footer" id="floatingFooter" style="display: none;">
-        <button class="btn" onclick="openCheckout()" style="flex: 1;">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="cartCount">0</span>
-            <span data-am="ትዕዛዝ አጠናቅ" data-om="Dhaadannoo Xumuri">ትዕዛዝ አጠናቅ</span>
-        </button>
     </div>
 </div>
 
+<!-- Phone Number Modal -->
+<div id="phoneModal" class="phone-modal">
+    <div class="phone-content">
+        <div style="font-size: 40px; margin-bottom: 15px; color: var(--primary);">
+            <i class="fas fa-phone"></i>
+        </div>
+        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: var(--dark);" 
+             id="phoneModalTitle"
+             data-am="ስልክ ቁጥር ያስገቡ" 
+             data-om="Lakkoofsa bilbila galchi">
+            ስልክ ቁጥር ያስገቡ
+        </div>
+        <div style="margin-bottom: 25px; color: var(--text-light); line-height: 1.6;" 
+             id="phoneModalMessage"
+             data-am="የትዕዛዝዎን ሁኔታ ለማሳወቅ የስልክ ቁጥርዎ ያስፈልጋል።" 
+             data-om="Haala ordeeraa keessan himuuuf lakkoofsa bilbila keessan barbaachisaa dha.">
+            የትዕዛዝዎን ሁኔታ ለማሳወቅ የስልክ ቁጥርዎ ያስፈልጋል።
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <input type="tel" id="userPhone" 
+                   placeholder="0912345678" 
+                   style="width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 1rem;"
+                   data-am-placeholder="0912345678"
+                   data-om-placeholder="0912345678">
+            <div style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px; text-align: left;"
+                 data-am="ለምሳሌ: 0912345678"
+                 data-om="Fakkeenya: 0912345678">
+                ለምሳሌ: 0912345678
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 10px;">
+            <button class="btn" onclick="submitPhoneNumber()" 
+                    data-am="አረጋግጥ" 
+                    data-om="Mirkaneessi">
+                <i class="fas fa-check"></i>
+                <span>አረጋግጥ</span>
+            </button>
+            <button class="btn btn-outline" onclick="skipPhoneNumber()" 
+                    data-am="ዝለል" 
+                    data-om="Dabali">
+                <i class="fas fa-forward"></i>
+                <span>ዝለል</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Method Modal -->
+<div id="paymentModal" class="payment-modal">
+    <div class="payment-content">
+        <div style="font-size: 40px; margin-bottom: 15px; color: var(--primary);">
+            <i class="fas fa-credit-card"></i>
+        </div>
+        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: var(--dark);" 
+             data-am="የክፍያ ዘዴ ይምረጡ" 
+             data-om="Kaffaltii Mala Filadhu">
+            የክፍያ ዘዴ ይምረጡ
+        </div>
+        
+        <!-- Delivery Fee Information -->
+        <div id="deliveryFeeDisplay" style="background: #fff8e1; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; border-left: 3px solid #ff9800;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <i class="fas fa-truck" style="color: #ff9800;"></i>
+                <div style="font-weight: 600; color: var(--dark);" 
+                     data-am="የመላኪያ ክፍያ" 
+                     data-om="Kaffaltii ergaa">
+                    የመላኪያ ክፍያ
+                </div>
+            </div>
+            <div id="deliveryFeeDetails" style="font-size: 0.9rem; color: var(--text-light);">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Order Summary -->
+        <div id="orderSummaryModal" style="background: #f0f9ff; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; text-align: left; border-left: 3px solid var(--primary);">
+            <div style="font-weight: 600; margin-bottom: 10px; color: var(--dark);" 
+                 data-am="የትዕዛዝ ማጠቃለያ" 
+                 data-om="Giddu-galeessa Ordeeraa">
+                የትዕዛዝ ማጠቃለያ
+            </div>
+            <div id="orderSummaryDetails" style="font-size: 0.9rem; color: var(--text-light);">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Payment Options -->
+        <div class="payment-option" onclick="selectPaymentMethod('cash')" id="cashPaymentOption">
+            <div class="payment-icon" style="background: #28a74520; color: #28a745;">
+                <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <div class="payment-details">
+                <div class="payment-title" data-am="ክፍያ ከመላኪያ በኋላ" data-om="Kaffaltii Ergaa Booda">ክፍያ ከመላኪያ በኋላ</div>
+                <div class="payment-desc" data-am="ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ" data-om="Nyaata fudhachuu keessan booda qarshii kaffala">ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ</div>
+            </div>
+            <i class="fas fa-check-circle" style="color: #28a745; font-size: 1.2rem; display: none;"></i>
+        </div>
+        
+        <div class="payment-option" onclick="selectPaymentMethod('telegram')" id="telegramPaymentOption">
+            <div class="payment-icon" style="background: #0088cc20; color: #0088cc;">
+                <i class="fab fa-telegram"></i>
+            </div>
+            <div class="payment-details">
+                <div class="payment-title" data-am="በቴሌግራም" data-om="Telegiraamiin">በቴሌግራም</div>
+                <div class="payment-desc" data-am="በቴሌግራም ይክፈሉ" data-om="Telegiraamiin kaffala">በቴሌግራም ይክፈሉ</div>
+            </div>
+            <i class="fas fa-check-circle" style="color: #0088cc; font-size: 1.2rem; display: none;"></i>
+        </div>
+        
+        <div style="margin-top: 25px; display: flex; gap: 10px;">
+            <button class="btn" onclick="confirmPayment()" id="confirmPaymentBtn"
+                    data-am="ክፍያ አረጋግጥ" 
+                    data-om="Kaffaltii Mirkaneessi">
+                <i class="fas fa-check"></i>
+                <span>ክፍያ አረጋግጥ</span>
+            </button>
+            <button class="btn btn-outline" onclick="closePaymentModal()" 
+                    data-am="ተመለስ" 
+                    data-om="Deebi'i">
+                <i class="fas fa-arrow-left"></i>
+                <span>ተመለስ</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- PWA Popup -->
+<div id="pwaPopup" class="pwa-popup">
+    <div class="pwa-icon">📱</div>
+    <div class="pwa-title" data-am="አፕ አርግ" data-om="App sirreessi">አፕ አርግ</div>
+    <div class="pwa-message" data-am="ወደ ስልክዎ መነሻ ማውጫ ይጨምሩ ፈጣን መዳረሻ ያግኙ" data-om="Gaafa keessan irratti app ergaa sirreessaa saami argadhu">ወደ ስልክዎ መነሻ ማውጫ ይጨምሩ ፈጣን መዳረሻ ያግኙ</div>
+    <div class="pwa-buttons">
+        <button class="pwa-btn pwa-yes" onclick="installPWA()" data-am="ጫን" data-om="Sirreessi">ጫን</button>
+        <button class="pwa-btn pwa-no" onclick="dismissPWA()" data-am="አትጫን" data-om="Hin sirreessin">አትጫን</button>
+    </div>
+</div>
+
+<!-- HOME PAGE -->
+<div id="homePage" class="page-content active">
+    <header>
+        <h1 style="margin:0; color:var(--dark); font-size: 1.8rem;" id="site-title" data-am="ቢሾፍቱ ዴሊቨሪ" data-om="Bishooftu Ergaa">ቢሾፍቱ ዴሊቨሪ</h1>
+        <div class="streak-fire" id="fireIcons">
+            <span class="fire" id="s1"></span><span class="fire" id="s2"></span><span class="fire" id="s3"></span>
+        </div>
+        <div id="statusMsg" style="font-size: 0.8rem; color: var(--text-light);" data-am="በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!" data-om="Guyyaa guyyaan dhaadannoo godhaa ibidda tasgabbeessaa!">በየቀኑ በማዘዝ እሳቱን ያቀጣጥሉ!</div>
+    </header>
+
+    <div class="container">
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-box">
+                <div class="stat-number" id="ordersToday">14</div>
+                <div class="stat-label" data-am="ትዕዛዞች" data-om="Ordeeron Har'a">ዛሬ ትዕዛዞች</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">30-45</div>
+                <div class="stat-label" data-am="ደቂቃዎች" data-om="Daqiiqota">ደቂቃዎች</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="activeRiders">3</div>
+                <div class="stat-label" data-am="ነጂዎች" data-om="Ergaa Eegtoota">ነጂዎች</div>
+            </div>
+        </div>
+
+        <!-- Delivery Fee Notice -->
+        <div class="delivery-notice">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                <i class="fas fa-truck" style="color: var(--primary);"></i>
+                <div style="font-weight: 600; color: var(--dark);" 
+                     data-am="የመላኪያ ክፍያ" 
+                     data-om="Kaffaltii ergaa">
+                    የመላኪያ ክፍያ
+                </div>
+            </div>
+            <div style="font-size: 0.9rem; color: var(--text-light);">
+                <div data-am="• 1 ኪ.ሜ ውስጥ: 50 ብር" data-om="• Kilomeetira 1 keessatti: 50 Birraa">• 1 ኪ.ሜ ውስጥ: 50 ብር</div>
+                <div data-am="• ከ1 ኪ.ሜ በላይ: 99 ብር" data-om="• Kilomeetira 1 ol: 99 Birraa">• ከ1 ኪ.ሜ በላይ: 99 ብር</div>
+                <div data-am="• የመጀመሪያ ማድረሻ ነፃ!" data-om="• Ergaa jalqabaa bilisaa!">• የመጀመሪያ ማድረሻ ነፃ!</div>
+            </div>
+        </div>
+
+        <!-- Top 3 Trending Foods -->
+        <div class="top-trending">
+            <div class="trending-header">
+                <i class="fas fa-fire"></i>
+                <h3 data-am="ታዋቂ ምግቦች" data-om="Nyaata Daddarfame">3 ታዋቂ ምግቦች</h3>
+            </div>
+            <div class="trending-items" id="trendingItems">
+                <!-- Trending items will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Restaurant Sections -->
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-utensils"></i>
+                <span data-am="ምግቦች" data-om="Nyaatota">ምግቦች</span>
+            </h2>
+            <span style="font-size: 0.9rem; color: var(--text-light);" data-am="ምረጥ" data-om="Filadhu">ምረጥ</span>
+        </div>
+
+        <div class="res-title">
+            <i class="fas fa-hotel"></i>
+            <span data-am="እታለም ኢንተርናሽናል ሆቴል" data-om="Etalem Interneeshinaal Hoteela">እታለም ኢንተርናሽናል ሆቴል</span>
+        </div>
+        <div class="menu-grid">
+            <!-- Burger Items -->
+            <div class="card"><img src="./assets/double-special-burger.webp?v=13" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700"><div class="card-info"><p class="card-title">Double Special Burger</p></div></div>
+            <div class="card"><img src="./assets/special-burger.webp?v=13" alt="Special Burger"><input type="checkbox" value="Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
+            <div class="card"><img src="./assets/double-beef-burger.webp?v=13" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger" data-price="480"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
+            <div class="card"><img src="./assets/cheese-burger.webp?v=13" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger" data-price="450"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/normal-burger.webp?v=13" alt="Normal Burger"><input type="checkbox" value="Normal Burger" data-price="410"><div class="card-info"><p class="card-title">Normal Burger</p></div></div>
+            <div class="card"><img src="./assets/tuna-burger.webp?v=13" alt="Tuna Burger"><input type="checkbox" value="Tuna Burger" data-price="350"><div class="card-info"><p class="card-title">Tuna Burger</p></div></div>
+            <div class="card"><img src="./assets/vegetable-burger.webp?v=13" alt="Vegetable Burger"><input type="checkbox" value="Vegetable Burger" data-price="250"><div class="card-info"><p class="card-title">Vegetable Burger</p></div></div>
+            <div class="card"><img src="./assets/sandwich-club.webp?v=13" alt="Sandwich Club"><input type="checkbox" value="Sandwich Club" data-price="400"><div class="card-info"><p class="card-title">Sandwich Club</p></div></div>
+            
+            <!-- Chips -->
+            <div class="card"><img src="./assets/chips.webp?v=13" alt="Chips"><input type="checkbox" value="Chips (ቺፕስ)" data-price="250"><div class="card-info"><p class="card-title">Chips (ቺፕስ)</p></div></div>
+            
+            <!-- Pizza Items -->
+            <div class="card"><img src="./assets/etalem-special-pizza.webp?v=13" alt="Etalem Special Pizza"><input type="checkbox" value="Etalem Special Pizza" data-price="650"><div class="card-info"><p class="card-title">Etalem Special Pizza</p></div></div>
+            <div class="card"><img src="./assets/beef-pizza.webp?v=13" alt="Beef Pizza"><input type="checkbox" value="Beef Pizza" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza</p></div></div>
+            <div class="card"><img src="./assets/margaritta-pizza.webp?v=13" alt="Margaritta Pizza"><input type="checkbox" value="Margaritta Pizza" data-price="650"><div class="card-info"><p class="card-title">Margaritta Pizza</p></div></div>
+            <div class="card"><img src="./assets/chicken-pizza.webp?v=13" alt="Chicken Pizza"><input type="checkbox" value="Chicken Pizza" data-price="700"><div class="card-info"><p class="card-title">Chicken Pizza</p></div></div>
+            <div class="card"><img src="./assets/tuna-pizza.webp?v=13" alt="Tuna Pizza"><input type="checkbox" value="Tuna Pizza" data-price="550"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
+            <div class="card"><img src="./assets/vegetable-pizza.webp?v=13" alt="Vegetable Pizza"><input type="checkbox" value="Vegetable Pizza" data-price="350"><div class="card-info"><p class="card-title">Vegetable Pizza</p></div></div>
+            
+            <!-- Juice Items -->
+            <div class="card"><img src="./assets/etalem-special-juice.webp?v=13" alt="Etalem Special Juice"><input type="checkbox" value="Etalem Special Juice" data-price="200"><div class="card-info"><p class="card-title">Etalem Special Juice</p></div></div>
+            <div class="card"><img src="./assets/strawberry-juice.webp?v=13" alt="Strawberry Juice"><input type="checkbox" value="Strawberry Juice" data-price="250"><div class="card-info"><p class="card-title">Strawberry Juice</p></div></div>
+            <div class="card"><img src="./assets/mixed-juice.webp?v=13" alt="Mixed Juice"><input type="checkbox" value="Mixed Juice" data-price="200"><div class="card-info"><p class="card-title">Mixed Juice</p></div></div>
+            
+            <!-- Fish Items -->
+            <div class="card"><img src="./assets/fish-kotelet.webp?v=13" alt="Fish Kotelet"><input type="checkbox" value="Fish Kotelet" data-price="400"><div class="card-info"><p class="card-title">Fish Kotelet</p></div></div>
+            <div class="card"><img src="./assets/grilled-fish.webp?v=13" alt="Grilled Fish"><input type="checkbox" value="Grilled Fish" data-price="400"><div class="card-info"><p class="card-title">Grilled Fish</p></div></div>
+        </div>
+
+        <!-- NEW MENU ITEMS -->
+        <div class="res-title">
+            <i class="fas fa-star"></i>
+            <span data-am="አዲስ ምናሌ" data-om="Menu Haaraa">አዲስ ምናሌ</span>
+        </div>
+        <div class="menu-grid">
+            <!-- New Burger Items -->
+            <div class="card"><img src="./assets/classic-king-burger.webp?v=13" alt="Classic King Burger"><input type="checkbox" value="Classic King Burger (freshly grounded beef, chicken and fish, lettuce, tomato, onion and sliced cheddar cheese, served with French fries and ketchup)" data-price="810"><div class="card-info"><p class="card-title">Classic King Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/classic-chicken-burger.webp?v=13" alt="Classic Chicken Burger"><input type="checkbox" value="Classic Chicken Burger (chicken breast, mayonnaise, lettuce special burger sauce, mustard, egg, black pepper, cheese served with french fries and ketchup)" data-price="705"><div class="card-info"><p class="card-title">Classic Chicken Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/double-cheese-burger.webp?v=13" alt="Double Cheese Burger"><input type="checkbox" value="Double Cheese Burger (Double layer freshly grounded beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="605"><div class="card-info"><p class="card-title">Double Cheese Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/classic-burger.webp?v=13" alt="Classic Burger"><input type="checkbox" value="Classic Burger (freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, iceberg lettuce, caramelized onion and special burger sauce served with french fries and ketchup)" data-price="570"><div class="card-info"><p class="card-title">Classic Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/beef-burger-new.webp?v=13" alt="Beef Burger"><input type="checkbox" value="Beef Burger (Freshly ground beef, vegetable oil, mayonnaise, lettuce, onion, and special burger sauce served with french fries and ketchup)" data-price="475"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/cheese-burger-new.webp?v=13" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/hamburger-new.webp?v=13" alt="Hamburger"><input type="checkbox" value="Hamburger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Hamburger</p></div></div>
+            
+            <div class="card"><img src="./assets/double-beef-burger-new.webp?v=13" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger (double layer freshly ground beef, vegetable oil, mayonnaise, lettuce, onion and special burger sauce served with french fries)" data-price="590"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/mixed-burger.webp?v=13" alt="Mixed Burger"><input type="checkbox" value="Mixed Burger (Freshly ground Beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Mixed Burger</p></div></div>
+            
+            <!-- New Pizza Items -->
+            <div class="card"><img src="./assets/special-classic-pizza.webp?v=13" alt="Special Classic Pizza"><input type="checkbox" value="Special Classic Pizza (minced chicken and beef, boiled egg, garlic, olive oil, fresh tomato sauce)" data-price="795"><div class="card-info"><p class="card-title">Special Classic Pizza</p></div></div>
+            
+            <div class="card"><img src="./assets/chicken-pizza-L.webp?v=13" alt="Chicken Pizza L"><input type="checkbox" value="Chicken Pizza L (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Chicken Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/pepperoni-pizza-L.webp?v=13" alt="Pepperoni Pizza L"><input type="checkbox" value="Pepperoni Pizza L/S (beef, ham, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Pepperoni Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/beef-pizza-L.webp?v=13" alt="Beef Pizza L"><input type="checkbox" value="Beef Pizza L (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/hawaiian-pizza-L.webp?v=13" alt="Hawaiian Pizza L"><input type="checkbox" value="Hawaiian Pizza L (beef sausage, pineapple, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Hawaiian Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/tuna-pizza-L.webp?v=13" alt="Tuna Pizza L"><input type="checkbox" value="Tuna Pizza L (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="600"><div class="card-info"><p class="card-title">Tuna Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/margarita-pizza-L.webp?v=13" alt="Margarita Pizza L"><input type="checkbox" value="Margarita Pizza L (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Margarita Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/vegetable-pizza-L.webp?v=13" alt="Vegetable Pizza L"><input type="checkbox" value="Vegetable Pizza L (sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="600"><div class="card-info"><p class="card-title">Vegetable Pizza L/S</p></div></div>
+            
+            <!-- New Noodle Items -->
+            <div class="card"><img src="./assets/stir-fry-chicken-noodles.webp?v=13" alt="Stir Fry Chicken Noodles"><input type="checkbox" value="Stir Fry Chicken Noodles (Freshly homemade noodles with marinated chicken breast(chopped) with egg/without egg, and different fresh vegetable and spice served with chili and soya sauce)" data-price="650"><div class="card-info"><p class="card-title">Stir Fry Chicken Noodles</p></div></div>
+            
+            <div class="card"><img src="./assets/stir-fry-beef-noodles.webp?v=13" alt="Stir Fry Beef Noodles"><input type="checkbox" value="Stir Fry Beef Noodles (freshly homemade noodles marinated beef(chopped)with egg/without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="630"><div class="card-info"><p class="card-title">Stir Fry Beef Noodles</p></div></div>
+            
+            <div class="card"><img src="./assets/stir-fry-vegetable-noodles.webp?v=13" alt="Stir Fry Vegetable Noodles"><input type="checkbox" value="Stir Fry Vegetable Noodles (Fasting) Freshly homemade noodles different vegetable, with egg/without egg, different fresh vegetable and spice served with chili and soya sauce" data-price="550"><div class="card-info"><p class="card-title">Stir Fry Vegetable Noodles</p></div></div>
+            
+            <div class="card"><img src="./assets/stir-fry-fish-noodles.webp?v=13" alt="Stir Fry Fish Noodles"><input type="checkbox" value="Stir Fry Fish Noodles (freshly homemade noodles with marinated fish with egg or without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="610"><div class="card-info"><p class="card-title">Stir Fry Fish Noodles</p></div></div>
+        </div>
+
+        <!-- Kameti's Kitchen Section -->
+        <div class="res-title">
+            <i class="fas fa-utensil-spoon"></i>
+            <span data-am="ካሜቲ (Kameti's Kitchen)" data-om="Kameetii (Kameti's Kitchen)">ካሜቲ (Kameti's Kitchen)</span>
+        </div>
+        <div class="menu-grid">
+            <!-- Kameti Burger Items -->
+            <div class="card"><img src="./assets/kameti-special-burger.webp?v=13" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
+            <div class="card"><img src="./assets/kameti-cheese-burger.webp?v=13" alt="Kameti Cheese Burger"><input type="checkbox" value="Kameti Cheese Burger" data-price="480"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/kameti-beef-burger.webp?v=13" alt="Kameti Beef Burger"><input type="checkbox" value="Kameti Beef Burger" data-price="450"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
+            
+            <!-- Kameti Pizza Items -->
+            <div class="card"><img src="./assets/kameti-large-pizza.webp?v=13" alt="Kameti Large Pizza"><input type="checkbox" value="Kameti Large Pizza" data-price="700"><div class="card-info"><p class="card-title">Large Pizza</p></div></div>
+            <div class="card"><img src="./assets/kameti-medium-pizza.webp?v=13" alt="Kameti Medium Pizza"><input type="checkbox" value="Kameti Medium Pizza" data-price="600"><div class="card-info"><p class="card-title">Medium Pizza</p></div></div>
+            <div class="card"><img src="./assets/kameti-tuna-pizza.webp?v=13" alt="Kameti Tuna Pizza"><input type="checkbox" value="Kameti Tuna Pizza" data-price="480"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
+            
+            <!-- Kameti Juice -->
+            <div class="card"><img src="./assets/kameti-special-juice.webp?v=13" alt="Kameti Special Juice"><input type="checkbox" value="Kameti Special Juice" data-price="230"><div class="card-info"><p class="card-title">Special Juice</p></div></div>
+            
+            <!-- Kameti Chips (150 ETB) -->
+            <div class="card"><img src="./assets/chips.webp?v=13" alt="Kameti's Chips"><input type="checkbox" value="Kameti's Chips" data-price="150"><div class="card-info"><p class="card-title">Kameti's Chips</p></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="aboutPage" class="page-content">
+    <header>
+        <h1 style="margin:0; color:var(--dark); font-size: 1.8rem;" data-am="ስለ ቢሾፍቱ ዴሊቨሪ" data-om="Waa'ee Bishooftu Ergaa">ስለ ቢሾፍቱ ዴሊቨሪ</h1>
+        <div style="font-size: 0.8rem; color: var(--text-light);" data-am="እንዴት እንደምንሰራ" data-om="Akkam nuti hojjennu">እንዴት እንደምንሰራ</div>
+    </header>
+
+    <div class="container">
+        <div class="info-card">
+            <h2 data-am="እንዴት እንሰራለን" data-om="Akkam Nuti Hojjennu">እንዴት እንሰራለን</h2>
+            
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div>
+                    <h3 style="margin:0;" data-am="ምግብ ይምረጡ" data-om="Nyaata Filadhu">ምግብ ይምረጡ</h3>
+                    <p data-am="ከእታለም ኢንተርናሽናል ሆቴል ወይም ካሜቲ ኪችን የተሻለ ምግብ ይምረጡ" data-om="Etalem Interneeshinaal Hoteela ykn Kameetii Kitchen irraa nyaata filadhu">ከእታለም ኢንተርናሽናል ሆቴል ወይም ካሜቲ ኪችን የተሻለ ምግብ ይምረጡ</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div>
+                    <h3 style="margin:0;" data-am="መረጃ ያስገቡ" data-om="Odeeffannoo Galchi">መረጃ ያስገቡ</h3>
+                    <p data-am="አካባቢዎን ያሳውቁ (ለፈጣን ማድረሻ እና የመላኪያ ክፍያ ለማስላት)" data-om="Bakka keessan agarsiisaa (ariifachiifachuuf fi kaffaltii ergaa hiruuf)">አካባቢዎን ያሳውቁ (ለፈጣን ማድረሻ እና የመላኪያ ክፍያ ለማስላት)</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div>
+                    <h3 style="margin:0;" data-am="በቴሌግራም ይላኩ" data-om="Telegiraamiin Ergi">በቴሌግራም ይላኩ</h3>
+                    <p data-am="ትዕዛዝዎ በቴሌግራም በራስ-ሰር ወደ አስተዳዳሪዎቻችን ይላካል" data-om="Ordeeraa keessan Telegiraamiin ofii ofii hoggantota keenya bira geessa">ትዕዛዝዎ በቴሌግራም በራስ-ሰር ወደ አስተዳዳሪዎቻችን ይላካል</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div>
+                    <h3 style="margin:0;" data-am="ምግብዎን ተቀበሉ" data-om="Nyaata Keessan Fudhadhaa">ምግብዎን ተቀበሉ</h3>
+                    <p data-am="በ30-45 ደቂቃ ውስጥ ምግብዎ ይደርስዎታል። በቴሌግራም የመላኪያ ሁኔታን ይከታተሉ" data-om="Daqiiqaa 30-45 keessatti nyaata keessan siniif ga'a. Telegiraamiin ergaa hordofaa">በ30-45 ደቂቃ ውስጥ ምግብዎ ይደርስዎታል። በቴሌግራም የመላኪያ ሁኔታን ይከታተሉ</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2 data-am="የመላኪያ መረጃ" data-om="Odeeffannoo Ergaa">የመላኪያ መረጃ</h2>
+            <ul style="padding-left:20px;">
+                <li data-am="የመጀመሪያ ማድረሻ ነፃ!" data-om="Ergaa jalqabaa bilisaa!">የመጀመሪያ ማድረሻ ነፃ!</li>
+                <li data-am="በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር" data-om="Kilomeetira 1 keessatti: 50 Birraa">በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር</li>
+                <li data-am="ከ1 ኪ.ሜ በላይ: 99 ብር" data-om="Kilomeetira 1 ol: 99 Birraa">ከ1 ኪ.ሜ በላይ: 99 ብር</li>
+                <li data-am="የማድረሻ ጊዜ: 30-45 ደቂቃ" data-om="Yeroo Ga'umsaa: 30-45 Daqiiqaa">የማድረሻ ጊዜ: 30-45 ደቂቃ</li>
+                <li data-am="አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ" data-om="Bakka Tajaajilaa: Bishooftu Keessaa">አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ</li>
+                <li data-am="የሚሰራው: በየቀኑ 8:00 AM - 10:00 PM" data-om="Yeroo Hojii: Guyyaa guyyaan 8:00 AM - 10:00 PM">የሚሰራው: በየቀኑ 8:00 AM - 10:00 PM</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h2 data-am="የግላዊነት ፖሊሲ" data-om="Iccitii Qulqullinaa">የግላዊነት ፖሊሲ</h2>
+            <p data-am="የእርስዎን መረጃ ለሶስተኛ ወገን አንሰጥም። ትዕዛዝዎ በቴሌግራም ለአስተዳዳሪዎቻችን ብቻ ይላካል።" data-om="Odeeffannoo keessan dursaa sadaffaa hin kenninu. Ordeeraa keessan Telegiraamiin hoggantota keenya qofa geessa.">የእርስዎን መረጃ ለሶስተኛ ወገን አንሰጥም። ትዕዛዝዎ በቴሌግራም ለአስተዳዳሪዎቻችን ብቻ ይላካል።</p>
+            <p data-am="ክፍያዎች በቀጥታ በገንዘብ ይከናወናሉ።" data-om="Kaffaltiin qarshii qofa hojietama.">ክፍያዎች በቀጥታ በገንዘብ ይከናወናሉ።</p>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div id="contactPage" class="page-content">
+    <header>
+        <h1 style="margin:0; color:var(--dark); font-size: 1.8rem;" data-am="አግኙን" data-om="Nu Qunnamuu">አግኙን</h1>
+        <div style="font-size: 0.8rem; color: var(--text-light);" data-am="ከእኛ ጋር ያገናኙ" data-om="Nu Waliin Walqunnamuu">ከእኛ ጋር ያገናኙ</div>
+    </header>
+
+    <div class="container">
+        <div class="contact-card">
+            <h2 data-am="ቀጥታ ማነጋገሪያ" data-om="Walqunnamtii Gaggaarii">ቀጥታ ማነጋገሪያ</h2>
+            <p><strong data-am="ስልክ፡" data-om="Bilbila:">ስልክ፡</strong> 0962636940</p>
+            <p><strong data-am="የስራ ሰዓት፡" data-om="Yeroo Hojii:">የስራ ሰዓት፡</strong> 8:00 AM - 10:00 PM</p>
+            
+            <button class="btn" onclick="callSupport()" style="margin-top:15px;" data-am="ይደውሉ" data-om="Bilbilaa">
+                <i class="fas fa-phone"></i>
+                <span>ይደውሉ</span>
+            </button>
+        </div>
+
+        <div class="contact-card">
+            <h2 data-am="ቴሌግራም" data-om="Telegiraamii">ቴሌግራም</h2>
+            <p data-am="ለፈጣን ድጋፍ እና የትዕዛዝ መከታተል በቴሌግራም ይጠይቁን።" data-om="Gargaarsa ariifachiisaafi hordoffii ordeeraa Telegiraamiin nu gaafadhaa.">ለፈጣን ድጋፍ እና የትዕዛዝ መከታተል በቴሌግራም ይጠይቁን።</p>
+            
+            <button class="telegram-track-btn" onclick="openTelegramForSupport()">
+                <i class="fab fa-telegram"></i>
+                <span data-am="በቴሌግራም ይጠይቁን" data-om="Telegiraamiin Nu Gaafadhaa">በቴሌግራም ይጠይቁን</span>
+            </button>
+            
+            <p style="font-size:0.85rem; color:var(--text-light); margin-top:10px;" data-am="አስተዳዳሪዎች በቴሌግራም በቀጥታ ይመልሳሉ" data-om="Hoggantotni Telegiraamii irratti gaaffii deebisu">አስተዳዳሪዎች በቴሌግራም በቀጥታ ይመልሳሉ</p>
+        </div>
+
+        <div class="contact-card">
+            <h2 data-am="አድራሻ" data-om="Teessoo">አድራሻ</h2>
+            <p data-am="ቢሾፍቱ፣ ኢትዮጵያ" data-om="Bishooftu, Itoophiyaa">ቢሾፍቱ፣ ኢትዮጵያ</p>
+            <p><strong data-am="አገልግሎት አካባቢ፡" data-om="Bakka Tajaajilaa:">አገልግሎት አካባቢ፡</strong> <span data-am="ቢሾፍቱ ውስጥ ብቻ" data-om="Bishooftu Keessaa Qofa">ቢሾፍቱ ውስጥ ብቻ</span></p>
+        </div>
+
+        <div class="info-card">
+            <h2 data-am="ተደጋግሞ የሚጠየቁ ጥያቄዎች" data-om="Gaaffilee Kan Irra Deddeebi'an">ተደጋግሞ የሚጠየቁ ጥያቄዎች</h2>
+            
+            <div style="margin-bottom:15px;">
+                <h4 style="margin:0;" data-am="Q: ክፍያውን እንዴት እንደሚፈጽሙ?" data-om="Q: Kaffaltiin akkamitti dabarfamuu danda'a?">Q: ክፍያውን እንዴት እንደሚፈጽሙ?</h4>
+                <p data-am="A: ክፍያውን በገንዘብ ከመላኪያ በኋላ መፈጸም ይችላሉ። ዝርዝር መረጃ በቴሌግራም ይሰጥዎታል።" data-om="A: Kaffaltiin qarshii ergaa booda danda'ama. Odeeffannoo guutuu Telegiraamiin kenname.">A: ክፍያውን በገንዘብ ከመላኪያ በኋላ መፈጸም ይችላሉ። ዝርዝር መረጃ በቴሌግራም ይሰጥዎታል።</p>
+            </div>
+            
+            <div style="margin-bottom:15px;">
+                <h4 style="margin:0;" data-am="Q: ምግቡ ምን ያህል ጊዜ ይፈጅብታል?" data-om="Q: Nyaataan yeroon meeqaatti ga'a?">Q: ምግቡ ምን ያህል ጊዜ ይፈጅብታል?</h4>
+                <p data-am="A: በ30-45 ደቂቃ ውስጥ። በቴሌግራም መላኪያውን ማየት ይችላሉ።" data-om="A: Daqiiqaa 30-45 keessatti. Telegiraamiin ergaa arguudha.">A: በ30-45 ደቂቃ ውስጥ። በቴሌግራም መላኪያውን ማየት ይችላሉ።</p>
+            </div>
+            
+            <div>
+                <h4 style="margin:0;" data-am="Q: ትዕዛዜን እንዴት እከታተላለሁ?" data-om="Q: Ordeeraa kiyya akkamitti hordoftu?">Q: ትዕዛዜን እንዴት እከታተላለሁ?</h4>
+                <p data-am="A: በዚህ አፕ ውስጥ ትዕዛዝ ፈልግ ይባላል ወይም በቴሌግራም ከአስተዳዳሪዎቻችን ጋር ተገናኝ።" data-om="A: App kana keessatti 'Ordeer Barbaadi' cuqi ykn Telegiraamiin hoggantota keenya waliin walqunnami.">A: በዚህ አፕ ውስጥ ትዕዛዝ ፈልግ ይባላል ወይም በቴሌግራም ከአስተዳዳሪዎቻችን ጋር ተገናኝ።</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="floating-footer">
+    <button class="btn" onclick="openCheckout()" id="checkout-btn" data-am="ትዕዛዝ አጠናቅ" data-om="Dhaadannoo Xumuri">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
+        <span>ትዕዛዝ አጠናቅ</span>
+    </button>
+</div>
+
 <script>
-    // Configuration
-    const config = {
-        botUsername: "Bishoftu_Delivery_bot",
-        telegramAdmin: "Bishoftu_Delivery_bot",
-        
-        // Restaurant coordinates
-        restaurants: {
-            etalem: { lat: 8.7592026, lng: 38.9458399 },
-            kameti: { lat: 8.7596178, lng: 38.9450543 },
-            noodles: { lat: 8.7512666, lng: 38.9619499 }
-        },
-        
-        // Delivery fees
-        deliveryFees: {
-            within1km: 50,
-            beyond1km: 99,
-            firstOrderFree: true
-        },
-        
-        // Default user location (Bishoftu center)
-        defaultLocation: { lat: 8.756, lng: 38.952 }
+    // Restaurant coordinates (updated with correct values)
+    const RESTAURANT_COORDINATES = {
+        'Etalem Hotel': { lat: 8.7592026, lng: 38.9458399 },
+        'Kameti Kitchen': { lat: 8.7596178, lng: 38.9450543 },
+        'Classic Noodles': { lat: 8.7512666, lng: 38.9619499 }
     };
+    
+    // Default to Etalem Hotel for distance calculation
+    const DEFAULT_RESTAURANT = 'Etalem Hotel';
+    
+    const BOT_USERNAME = "Bishoftu_Delivery_bot";
+    const TELEGRAM_ADMIN_USERNAME = "Bishoftu_Delivery_bot";
+    let orderData = {};
+    let userLat = null;
+    let userLng = null;
+    let userPhone = '';
+    let deferredPrompt = null;
+    const FIRST_DELIVERY_FREE = true;
+    let isFirstOrder = localStorage.getItem('firstOrderMade') !== 'true';
+    const SITE_URL = "https://mikemoke4444-gif.github.io/delivery_app/";
+    let currentLang = localStorage.getItem('preferredLang') || 'am';
+    let currentPage = 'home';
+    let selectedPaymentMethod = 'cash';
+    let deliveryFee = 0;
+    let calculatedDistance = 0;
+    let isLocationRequested = false;
+    
+    // Top 3 trending foods with order counts
+    const trendingFoods = [
+        { name: "Double Special Burger", orders: 42, image: "./assets/double-special-burger.webp" },
+        { name: "Special Classic Pizza", orders: 38, image: "./assets/special-classic-pizza.webp" },
+        { name: "Classic King Burger", orders: 35, image: "./assets/classic-king-burger.webp" }
+    ];
+    
+    // Pull to refresh variables
+    let startY = 0;
+    let currentY = 0;
+    let isRefreshing = false;
+    const refreshContainer = document.getElementById('refreshContainer');
+    const refreshSpinner = document.getElementById('refreshSpinner');
+    const refreshText = document.getElementById('refreshText');
 
-    // App State
-    const state = {
-        currentLanguage: localStorage.getItem('preferredLang') || 'am',
-        userLocation: null,
-        hasLocationPermission: false,
-        selectedPayment: null,
-        cart: JSON.parse(localStorage.getItem('cart')) || [],
-        isFirstOrder: localStorage.getItem('firstOrderMade') !== 'true',
-        currentPage: 'menu'
-    };
+    // Elements
+    const offlineIndicator = document.getElementById('offlineIndicator');
+    const toast = document.getElementById('toast');
 
-    // Initialize app
-    function initApp() {
-        // Set initial language
-        switchLanguage(state.currentLanguage);
+    // Initialize trending foods
+    function initTrendingFoods() {
+        const trendingContainer = document.getElementById('trendingItems');
+        trendingContainer.innerHTML = '';
         
-        // Check if location was previously granted
-        const savedLocation = localStorage.getItem('userLocation');
-        if (savedLocation) {
-            state.userLocation = JSON.parse(savedLocation);
-            state.hasLocationPermission = true;
-            showAppContent();
+        trendingFoods.forEach((food, index) => {
+            const trendingItem = document.createElement('div');
+            trendingItem.className = 'trending-item';
+            trendingItem.innerHTML = `
+                <div class="trending-rank">${index + 1}</div>
+                <div class="trending-info">
+                    <div class="trending-name">${food.name}</div>
+                    <div class="trending-orders">${food.orders} ${currentLang === 'am' ? 'ትዕዛዞች' : 'Ordeeron'}</div>
+                </div>
+                <button class="btn" style="padding: 8px 12px; font-size: 0.8rem;" onclick="addTrendingItem('${food.name}')">
+                    <i class="fas fa-plus"></i>
+                    <span>${currentLang === 'am' ? 'ጨምር' : 'Dabaladhu'}</span>
+                </button>
+            `;
+            trendingContainer.appendChild(trendingItem);
+        });
+        
+        // Add trending badges to menu items
+        document.querySelectorAll('.card').forEach(card => {
+            const title = card.querySelector('.card-title').textContent;
+            const isTrending = trendingFoods.some(food => food.name === title);
+            if (isTrending) {
+                const badge = document.createElement('div');
+                badge.className = 'trending-badge';
+                badge.innerHTML = `<i class="fas fa-fire"></i> ${currentLang === 'am' ? 'ታዋቂ' : 'Kan Daddarfame'}`;
+                card.appendChild(badge);
+            }
+        });
+    }
+    
+    // Add trending item to cart
+    function addTrendingItem(itemName) {
+        // Find the checkbox for this item
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (let checkbox of checkboxes) {
+            if (checkbox.value.includes(itemName)) {
+                checkbox.checked = true;
+                
+                // Animate the card
+                const card = checkbox.closest('.card');
+                card.classList.add('item-added');
+                setTimeout(() => {
+                    card.classList.remove('item-added');
+                }, 300);
+                
+                updateCartCount();
+                showToast(`${currentLang === 'am' ? 'ተጨመረ:' : 'Dabalame:'} ${itemName}`, 2000);
+                return;
+            }
         }
         
-        // Load cart
-        updateCartUI();
+        // If exact match not found, show message
+        showToast(currentLang === 'am' ? 'አትሙ በምናሌው ውስጥ አልተገኘም' : 'Nyaanni menu keessatti hin argamne', 3000);
+    }
+
+    // Language switching function
+    function switchLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('preferredLang', lang);
         
-        // Setup event listeners
-        setupEventListeners();
+        // Update HTML lang attribute and data-lang
+        document.documentElement.lang = lang;
+        document.documentElement.setAttribute('data-lang', lang);
+        
+        // Update button states
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent === (lang === 'am' ? 'አማርኛ' : 'Afaan Oromoo')) {
+                btn.classList.add('active');
+            }
+        });
+        
+        // Update all translatable elements
+        updateTextContent();
+        
+        // Reinitialize trending foods with new language
+        initTrendingFoods();
+        
+        // Update cart count
+        updateCartCount();
+        
+        // Show confirmation
+        showToast(lang === 'am' ? 'ቋንቋ ተቀይሯል!' : 'Afaan jijjiirame!', 2000);
+    }
+
+    // Update text content based on language
+    function updateTextContent() {
+        // Update elements with data attributes
+        document.querySelectorAll('[data-am]').forEach(el => {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                const placeholder = currentLang === 'am' ? 
+                    el.getAttribute('data-am-placeholder') : 
+                    el.getAttribute('data-om-placeholder');
+                if (placeholder) el.placeholder = placeholder;
+            } else {
+                const text = currentLang === 'am' ? 
+                    el.getAttribute('data-am') : 
+                    el.getAttribute('data-om');
+                if (text) el.innerHTML = text;
+            }
+        });
+        
+        // Update page title
+        const title = currentLang === 'am' ? 
+            'ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery' : 
+            'Bishooftu Ergaa | Bishoftu Delivery';
+        document.title = title;
+        document.getElementById('page-title').textContent = title;
+        
+        // Update refresh text
+        if (refreshText) {
+            refreshText.textContent = currentLang === 'am' ? 
+                'ይቀናል... ለማደስት ከላይ ይሳቡ' : 
+                'Deebi\'aa... Harka keessan deebisuu fedhaa';
+        }
+        
+        // Update fire icons
+        document.querySelectorAll('.fire').forEach((fire, index) => {
+            fire.textContent = index === 0 ? '🔥' : index === 1 ? '🔥' : '🔥';
+        });
+    }
+
+    // Select payment method in modal
+    function selectPaymentMethod(method) {
+        selectedPaymentMethod = method;
+        
+        // Update UI
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.classList.remove('selected');
+            option.querySelector('.fa-check-circle').style.display = 'none';
+        });
+        
+        const selectedOption = document.getElementById(method + 'PaymentOption');
+        selectedOption.classList.add('selected');
+        selectedOption.querySelector('.fa-check-circle').style.display = 'block';
+    }
+
+    // Show page function
+    function showPage(page) {
+        currentPage = page;
+        
+        // Hide all pages
+        document.querySelectorAll('.page-content').forEach(p => {
+            p.classList.remove('active');
+        });
+        
+        // Show selected page
+        document.getElementById(page + 'Page').classList.add('active');
+        
+        // Update navigation buttons
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`.nav-btn[onclick="showPage('${page}')"]`).classList.add('active');
+        
+        // Update footer button
+        const checkoutBtn = document.getElementById('checkout-btn');
+        if (page === 'home') {
+            checkoutBtn.style.display = 'flex';
+            checkoutBtn.innerHTML = `
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cartCount">${getCartCount()}</span>
+                <span>${currentLang === 'am' ? 'ትዕዛዝ አጠናቅ' : 'Dhaadannoo Xumuri'}</span>
+            `;
+            checkoutBtn.onclick = openCheckout;
+        } else {
+            checkoutBtn.style.display = 'none';
+        }
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+
+    // Update cart count
+    function updateCartCount() {
+        const count = getCartCount();
+        document.getElementById('cartCount').textContent = count;
+    }
+    
+    function getCartCount() {
+        return document.querySelectorAll('input[type="checkbox"]:checked').length;
+    }
+
+    // Open Telegram for support
+    function openTelegramForSupport() {
+        const message = currentLang === 'am' ?
+            'ሰላም! ከቢሾፍቱ ዴሊቨሪ እገዛ እፈልጋለሁ።' :
+            'Akkam! Bishooftu Ergaa irraa gargaarsa barbaada.';
+        
+        const encodedMessage = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/${TELEGRAM_ADMIN_USERNAME}?text=${encodedMessage}`;
+        window.open(telegramUrl, '_blank');
+    }
+
+    // Call support
+    function callSupport() {
+        window.location.href = 'tel:+251962636940';
+    }
+
+    // Contact support
+    function contactSupport() {
+        openTelegramForSupport();
+    }
+
+    // Initialize app
+    window.onload = () => {
+        // Set initial language
+        switchLanguage(currentLang);
+        updateStreakUI();
+        initPWA();
+        initPullToRefresh();
+        initTrendingFoods();
+        
+        // Update cart count
+        updateCartCount();
+        
+        // Add event listeners to checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', updateCartCount);
+        });
+        
+        // Update stats with random numbers (for demo)
+        setInterval(() => {
+            const ordersToday = document.getElementById('ordersToday');
+            const activeRiders = document.getElementById('activeRiders');
+            if (ordersToday) {
+                const current = parseInt(ordersToday.textContent);
+                ordersToday.textContent = current + Math.floor(Math.random() * 3);
+            }
+            if (activeRiders) {
+                activeRiders.textContent = 2 + Math.floor(Math.random() * 2);
+            }
+        }, 10000);
+        
+        // 1. Show PWA popup after 10 seconds
+        setTimeout(() => {
+            showPWApopup();
+        }, 10000);
+        
+        // Check online/offline status
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        updateOnlineStatus();
+        
+        // Check for updates
+        checkForUpdates();
+        
+        // Try to get saved location
+        const savedLocation = sessionStorage.getItem('userLocation');
+        if (savedLocation) {
+            const loc = JSON.parse(savedLocation);
+            userLat = loc.lat;
+            userLng = loc.lng;
+            isLocationRequested = true;
+        }
+        
+        // Set default payment method
+        selectPaymentMethod('cash');
+    };
+
+    // Initialize Pull to Refresh
+    function initPullToRefresh() {
+        document.addEventListener('touchstart', handleTouchStart, { passive: true });
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('touchend', handleTouchEnd);
+    }
+
+    function handleTouchStart(e) {
+        if (window.scrollY === 0 && !isRefreshing) {
+            startY = e.touches[0].clientY;
+            currentY = startY;
+        }
+    }
+
+    function handleTouchMove(e) {
+        if (!startY || isRefreshing) return;
+        
+        currentY = e.touches[0].clientY;
+        const deltaY = currentY - startY;
+        
+        if (window.scrollY === 0 && deltaY > 0) {
+            e.preventDefault();
+            const pullProgress = Math.min(deltaY / 100, 1);
+            refreshContainer.style.top = `${Math.min(deltaY - 60, 0)}px`;
+            
+            // Update text based on pull distance
+            if (deltaY > 80) {
+                refreshText.textContent = currentLang === 'am' ? 
+                    'ይልቀቅ... ለማደስት አርፉ' : 
+                    'Dhiisii... Deebisuu fedhaa';
+            } else {
+                refreshText.textContent = currentLang === 'am' ? 
+                    'ይቀናል... ለማደስት ከላይ ይሳቡ' : 
+                    'Deebi\'aa... Harka keessan deebisuu fedhaa';
+            }
+        }
+    }
+
+    function handleTouchEnd() {
+        if (!startY || isRefreshing) return;
+        
+        const deltaY = currentY - startY;
+        
+        if (deltaY > 80) {
+            // Trigger refresh
+            startRefresh();
+        } else {
+            // Reset
+            resetRefresh();
+        }
+        
+        startY = 0;
+        currentY = 0;
+    }
+
+    function startRefresh() {
+        isRefreshing = true;
+        refreshContainer.style.top = '0';
+        refreshSpinner.style.display = 'block';
+        refreshText.textContent = currentLang === 'am' ? 
+            'በማደስ ላይ...' : 
+            'Kan deebisan...';
+        
+        // Simulate refresh action
+        setTimeout(() => {
+            completeRefresh();
+        }, 1500);
+    }
+
+    function completeRefresh() {
+        isRefreshing = false;
+        
+        // Perform actual refresh actions
+        updateStreakUI();
+        checkForUpdates();
+        
+        // Update trending foods order counts (simulated)
+        trendingFoods.forEach(food => {
+            food.orders += Math.floor(Math.random() * 5);
+        });
+        initTrendingFoods();
+        
+        // Show success message
+        refreshText.textContent = currentLang === 'am' ? 
+            'ተደስቷል!' : 
+            'Milkaa\'e!';
+        refreshSpinner.style.display = 'none';
+        
+        // Show toast
+        showToast(currentLang === 'am' ? 
+            'አፕዎ ተደስቷል!' : 
+            'App keessan deebifame!', 2000);
+        
+        // Hide refresh container after delay
+        setTimeout(() => {
+            resetRefresh();
+        }, 1000);
+    }
+
+    function resetRefresh() {
+        refreshContainer.style.top = '-60px';
+        refreshSpinner.style.display = 'none';
+        refreshText.textContent = currentLang === 'am' ? 
+            'ይቀናል... ለማደስት ከላይ ይሳቡ' : 
+            'Deebi\'aa... Harka keessan deebisuu fedhaa';
+        isRefreshing = false;
+    }
+
+    // Check for updates
+    function checkForUpdates() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.ready.then(reg => {
+                reg.update();
+            });
+        }
+    }
+
+    // Show location modal (called before sending to Telegram)
+    function showLocationModal() {
+        document.getElementById('locationModal').style.display = 'block';
     }
 
     // Request location permission
-    function requestLocationPermission() {
-        const btn = document.getElementById('allowLocationBtn');
-        const originalText = btn.innerHTML;
-        
-        btn.innerHTML = '<div class="loading-spinner"></div>';
-        btn.disabled = true;
+    function requestLocation() {
+        document.getElementById('locationModal').style.display = 'none';
         
         if (!navigator.geolocation) {
-            showToast(state.currentLanguage === 'am' ? 
-                '❌ አካባቢ አገልግሎት የለም' : 
-                '❌ Tajaajila bakkaa hin jiru');
-            btn.innerHTML = originalText;
-            btn.disabled = false;
+            showToast(currentLang === 'am' ? 'አካባቢ አገልግሎት የለም' : 'Tajaajila bakkaa hin jiru', 3000);
             return;
         }
+        
+        showToast(currentLang === 'am' ? 'አካባቢዎ እየተመዘገበ...' : 'Bakka keessan kan barreeffamu...', 2000);
         
         const options = {
             enableHighAccuracy: true,
@@ -921,48 +1996,47 @@
         
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                state.userLocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                state.hasLocationPermission = true;
+                userLat = position.coords.latitude;
+                userLng = position.coords.longitude;
+                showToast(currentLang === 'am' ? 'አካባቢዎ ተመዝግቧል!' : 'Bakka keessan barreeffame!', 3000);
                 
-                // Save location
-                localStorage.setItem('userLocation', JSON.stringify(state.userLocation));
+                sessionStorage.setItem('userLocation', JSON.stringify({
+                    lat: userLat,
+                    lng: userLng
+                }));
                 
-                // Show payment modal
+                isLocationRequested = true;
+                
+                // Calculate distance and delivery fee
+                calculateDeliveryFee();
+                
+                // Show payment modal after getting location
                 showPaymentModal();
-                
-                showToast(state.currentLanguage === 'am' ? 
-                    '✅ አካባቢዎ ተመዝግቧል!' : 
-                    '✅ Bakka keessan barreeffame!');
             },
             (error) => {
-                let errorMsg = state.currentLanguage === 'am' ? 
-                    '❌ አካባቢ ማወቅ አልተቻለም' : 
-                    '❌ Bakka beekuu hindandeenye';
+                let errorMsg = currentLang === 'am' ? 'አካባቢ ማወቅ አልተቻለም' : 'Bakka beekuu hindandeenye';
                 
                 switch(error.code) {
                     case error.PERMISSION_DENIED:
-                        errorMsg = state.currentLanguage === 'am' ? 
-                            '❌ አካባቢ ፈቃድ አልተሰጠም' : 
-                            '❌ Hayyama bakkaa hin kennine';
+                        errorMsg = currentLang === 'am' ? 'አካባቢ ፈቃድ አልተሰጠም' : 'Hayyama bakkaa hin kennine';
                         break;
                     case error.POSITION_UNAVAILABLE:
-                        errorMsg = state.currentLanguage === 'am' ? 
-                            '❌ አካባቢ መረጃ የለም' : 
-                            '❌ Odeeffannoo bakkaa hin jiru';
+                        errorMsg = currentLang === 'am' ? 'አካባቢ መረጃ የለም' : 'Odeeffannoo bakkaa hin jiru';
                         break;
                     case error.TIMEOUT:
-                        errorMsg = state.currentLanguage === 'am' ? 
-                            '❌ አካባቢ መጠየቅ ጊዜው አልፏል' : 
-                            '❌ Yeroo gaafannoo bakkaa darbee';
+                        errorMsg = currentLang === 'am' ? 'አካባቢ መጠየቅ ጊዜው አልፏል' : 'Yeroo gaafannoo bakkaa darbee';
                         break;
                 }
                 
-                showToast(errorMsg);
-                btn.innerHTML = originalText;
-                btn.disabled = false;
+                showToast(errorMsg, 4000);
+                
+                // Even if location fails, show payment modal
+                setTimeout(() => {
+                    // Set default delivery fee
+                    deliveryFee = 99;
+                    calculatedDistance = 0;
+                    showPaymentModal();
+                }, 1000);
             },
             options
         );
@@ -970,276 +2044,49 @@
 
     // Deny location
     function denyLocation() {
-        showToast(state.currentLanguage === 'am' ? 
-            '👌 እሺ፣ ይቅርታ። አካባቢ ሳይጠየቅ መጠቀም አይችሉም።' : 
-            '👌 Dhiifama, ilaalcha bakkaa hin gaafatamne fayyadamuu hin dandeessu.');
-        // Keep showing location modal until granted
-    }
-
-    // Show payment method modal
-    function showPaymentModal() {
         document.getElementById('locationModal').style.display = 'none';
-        document.getElementById('paymentModal').style.display = 'flex';
+        showToast(currentLang === 'am' ? 'አልፈልግም' : 'Hin barbaadu', 2000);
+        isLocationRequested = false;
         
-        // Reset payment selection
-        state.selectedPayment = null;
-        document.getElementById('confirmPaymentBtn').disabled = true;
+        // Set default delivery fee
+        deliveryFee = 99;
+        calculatedDistance = 0;
         
-        // Reset checkmarks
-        document.querySelectorAll('.fa-check-circle').forEach(icon => {
-            icon.style.display = 'none';
-        });
+        // Show payment modal
+        showPaymentModal();
     }
 
-    // Select payment method
-    function selectPayment(method) {
-        state.selectedPayment = method;
-        
-        // Update UI
-        document.querySelectorAll('.payment-option').forEach(option => {
-            option.classList.remove('selected');
-            option.querySelector('.fa-check-circle').style.display = 'none';
-        });
-        
-        const selectedOption = document.getElementById(method + 'Option');
-        selectedOption.classList.add('selected');
-        selectedOption.querySelector('.fa-check-circle').style.display = 'block';
-        
-        document.getElementById('confirmPaymentBtn').disabled = false;
-    }
-
-    // Confirm payment method and show app
-    function confirmPayment() {
-        if (!state.selectedPayment) {
-            showToast(state.currentLanguage === 'am' ? 
-                '⚠️ እባክዎ የክፍያ ዘዴ ይምረጡ' : 
-                '⚠️ Mala kaffaltii filadhu');
-            return;
-        }
-        
-        document.getElementById('paymentModal').style.display = 'none';
-        showAppContent();
-        
-        // Save payment preference
-        localStorage.setItem('selectedPayment', state.selectedPayment);
-    }
-
-    // Show main app content
-    function showAppContent() {
-        document.getElementById('appContent').style.display = 'block';
-        updateCartUI();
-    }
-
-    // Switch language
-    function switchLanguage(lang) {
-        state.currentLanguage = lang;
-        localStorage.setItem('preferredLang', lang);
-        
-        // Update HTML attributes
-        document.documentElement.lang = lang;
-        document.documentElement.setAttribute('data-lang', lang);
-        
-        // Update all translatable elements
-        updateTextContent();
-        
-        // Update cart UI
-        updateCartUI();
-        
-        showToast(lang === 'am' ? 
-            '✅ ቋንቋ ተቀይሯል!' : 
-            '✅ Afaan jijjiirame!');
-    }
-
-    // Update text content based on language
-    function updateTextContent() {
-        document.querySelectorAll('[data-am]').forEach(el => {
-            const text = state.currentLanguage === 'am' ? 
-                el.getAttribute('data-am') : 
-                el.getAttribute('data-om');
-            if (text) el.textContent = text;
-        });
-        
-        // Update page title
-        const title = state.currentLanguage === 'am' ? 
-            'ቢሾፍቱ ዴሊቨሪ' : 
-            'Bishooftu Ergaa';
-        document.title = title;
-        document.getElementById('page-title').textContent = title;
-    }
-
-    // Show page
-    function showPage(page) {
-        state.currentPage = page;
-        
-        // Hide all pages
-        document.querySelectorAll('.page').forEach(p => {
-            p.style.display = 'none';
-        });
-        
-        // Show selected page
-        document.getElementById(page + 'Page').style.display = 'block';
-        
-        // Update navigation buttons
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        // Find and activate the correct button
-        const activeBtn = Array.from(document.querySelectorAll('.nav-btn')).find(btn => 
-            btn.getAttribute('onclick')?.includes(page)
-        );
-        if (activeBtn) activeBtn.classList.add('active');
-        
-        // Show/hide floating footer
-        document.getElementById('floatingFooter').style.display = 
-            (page === 'menu' || page === 'cart') && state.cart.length > 0 ? 'flex' : 'none';
-        
-        // Scroll to top
-        window.scrollTo(0, 0);
-    }
-
-    // Add item to cart
-    function addToCart(itemName, price, restaurant) {
-        // Check if item already in cart
-        const existingItem = state.cart.find(item => item.name === itemName);
-        
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            state.cart.push({
-                name: itemName,
-                price: price,
-                restaurant: restaurant,
-                quantity: 1
-            });
-        }
-        
-        // Save to localStorage
-        localStorage.setItem('cart', JSON.stringify(state.cart));
-        
-        // Update UI
-        updateCartUI();
-        
-        // Show feedback
-        const card = event.target.closest('.card');
-        card.style.animation = 'none';
-        setTimeout(() => {
-            card.style.animation = 'itemAdded 0.3s ease';
-        }, 10);
-        
-        showToast(state.currentLanguage === 'am' ? 
-            `✅ ${itemName} ተጨመረ` : 
-            `✅ ${itemName} dabalame`);
-    }
-
-    // Update cart UI
-    function updateCartUI() {
-        const cartCount = state.cart.reduce((sum, item) => sum + item.quantity, 0);
-        document.getElementById('cartCount').textContent = cartCount;
-        
-        // Show/hide floating footer
-        document.getElementById('floatingFooter').style.display = 
-            (state.currentPage === 'menu' || state.currentPage === 'cart') && cartCount > 0 ? 'flex' : 'none';
-        
-        // Update cart page
-        updateCartPage();
-    }
-
-    // Update cart page
-    function updateCartPage() {
-        const cartItemsContainer = document.getElementById('cartItems');
-        const emptyCartMessage = document.getElementById('emptyCartMessage');
-        
-        if (state.cart.length === 0) {
-            cartItemsContainer.innerHTML = '';
-            cartItemsContainer.appendChild(emptyCartMessage);
-            document.getElementById('foodTotal').textContent = '0 ብር';
-            document.getElementById('deliveryFee').textContent = '0 ብር';
-            document.getElementById('totalPrice').textContent = '0 ብር';
-            return;
-        }
-        
-        // Calculate totals
-        const foodTotal = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const deliveryFee = calculateDeliveryFee();
-        const totalPrice = foodTotal + deliveryFee;
-        
-        // Update totals display
-        document.getElementById('foodTotal').textContent = `${foodTotal} ብር`;
-        document.getElementById('deliveryFee').textContent = `${deliveryFee} ብር`;
-        document.getElementById('totalPrice').textContent = `${totalPrice} ብር`;
-        
-        // Render cart items
-        cartItemsContainer.innerHTML = '';
-        
-        state.cart.forEach((item, index) => {
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'cart-item';
-            itemDiv.style.cssText = `
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: var(--spacing-md);
-                background: white;
-                border-radius: var(--radius);
-                margin-bottom: var(--spacing-sm);
-                box-shadow: var(--shadow-light);
-            `;
-            
-            itemDiv.innerHTML = `
-                <div>
-                    <div style="font-weight: 600; margin-bottom: 4px;">${item.name}</div>
-                    <div style="font-size: 0.9rem; color: var(--text-light);">${item.price} ብር x ${item.quantity}</div>
-                </div>
-                <div style="display: flex; align-items: center; gap: var(--spacing-md);">
-                    <div style="font-weight: bold;">${item.price * item.quantity} ብር</div>
-                    <button onclick="removeFromCart(${index})" style="background: none; border: none; color: var(--primary); cursor: pointer; font-size: 1.2rem;">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            `;
-            
-            cartItemsContainer.appendChild(itemDiv);
-        });
-    }
-
-    // Remove item from cart
-    function removeFromCart(index) {
-        state.cart.splice(index, 1);
-        localStorage.setItem('cart', JSON.stringify(state.cart));
-        updateCartUI();
-        
-        showToast(state.currentLanguage === 'am' ? 
-            '🗑️ ንጥል ተሰርዟል' : 
-            '🗑️ Qooda dhiifame');
-    }
-
-    // Calculate delivery fee
+    // Calculate distance and delivery fee
     function calculateDeliveryFee() {
-        if (!state.userLocation) return 0;
-        
-        // For now, use a simple calculation based on Etalem (main restaurant)
-        // In a real app, you'd calculate based on the farthest restaurant in the order
-        const distance = calculateDistance(
-            state.userLocation.lat,
-            state.userLocation.lng,
-            config.restaurants.etalem.lat,
-            config.restaurants.etalem.lng
-        );
-        
-        let fee = distance <= 1 ? config.deliveryFees.within1km : config.deliveryFees.beyond1km;
-        
-        // First order free
-        if (state.isFirstOrder && config.deliveryFees.firstOrderFree) {
-            fee = 0;
+        if (!userLat || !userLng) {
+            deliveryFee = 99;
+            calculatedDistance = 0;
+            return;
         }
         
-        return fee;
+        const restaurant = RESTAURANT_COORDINATES[DEFAULT_RESTAURANT];
+        if (!restaurant) {
+            deliveryFee = 99;
+            calculatedDistance = 0;
+            return;
+        }
+        
+        // Calculate distance in kilometers
+        calculatedDistance = calculateDistance(userLat, userLng, restaurant.lat, restaurant.lng);
+        
+        // Calculate delivery fee based on distance
+        if (isFirstOrder && FIRST_DELIVERY_FREE) {
+            deliveryFee = 0; // First order free
+        } else if (calculatedDistance <= 1) {
+            deliveryFee = 50; // Within 1km
+        } else {
+            deliveryFee = 99; // Beyond 1km
+        }
     }
 
-    // Calculate distance between two coordinates
+    // Calculate distance between two coordinates in kilometers
     function calculateDistance(lat1, lon1, lat2, lon2) {
-        const R = 6371;
+        const R = 6371; // Earth's radius in km
         const dLat = (lat2 - lat1) * Math.PI / 180;
         const dLon = (lon2 - lon1) * Math.PI / 180;
         const a = 
@@ -1250,150 +2097,198 @@
         return R * c;
     }
 
-    // Open checkout
-    function openCheckout() {
-        if (state.cart.length === 0) {
-            showToast(state.currentLanguage === 'am' ? 
-                '⚠️ ቅርጫትዎ ባዶ ነው' : 
-                '⚠️ Gaaddisa keessan duwwaa dha');
+    // Show payment modal
+    function showPaymentModal() {
+        // Get selected items and total
+        let foodTotal = 0;
+        let selectedItems = [];
+        let selectedCount = 0;
+        
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
+            selectedItems.push(box.value);
+            foodTotal += parseInt(box.getAttribute('data-price'));
+            selectedCount++;
+        });
+        
+        // Update order summary in modal
+        const orderSummaryDetails = document.getElementById('orderSummaryDetails');
+        const deliveryFeeDetails = document.getElementById('deliveryFeeDetails');
+        const totalAmount = foodTotal + deliveryFee;
+        
+        // Update delivery fee display
+        if (deliveryFeeDetails) {
+            let feeText = '';
+            if (isFirstOrder && FIRST_DELIVERY_FREE) {
+                feeText = currentLang === 'am' ? 
+                    'የመጀመሪያ ማድረሻ ነፃ!' : 
+                    'Ergaa jalqabaa bilisaa!';
+            } else if (calculatedDistance > 0) {
+                feeText = currentLang === 'am' ? 
+                    `ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ<br>` + 
+                    `ክፍያ: ${deliveryFee} ብር` : 
+                    `Fageenya: ${calculatedDistance.toFixed(2)} km<br>` +
+                    `Kaffaltii: ${deliveryFee} Birraa`;
+            } else {
+                feeText = currentLang === 'am' ? 
+                    `ክፍያ: ${deliveryFee} ብር` : 
+                    `Kaffaltii: ${deliveryFee} Birraa`;
+            }
+            deliveryFeeDetails.innerHTML = feeText;
+        }
+        
+        // Update order summary
+        if (orderSummaryDetails) {
+            let summaryText = currentLang === 'am' ? 
+                `የተመረጡ እቃዎች: ${selectedCount}<br>` +
+                `የምግብ ዋጋ: ${foodTotal} ብር<br>` +
+                `የመላኪያ ክፍያ: ${deliveryFee} ብር<br>` +
+                `<strong>ጠቅላላ: ${totalAmount} ብር</strong>` :
+                `Nyaata filataman: ${selectedCount}<br>` +
+                `Gatii nyaataa: ${foodTotal} Birraa<br>` +
+                `Kaffaltii ergaa: ${deliveryFee} Birraa<br>` +
+                `<strong>Waliigala: ${totalAmount} Birraa</strong>`;
+            
+            orderSummaryDetails.innerHTML = summaryText;
+        }
+        
+        // Show payment modal
+        document.getElementById('paymentModal').style.display = 'block';
+    }
+
+    // Close payment modal
+    function closePaymentModal() {
+        document.getElementById('paymentModal').style.display = 'none';
+    }
+
+    // Confirm payment and proceed to phone number collection
+    function confirmPayment() {
+        closePaymentModal();
+        
+        // After payment confirmation, show phone number modal
+        showPhoneNumberModal();
+    }
+
+    // Show phone number modal
+    function showPhoneNumberModal() {
+        document.getElementById('phoneModal').style.display = 'block';
+    }
+
+    // Submit phone number
+    function submitPhoneNumber() {
+        const phoneInput = document.getElementById('userPhone');
+        userPhone = phoneInput.value.trim();
+        
+        if (!userPhone) {
+            showToast(currentLang === 'am' ? 'እባክዎ ስልክ ቁጥር ያስገቡ' : 'Lakkoofsa bilbila galchaa', 3000);
             return;
         }
         
-        // Calculate totals
-        const foodTotal = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const deliveryFee = calculateDeliveryFee();
-        const totalPrice = foodTotal + deliveryFee;
-        
-        // Create order message
-        const orderId = 'BD' + Date.now().toString().slice(-8);
-        const orderMessage = createOrderMessage(orderId, foodTotal, deliveryFee, totalPrice);
-        
-        // Send to Telegram
-        sendOrderToTelegram(orderMessage, orderId);
-    }
-
-    // Create order message
-    function createOrderMessage(orderId, foodTotal, deliveryFee, totalPrice) {
-        const itemsText = state.cart.map(item => 
-            `• ${item.name} - ${item.quantity} x ${item.price} ብር = ${item.price * item.quantity} ብር`
-        ).join('\n');
-        
-        const locationText = state.userLocation ? 
-            `📍 Location: ${state.userLocation.lat.toFixed(6)}, ${state.userLocation.lng.toFixed(6)}` :
-            '📍 Location: Not provided';
-        
-        const phoneRequest = state.currentLanguage === 'am' ? 
-            '📱 እባክዎ ስልክ ቁጥርዎን ይላኩ:' :
-            '📱 Mee lakkoofsa bilbilaa keessan ergaa:';
-        
-        return `/order\n\n` +
-               `🆔 Order ID: ${orderId}\n` +
-               `⏰ Time: ${new Date().toLocaleString()}\n\n` +
-               `🛒 Items:\n${itemsText}\n\n` +
-               `💰 Food Total: ${foodTotal} ብር\n` +
-               `🚚 Delivery Fee: ${deliveryFee} ብር\n` +
-               `💵 TOTAL: ${totalPrice} ብር\n\n` +
-               `💳 Payment: ${state.selectedPayment === 'cash' ? 'Cash on Delivery' : 'Telegram'}\n` +
-               `${locationText}\n\n` +
-               `${phoneRequest}\n\n` +
-               `🧪 This is a TEST order for user interest gathering`;
-    }
-
-    // Send order to Telegram
-    function sendOrderToTelegram(message, orderId) {
-        const encodedMessage = encodeURIComponent(message);
-        const telegramUrl = `https://t.me/${config.botUsername}?text=${encodedMessage}`;
-        
-        // Open Telegram
-        window.open(telegramUrl, '_blank');
-        
-        // Clear cart
-        state.cart = [];
-        localStorage.setItem('cart', JSON.stringify(state.cart));
-        
-        // Mark first order as completed
-        if (state.isFirstOrder) {
-            localStorage.setItem('firstOrderMade', 'true');
-            state.isFirstOrder = false;
-        }
-        
-        // Update UI
-        updateCartUI();
-        showPage('menu');
-        
-        // Show success message
-        setTimeout(() => {
-            alert(state.currentLanguage === 'am' ? 
-                `✅ ትዕዛዝዎ ተልኳል!\n\nየትዕዛዝ መለያ: ${orderId}\n\nቴሌግራም ከተከፈተ በኋላ 'SEND' ይጫኑ።` :
-                `✅ Dhaadannoo keessan ergame!\n\nID Ordeeraa: ${orderId}\n\nErgaa Telegiraamii bane booda 'SEND' cuqi.`);
-        }, 500);
-    }
-
-    // Track order
-    function trackOrder() {
-        const orderId = document.getElementById('orderIdInput').value.trim();
-        
-        if (!orderId) {
-            showToast(state.currentLanguage === 'am' ? 
-                '⚠️ እባክዎ የትዕዛዝ መለያ ያስገቡ' : 
-                '⚠️ ID ordeeraa galchaa');
+        // Validate Ethiopian phone number
+        if (!/^(09|07)\d{8}$/.test(userPhone)) {
+            showToast(currentLang === 'am' ? 'ትክክለኛ ስልክ ቁጥር ያስገቡ (ምሳሌ: 0912345678)' : 'Lakkoofsa bilbila sirrii galchi (Fakkeenya: 0912345678)', 4000);
             return;
         }
         
-        // For demo, just show a message
-        const resultDiv = document.getElementById('trackingResult');
-        resultDiv.style.display = 'block';
-        resultDiv.innerHTML = `
-            <div style="background: white; padding: var(--spacing-xl); border-radius: var(--radius); box-shadow: var(--shadow-light);">
-                <h3 style="margin-top: 0; color: var(--primary);">${state.currentLanguage === 'am' ? 'የትዕዛዝ ሁኔታ' : 'Haala Ordeeraa'}</h3>
-                <p>${state.currentLanguage === 'am' ? 'የትዕዛዝ መለያ:' : 'ID Ordeeraa:'} <strong>${orderId}</strong></p>
-                <p>${state.currentLanguage === 'am' ? 'ሁኔታ:' : 'Haala:'} <span style="color: var(--primary); font-weight: bold;">${state.currentLanguage === 'am' ? 'በማብሰል ላይ' : 'Kan oolan'}</span></p>
-                <p>${state.currentLanguage === 'am' ? 'የሚደርስበት ጊዜ:' : 'Yeroon ga\'u:'} 30-45 ${state.currentLanguage === 'am' ? 'ደቂቃ' : 'daqiiqaa'}</p>
-                
-                <div style="margin-top: var(--spacing-xl);">
-                    <button class="btn" onclick="contactSupport()" style="margin-top: var(--spacing-md);">
-                        <i class="fas fa-headset"></i>
-                        <span>${state.currentLanguage === 'am' ? 'ድጋፍ ያግኙ' : 'Gargaarsa Argadhu'}</span>
-                    </button>
-                </div>
-            </div>
-        `;
+        document.getElementById('phoneModal').style.display = 'none';
+        showToast(currentLang === 'am' ? 'ስልክ ቁጥር ተመዝግቧል!' : 'Lakkoofsa bilbila barreeffame!', 2000);
         
-        showToast(state.currentLanguage === 'am' ? 
-            '🔍 ትዕዛዝ ተገኝቷል' : 
-            '🔍 Ordeer argame');
+        // Proceed to send to Telegram
+        sendOrderToTelegram();
     }
 
-    // Contact support via Telegram
-    function contactSupport() {
-        const message = state.currentLanguage === 'am' ?
-            '👋 ሰላም! ከቢሾፍቱ ዴሊቨሪ እገዛ እፈልጋለሁ።' :
-            '👋 Akkam! Bishooftu Ergaa irraa gargaarsa barbaada.';
+    // Skip phone number
+    function skipPhoneNumber() {
+        document.getElementById('phoneModal').style.display = 'none';
+        userPhone = '';
+        showToast(currentLang === 'am' ? 'ስልክ ቁጥር ተዘልሏል' : 'Lakkoofsa bilbila dabalamtee', 2000);
         
-        const encodedMessage = encodeURIComponent(message);
-        const telegramUrl = `https://t.me/${config.telegramAdmin}?text=${encodedMessage}`;
-        window.open(telegramUrl, '_blank');
+        // Proceed to send to Telegram
+        sendOrderToTelegram();
     }
 
-    // Open Telegram for support
-    function openTelegramForSupport() {
-        contactSupport();
+    // Show PWA popup after 10 seconds
+    function showPWApopup() {
+        const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+        const isDismissed = localStorage.getItem('pwaPopupDismissed') === 'true';
+        
+        if (isInstalled || isStandalone || isDismissed) return;
+        
+        document.getElementById('pwaPopup').style.display = 'block';
     }
 
-    // Call support
-    function callSupport() {
-        window.location.href = 'tel:+251962636940';
+    // Install PWA
+    function installPWA() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(choice => {
+                if (choice.outcome === 'accepted') {
+                    localStorage.setItem('pwaInstalled', 'true');
+                    hidePWApopup();
+                    showToast(currentLang === 'am' ? 'አፕዎ ተጫኗል!' : 'App keessan sirreessame!', 3000);
+                } else {
+                    dismissPWA();
+                }
+                deferredPrompt = null;
+            });
+        } else {
+            showManualInstall();
+        }
     }
 
-    // Show toast notification
+    // Dismiss PWA
+    function dismissPWA() {
+        hidePWApopup();
+        localStorage.setItem('pwaPopupDismissed', 'true');
+        showToast(currentLang === 'am' ? 'እሺ፣ በኋላ ላይ እንደገና እናሳይዎታለን' : 'OK, booda irratti ni agarsiifna', 2000);
+    }
+
+    function hidePWApopup() {
+        document.getElementById('pwaPopup').style.display = 'none';
+    }
+
+    function showManualInstall() {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const isAndroid = /Android/.test(navigator.userAgent);
+        
+        let instructions = '';
+        
+        if (isIOS) {
+            instructions = currentLang === 'am' ? 
+                'ለአይፎን/አይፓድ:\n' +
+                '1. በሳፋሪ ላይ የማጋራት አዶን ይጫኑ\n' +
+                '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
+                '3. "አክል" የሚለውን ይጫኑ' :
+                'iPhone/iPad:\n' +
+                '1. Share button cuqi\n' +
+                '2. "Add to Home Screen" filadhu\n' +
+                '3. "Add" cuqi';
+        } else if (isAndroid) {
+            instructions = currentLang === 'am' ? 
+                'ለአንድሮይድ:\n' +
+                '1. በቻሮም ላይ ሶስት ነጥብ ይጫኑ\n' +
+                '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
+                '3. "አክል" የሚለውን ይጫኑ' :
+                'Android:\n' +
+                '1. Dots sadi cuqi\n' +
+                '2. "Add to Home Screen" filadhu\n' +
+                '3. "Add" cuqi';
+        } else {
+            instructions = currentLang === 'am' ? 'እባክዎ ስልክዎን ይጠቀሙ' : 'Mobil keessan fayyadamaa';
+        }
+        
+        alert(currentLang === 'am' ? 'እንዴት አፕን እንደሚጨምሩ:\n\n' + instructions : 
+              'App maal akka dabalattu:\n\n' + instructions);
+        hidePWApopup();
+    }
+
+    // Show toast
     function showToast(message, duration = 3000) {
-        const toast = document.getElementById('toast');
         toast.textContent = message;
         toast.style.display = 'block';
         toast.style.animation = 'none';
-        
         setTimeout(() => {
-            toast.style.animation = 'toastInOut 3s ease';
+            toast.style.animation = 'fadeInOut 3s ease';
         }, 10);
         
         setTimeout(() => {
@@ -1401,74 +2296,192 @@
         }, duration);
     }
 
-    // Setup event listeners
-    function setupEventListeners() {
-        // Handle orientation changes
-        window.addEventListener('orientationchange', () => {
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-            }, 100);
+    // Initialize PWA
+    function initPWA() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./service-worker.js?v=13')
+                .then(reg => {
+                    console.log('Service Worker registered');
+                })
+                .catch(err => {
+                    console.log('Service Worker failed:', err);
+                });
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
         });
-        
-        // Handle resize for responsive adjustments
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                updateCartUI();
-            }, 250);
+
+        window.addEventListener('appinstalled', () => {
+            hidePWApopup();
+            localStorage.setItem('pwaInstalled', 'true');
+            showToast(currentLang === 'am' ? 'አፕዎ ተጫኗል!' : 'App keessan sirreessame!', 3000);
         });
     }
 
-    // Initialize when page loads
-    window.addEventListener('DOMContentLoaded', initApp);
-    
-    // Prevent zoom on double-tap
-    document.addEventListener('touchstart', (e) => {
-        if (e.touches.length > 1) {
-            e.preventDefault();
+    // Update online/offline status
+    function updateOnlineStatus() {
+        const isOnline = navigator.onLine;
+        offlineIndicator.style.display = isOnline ? 'none' : 'block';
+        
+        if (!isOnline) {
+            offlineIndicator.textContent = currentLang === 'am' ? 
+                'ኦፍላይን ሁነዋል' : 
+                'Ilaalcha hin jiru';
         }
-    }, { passive: false });
+    }
 
-    // Prevent pull-to-refresh
-    document.addEventListener('touchmove', (e) => {
-        if (e.scale !== 1) {
-            e.preventDefault();
-        }
-    }, { passive: false });
-
-    // Add CSS animation for item added effect
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes itemAdded {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .card {
-            animation-duration: 0.3s;
-            animation-timing-function: ease;
-        }
-        
-        /* Ensure images are responsive */
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        /* Improve tap targets on mobile */
-        @media (max-width: 768px) {
-            button, .btn, .payment-option {
-                min-height: 44px;
+    // Update streak UI
+    function updateStreakUI() {
+        const s = parseInt(localStorage.getItem('userStreak')) || 0;
+        for(let i=1; i<=3; i++) {
+            const elem = document.getElementById('s'+i);
+            if (elem) {
+                elem.classList.toggle('active', i <= s);
             }
+        }
+    }
+
+    function openCheckout() {
+        let foodTotal = 0;
+        let selected = [];
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
+            selected.push(box.value);
+            foodTotal += parseInt(box.getAttribute('data-price'));
+        });
+
+        if(selected.length === 0) {
+            alert(currentLang === 'am' ? 
+                "እባክዎ ቢያንስ አንድ ምግብ ይምረጡ!" : 
+                "Yoo xinna tokko nyaata filadhu!");
+            return;
+        }
+        
+        orderData = { 
+            name: "Customer",
+            phone: userPhone || "Not Provided",
+            landmark: "Not Provided",
+            items: selected.join(", "), 
+            foodTotal,
+            paymentMethod: selectedPaymentMethod,
+            deliveryFee: deliveryFee,
+            distance: calculatedDistance,
+            isFirstOrderFree: isFirstOrder && FIRST_DELIVERY_FREE
+        };
+        
+        // Show location modal before payment modal
+        if (!isLocationRequested) {
+            showLocationModal();
+        } else {
+            // If location already requested, calculate fee and show payment modal
+            calculateDeliveryFee();
+            showPaymentModal();
+        }
+    }
+
+    // Send order to Telegram (after getting phone number)
+    function sendOrderToTelegram() {
+        localStorage.setItem('lastOrder', JSON.stringify(orderData));
+        
+        // Mark first order as completed
+        if (isFirstOrder) {
+            localStorage.setItem('firstOrderMade', 'true');
+            isFirstOrder = false;
+        }
+        
+        // Use saved location if available
+        const savedLocation = sessionStorage.getItem('userLocation');
+        if (savedLocation && !userLat && !userLng) {
+            const loc = JSON.parse(savedLocation);
+            userLat = loc.lat;
+            userLng = loc.lng;
+            calculateDeliveryFee(); // Recalculate with saved location
+        }
+        
+        const message = createOrderMessage();
+        const encodedMessage = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/${BOT_USERNAME}?text=${encodedMessage}`;
+        
+        window.open(telegramUrl, '_blank');
+        
+        setTimeout(() => {
+            alert(currentLang === 'am' ? 
+                "ትዕዛዝዎ ተልኳል!\n\nወደ ቴሌግራም ተላክዎታል። መልእክቱ ከተከፈተ በኋላ 'SEND' የሚለውን ይጫኑ።" :
+                "Dhaadannoo keessan ergame!\n\nTelegiraamiin ergame. Ergaa bane booda 'SEND' cuqi.");
+            clearForm();
+        }, 500);
+    }
+
+    // Create order message
+    function createOrderMessage() {
+        let locationInfo = "";
+        let deliveryPriceInfo = "";
+        let mapUrl = "";
+        let totalItemsPrice = orderData.foodTotal;
+        
+        const totalAmount = totalItemsPrice + deliveryFee;
+        
+        if (userLat && userLng) {
+            locationInfo = `Location: ${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
+            mapUrl = `Map: https://www.google.com/maps?q=${userLat},${userLng}`;
             
-            .card {
-                min-height: 44px;
+            deliveryPriceInfo = 
+                `Distance from restaurant: ${calculatedDistance.toFixed(2)} km\n` +
+                `Food Items Total: ${totalItemsPrice} ETB\n` +
+                `Delivery Fee: ${deliveryFee} ETB ${orderData.isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
+                `TOTAL: ${totalAmount} ETB\n`;
+        } else {
+            locationInfo = "Location: Not provided";
+            deliveryPriceInfo = 
+                `Food Items Total: ${totalItemsPrice} ETB\n` +
+                `Delivery Fee: ${deliveryFee} ETB ${orderData.isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
+                `TOTAL: ${totalAmount} ETB\n`;
+        }
+        
+        // Streak Logic
+        if(orderData.foodTotal >= 600) {
+            let streak = parseInt(localStorage.getItem('userStreak')) || 0;
+            let last = localStorage.getItem('lastDate');
+            let today = new Date().toDateString();
+            if(last !== today) {
+                streak = (last === new Date(Date.now() - 86400000).toDateString()) ? streak + 1 : 1;
+                localStorage.setItem('userStreak', streak);
+                localStorage.setItem('lastDate', today);
+                updateStreakUI();
             }
         }
-    `;
-    document.head.appendChild(style);
+        
+        // Add phone number request in user's language
+        const phoneRequest = currentLang === 'am' ? 
+            "\n\nለበለጠ መረጃ እና ትዕዛዝ መከታተል እባክዎ ስልክ ቁጥርዎን ያሳውቁ:" :
+            "\n\nOdeeffannoo dheeraafi hordoffii ordeeraaf lakkoofsa bilbila keessan himaa:";
+        
+        return `/order\n` +
+               `Name: ${orderData.name}\n` +
+               `Phone: ${orderData.phone}\n` +
+               `Landmark: ${orderData.landmark}\n` +
+               `${locationInfo}\n` +
+               `${mapUrl}\n\n` +
+               `Items:\n${orderData.items}\n\n` +
+               `${deliveryPriceInfo}\n` +
+               `Payment Method: ${orderData.paymentMethod === 'cash' ? 'Cash on Delivery' : 'Telegram'}\n` +
+               `Time: ${new Date().toLocaleString('am-ET')}\n` +
+               `Order ID: BD${Date.now().toString().slice(-8)}\n` +
+               `${phoneRequest}\n\n` +
+               `This is a TEST order for user interest gathering`;
+    }
+
+    function clearForm() {
+        // Clear checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        updateCartCount();
+        
+        // Reset form data
+        userPhone = '';
+        deliveryFee = 0;
+        calculatedDistance = 0;
+    }
 </script>
 </body>
 </html>
