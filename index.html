@@ -278,15 +278,15 @@
             gap: 8px;
         }
         
-        /* Menu Grid - FIXED FOR MOBILE */
+        /* Menu Grid - TWO COLUMNS FOR PHONES AND TABLETS */
         .menu-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+            grid-template-columns: 1fr 1fr; 
             gap: 15px; 
             margin-bottom: 20px;
         }
         
-        /* Card Styles with larger checkboxes */
+        /* Card Styles */
         .card { 
             background: var(--card-bg); 
             border-radius: var(--radius); 
@@ -304,7 +304,7 @@
         }
         .card img { 
             width: 100%; 
-            height: 140px; 
+            height: 130px; 
             object-fit: cover; 
             background: linear-gradient(45deg, #f5f5f5, #e0e0e0); 
         }
@@ -318,7 +318,7 @@
             font-size: 0.9rem; 
             font-weight: 600; 
             margin: 0 0 8px 0; 
-            min-height: 42px; 
+            min-height: 40px; 
             color: var(--dark);
             line-height: 1.4;
         }
@@ -329,12 +329,11 @@
             position: absolute; 
             top: 10px; 
             right: 10px; 
-            width: 28px; 
-            height: 28px; 
+            width: 22px; 
+            height: 22px; 
             accent-color: var(--primary);
             cursor: pointer;
             z-index: 2;
-            transform: scale(1.2);
         }
         
         /* Trending Badge */
@@ -399,7 +398,7 @@
             line-height: 1.4;
         }
         
-        /* Top Trending Section */
+        /* Top 3 Trending Foods Section */
         .top-trending {
             background: linear-gradient(135deg, #fff8e1, #ffecb3);
             border-radius: var(--radius);
@@ -432,14 +431,18 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px;
+            padding: 10px;
             background: white;
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+        .trending-item:hover {
+            transform: translateX(5px);
         }
         .trending-rank {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background: var(--primary);
             color: white;
@@ -457,7 +460,6 @@
             font-weight: 600;
             margin: 0 0 3px 0;
             color: var(--dark);
-            font-size: 0.95rem;
         }
         .trending-price {
             display: none !important;
@@ -465,27 +467,6 @@
         .trending-orders {
             font-size: 0.8rem;
             color: var(--text-light);
-        }
-        
-        /* Larger Add Button for Trending Items */
-        .trending-add-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 600;
-            transition: var(--transition);
-            white-space: nowrap;
-        }
-        .trending-add-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
         }
         
         /* Modal Style */
@@ -654,6 +635,10 @@
         }
         .btn-outline:hover {
             background: #ff450008;
+        }
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 0.85rem;
         }
         
         /* Form Inputs */
@@ -955,14 +940,17 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .menu-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                grid-template-columns: 1fr 1fr; /* TWO COLUMNS on tablets */
                 gap: 12px;
+            }
+            .quick-stats {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         
         @media (max-width: 480px) {
             .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr 1fr; /* TWO COLUMNS on phones */
                 gap: 10px;
             }
             .floating-footer {
@@ -993,21 +981,17 @@
                 padding: 10px 12px;
             }
             .card img {
-                height: 130px;
-            }
-            .card-title {
-                font-size: 0.85rem;
-                min-height: 38px;
-            }
-            .trending-add-btn {
-                padding: 8px 12px;
-                font-size: 0.8rem;
+                height: 110px; /* Slightly smaller images on mobile */
             }
         }
         
         @media (max-width: 360px) {
             .menu-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr; /* Still TWO COLUMNS on small phones */
+                gap: 8px;
+            }
+            .card img {
+                height: 100px;
             }
             .nav-btn {
                 padding: 6px 10px;
@@ -1016,11 +1000,6 @@
             .lang-btn {
                 padding: 5px 10px;
                 font-size: 0.7rem;
-            }
-            .card input {
-                width: 26px;
-                height: 26px;
-                transform: scale(1.1);
             }
         }
         
@@ -1058,7 +1037,7 @@
 <body>
 
 <!-- Testing Notice -->
-<div class="testing-notice" data-am="ፍላጎት ማሰባሰቢያ ፈተና ነው። ለቢሾፍቱ ምግብ ማድረሻ ሀሳብ ብቻ ነው።" data-om="Kun tajaajila nyaataa Bishooftu irratti madaala fedha fayyadamaa. Yaada qofaa dha.">
+<div class="testing-notice" data-am="ፍላጎት ማሰባሰቢያ ነው። ለቢሾፍቱ ምግብ ማድረሻ ሀሳብ ነው።" data-om="Kun tajaajila nyaataa Bishooftu irratti madaala fedha fayyadamaa. Yaada qofaa dha.">
     This is a user interest gathering test for a potential food delivery idea in Bishoftu.
 </div>
 
@@ -1066,7 +1045,7 @@
 <div id="refreshContainer">
     <div class="refresh-content">
         <div class="refresh-spinner" id="refreshSpinner"></div>
-        <span id="refreshText" data-am="ይቀናል... ለማደስት ከላይ ይሳቡ" data-om="Deebi'aa... Harka keessan deebisuu fedhaa">ይቀናል... ለማደስት ከላይ ይሳቡ</span>
+        <span id="refreshText" data-am="... ለማደስት ከላይ ይሳቡ" data-om="Deebi'aa... Harka keessan deebisuu fedhaa">ይቀናል... ለማደስት ከላይ ይሳቡ</span>
     </div>
 </div>
 
@@ -1319,7 +1298,7 @@
             </div>
         </div>
 
-        <!-- Top 3 Trending Foods -->
+        <!-- Top 3 Trending Foods Section -->
         <div class="top-trending">
             <div class="trending-header">
                 <i class="fas fa-fire"></i>
@@ -1378,7 +1357,7 @@
         <!-- NEW MENU ITEMS -->
         <div class="res-title">
             <i class="fas fa-star"></i>
-            <span data-am="አዲስ ምናሌ" data-om="Menu Haaraa">አዲስ ምናሌ</span>
+            <span data-am="Classic Noodles" data-om="Classic Noodles">አዲስ ምናሌ</span>
         </div>
         <div class="menu-grid">
             <!-- New Burger Items -->
@@ -1586,11 +1565,9 @@
     // Restaurant coordinates
     const RESTAURANT_COORDINATES = {
         'Etalem Hotel': { lat: 8.7592026, lng: 38.9458399 },
-        'Kameti Kitchen': { lat: 8.7596178, lng: 38.9450543 },
-        'Classic Noodles': { lat: 8.7512666, lng: 38.9619499 }
+        'Kameti Kitchen': { lat: 8.7596178, lng: 38.9450543 }
     };
     
-    // Default to Etalem Hotel for distance calculation
     const DEFAULT_RESTAURANT = 'Etalem Hotel';
     
     const BOT_USERNAME = "Bishoftu_Delivery_bot";
@@ -1602,19 +1579,19 @@
     let deferredPrompt = null;
     const FIRST_DELIVERY_FREE = true;
     let isFirstOrder = localStorage.getItem('firstOrderMade') !== 'true';
-    const SITE_URL = "https://bishoftudelivery.github.io/";
+    const SITE_URL = "https://mikemoke4444-gif.github.io/delivery_app/";
     let currentLang = localStorage.getItem('preferredLang') || 'am';
     let currentPage = 'home';
-    let selectedPaymentMethod = 'cash';
+    let selectedPaymentMethod = 'cash'; // Default to cash payment after delivery
     let deliveryFee = 0;
     let calculatedDistance = 0;
     let isLocationRequested = false;
     
     // Top 3 trending foods with order counts
     const trendingFoods = [
-        { name: "Double Special Burger", orders: 4, image: "./assets/double-special-burger.webp" },
-        { name: "Special Classic Pizza", orders: 3, image: "./assets/special-classic-pizza.webp" },
-        { name: "Classic King Burger", orders: 7, image: "./assets/classic-king-burger.webp" }
+        { name: "Double Special Burger", orders: 4, image: "./assets/double-special-burger.webp", price: 700 },
+        { name: "Special Classic Pizza", orders: 3, image: "./assets/special-classic-pizza.webp", price: 795 },
+        { name: "Classic King Burger", orders: 7, image: "./assets/classic-king-burger.webp", price: 810 }
     ];
     
     // Pull to refresh variables
@@ -1643,7 +1620,7 @@
                     <div class="trending-name">${food.name}</div>
                     <div class="trending-orders">${food.orders} ${currentLang === 'am' ? 'ትዕዛዞች' : 'Ordeeron'}</div>
                 </div>
-                <button class="trending-add-btn" onclick="addTrendingItem('${food.name}')">
+                <button class="btn btn-small" onclick="addTrendingItem('${food.name}')">
                     <i class="fas fa-plus"></i>
                     <span>${currentLang === 'am' ? 'ጨምር' : 'Dabaladhu'}</span>
                 </button>
@@ -1890,7 +1867,7 @@
             isLocationRequested = true;
         }
         
-        // Set default payment method
+        // Set default payment method to cash (payment after delivery)
         selectPaymentMethod('cash');
     };
 
@@ -2491,10 +2468,10 @@
             }
         }
         
-        // Add phone number request in user's language
-        const phoneRequest = currentLang === 'am' ? 
-            "\n\nለበለጠ መረጃ እና ትዕዛዝ መከታተል እባክዎ ስልክ ቁጥርዎን ያሳውቁ:" :
-            "\n\nOdeeffannoo dheeraafi hordoffii ordeeraaf lakkoofsa bilbila keessan himaa:";
+        // Payment method info
+        const paymentMethodInfo = selectedPaymentMethod === 'cash' ? 
+            'Payment Method: Cash on Delivery (Pay after receiving your food)' :
+            'Payment Method: Telegram Payment';
         
         return `/order\n` +
                `Name: ${orderData.name}\n` +
@@ -2504,10 +2481,9 @@
                `${mapUrl}\n\n` +
                `Items:\n${orderData.items}\n\n` +
                `${deliveryPriceInfo}\n` +
-               `Payment Method: ${orderData.paymentMethod === 'cash' ? 'Cash on Delivery' : 'Telegram'}\n` +
+               `${paymentMethodInfo}\n` +
                `Time: ${new Date().toLocaleString('am-ET')}\n` +
-               `Order ID: BD${Date.now().toString().slice(-8)}\n` +
-               `${phoneRequest}\n\n` +
+               `Order ID: BD${Date.now().toString().slice(-8)}\n\n` +
                `This is a TEST order for user interest gathering`;
     }
 
@@ -2522,5 +2498,5 @@
         calculatedDistance = 0;
     }
 </script>
-</body>
+</body> 
 </html>
