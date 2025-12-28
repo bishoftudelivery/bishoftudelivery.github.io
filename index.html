@@ -358,13 +358,13 @@
             background: white;
             border: 2px solid var(--border);
             border-radius: var(--radius-sm);
-            padding: 15px;
-            margin: 15px 0;
+            padding: 12px;
+            margin: 10px 0;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .payment-option:hover {
             border-color: var(--primary-light);
@@ -375,13 +375,13 @@
             background: #ff450008;
         }
         .payment-icon {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         .payment-details {
             flex: 1;
@@ -390,83 +390,94 @@
             font-weight: 600;
             margin: 0 0 3px 0;
             color: var(--dark);
+            font-size: 0.9rem;
         }
         .payment-desc {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-light);
             margin: 0;
-            line-height: 1.4;
+            line-height: 1.3;
         }
         
-        /* Top 3 Trending Foods Section */
-        .top-trending {
-            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+        /* Recent Orders Section */
+        .recent-orders {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 15px;
             margin: 20px 0;
-            border-left: 5px solid var(--primary);
+            border-left: 5px solid var(--secondary);
             box-shadow: var(--shadow-light);
         }
-        .trending-header {
+        .recent-header {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 15px;
         }
-        .trending-header i {
-            color: var(--primary);
-            font-size: 1.5rem;
+        .recent-header i {
+            color: var(--secondary);
+            font-size: 1.3rem;
         }
-        .trending-header h3 {
+        .recent-header h3 {
             margin: 0;
             color: var(--dark);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
-        .trending-items {
+        .recent-items {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
-        .trending-item {
+        .recent-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px;
+            gap: 10px;
+            padding: 8px;
             background: white;
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow-light);
             transition: var(--transition);
         }
-        .trending-item:hover {
-            transform: translateX(5px);
+        .recent-item:hover {
+            transform: translateX(3px);
         }
-        .trending-rank {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
+        .recent-img {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
             flex-shrink: 0;
         }
-        .trending-info {
+        .recent-info {
             flex: 1;
         }
-        .trending-name {
+        .recent-name {
             font-weight: 600;
             margin: 0 0 3px 0;
             color: var(--dark);
+            font-size: 0.9rem;
         }
-        .trending-price {
-            display: none !important;
-        }
-        .trending-orders {
-            font-size: 0.8rem;
+        .recent-time {
+            font-size: 0.75rem;
             color: var(--text-light);
+        }
+        .recent-add-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .recent-add-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
         }
         
         /* Modal Style */
@@ -484,14 +495,16 @@
         }
         .modal-content { 
             background: white; 
-            margin: 10% auto; 
-            padding: 25px; 
+            margin: 5% auto; 
+            padding: 20px; 
             border-radius: var(--radius-lg); 
-            width: 85%; 
-            max-width: 400px; 
+            width: 90%; 
+            max-width: 350px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
         }
         @keyframes modalSlide {
             from { opacity: 0; transform: translateY(-30px); }
@@ -513,11 +526,11 @@
         }
         .location-content { 
             background: white; 
-            margin: 20% auto; 
-            padding: 30px; 
+            margin: 10% auto; 
+            padding: 25px; 
             border-radius: var(--radius-lg); 
             width: 85%; 
-            max-width: 400px; 
+            max-width: 350px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
@@ -538,11 +551,11 @@
         }
         .phone-content { 
             background: white; 
-            margin: 20% auto; 
-            padding: 30px; 
+            margin: 15% auto; 
+            padding: 25px; 
             border-radius: var(--radius-lg); 
             width: 85%; 
-            max-width: 400px; 
+            max-width: 350px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
@@ -563,23 +576,25 @@
         }
         .payment-content { 
             background: white; 
-            margin: 20% auto; 
-            padding: 30px; 
+            margin: 5% auto; 
+            padding: 20px; 
             border-radius: var(--radius-lg); 
-            width: 85%; 
-            max-width: 400px; 
+            width: 90%; 
+            max-width: 350px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
         }
         
         .payment-info { 
             background: #f8f9fa; 
-            padding: 18px; 
+            padding: 15px; 
             border-radius: var(--radius-sm); 
-            margin: 20px 0; 
+            margin: 15px 0; 
             text-align: left; 
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             border-left: 4px solid var(--primary);
         }
         
@@ -756,11 +771,11 @@
             transform: translate(-50%, -50%);
             background: white;
             border-radius: var(--radius-lg);
-            padding: 25px;
+            padding: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             z-index: 10001;
             width: 85%;
-            max-width: 320px;
+            max-width: 300px;
             text-align: center;
             animation: popupIn 0.3s ease;
             border: 2px solid var(--primary);
@@ -772,23 +787,23 @@
         }
         
         .pwa-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
+            font-size: 40px;
+            margin-bottom: 10px;
             color: var(--primary);
         }
         
         .pwa-title {
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
             color: var(--dark);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
         }
         
         .pwa-message {
-            margin: 0 0 25px 0;
+            margin: 0 0 20px 0;
             color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.5;
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
         
         .pwa-buttons {
@@ -798,12 +813,12 @@
         
         .pwa-btn {
             flex: 1;
-            padding: 14px 0;
+            padding: 12px 0;
             border-radius: var(--radius-sm);
             border: none;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: var(--transition);
         }
         
@@ -869,24 +884,24 @@
         /* Order Summary */
         .order-summary {
             background: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: var(--radius);
-            margin: 20px 0;
+            margin: 15px 0;
             box-shadow: var(--shadow-light);
         }
         .summary-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--border);
         }
         .summary-row:last-child {
             border-bottom: none;
             font-weight: 700;
-            font-size: 1.1rem;
-            margin-top: 10px;
-            padding-top: 10px;
+            font-size: 1rem;
+            margin-top: 8px;
+            padding-top: 8px;
             border-top: 2px solid var(--primary);
         }
         
@@ -968,7 +983,7 @@
             }
             .modal-content {
                 width: 90%;
-                padding: 20px;
+                padding: 15px;
             }
             .stat-box {
                 padding: 12px;
@@ -982,6 +997,9 @@
             }
             .card img {
                 height: 110px; /* Slightly smaller images on mobile */
+            }
+            .payment-content {
+                padding: 15px;
             }
         }
         
@@ -1167,18 +1185,18 @@
 <!-- Payment Method Modal -->
 <div id="paymentModal" class="payment-modal">
     <div class="payment-content">
-        <div style="font-size: 40px; margin-bottom: 15px; color: var(--primary);">
+        <div style="font-size: 40px; margin-bottom: 10px; color: var(--primary);">
             <i class="fas fa-credit-card"></i>
         </div>
-        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: var(--dark);" 
+        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--dark);" 
              data-am="የክፍያ ዘዴ ይምረጡ" 
              data-om="Kaffaltii Mala Filadhu">
             የክፍያ ዘዴ ይምረጡ
         </div>
         
         <!-- Delivery Fee Information -->
-        <div id="deliveryFeeDisplay" style="background: #fff8e1; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; border-left: 3px solid #ff9800;">
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <div id="deliveryFeeDisplay" style="background: #fff8e1; padding: 12px; border-radius: var(--radius-sm); margin-bottom: 15px; border-left: 3px solid #ff9800;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
                 <i class="fas fa-truck" style="color: #ff9800;"></i>
                 <div style="font-weight: 600; color: var(--dark);" 
                      data-am="የመላኪያ ክፍያ" 
@@ -1186,19 +1204,19 @@
                     የመላኪያ ክፍያ
                 </div>
             </div>
-            <div id="deliveryFeeDetails" style="font-size: 0.9rem; color: var(--text-light);">
+            <div id="deliveryFeeDetails" style="font-size: 0.85rem; color: var(--text-light);">
                 <!-- Will be populated by JavaScript -->
             </div>
         </div>
         
         <!-- Order Summary -->
-        <div id="orderSummaryModal" style="background: #f0f9ff; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; text-align: left; border-left: 3px solid var(--primary);">
-            <div style="font-weight: 600; margin-bottom: 10px; color: var(--dark);" 
+        <div id="orderSummaryModal" style="background: #f0f9ff; padding: 12px; border-radius: var(--radius-sm); margin-bottom: 15px; text-align: left; border-left: 3px solid var(--primary);">
+            <div style="font-weight: 600; margin-bottom: 8px; color: var(--dark);" 
                  data-am="የትዕዛዝ ማጠቃለያ" 
                  data-om="Giddu-galeessa Ordeeraa">
                 የትዕዛዝ ማጠቃለያ
             </div>
-            <div id="orderSummaryDetails" style="font-size: 0.9rem; color: var(--text-light);">
+            <div id="orderSummaryDetails" style="font-size: 0.85rem; color: var(--text-light);">
                 <!-- Will be populated by JavaScript -->
             </div>
         </div>
@@ -1212,7 +1230,7 @@
                 <div class="payment-title" data-am="ክፍያ ከመላኪያ በኋላ" data-om="Kaffaltii Ergaa Booda">ክፍያ ከመላኪያ በኋላ</div>
                 <div class="payment-desc" data-am="ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ" data-om="Nyaata fudhachuu keessan booda qarshii kaffala">ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ</div>
             </div>
-            <i class="fas fa-check-circle" style="color: #28a745; font-size: 1.2rem; display: none;"></i>
+            <i class="fas fa-check-circle" style="color: #28a745; font-size: 1.1rem; display: none;"></i>
         </div>
         
         <div class="payment-option" onclick="selectPaymentMethod('telegram')" id="telegramPaymentOption">
@@ -1223,10 +1241,10 @@
                 <div class="payment-title" data-am="በቴሌግራም" data-om="Telegiraamiin">በቴሌግራም</div>
                 <div class="payment-desc" data-am="በቴሌግራም ይክፈሉ" data-om="Telegiraamiin kaffala">በቴሌግራም ይክፈሉ</div>
             </div>
-            <i class="fas fa-check-circle" style="color: #0088cc; font-size: 1.2rem; display: none;"></i>
+            <i class="fas fa-check-circle" style="color: #0088cc; font-size: 1.1rem; display: none;"></i>
         </div>
         
-        <div style="margin-top: 25px; display: flex; gap: 10px;">
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
             <button class="btn" onclick="confirmPayment()" id="confirmPaymentBtn"
                     data-am="ክፍያ አረጋግጥ" 
                     data-om="Kaffaltii Mirkaneessi">
@@ -1298,14 +1316,14 @@
             </div>
         </div>
 
-        <!-- Top 3 Trending Foods Section -->
-        <div class="top-trending">
-            <div class="trending-header">
-                <i class="fas fa-fire"></i>
-                <h3 data-am="ታዋቂ ምግቦች" data-om="Nyaata Daddarfame">3 ታዋቂ ምግቦች</h3>
+        <!-- Recent Orders Section (Replaces Trending) -->
+        <div class="recent-orders">
+            <div class="recent-header">
+                <i class="fas fa-history"></i>
+                <h3 data-am="የቅርብ ጊዜ ትዕዛዞች" data-om="Ordeeron Dhihoo">የቅርብ ጊዜ ትዕዛዞች</h3>
             </div>
-            <div class="trending-items" id="trendingItems">
-                <!-- Trending items will be populated by JavaScript -->
+            <div class="recent-items" id="recentItems">
+                <!-- Recent items will be populated by JavaScript -->
             </div>
         </div>
 
@@ -1587,12 +1605,8 @@
     let calculatedDistance = 0;
     let isLocationRequested = false;
     
-    // Top 3 trending foods with order counts
-    const trendingFoods = [
-        { name: "Double Special Burger", orders: 4, image: "./assets/double-special-burger.webp", price: 700 },
-        { name: "Special Classic Pizza", orders: 3, image: "./assets/special-classic-pizza.webp", price: 795 },
-        { name: "Classic King Burger", orders: 7, image: "./assets/classic-king-burger.webp", price: 810 }
-    ];
+    // Recent orders array (max 3 items)
+    let recentOrders = [];
     
     // Pull to refresh variables
     let startY = 0;
@@ -1606,43 +1620,70 @@
     const offlineIndicator = document.getElementById('offlineIndicator');
     const toast = document.getElementById('toast');
 
-    // Initialize trending foods
-    function initTrendingFoods() {
-        const trendingContainer = document.getElementById('trendingItems');
-        trendingContainer.innerHTML = '';
+    // Initialize recent orders from localStorage
+    function initRecentOrders() {
+        const savedOrders = localStorage.getItem('recentOrders');
+        if (savedOrders) {
+            recentOrders = JSON.parse(savedOrders);
+            updateRecentOrdersDisplay();
+        }
+    }
+    
+    // Update recent orders display
+    function updateRecentOrdersDisplay() {
+        const recentContainer = document.getElementById('recentItems');
+        recentContainer.innerHTML = '';
         
-        trendingFoods.forEach((food, index) => {
-            const trendingItem = document.createElement('div');
-            trendingItem.className = 'trending-item';
-            trendingItem.innerHTML = `
-                <div class="trending-rank">${index + 1}</div>
-                <div class="trending-info">
-                    <div class="trending-name">${food.name}</div>
-                    <div class="trending-orders">${food.orders} ${currentLang === 'am' ? 'ትዕዛዞች' : 'Ordeeron'}</div>
+        if (recentOrders.length === 0) {
+            recentContainer.innerHTML = `
+                <div style="text-align: center; color: var(--text-light); font-size: 0.9rem; padding: 15px;">
+                    ${currentLang === 'am' ? 'እስካሁን ምንም ትዕዛዝ አላደረጉም' : 'Hanga ammaatti ordeeraa hin godhinne'}
                 </div>
-                <button class="btn btn-small" onclick="addTrendingItem('${food.name}')">
+            `;
+            return;
+        }
+        
+        recentOrders.slice(0, 3).forEach((item, index) => {
+            const recentItem = document.createElement('div');
+            recentItem.className = 'recent-item';
+            recentItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}" class="recent-img" onerror="this.src='./assets/default-food.webp'">
+                <div class="recent-info">
+                    <div class="recent-name">${item.name}</div>
+                    <div class="recent-time">${currentLang === 'am' ? 'ቅርብ ጊዜ' : 'Yeroo Dhihoo'}</div>
+                </div>
+                <button class="recent-add-btn" onclick="addRecentItem('${item.name}')">
                     <i class="fas fa-plus"></i>
-                    <span>${currentLang === 'am' ? 'ጨምር' : 'Dabaladhu'}</span>
                 </button>
             `;
-            trendingContainer.appendChild(trendingItem);
-        });
-        
-        // Add trending badges to menu items
-        document.querySelectorAll('.card').forEach(card => {
-            const title = card.querySelector('.card-title').textContent;
-            const isTrending = trendingFoods.some(food => food.name === title);
-            if (isTrending) {
-                const badge = document.createElement('div');
-                badge.className = 'trending-badge';
-                badge.innerHTML = `<i class="fas fa-fire"></i> ${currentLang === 'am' ? 'ታዋቂ' : 'Kan Daddarfame'}`;
-                card.appendChild(badge);
-            }
+            recentContainer.appendChild(recentItem);
         });
     }
     
-    // Add trending item to cart
-    function addTrendingItem(itemName) {
+    // Add a recent order
+    function addRecentOrder(itemName, imageUrl) {
+        // Remove if already exists
+        recentOrders = recentOrders.filter(item => item.name !== itemName);
+        
+        // Add to beginning
+        recentOrders.unshift({
+            name: itemName,
+            image: imageUrl,
+            time: new Date().toISOString()
+        });
+        
+        // Keep only last 3
+        recentOrders = recentOrders.slice(0, 3);
+        
+        // Save to localStorage
+        localStorage.setItem('recentOrders', JSON.stringify(recentOrders));
+        
+        // Update display
+        updateRecentOrdersDisplay();
+    }
+    
+    // Add recent item to cart
+    function addRecentItem(itemName) {
         // Find the checkbox for this item
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         for (let checkbox of checkboxes) {
@@ -1651,10 +1692,12 @@
                 
                 // Animate the card
                 const card = checkbox.closest('.card');
-                card.classList.add('item-added');
-                setTimeout(() => {
-                    card.classList.remove('item-added');
-                }, 300);
+                if (card) {
+                    card.classList.add('item-added');
+                    setTimeout(() => {
+                        card.classList.remove('item-added');
+                    }, 300);
+                }
                 
                 updateCartCount();
                 showToast(`${currentLang === 'am' ? 'ተጨመረ:' : 'Dabalame:'} ${itemName}`, 2000);
@@ -1686,8 +1729,8 @@
         // Update all translatable elements
         updateTextContent();
         
-        // Reinitialize trending foods with new language
-        initTrendingFoods();
+        // Update recent orders display with new language
+        updateRecentOrdersDisplay();
         
         // Update cart count
         updateCartCount();
@@ -1822,7 +1865,7 @@
         updateStreakUI();
         initPWA();
         initPullToRefresh();
-        initTrendingFoods();
+        initRecentOrders();
         
         // Update cart count
         updateCartCount();
@@ -1845,7 +1888,7 @@
             }
         }, 10000);
         
-        // 1. Show PWA popup after 10 seconds
+        // 1. Show PWA popup after 10 seconds (First Change)
         setTimeout(() => {
             showPWApopup();
         }, 10000);
@@ -1946,12 +1989,6 @@
         // Perform actual refresh actions
         updateStreakUI();
         checkForUpdates();
-        
-        // Update trending foods order counts (simulated)
-        trendingFoods.forEach(food => {
-            food.orders += Math.floor(Math.random() * 5);
-        });
-        initTrendingFoods();
         
         // Show success message
         refreshText.textContent = currentLang === 'am' ? 
@@ -2113,7 +2150,7 @@
         return R * c;
     }
 
-    // Show payment modal
+    // Show payment modal (Second Change - Made smaller)
     function showPaymentModal() {
         // Get selected items and total
         let foodTotal = 0;
@@ -2124,6 +2161,16 @@
             selectedItems.push(box.value);
             foodTotal += parseInt(box.getAttribute('data-price'));
             selectedCount++;
+            
+            // Add to recent orders (get image from parent card)
+            const card = box.closest('.card');
+            if (card) {
+                const img = card.querySelector('img');
+                if (img && img.src) {
+                    const itemName = box.value.split('(')[0].trim(); // Get just the item name
+                    addRecentOrder(itemName, img.src);
+                }
+            }
         });
         
         // Update order summary in modal
@@ -2222,7 +2269,7 @@
         sendOrderToTelegram();
     }
 
-    // Show PWA popup after 10 seconds
+    // Show PWA popup after 10 seconds (First Change)
     function showPWApopup() {
         const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
