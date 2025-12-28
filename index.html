@@ -358,13 +358,13 @@
             background: white;
             border: 2px solid var(--border);
             border-radius: var(--radius-sm);
-            padding: 12px;
-            margin: 10px 0;
+            padding: 15px;
+            margin: 15px 0;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .payment-option:hover {
             border-color: var(--primary-light);
@@ -375,13 +375,13 @@
             background: #ff450008;
         }
         .payment-icon {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.2rem;
         }
         .payment-details {
             flex: 1;
@@ -390,20 +390,19 @@
             font-weight: 600;
             margin: 0 0 3px 0;
             color: var(--dark);
-            font-size: 0.9rem;
         }
         .payment-desc {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-light);
             margin: 0;
-            line-height: 1.3;
+            line-height: 1.4;
         }
         
-        /* Recent Orders Section */
+        /* Recently Ordered Foods Section */
         .recent-orders {
             background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
             border-radius: var(--radius);
-            padding: 15px;
+            padding: 20px;
             margin: 20px 0;
             border-left: 5px solid var(--secondary);
             box-shadow: var(--shadow-light);
@@ -416,37 +415,36 @@
         }
         .recent-header i {
             color: var(--secondary);
-            font-size: 1.3rem;
+            font-size: 1.5rem;
         }
         .recent-header h3 {
             margin: 0;
             color: var(--dark);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         .recent-items {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         .recent-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px;
+            gap: 12px;
+            padding: 10px;
             background: white;
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow-light);
             transition: var(--transition);
         }
         .recent-item:hover {
-            transform: translateX(3px);
+            transform: translateX(5px);
         }
-        .recent-img {
-            width: 50px;
-            height: 50px;
+        .recent-item img {
+            width: 60px;
+            height: 60px;
             border-radius: var(--radius-sm);
             object-fit: cover;
-            flex-shrink: 0;
         }
         .recent-info {
             flex: 1;
@@ -455,29 +453,10 @@
             font-weight: 600;
             margin: 0 0 3px 0;
             color: var(--dark);
-            font-size: 0.9rem;
         }
-        .recent-time {
-            font-size: 0.75rem;
+        .recent-orders-count {
+            font-size: 0.8rem;
             color: var(--text-light);
-        }
-        .recent-add-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            flex-shrink: 0;
-        }
-        .recent-add-btn:hover {
-            background: var(--primary-dark);
-            transform: scale(1.1);
         }
         
         /* Modal Style */
@@ -495,16 +474,14 @@
         }
         .modal-content { 
             background: white; 
-            margin: 5% auto; 
-            padding: 20px; 
+            margin: 10% auto; 
+            padding: 25px; 
             border-radius: var(--radius-lg); 
-            width: 90%; 
-            max-width: 350px; 
+            width: 85%; 
+            max-width: 400px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
-            max-height: 85vh;
-            overflow-y: auto;
         }
         @keyframes modalSlide {
             from { opacity: 0; transform: translateY(-30px); }
@@ -526,11 +503,11 @@
         }
         .location-content { 
             background: white; 
-            margin: 10% auto; 
-            padding: 25px; 
+            margin: 20% auto; 
+            padding: 30px; 
             border-radius: var(--radius-lg); 
             width: 85%; 
-            max-width: 350px; 
+            max-width: 400px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
@@ -551,17 +528,17 @@
         }
         .phone-content { 
             background: white; 
-            margin: 15% auto; 
-            padding: 25px; 
+            margin: 20% auto; 
+            padding: 30px; 
             border-radius: var(--radius-lg); 
             width: 85%; 
-            max-width: 350px; 
+            max-width: 400px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
         }
         
-        /* Payment Modal */
+        /* Payment Modal - Modified to be scrollable */
         .payment-modal { 
             display: none; 
             position: fixed; 
@@ -580,21 +557,21 @@
             padding: 20px; 
             border-radius: var(--radius-lg); 
             width: 90%; 
-            max-width: 350px; 
+            max-width: 400px; 
+            max-height: 80vh;
+            overflow-y: auto;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
-            max-height: 85vh;
-            overflow-y: auto;
         }
         
         .payment-info { 
             background: #f8f9fa; 
-            padding: 15px; 
+            padding: 18px; 
             border-radius: var(--radius-sm); 
             margin: 15px 0; 
             text-align: left; 
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             border-left: 4px solid var(--primary);
         }
         
@@ -771,11 +748,11 @@
             transform: translate(-50%, -50%);
             background: white;
             border-radius: var(--radius-lg);
-            padding: 20px;
+            padding: 25px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             z-index: 10001;
             width: 85%;
-            max-width: 300px;
+            max-width: 320px;
             text-align: center;
             animation: popupIn 0.3s ease;
             border: 2px solid var(--primary);
@@ -787,23 +764,23 @@
         }
         
         .pwa-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
+            font-size: 50px;
+            margin-bottom: 15px;
             color: var(--primary);
         }
         
         .pwa-title {
-            margin: 0 0 8px 0;
+            margin: 0 0 10px 0;
             color: var(--dark);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
         }
         
         .pwa-message {
-            margin: 0 0 20px 0;
+            margin: 0 0 25px 0;
             color: var(--text-light);
-            font-size: 0.9rem;
-            line-height: 1.4;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         .pwa-buttons {
@@ -813,12 +790,12 @@
         
         .pwa-btn {
             flex: 1;
-            padding: 12px 0;
+            padding: 14px 0;
             border-radius: var(--radius-sm);
             border: none;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: var(--transition);
         }
         
@@ -884,24 +861,24 @@
         /* Order Summary */
         .order-summary {
             background: white;
-            padding: 15px;
+            padding: 20px;
             border-radius: var(--radius);
-            margin: 15px 0;
+            margin: 20px 0;
             box-shadow: var(--shadow-light);
         }
         .summary-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
-            padding-bottom: 8px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
             border-bottom: 1px solid var(--border);
         }
         .summary-row:last-child {
             border-bottom: none;
             font-weight: 700;
-            font-size: 1rem;
-            margin-top: 8px;
-            padding-top: 8px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            padding-top: 10px;
             border-top: 2px solid var(--primary);
         }
         
@@ -983,7 +960,7 @@
             }
             .modal-content {
                 width: 90%;
-                padding: 15px;
+                padding: 20px;
             }
             .stat-box {
                 padding: 12px;
@@ -999,7 +976,8 @@
                 height: 110px; /* Slightly smaller images on mobile */
             }
             .payment-content {
-                padding: 15px;
+                margin: 10% auto;
+                max-height: 85vh;
             }
         }
         
@@ -1182,21 +1160,21 @@
     </div>
 </div>
 
-<!-- Payment Method Modal -->
+<!-- Payment Method Modal - Modified to be scrollable -->
 <div id="paymentModal" class="payment-modal">
     <div class="payment-content">
-        <div style="font-size: 40px; margin-bottom: 10px; color: var(--primary);">
+        <div style="font-size: 40px; margin-bottom: 15px; color: var(--primary);">
             <i class="fas fa-credit-card"></i>
         </div>
-        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--dark);" 
+        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: var(--dark);" 
              data-am="የክፍያ ዘዴ ይምረጡ" 
              data-om="Kaffaltii Mala Filadhu">
             የክፍያ ዘዴ ይምረጡ
         </div>
         
         <!-- Delivery Fee Information -->
-        <div id="deliveryFeeDisplay" style="background: #fff8e1; padding: 12px; border-radius: var(--radius-sm); margin-bottom: 15px; border-left: 3px solid #ff9800;">
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+        <div id="deliveryFeeDisplay" style="background: #fff8e1; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; border-left: 3px solid #ff9800;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                 <i class="fas fa-truck" style="color: #ff9800;"></i>
                 <div style="font-weight: 600; color: var(--dark);" 
                      data-am="የመላኪያ ክፍያ" 
@@ -1204,19 +1182,19 @@
                     የመላኪያ ክፍያ
                 </div>
             </div>
-            <div id="deliveryFeeDetails" style="font-size: 0.85rem; color: var(--text-light);">
+            <div id="deliveryFeeDetails" style="font-size: 0.9rem; color: var(--text-light);">
                 <!-- Will be populated by JavaScript -->
             </div>
         </div>
         
         <!-- Order Summary -->
-        <div id="orderSummaryModal" style="background: #f0f9ff; padding: 12px; border-radius: var(--radius-sm); margin-bottom: 15px; text-align: left; border-left: 3px solid var(--primary);">
-            <div style="font-weight: 600; margin-bottom: 8px; color: var(--dark);" 
+        <div id="orderSummaryModal" style="background: #f0f9ff; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; text-align: left; border-left: 3px solid var(--primary);">
+            <div style="font-weight: 600; margin-bottom: 10px; color: var(--dark);" 
                  data-am="የትዕዛዝ ማጠቃለያ" 
                  data-om="Giddu-galeessa Ordeeraa">
                 የትዕዛዝ ማጠቃለያ
             </div>
-            <div id="orderSummaryDetails" style="font-size: 0.85rem; color: var(--text-light);">
+            <div id="orderSummaryDetails" style="font-size: 0.9rem; color: var(--text-light);">
                 <!-- Will be populated by JavaScript -->
             </div>
         </div>
@@ -1230,7 +1208,7 @@
                 <div class="payment-title" data-am="ክፍያ ከመላኪያ በኋላ" data-om="Kaffaltii Ergaa Booda">ክፍያ ከመላኪያ በኋላ</div>
                 <div class="payment-desc" data-am="ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ" data-om="Nyaata fudhachuu keessan booda qarshii kaffala">ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ</div>
             </div>
-            <i class="fas fa-check-circle" style="color: #28a745; font-size: 1.1rem; display: none;"></i>
+            <i class="fas fa-check-circle" style="color: #28a745; font-size: 1.2rem; display: none;"></i>
         </div>
         
         <div class="payment-option" onclick="selectPaymentMethod('telegram')" id="telegramPaymentOption">
@@ -1241,10 +1219,10 @@
                 <div class="payment-title" data-am="በቴሌግራም" data-om="Telegiraamiin">በቴሌግራም</div>
                 <div class="payment-desc" data-am="በቴሌግራም ይክፈሉ" data-om="Telegiraamiin kaffala">በቴሌግራም ይክፈሉ</div>
             </div>
-            <i class="fas fa-check-circle" style="color: #0088cc; font-size: 1.1rem; display: none;"></i>
+            <i class="fas fa-check-circle" style="color: #0088cc; font-size: 1.2rem; display: none;"></i>
         </div>
         
-        <div style="margin-top: 20px; display: flex; gap: 10px;">
+        <div style="margin-top: 25px; display: flex; gap: 10px;">
             <button class="btn" onclick="confirmPayment()" id="confirmPaymentBtn"
                     data-am="ክፍያ አረጋግጥ" 
                     data-om="Kaffaltii Mirkaneessi">
@@ -1316,14 +1294,19 @@
             </div>
         </div>
 
-        <!-- Recent Orders Section (Replaces Trending) -->
-        <div class="recent-orders">
+        <!-- Recently Ordered Foods Section -->
+        <div class="recent-orders" id="recentOrdersSection">
             <div class="recent-header">
                 <i class="fas fa-history"></i>
-                <h3 data-am="የቅርብ ጊዜ ትዕዛዞች" data-om="Ordeeron Dhihoo">የቅርብ ጊዜ ትዕዛዞች</h3>
+                <h3 data-am="ቅርብ ጊዜ የታዘዙ ምግቦች" data-om="Nyaata Dhihoo Keessa Ordeerfame">ቅርብ ጊዜ የታዘዙ ምግቦች</h3>
             </div>
             <div class="recent-items" id="recentItems">
                 <!-- Recent items will be populated by JavaScript -->
+                <div style="text-align: center; padding: 20px; color: var(--text-light);" 
+                     data-am="ምንም ቅርብ ጊዜ የታዘዙ ምግቦች የሉም።" 
+                     data-om="Nyaata dhihoo keessa ordeerfame hin jiru.">
+                    ምንም ቅርብ ጊዜ የታዘዙ ምግቦች የሉም።
+                </div>
             </div>
         </div>
 
@@ -1605,7 +1588,7 @@
     let calculatedDistance = 0;
     let isLocationRequested = false;
     
-    // Recent orders array (max 3 items)
+    // Recently ordered foods (will be loaded from localStorage)
     let recentOrders = [];
     
     // Pull to refresh variables
@@ -1620,70 +1603,117 @@
     const offlineIndicator = document.getElementById('offlineIndicator');
     const toast = document.getElementById('toast');
 
-    // Initialize recent orders from localStorage
+    // Initialize recently ordered items
     function initRecentOrders() {
-        const savedOrders = localStorage.getItem('recentOrders');
-        if (savedOrders) {
-            recentOrders = JSON.parse(savedOrders);
-            updateRecentOrdersDisplay();
+        try {
+            const savedOrders = localStorage.getItem('recentOrders');
+            if (savedOrders) {
+                recentOrders = JSON.parse(savedOrders);
+            } else {
+                recentOrders = [];
+            }
+            
+            // Display recent orders
+            displayRecentOrders();
+        } catch (error) {
+            console.error('Error loading recent orders:', error);
+            recentOrders = [];
         }
     }
     
-    // Update recent orders display
-    function updateRecentOrdersDisplay() {
+    // Display recent orders in the UI
+    function displayRecentOrders() {
         const recentContainer = document.getElementById('recentItems');
-        recentContainer.innerHTML = '';
+        const recentSection = document.getElementById('recentOrdersSection');
+        
+        if (!recentContainer || !recentSection) return;
         
         if (recentOrders.length === 0) {
             recentContainer.innerHTML = `
-                <div style="text-align: center; color: var(--text-light); font-size: 0.9rem; padding: 15px;">
-                    ${currentLang === 'am' ? 'እስካሁን ምንም ትዕዛዝ አላደረጉም' : 'Hanga ammaatti ordeeraa hin godhinne'}
+                <div style="text-align: center; padding: 20px; color: var(--text-light);" 
+                     data-am="ምንም ቅርብ ጊዜ የታዘዙ ምግቦች የሉም።" 
+                     data-om="Nyaata dhihoo keessa ordeerfame hin jiru.">
+                    ምንም ቅርብ ጊዜ የታዘዙ ምግቦች የሉም።
                 </div>
             `;
             return;
         }
         
-        recentOrders.slice(0, 3).forEach((item, index) => {
+        recentContainer.innerHTML = '';
+        
+        // Show only up to 3 recent orders
+        const ordersToShow = recentOrders.slice(0, 3);
+        
+        ordersToShow.forEach((order, index) => {
             const recentItem = document.createElement('div');
             recentItem.className = 'recent-item';
             recentItem.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" class="recent-img" onerror="this.src='./assets/default-food.webp'">
+                <img src="${order.image || './assets/default-food.webp'}" alt="${order.name}">
                 <div class="recent-info">
-                    <div class="recent-name">${item.name}</div>
-                    <div class="recent-time">${currentLang === 'am' ? 'ቅርብ ጊዜ' : 'Yeroo Dhihoo'}</div>
+                    <div class="recent-name">${order.name}</div>
+                    <div class="recent-orders-count">${currentLang === 'am' ? 
+                        `ዋጋ: ${order.price} ብር • ${order.date}` : 
+                        `Gatii: ${order.price} Birraa • ${order.date}`}</div>
                 </div>
-                <button class="recent-add-btn" onclick="addRecentItem('${item.name}')">
-                    <i class="fas fa-plus"></i>
+                <button class="btn btn-small" onclick="reorderItem('${order.name}', ${order.price})">
+                    <i class="fas fa-redo"></i>
+                    <span>${currentLang === 'am' ? 'እንደገና አዘዝ' : 'Irra Deebiin Ordeer'}</span>
                 </button>
             `;
             recentContainer.appendChild(recentItem);
         });
+        
+        // Update language for the recent items
+        if (currentLang !== 'am') {
+            const reorderButtons = recentContainer.querySelectorAll('.btn-small span');
+            reorderButtons.forEach(btn => {
+                btn.textContent = 'Irra Deebiin Ordeer';
+            });
+        }
     }
     
-    // Add a recent order
-    function addRecentOrder(itemName, imageUrl) {
-        // Remove if already exists
-        recentOrders = recentOrders.filter(item => item.name !== itemName);
-        
-        // Add to beginning
-        recentOrders.unshift({
-            name: itemName,
-            image: imageUrl,
-            time: new Date().toISOString()
+    // Add item to recent orders
+    function addToRecentOrders(itemName, itemPrice) {
+        // Find the item image
+        let itemImage = './assets/default-food.webp';
+        document.querySelectorAll('.card').forEach(card => {
+            const title = card.querySelector('.card-title').textContent;
+            if (title === itemName || card.querySelector('input[type="checkbox"]').value.includes(itemName)) {
+                const img = card.querySelector('img');
+                if (img && img.src) {
+                    itemImage = img.src;
+                }
+            }
         });
         
-        // Keep only last 3
-        recentOrders = recentOrders.slice(0, 3);
+        // Create order object
+        const order = {
+            name: itemName,
+            price: itemPrice,
+            image: itemImage,
+            date: new Date().toLocaleDateString('am-ET')
+        };
+        
+        // Remove if already exists (to avoid duplicates)
+        recentOrders = recentOrders.filter(o => o.name !== itemName);
+        
+        // Add to beginning of array
+        recentOrders.unshift(order);
+        
+        // Keep only last 10 orders
+        if (recentOrders.length > 10) {
+            recentOrders = recentOrders.slice(0, 10);
+        }
         
         // Save to localStorage
         localStorage.setItem('recentOrders', JSON.stringify(recentOrders));
         
-        // Update display
-        updateRecentOrdersDisplay();
+        // Update UI
+        displayRecentOrders();
     }
     
-    // Add recent item to cart
-    function addRecentItem(itemName) {
+    // Reorder an item
+    function reorderItem(itemName, itemPrice) {
         // Find the checkbox for this item
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         for (let checkbox of checkboxes) {
@@ -1729,8 +1759,8 @@
         // Update all translatable elements
         updateTextContent();
         
-        // Update recent orders display with new language
-        updateRecentOrdersDisplay();
+        // Update recent orders display
+        displayRecentOrders();
         
         // Update cart count
         updateCartCount();
@@ -1865,7 +1895,7 @@
         updateStreakUI();
         initPWA();
         initPullToRefresh();
-        initRecentOrders();
+        initRecentOrders(); // Initialize recent orders instead of trending
         
         // Update cart count
         updateCartCount();
@@ -1888,7 +1918,7 @@
             }
         }, 10000);
         
-        // 1. Show PWA popup after 10 seconds (First Change)
+        // 1. Show PWA popup after 10 seconds (CHANGE 1: Already implemented)
         setTimeout(() => {
             showPWApopup();
         }, 10000);
@@ -2150,7 +2180,7 @@
         return R * c;
     }
 
-    // Show payment modal (Second Change - Made smaller)
+    // Show payment modal (CHANGE 2: Now scrollable)
     function showPaymentModal() {
         // Get selected items and total
         let foodTotal = 0;
@@ -2161,16 +2191,6 @@
             selectedItems.push(box.value);
             foodTotal += parseInt(box.getAttribute('data-price'));
             selectedCount++;
-            
-            // Add to recent orders (get image from parent card)
-            const card = box.closest('.card');
-            if (card) {
-                const img = card.querySelector('img');
-                if (img && img.src) {
-                    const itemName = box.value.split('(')[0].trim(); // Get just the item name
-                    addRecentOrder(itemName, img.src);
-                }
-            }
         });
         
         // Update order summary in modal
@@ -2269,7 +2289,7 @@
         sendOrderToTelegram();
     }
 
-    // Show PWA popup after 10 seconds (First Change)
+    // Show PWA popup after 10 seconds (CHANGE 1: Already implemented)
     function showPWApopup() {
         const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
@@ -2461,6 +2481,13 @@
             userLng = loc.lng;
             calculateDeliveryFee(); // Recalculate with saved location
         }
+        
+        // Add selected items to recent orders
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
+            const itemName = box.value.split('(')[0].trim(); // Get just the item name
+            const itemPrice = parseInt(box.getAttribute('data-price'));
+            addToRecentOrders(itemName, itemPrice);
+        });
         
         const message = createOrderMessage();
         const encodedMessage = encodeURIComponent(message);
