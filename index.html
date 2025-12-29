@@ -9,36 +9,72 @@
     <meta http-equiv="Expires" content="0">
     <title id="page-title">ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery</title>
     
-    <!-- PWA Meta Tags - UPDATED FOR BETTER CROSS-DEVICE SUPPORT -->
-    <meta name="theme-color" content="#ff4500">
-    <meta name="description" content="ቢሾፍቱ ውስጥ ምግብ ማድረሻ - Food Delivery Service in Bishoftu">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="BishoftuDelivery">
-    <link rel="manifest" href="./manifest.json?v=14.3">
-    
-    <!-- iOS Meta Tags -->
-    <link rel="apple-touch-icon" href="./icons/icon-152x152.png?v=14.3">
-    <link rel="apple-touch-icon" sizes="57x57" href="./icons/icon-57x57.png?v=14.3">
-    <link rel="apple-touch-icon" sizes="72x72" href="./icons/icon-72x72.png?v=14.3">
-    <link rel="apple-touch-icon" sizes="114x114" href="./icons/icon-114x114.png?v=14.3">
-    <link rel="apple-touch-icon" sizes="120x120" href="./icons/icon-120x120.png?v=14.3">
-    <link rel="apple-touch-icon" sizes="144x144" href="./icons/icon-144x144.png?v=14.3">
-    <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152x152.png?v=14.3">
-    <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180x180.png?v=14.3">
-    
-    <!-- Android Chrome Meta Tags -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=14.3">
-    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192x192.png?v=14.3">
-    <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512x512.png?v=14.3">
-    
-    <!-- Windows Meta Tags -->
-    <meta name="msapplication-TileColor" content="#ff4500">
-    <meta name="msapplication-TileImage" content="./icons/icon-144x144.png?v=14.3">
-    <meta name="msapplication-config" content="./browserconfig.xml">
-    
+  // Service Worker for Bishoftu Delivery - Fixed for GitHub Pages
+// Version: 14.4
+
+const CACHE_NAME = 'bishoftu-delivery-v14.4';
+const STATIC_CACHE = 'static-v14.4';
+
+// Install event
+self.addEventListener('install', event => {
+  console.log('[Service Worker] Installing...');
+  self.skipWaiting();
+});
+
+// Activate event
+self.addEventListener('activate', event => {
+  console.log('[Service Worker] Activating...');
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName.startsWith('bishoftu-delivery-') && cacheName !== CACHE_NAME) {
+            console.log('[Service Worker] Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+// Fetch event - Cache First Strategy
+self.addEventListener('fetch', event => {
+  // Skip non-GET requests
+  if (event.request.method !== 'GET') return;
+  
+  // Handle fetch event
+  event.respondWith(
+    caches.match(event.request).then(cachedResponse => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      
+      return fetch(event.request).then(networkResponse => {
+        // Don't cache if not a valid response
+        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+          return networkResponse;
+        }
+        
+        // Clone the response
+        const responseToCache = networkResponse.clone();
+        
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, responseToCache);
+        });
+        
+        return networkResponse;
+      }).catch(() => {
+        // If offline and request is for HTML, return a fallback
+        if (event.request.headers.get('accept').includes('text/html')) {
+          return caches.match('https://bishoftudelivery.github.io/index.html');
+        }
+        
+        return new Response('You are offline. Please check your connection.');
+      });
+    })
+  );
+});
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -1958,6 +1994,109 @@
 </div>
 
 <script>
+    // PWA Installation Handler
+let deferredPrompt = null;
+const installButton = document.getElementById('installButton');
+
+// Listen for beforeinstallprompt event
+window.addEventListener('beforeinstallprompt', (e) => {
+  console.log('PWA: beforeinstallprompt event fired');
+  
+  // Prevent Chrome 67+ from automatically showing prompt
+  e.preventDefault();
+  
+  // Stash the event
+  deferredPrompt = e;
+  
+  // Show install button if it exists
+  if (installButton) {
+    installButton.style.display = 'flex';
+  }
+  
+  // Show PWA popup after 3 seconds
+  setTimeout(() => {
+    showPWApopup();
+  }, 3000);
+});
+
+// Listen for app installed event
+window.addEventListener('appinstalled', (evt) => {
+  console.log('PWA: App was installed');
+  localStorage.setItem('pwaInstalled', 'true');
+  
+  // Hide install buttons
+  if (installButton) installButton.style.display = 'none';
+  hidePWApopup();
+  
+  // Show success message
+  showToast(currentLang === 'am' ? 'አፕዎ ተጫኗል!' : 'App keessan sirreessame!', 3000);
+});
+
+// Check if PWA is installable
+function checkPWAInstallable() {
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+  const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
+  
+  if (isStandalone || isInstalled) {
+    return false;
+  }
+  
+  return deferredPrompt !== null;
+}
+
+// Show PWA popup
+function showPWApopup() {
+  const isInstallable = checkPWAInstallable();
+  const isDismissed = localStorage.getItem('pwaPopupDismissed') === 'true';
+  
+  if (!isInstallable || isDismissed) return;
+  
+  document.getElementById('pwaPopup').style.display = 'block';
+}
+
+// Install PWA function
+function installPWA() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted PWA installation');
+        localStorage.setItem('pwaInstalled', 'true');
+        hidePWApopup();
+        if (installButton) installButton.style.display = 'none';
+      }
+      deferredPrompt = null;
+    });
+  } else {
+    // Fallback instructions
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+    
+    let message = '';
+    if (isIOS) {
+      message = '1. Tap Share button\n2. Tap "Add to Home Screen"\n3. Tap "Add"';
+    } else if (isAndroid) {
+      message = '1. Tap Menu (3 dots)\n2. Tap "Install app" or "Add to Home Screen"\n3. Tap "Install"';
+    } else {
+      message = 'Look for the install icon in your browser address bar';
+    }
+    
+    alert(currentLang === 'am' ? 
+      'አፕ ለመጫን:\n\n' + message : 
+      'To install app:\n\n' + message);
+  }
+}
+
+// Dismiss PWA popup
+function dismissPWA() {
+  hidePWApopup();
+  localStorage.setItem('pwaPopupDismissed', 'true');
+}
+
+function hidePWApopup() {
+  document.getElementById('pwaPopup').style.display = 'none';
+}
     // Restaurant coordinates with correct values
     const RESTAURANT_COORDINATES = {
         'Classic Noodles': { lat: 8.7512517, lng: 38.9619680 },
@@ -1976,7 +2115,7 @@
     let deferredPrompt = null;
     const FIRST_DELIVERY_FREE = true;
     let isFirstOrder = localStorage.getItem('firstOrderMade') !== 'true';
-    const SITE_URL = "https://mikemoke4444-gif.github.io/delivery_app/";
+    const SITE_URL = "https://bishoftudelivery.github.io/";
     let currentLang = localStorage.getItem('preferredLang') || 'am';
     let currentPage = 'home';
     let selectedPaymentMethod = 'cash'; // Default to cash payment after delivery
