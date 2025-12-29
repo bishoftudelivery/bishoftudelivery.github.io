@@ -1,13 +1,25 @@
-// Service Worker for Bishoftu Delivery - Fixed for GitHub Pages
+// Service Worker for Bishoftu Delivery
 // Version: 14.4
 
 const CACHE_NAME = 'bishoftu-delivery-v14.4';
 const STATIC_CACHE = 'static-v14.4';
 
+// Files to cache
+const CACHE_URLS = [
+  './',
+  './index.html',
+  './manifest.json',
+  // Add other important files here
+];
+
 // Install event
 self.addEventListener('install', event => {
   console.log('[Service Worker] Installing...');
-  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(CACHE_URLS))
+      .then(() => self.skipWaiting())
+  );
 });
 
 // Activate event
@@ -56,7 +68,7 @@ self.addEventListener('fetch', event => {
       }).catch(() => {
         // If offline and request is for HTML, return a fallback
         if (event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('https://bishoftudelivery.github.io/index.html');
+          return caches.match('./index.html');
         }
         
         return new Response('You are offline. Please check your connection.');
