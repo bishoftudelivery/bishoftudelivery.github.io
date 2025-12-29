@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="am" data-version="13.3" data-lang="am">
+<html lang="am" data-version="14.2" data-lang="am">
 <head>
     <meta name="google-site-verification" content="Yo225u8qpEADrbmyCChQZ9zOZ9pNeUwm1meyq8ChHh4" />
     <meta charset="UTF-8">
@@ -9,19 +9,35 @@
     <meta http-equiv="Expires" content="0">
     <title id="page-title">ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery</title>
     
-    <!-- PWA Meta Tags -->
+    <!-- PWA Meta Tags - UPDATED FOR BETTER CROSS-DEVICE SUPPORT -->
     <meta name="theme-color" content="#ff4500">
     <meta name="description" content="ቢሾፍቱ ውስጥ ምግብ ማድረሻ - Food Delivery Service in Bishoftu">
-    <link rel="manifest" href="./manifest.json?v=13">
-    
-    <!-- iOS Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="BishoftuEats">
-    <link rel="apple-touch-icon" href="./icons/icon-152x152.png?v=13">
+    <meta name="apple-mobile-web-app-title" content="BishoftuDelivery">
+    <link rel="manifest" href="./manifest.json?v=14.2">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=13">
+    <!-- iOS Meta Tags -->
+    <link rel="apple-touch-icon" href="./icons/icon-152x152.png?v=14.2">
+    <link rel="apple-touch-icon" sizes="57x57" href="./icons/icon-57x57.png?v=14.2">
+    <link rel="apple-touch-icon" sizes="72x72" href="./icons/icon-72x72.png?v=14.2">
+    <link rel="apple-touch-icon" sizes="114x114" href="./icons/icon-114x114.png?v=14.2">
+    <link rel="apple-touch-icon" sizes="120x120" href="./icons/icon-120x120.png?v=14.2">
+    <link rel="apple-touch-icon" sizes="144x144" href="./icons/icon-144x144.png?v=14.2">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152x152.png?v=14.2">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180x180.png?v=14.2">
+    
+    <!-- Android Chrome Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=14.2">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192x192.png?v=14.2">
+    <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512x512.png?v=14.2">
+    
+    <!-- Windows Meta Tags -->
+    <meta name="msapplication-TileColor" content="#ff4500">
+    <meta name="msapplication-TileImage" content="./icons/icon-144x144.png?v=14.2">
+    <meta name="msapplication-config" content="./browserconfig.xml">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -353,18 +369,18 @@
             gap: 3px;
         }
         
-        /* Payment Options in Modal */
+        /* Payment Options in Modal - UPDATED FOR BETTER FIT */
         .payment-option {
             background: white;
             border: 2px solid var(--border);
             border-radius: var(--radius-sm);
-            padding: 15px;
-            margin: 15px 0;
+            padding: 12px;
+            margin: 10px 0;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .payment-option:hover {
             border-color: var(--primary-light);
@@ -375,36 +391,39 @@
             background: #ff450008;
         }
         .payment-icon {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
+            flex-shrink: 0;
         }
         .payment-details {
             flex: 1;
+            min-width: 0;
         }
         .payment-title {
             font-weight: 600;
             margin: 0 0 3px 0;
             color: var(--dark);
+            font-size: 0.9rem;
         }
         .payment-desc {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-light);
             margin: 0;
-            line-height: 1.4;
+            line-height: 1.3;
         }
         
-        /* Recently Ordered Foods Section */
+        /* Recent Orders Section */
         .recent-orders {
-            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 18px;
             margin: 20px 0;
-            border-left: 5px solid var(--secondary);
+            border-left: 5px solid var(--primary);
             box-shadow: var(--shadow-light);
         }
         .recent-header {
@@ -414,7 +433,7 @@
             margin-bottom: 15px;
         }
         .recent-header i {
-            color: var(--secondary);
+            color: var(--primary);
             font-size: 1.5rem;
         }
         .recent-header h3 {
@@ -423,40 +442,41 @@
             font-size: 1.2rem;
         }
         .recent-items {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
         }
         .recent-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 12px;
             padding: 10px;
             background: white;
             border-radius: var(--radius-sm);
             box-shadow: var(--shadow-light);
             transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
         }
         .recent-item:hover {
-            transform: translateX(5px);
+            transform: translateY(-3px);
         }
-        .recent-item img {
-            width: 60px;
-            height: 60px;
-            border-radius: var(--radius-sm);
+        .recent-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
             object-fit: cover;
-        }
-        .recent-info {
-            flex: 1;
+            margin-bottom: 8px;
+            border: 2px solid var(--primary-light);
         }
         .recent-name {
             font-weight: 600;
-            margin: 0 0 3px 0;
+            margin: 0;
             color: var(--dark);
-        }
-        .recent-orders-count {
             font-size: 0.8rem;
-            color: var(--text-light);
+            line-height: 1.2;
+            height: 32px;
+            overflow: hidden;
         }
         
         /* Modal Style */
@@ -475,6 +495,37 @@
         .modal-content { 
             background: white; 
             margin: 10% auto; 
+            padding: 20px; 
+            border-radius: var(--radius-lg); 
+            width: 85%; 
+            max-width: 400px; 
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: modalSlide 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        @keyframes modalSlide {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Preorder Time Selection Modal */
+        .preorder-modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(3px);
+            animation: fadeIn 0.2s ease;
+        }
+        .preorder-content { 
+            background: white; 
+            margin: 15% auto; 
             padding: 25px; 
             border-radius: var(--radius-lg); 
             width: 85%; 
@@ -482,10 +533,38 @@
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
         }
-        @keyframes modalSlide {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        /* Preorder Time Options */
+        .time-option {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .time-option:hover {
+            border-color: var(--primary-light);
+            background: #ff450005;
+        }
+        .time-option.selected {
+            border-color: var(--primary);
+            background: #ff450008;
+        }
+        .time-slot {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        .time-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
         }
         
         /* Location Modal */
@@ -503,14 +582,16 @@
         }
         .location-content { 
             background: white; 
-            margin: 20% auto; 
-            padding: 30px; 
+            margin: 15% auto; 
+            padding: 25px; 
             border-radius: var(--radius-lg); 
             width: 85%; 
             max-width: 400px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
         }
         
         /* Phone Modal */
@@ -528,17 +609,19 @@
         }
         .phone-content { 
             background: white; 
-            margin: 20% auto; 
-            padding: 30px; 
+            margin: 15% auto; 
+            padding: 25px; 
             border-radius: var(--radius-lg); 
             width: 85%; 
             max-width: 400px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
         }
         
-        /* Payment Modal - Modified to be scrollable */
+        /* Payment Modal - UPDATED FOR BETTER FIT */
         .payment-modal { 
             display: none; 
             position: fixed; 
@@ -553,26 +636,70 @@
         }
         .payment-content { 
             background: white; 
-            margin: 5% auto; 
+            margin: 10% auto; 
             padding: 20px; 
             border-radius: var(--radius-lg); 
             width: 90%; 
-            max-width: 400px; 
-            max-height: 80vh;
-            overflow-y: auto;
+            max-width: 380px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             animation: modalSlide 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
         }
         
         .payment-info { 
             background: #f8f9fa; 
-            padding: 18px; 
+            padding: 15px; 
             border-radius: var(--radius-sm); 
             margin: 15px 0; 
             text-align: left; 
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             border-left: 4px solid var(--primary);
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        /* Order Type Buttons - UPDATED WITH NEW TEXT */
+        .order-type-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .order-type-btn {
+            flex: 1;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .order-type-btn:hover {
+            border-color: var(--primary-light);
+            background: #ff450005;
+        }
+        .order-type-btn.active {
+            border-color: var(--primary);
+            background: #ff450008;
+        }
+        .order-type-icon {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        .order-type-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dark);
+        }
+        .order-type-price {
+            font-size: 0.75rem;
+            color: var(--secondary);
+            font-weight: 600;
         }
         
         /* Floating Footer */
@@ -605,6 +732,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            min-height: 50px;
         }
         .btn:hover {
             background: linear-gradient(90deg, var(--primary-dark), var(--primary));
@@ -631,6 +759,7 @@
         .btn-small {
             padding: 8px 15px;
             font-size: 0.85rem;
+            min-height: auto;
         }
         
         /* Form Inputs */
@@ -739,7 +868,7 @@
             box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
         }
         
-        /* PWA Popup */
+        /* PWA Popup - IMPROVED FOR ALL DEVICES */
         .pwa-popup {
             display: none;
             position: fixed;
@@ -825,7 +954,7 @@
             box-shadow: 0 3px 10px rgba(255, 68, 68, 0.3);
         }
         
-        /* Delivery Fee Notice */
+        /* Delivery Fee Notice - UPDATED WITH NEW TEXT */
         .delivery-notice {
             background: #f0f9ff;
             padding: 15px;
@@ -912,6 +1041,22 @@
             color: var(--text-light);
         }
         
+        /* Operating Hours Banner */
+        .hours-banner {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 12px 15px;
+            border-radius: var(--radius-sm);
+            margin: 15px 0;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
         /* RTL support for Oromo */
         body[data-lang="om"] {
             direction: rtl;
@@ -938,6 +1083,19 @@
             .quick-stats {
                 grid-template-columns: repeat(3, 1fr);
             }
+            .payment-content {
+                margin: 5% auto;
+                padding: 18px;
+                width: 92%;
+                max-height: 85vh;
+            }
+            .preorder-content {
+                margin: 10% auto;
+                padding: 20px;
+            }
+            .order-type-buttons {
+                flex-direction: column;
+            }
         }
         
         @media (max-width: 480px) {
@@ -959,8 +1117,9 @@
                 padding: 12px;
             }
             .modal-content {
-                width: 90%;
-                padding: 20px;
+                width: 92%;
+                padding: 18px;
+                margin: 5% auto;
             }
             .stat-box {
                 padding: 12px;
@@ -975,9 +1134,33 @@
             .card img {
                 height: 110px; /* Slightly smaller images on mobile */
             }
+            .recent-items {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            .recent-image {
+                width: 70px;
+                height: 70px;
+            }
+            .recent-name {
+                font-size: 0.75rem;
+                height: 28px;
+            }
             .payment-content {
+                padding: 15px;
                 margin: 10% auto;
-                max-height: 85vh;
+                max-height: 90vh;
+            }
+            .payment-option {
+                padding: 10px;
+                margin: 8px 0;
+            }
+            .preorder-content {
+                margin: 15% auto;
+                padding: 18px;
+            }
+            .order-type-buttons {
+                flex-direction: column;
             }
         }
         
@@ -996,6 +1179,52 @@
             .lang-btn {
                 padding: 5px 10px;
                 font-size: 0.7rem;
+            }
+            .recent-items {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            .recent-image {
+                width: 60px;
+                height: 60px;
+            }
+            .recent-name {
+                font-size: 0.7rem;
+            }
+            .payment-content {
+                margin: 15% auto;
+                padding: 12px;
+            }
+            .preorder-content {
+                margin: 20% auto;
+                padding: 15px;
+            }
+            .order-type-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        /* Desktop/Laptop styles */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 900px;
+            }
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr); /* THREE columns on desktop */
+                gap: 20px;
+            }
+            .card img {
+                height: 150px;
+            }
+            .card-title {
+                font-size: 1rem;
+            }
+            .nav-btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+            .pwa-popup {
+                max-width: 400px;
             }
         }
         
@@ -1027,6 +1256,29 @@
             border-radius: var(--radius-sm);
             margin: 10px 0;
             border-left: 3px solid #ff9800;
+        }
+        
+        /* Order type selected */
+        .order-type-selected {
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            margin: 10px 0;
+            border-left: 3px solid var(--secondary);
+        }
+        
+        /* Restaurant distance indicator */
+        .distance-indicator {
+            position: absolute;
+            top: 10px;
+            right: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 1;
         }
     </style>
 </head>
@@ -1064,6 +1316,56 @@
     <button class="nav-btn" onclick="showPage('contact')" data-am="አግኙን" data-om="Nu Qunnamuu">አግኙን</button>
 </nav>
 
+<!-- Preorder Time Selection Modal -->
+<div id="preorderModal" class="preorder-modal">
+    <div class="preorder-content">
+        <div style="font-size: 40px; margin-bottom: 15px; color: var(--primary);">
+            <i class="fas fa-clock"></i>
+        </div>
+        <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; color: var(--dark);" 
+             data-am="የቅድመ ትዕዛዝ ሰዓት ይምረጡ" 
+             data-om="Yeroo Ordeeraa Duraa Filadhu">
+            የቅድመ ትዕዛዝ ሰዓት ይምረጡ
+        </div>
+        <div style="margin-bottom: 25px; color: var(--text-light); line-height: 1.6;" 
+             data-am="እባክዎ ምግብዎን መቀበል የሚፈልጉበትን ሰዓት ይምረጡ" 
+             data-om="Yeroon nyaata keessan fudhachuu barbaaddan filadhu">
+            እባክዎ ምግብዎን መቀበል የሚፈልጉበትን ሰዓት ይምረጡ
+        </div>
+        
+        <!-- Time Options -->
+        <div class="time-option" onclick="selectPreorderTime('slot1')" id="slot1Option">
+            <div class="time-slot">4:30 PM - 6:30 PM</div>
+            <div class="time-desc" data-am="ከ4:30 በፊት ትዕዛዝ ማድረግ አለቦት" data-om="4:30 duras ordeer gochuu qabdu">ከ4:30 በፊት ትዕዛዝ ማድረግ አለቦት</div>
+        </div>
+        
+        <div class="time-option" onclick="selectPreorderTime('slot2')" id="slot2Option">
+            <div class="time-slot">5:30 PM - 8:30 PM</div>
+            <div class="time-desc" data-am="ከ5:30 በፊት ትዕዛዝ ማድረግ አለቦት" data-om="5:30 duras ordeer gochuu qabdu">ከ5:30 በፊት ትዕዛዝ ማድረግ አለቦት</div>
+        </div>
+        
+        <div class="time-option" onclick="selectPreorderTime('slot3')" id="slot3Option">
+            <div class="time-slot">9:30 PM - 11:00 PM</div>
+            <div class="time-desc" data-am="ከ9:30 በፊት ትዕዛዝ ማድረግ አለቦት" data-om="9:30 duras ordeer gochuu qabdu">ከ9:30 በፊት ትዕዛዝ ማድረግ አለቦት</div>
+        </div>
+        
+        <div style="margin-top: 25px; display: flex; gap: 10px;">
+            <button class="btn" onclick="confirmPreorderTime()" 
+                    data-am="አረጋግጥ" 
+                    data-om="Mirkaneessi">
+                <i class="fas fa-check"></i>
+                <span>አረጋግጥ</span>
+            </button>
+            <button class="btn btn-outline" onclick="cancelPreorder()" 
+                    data-am="ተመለስ" 
+                    data-om="Deebi'i">
+                <i class="fas fa-arrow-left"></i>
+                <span>ተመለስ</span>
+            </button>
+        </div>
+    </div>
+</div>
+
 <!-- Location Modal -->
 <div id="locationModal" class="location-modal">
     <div class="location-content">
@@ -1081,6 +1383,20 @@
             ምግብዎን በፍጥነት ለማድረስ እና ትክክለኛ የመላኪያ ክፍያ ለማስላት የእርስዎን አካባቢ ማወቅ አለብን።
         </div>
         
+        <!-- Order Type Selection - UPDATED WITH NEW TEXT -->
+        <div class="order-type-buttons">
+            <div class="order-type-btn" onclick="selectOrderType('normal')" id="normalOrderBtn">
+                <div class="order-type-icon"><i class="fas fa-bolt"></i></div>
+                <div class="order-type-title" data-am="አሁን እዘዝ" data-om="Amma Ajaji">አሁን እዘዝ</div>
+                <div class="order-type-price" data-am="50-99 ብር" data-om="50-99 Birraa">50-99 ብር</div>
+            </div>
+            <div class="order-type-btn" onclick="selectOrderType('preorder')" id="preorderBtn">
+                <div class="order-type-icon"><i class="fas fa-clock"></i></div>
+                <div class="order-type-title" data-am="ቅድመ ትዕዛዝ" data-om="Ordeer Duraa">ቅድመ ትዕዛዝ</div>
+                <div class="order-type-price" data-am="50 ብር" data-om="50 Birraa">50 ብር</div>
+            </div>
+        </div>
+        
         <div style="background: #f0f9ff; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; text-align: left; border-left: 3px solid var(--primary);">
             <div style="font-weight: 600; margin-bottom: 8px; color: var(--dark);" 
                  data-am="የመላኪያ ክፍያ" 
@@ -1088,9 +1404,10 @@
                 የመላኪያ ክፍያ
             </div>
             <div style="font-size: 0.9rem; color: var(--text-light);">
-                <div data-am="• 1 ኪ.ሜ ውስጥ: 50 ብር" data-om="• Kilomeetira 1 keessatti: 50 Birraa">• 1 ኪ.ሜ ውስጥ: 50 ብር</div>
-                <div data-am="• ከ1 ኪ.ሜ በላይ: 99 ብር" data-om="• Kilomeetira 1 ol: 99 Birraa">• ከ1 ኪ.ሜ በላይ: 99 ብር</div>
+                <div data-am="• አሁን እዘዝ: 1 ኪ.ሜ ውስጥ 50 ብር, ከ1 ኪ.ሜ በላይ 99 ብር" data-om="• Amma Ajaji: Kilomeetira 1 keessatti 50 Birraa, Kilomeetira 1 ol 99 Birraa">• አሁን እዘዝ: 1 ኪ.ሜ ውስጥ 50 ብር, ከ1 ኪ.ሜ በላይ 99 ብር</div>
+                <div data-am="• ቅድመ ትዕዛዝ: 50 ብር" data-om="• Ordeer Duraa: 50 Birraa">• ቅድመ ትዕዛዝ: 50 ብር</div>
                 <div data-am="• የመጀመሪያ ማድረሻ ነፃ!" data-om="• Ergaa jalqabaa bilisaa!">• የመጀመሪያ ማድረሻ ነፃ!</div>
+                <div data-am="• ከ10 ኪ.ሜ በላይ አይሰራም" data-om="• Kilomeetira 10 ol hin hojjetu">• ከ10 ኪ.ሜ በላይ አይሰራም</div>
             </div>
         </div>
         
@@ -1160,7 +1477,7 @@
     </div>
 </div>
 
-<!-- Payment Method Modal - Modified to be scrollable -->
+<!-- Payment Method Modal - UPDATED FOR BETTER FIT -->
 <div id="paymentModal" class="payment-modal">
     <div class="payment-content">
         <div style="font-size: 40px; margin-bottom: 15px; color: var(--primary);">
@@ -1172,29 +1489,51 @@
             የክፍያ ዘዴ ይምረጡ
         </div>
         
+        <!-- Order Type Display -->
+        <div id="orderTypeDisplay" style="background: #e8f5e9; padding: 12px; border-radius: var(--radius-sm); margin-bottom: 15px; border-left: 3px solid var(--secondary);">
+            <div style="font-weight: 600; color: var(--dark); font-size: 0.9rem;" id="orderTypeText">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;" id="preorderTimeText">
+                <!-- Will be populated for preorders -->
+            </div>
+        </div>
+        
+        <!-- Selected Restaurants -->
+        <div id="selectedRestaurantsDisplay" style="background: #fff3e0; padding: 12px; border-radius: var(--radius-sm); margin-bottom: 15px; border-left: 3px solid #ff9800;">
+            <div style="font-weight: 600; color: var(--dark); font-size: 0.9rem;" 
+                 data-am="የተመረጡ ሬስቶራንቶች" 
+                 data-om="Reestorantoota Filataman">
+                የተመረጡ ሬስቶራንቶች
+            </div>
+            <div id="selectedRestaurantsList" style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+        
         <!-- Delivery Fee Information -->
-        <div id="deliveryFeeDisplay" style="background: #fff8e1; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; border-left: 3px solid #ff9800;">
+        <div id="deliveryFeeDisplay" style="background: #fff8e1; padding: 12px; border-radius: var(--radius-sm); margin-bottom: 15px; border-left: 3px solid #ff9800;">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                 <i class="fas fa-truck" style="color: #ff9800;"></i>
-                <div style="font-weight: 600; color: var(--dark);" 
+                <div style="font-weight: 600; color: var(--dark); font-size: 0.9rem;" 
                      data-am="የመላኪያ ክፍያ" 
                      data-om="Kaffaltii ergaa">
                     የመላኪያ ክፍያ
                 </div>
             </div>
-            <div id="deliveryFeeDetails" style="font-size: 0.9rem; color: var(--text-light);">
+            <div id="deliveryFeeDetails" style="font-size: 0.8rem; color: var(--text-light);">
                 <!-- Will be populated by JavaScript -->
             </div>
         </div>
         
         <!-- Order Summary -->
-        <div id="orderSummaryModal" style="background: #f0f9ff; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 20px; text-align: left; border-left: 3px solid var(--primary);">
-            <div style="font-weight: 600; margin-bottom: 10px; color: var(--dark);" 
+        <div id="orderSummaryModal" style="background: #f0f9ff; padding: 12px; border-radius: var(--radius-sm); margin-bottom: 15px; text-align: left; border-left: 3px solid var(--primary);">
+            <div style="font-weight: 600; margin-bottom: 8px; color: var(--dark); font-size: 0.9rem;" 
                  data-am="የትዕዛዝ ማጠቃለያ" 
                  data-om="Giddu-galeessa Ordeeraa">
                 የትዕዛዝ ማጠቃለያ
             </div>
-            <div id="orderSummaryDetails" style="font-size: 0.9rem; color: var(--text-light);">
+            <div id="orderSummaryDetails" style="font-size: 0.8rem; color: var(--text-light);">
                 <!-- Will be populated by JavaScript -->
             </div>
         </div>
@@ -1208,7 +1547,7 @@
                 <div class="payment-title" data-am="ክፍያ ከመላኪያ በኋላ" data-om="Kaffaltii Ergaa Booda">ክፍያ ከመላኪያ በኋላ</div>
                 <div class="payment-desc" data-am="ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ" data-om="Nyaata fudhachuu keessan booda qarshii kaffala">ምግቡን ከተቀበሉ በኋላ በገንዘብ ይክፈሉ</div>
             </div>
-            <i class="fas fa-check-circle" style="color: #28a745; font-size: 1.2rem; display: none;"></i>
+            <i class="fas fa-check-circle" style="color: #28a745; font-size: 1.1rem; display: none;"></i>
         </div>
         
         <div class="payment-option" onclick="selectPaymentMethod('telegram')" id="telegramPaymentOption">
@@ -1219,15 +1558,15 @@
                 <div class="payment-title" data-am="በቴሌግራም" data-om="Telegiraamiin">በቴሌግራም</div>
                 <div class="payment-desc" data-am="በቴሌግራም ይክፈሉ" data-om="Telegiraamiin kaffala">በቴሌግራም ይክፈሉ</div>
             </div>
-            <i class="fas fa-check-circle" style="color: #0088cc; font-size: 1.2rem; display: none;"></i>
+            <i class="fas fa-check-circle" style="color: #0088cc; font-size: 1.1rem; display: none;"></i>
         </div>
         
-        <div style="margin-top: 25px; display: flex; gap: 10px;">
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
             <button class="btn" onclick="confirmPayment()" id="confirmPaymentBtn"
-                    data-am="ክፍያ አረጋግጥ" 
-                    data-om="Kaffaltii Mirkaneessi">
-                <i class="fas fa-check"></i>
-                <span>ክፍያ አረጋግጥ</span>
+                    data-am="ትዕዛዝ ላክ" 
+                    data-om="Ordeer Ergi">
+                <i class="fas fa-paper-plane"></i>
+                <span>ትዕዛዝ ላክ</span>
             </button>
             <button class="btn btn-outline" onclick="closePaymentModal()" 
                     data-am="ተመለስ" 
@@ -1239,7 +1578,7 @@
     </div>
 </div>
 
-<!-- PWA Popup -->
+<!-- PWA Popup - WILL SHOW AFTER 10 SECONDS -->
 <div id="pwaPopup" class="pwa-popup">
     <div class="pwa-icon">📱</div>
     <div class="pwa-title" data-am="አፕ አርግ" data-om="App sirreessi">አፕ አርግ</div>
@@ -1261,6 +1600,12 @@
     </header>
 
     <div class="container">
+        <!-- Operating Hours Banner -->
+        <div class="hours-banner">
+            <i class="fas fa-clock"></i>
+            <span data-am="የስራ ሰዓት: 9:00 AM - 6:00 PM" data-om="Yeroo Hojii: 9:00 AM - 6:00 PM">የስራ ሰዓት: 9:00 AM - 6:00 PM</span>
+        </div>
+
         <!-- Quick Stats -->
         <div class="quick-stats">
             <div class="stat-box">
@@ -1277,7 +1622,7 @@
             </div>
         </div>
 
-        <!-- Delivery Fee Notice -->
+        <!-- Delivery Fee Notice - UPDATED WITH NEW TEXT -->
         <div class="delivery-notice">
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
                 <i class="fas fa-truck" style="color: var(--primary);"></i>
@@ -1288,24 +1633,26 @@
                 </div>
             </div>
             <div style="font-size: 0.9rem; color: var(--text-light);">
-                <div data-am="• 1 ኪ.ሜ ውስጥ: 50 ብር" data-om="• Kilomeetira 1 keessatti: 50 Birraa">• 1 ኪ.ሜ ውስጥ: 50 ብር</div>
-                <div data-am="• ከ1 ኪ.ሜ በላይ: 99 ብር" data-om="• Kilomeetira 1 ol: 99 Birraa">• ከ1 ኪ.ሜ በላይ: 99 ብር</div>
+                <div data-am="• አሁን እዘዝ: 1 ኪ.ሜ ውስጥ 50 ብር, ከ1 ኪ.ሜ በላይ 99 ብር" data-om="• Amma Ajaji: Kilomeetira 1 keessatti 50 Birraa, Kilomeetira 1 ol 99 Birraa">• አሁን እዘዝ: 1 ኪ.ሜ ውስጥ 50 ብር, ከ1 ኪ.ሜ በላይ 99 ብር</div>
+                <div data-am="• ቅድመ ትዕዛዝ: 50 ብር" data-om="• Ordeer Duraa: 50 Birraa">• ቅድመ ትዕዛዝ: 50 ብር</div>
                 <div data-am="• የመጀመሪያ ማድረሻ ነፃ!" data-om="• Ergaa jalqabaa bilisaa!">• የመጀመሪያ ማድረሻ ነፃ!</div>
+                <div data-am="• ከ10 ኪ.ሜ በላይ አይሰራም" data-om="• Kilomeetira 10 ol hin hojjetu">• ከ10 ኪ.ሜ በላይ አይሰራም</div>
             </div>
         </div>
 
-        <!-- Recently Ordered Foods Section -->
-        <div class="recent-orders" id="recentOrdersSection">
+        <!-- Recent Orders Section -->
+        <div class="recent-orders">
             <div class="recent-header">
                 <i class="fas fa-history"></i>
-                <h3 data-am="ቅርብ ጊዜ የታዘዙ ምግቦች" data-om="Nyaata Dhihoo Keessa Ordeerfame">ቅርብ ጊዜ የታዘዙ ምግቦች</h3>
+                <h3 data-am="ያለፉት ትዕዛዞች" data-om="Ordeeron Darban">ያለፉት ትዕዛዞች</h3>
             </div>
             <div class="recent-items" id="recentItems">
                 <!-- Recent items will be populated by JavaScript -->
-                <div style="text-align: center; padding: 20px; color: var(--text-light);" 
-                     data-am="ምንም ቅርብ ጊዜ የታዘዙ ምግቦች የሉም።" 
-                     data-om="Nyaata dhihoo keessa ordeerfame hin jiru.">
-                    ምንም ቅርብ ጊዜ የታዘዙ ምግቦች የሉም።
+                <div class="recent-item" style="justify-content: center; grid-column: span 3;" id="noRecentOrders">
+                    <div style="font-size: 2rem; color: var(--text-lighter); margin-bottom: 10px;">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div style="font-size: 0.9rem; color: var(--text-light);" data-am="ምንም ያለፈ ትዕዛዝ የለም" data-om="Ordeer darban hin jiru">ምንም ያለፈ ትዕዛዝ የለም</div>
                 </div>
             </div>
         </div>
@@ -1319,115 +1666,116 @@
             <span style="font-size: 0.9rem; color: var(--text-light);" data-am="ምረጥ" data-om="Filadhu">ምረጥ</span>
         </div>
 
+        <!-- CLASSIC NOODLES RESTAURANT -->
+        <div class="res-title">
+            <i class="fas fa-star"></i>
+            <span data-am="Classic Noodles" data-om="Classic Noodles">Classic Noodles</span>
+        </div>
+        <div class="menu-grid" data-restaurant="Classic Noodles">
+            <!-- Classic Noodles Burger Items -->
+            <div class="card"><img src="./assets/classic-king-burger.webp?v=14.2" alt="Classic King Burger"><input type="checkbox" value="Classic King Burger (freshly grounded beef, chicken and fish, lettuce, tomato, onion and sliced cheddar cheese, served with French fries and ketchup)" data-price="810" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Classic King Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/classic-chicken-burger.webp?v=14.2" alt="Classic Chicken Burger"><input type="checkbox" value="Classic Chicken Burger (chicken breast, mayonnaise, lettuce special burger sauce, mustard, egg, black pepper, cheese served with french fries and ketchup)" data-price="705" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Classic Chicken Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/double-cheese-burger.webp?v=14.2" alt="Double Cheese Burger"><input type="checkbox" value="Double Cheese Burger (Double layer freshly grounded beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="605" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Double Cheese Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/classic-burger.webp?v=14.2" alt="Classic Burger"><input type="checkbox" value="Classic Burger (freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, iceberg lettuce, caramelized onion and special burger sauce served with french fries and ketchup)" data-price="570" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Classic Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/beef-burger-new.webp?v=14.2" alt="Beef Burger"><input type="checkbox" value="Beef Burger (Freshly ground beef, vegetable oil, mayonnaise, lettuce, onion, and special burger sauce served with french fries and ketchup)" data-price="475" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/cheese-burger-new.webp?v=14.2" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/hamburger-new.webp?v=14.2" alt="Hamburger"><input type="checkbox" value="Hamburger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Hamburger</p></div></div>
+            
+            <div class="card"><img src="./assets/double-beef-burger-new.webp?v=14.2" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger (double layer freshly ground beef, vegetable oil, mayonnaise, lettuce, onion and special burger sauce served with french fries)" data-price="590" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
+            
+            <div class="card"><img src="./assets/mixed-burger.webp?v=14.2" alt="Mixed Burger"><input type="checkbox" value="Mixed Burger (Freshly ground Beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Mixed Burger</p></div></div>
+            
+            <!-- Classic Noodles Pizza Items -->
+            <div class="card"><img src="./assets/special-classic-pizza.webp?v=14.2" alt="Special Classic Pizza"><input type="checkbox" value="Special Classic Pizza (minced chicken and beef, boiled egg, garlic, olive oil, fresh tomato sauce)" data-price="795" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Special Classic Pizza</p></div></div>
+            
+            <div class="card"><img src="./assets/chicken-pizza-L.webp?v=14.2" alt="Chicken Pizza L"><input type="checkbox" value="Chicken Pizza L (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="600" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Chicken Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/pepperoni-pizza-L.webp?v=14.2" alt="Pepperoni Pizza L"><input type="checkbox" value="Pepperoni Pizza L/S (beef, ham, cheese, oregano)" data-price="600" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Pepperoni Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/beef-pizza-L.webp?v=14.2" alt="Beef Pizza L"><input type="checkbox" value="Beef Pizza L (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Beef Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/hawaiian-pizza-L.webp?v=14.2" alt="Hawaiian Pizza L"><input type="checkbox" value="Hawaiian Pizza L (beef sausage, pineapple, cheese, oregano)" data-price="600" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Hawaiian Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/tuna-pizza-L.webp?v=14.2" alt="Tuna Pizza L"><input type="checkbox" value="Tuna Pizza L (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="600" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Tuna Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/margarita-pizza-L.webp?v=14.2" alt="Margarita Pizza L"><input type="checkbox" value="Margarita Pizza L (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Margarita Pizza L/S</p></div></div>
+            
+            <div class="card"><img src="./assets/vegetable-pizza-L.webp?v=14.2" alt="Vegetable Pizza L"><input type="checkbox" value="Vegetable Pizza L (sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="600" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Vegetable Pizza L/S</p></div></div>
+            
+            <!-- Classic Noodles Noodle Items -->
+            <div class="card"><img src="./assets/stir-fry-chicken-noodles.webp?v=14.2" alt="Stir Fry Chicken Noodles"><input type="checkbox" value="Stir Fry Chicken Noodles (Freshly homemade noodles with marinated chicken breast(chopped) with egg/without egg, and different fresh vegetable and spice served with chili and soya sauce)" data-price="650" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Stir Fry Chicken Noodles</p></div></div>
+            
+            <div class="card"><img src="./assets/stir-fry-beef-noodles.webp?v=14.2" alt="Stir Fry Beef Noodles"><input type="checkbox" value="Stir Fry Beef Noodles (freshly homemade noodles marinated beef(chopped)with egg/without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="630" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Stir Fry Beef Noodles</p></div></div>
+            
+            <div class="card"><img src="./assets/stir-fry-vegetable-noodles.webp?v=14.2" alt="Stir Fry Vegetable Noodles"><input type="checkbox" value="Stir Fry Vegetable Noodles (Fasting) Freshly homemade noodles different vegetable, with egg/without egg, different fresh vegetable and spice served with chili and soya sauce" data-price="550" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Stir Fry Vegetable Noodles</p></div></div>
+            
+            <div class="card"><img src="./assets/stir-fry-fish-noodles.webp?v=14.2" alt="Stir Fry Fish Noodles"><input type="checkbox" value="Stir Fry Fish Noodles (freshly homemade noodles with marinated fish with egg or without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="610" data-restaurant="Classic Noodles"><div class="card-info"><p class="card-title">Stir Fry Fish Noodles</p></div></div>
+        </div>
+
+        <!-- ETALEM HOTEL RESTAURANT -->
         <div class="res-title">
             <i class="fas fa-hotel"></i>
             <span data-am="እታለም ኢንተርናሽናል ሆቴል" data-om="Etalem Interneeshinaal Hoteela">እታለም ኢንተርናሽናል ሆቴል</span>
         </div>
-        <div class="menu-grid">
-            <!-- Burger Items -->
-            <div class="card"><img src="./assets/double-special-burger.webp?v=13" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700"><div class="card-info"><p class="card-title">Double Special Burger</p></div></div>
-            <div class="card"><img src="./assets/special-burger.webp?v=13" alt="Special Burger"><input type="checkbox" value="Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
-            <div class="card"><img src="./assets/double-beef-burger.webp?v=13" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger" data-price="480"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
-            <div class="card"><img src="./assets/cheese-burger.webp?v=13" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger" data-price="450"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
-            <div class="card"><img src="./assets/normal-burger.webp?v=13" alt="Normal Burger"><input type="checkbox" value="Normal Burger" data-price="410"><div class="card-info"><p class="card-title">Normal Burger</p></div></div>
-            <div class="card"><img src="./assets/tuna-burger.webp?v=13" alt="Tuna Burger"><input type="checkbox" value="Tuna Burger" data-price="350"><div class="card-info"><p class="card-title">Tuna Burger</p></div></div>
-            <div class="card"><img src="./assets/vegetable-burger.webp?v=13" alt="Vegetable Burger"><input type="checkbox" value="Vegetable Burger" data-price="250"><div class="card-info"><p class="card-title">Vegetable Burger</p></div></div>
-            <div class="card"><img src="./assets/sandwich-club.webp?v=13" alt="Sandwich Club"><input type="checkbox" value="Sandwich Club" data-price="400"><div class="card-info"><p class="card-title">Sandwich Club</p></div></div>
+        <div class="menu-grid" data-restaurant="Etalem Hotel">
+            <!-- Etalem Burger Items -->
+            <div class="card"><img src="./assets/double-special-burger.webp?v=14.2" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Double Special Burger</p></div></div>
+            <div class="card"><img src="./assets/special-burger.webp?v=14.2" alt="Special Burger"><input type="checkbox" value="Special Burger" data-price="500" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
+            <div class="card"><img src="./assets/double-beef-burger.webp?v=14.2" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger" data-price="480" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
+            <div class="card"><img src="./assets/cheese-burger.webp?v=14.2" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger" data-price="450" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/normal-burger.webp?v=14.2" alt="Normal Burger"><input type="checkbox" value="Normal Burger" data-price="410" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Normal Burger</p></div></div>
+            <div class="card"><img src="./assets/tuna-burger.webp?v=14.2" alt="Tuna Burger"><input type="checkbox" value="Tuna Burger" data-price="350" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Tuna Burger</p></div></div>
+            <div class="card"><img src="./assets/vegetable-burger.webp?v=14.2" alt="Vegetable Burger"><input type="checkbox" value="Vegetable Burger" data-price="250" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Vegetable Burger</p></div></div>
+            <div class="card"><img src="./assets/sandwich-club.webp?v=14.2" alt="Sandwich Club"><input type="checkbox" value="Sandwich Club" data-price="400" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Sandwich Club</p></div></div>
             
-            <!-- Chips -->
-            <div class="card"><img src="./assets/chips.webp?v=13" alt="Chips"><input type="checkbox" value="Chips (ቺፕስ)" data-price="250"><div class="card-info"><p class="card-title">Chips (ቺፕስ)</p></div></div>
+            <!-- Etalem Chips -->
+            <div class="card"><img src="./assets/chips.webp?v=14.2" alt="Chips"><input type="checkbox" value="Chips (ቺፕስ)" data-price="250" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Chips (ቺፕስ)</p></div></div>
             
-            <!-- Pizza Items -->
-            <div class="card"><img src="./assets/etalem-special-pizza.webp?v=13" alt="Etalem Special Pizza"><input type="checkbox" value="Etalem Special Pizza" data-price="650"><div class="card-info"><p class="card-title">Etalem Special Pizza</p></div></div>
-            <div class="card"><img src="./assets/beef-pizza.webp?v=13" alt="Beef Pizza"><input type="checkbox" value="Beef Pizza" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza</p></div></div>
-            <div class="card"><img src="./assets/margaritta-pizza.webp?v=13" alt="Margaritta Pizza"><input type="checkbox" value="Margaritta Pizza" data-price="650"><div class="card-info"><p class="card-title">Margaritta Pizza</p></div></div>
-            <div class="card"><img src="./assets/chicken-pizza.webp?v=13" alt="Chicken Pizza"><input type="checkbox" value="Chicken Pizza" data-price="700"><div class="card-info"><p class="card-title">Chicken Pizza</p></div></div>
-            <div class="card"><img src="./assets/tuna-pizza.webp?v=13" alt="Tuna Pizza"><input type="checkbox" value="Tuna Pizza" data-price="550"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
-            <div class="card"><img src="./assets/vegetable-pizza.webp?v=13" alt="Vegetable Pizza"><input type="checkbox" value="Vegetable Pizza" data-price="350"><div class="card-info"><p class="card-title">Vegetable Pizza</p></div></div>
+            <!-- Etalem Pizza Items -->
+            <div class="card"><img src="./assets/etalem-special-pizza.webp?v=14.2" alt="Etalem Special Pizza"><input type="checkbox" value="Etalem Special Pizza" data-price="650" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Etalem Special Pizza</p></div></div>
+            <div class="card"><img src="./assets/beef-pizza.webp?v=14.2" alt="Beef Pizza"><input type="checkbox" value="Beef Pizza" data-price="600" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Beef Pizza</p></div></div>
+            <div class="card"><img src="./assets/margaritta-pizza.webp?v=14.2" alt="Margaritta Pizza"><input type="checkbox" value="Margaritta Pizza" data-price="650" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Margaritta Pizza</p></div></div>
+            <div class="card"><img src="./assets/chicken-pizza.webp?v=14.2" alt="Chicken Pizza"><input type="checkbox" value="Chicken Pizza" data-price="700" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Chicken Pizza</p></div></div>
+            <div class="card"><img src="./assets/tuna-pizza.webp?v=14.2" alt="Tuna Pizza"><input type="checkbox" value="Tuna Pizza" data-price="550" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
+            <div class="card"><img src="./assets/vegetable-pizza.webp?v=14.2" alt="Vegetable Pizza"><input type="checkbox" value="Vegetable Pizza" data-price="350" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Vegetable Pizza</p></div></div>
             
-            <!-- Juice Items -->
-            <div class="card"><img src="./assets/etalem-special-juice.webp?v=13" alt="Etalem Special Juice"><input type="checkbox" value="Etalem Special Juice" data-price="200"><div class="card-info"><p class="card-title">Etalem Special Juice</p></div></div>
-            <div class="card"><img src="./assets/strawberry-juice.webp?v=13" alt="Strawberry Juice"><input type="checkbox" value="Strawberry Juice" data-price="250"><div class="card-info"><p class="card-title">Strawberry Juice</p></div></div>
-            <div class="card"><img src="./assets/mixed-juice.webp?v=13" alt="Mixed Juice"><input type="checkbox" value="Mixed Juice" data-price="200"><div class="card-info"><p class="card-title">Mixed Juice</p></div></div>
+            <!-- Etalem Juice Items -->
+            <div class="card"><img src="./assets/etalem-special-juice.webp?v=14.2" alt="Etalem Special Juice"><input type="checkbox" value="Etalem Special Juice" data-price="200" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Etalem Special Juice</p></div></div>
+            <div class="card"><img src="./assets/strawberry-juice.webp?v=14.2" alt="Strawberry Juice"><input type="checkbox" value="Strawberry Juice" data-price="250" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Strawberry Juice</p></div></div>
+            <div class="card"><img src="./assets/mixed-juice.webp?v=14.2" alt="Mixed Juice"><input type="checkbox" value="Mixed Juice" data-price="200" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Mixed Juice</p></div></div>
             
-            <!-- Fish Items -->
-            <div class="card"><img src="./assets/fish-kotelet.webp?v=13" alt="Fish Kotelet"><input type="checkbox" value="Fish Kotelet" data-price="400"><div class="card-info"><p class="card-title">Fish Kotelet</p></div></div>
-            <div class="card"><img src="./assets/grilled-fish.webp?v=13" alt="Grilled Fish"><input type="checkbox" value="Grilled Fish" data-price="400"><div class="card-info"><p class="card-title">Grilled Fish</p></div></div>
+            <!-- Etalem Fish Items -->
+            <div class="card"><img src="./assets/fish-kotelet.webp?v=14.2" alt="Fish Kotelet"><input type="checkbox" value="Fish Kotelet" data-price="400" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Fish Kotelet</p></div></div>
+            <div class="card"><img src="./assets/grilled-fish.webp?v=14.2" alt="Grilled Fish"><input type="checkbox" value="Grilled Fish" data-price="400" data-restaurant="Etalem Hotel"><div class="card-info"><p class="card-title">Grilled Fish</p></div></div>
         </div>
 
-        <!-- NEW MENU ITEMS -->
-        <div class="res-title">
-            <i class="fas fa-star"></i>
-            <span data-am="Classic Noodles" data-om="Classic Noodles">አዲስ ምናሌ</span>
-        </div>
-        <div class="menu-grid">
-            <!-- New Burger Items -->
-            <div class="card"><img src="./assets/classic-king-burger.webp?v=13" alt="Classic King Burger"><input type="checkbox" value="Classic King Burger (freshly grounded beef, chicken and fish, lettuce, tomato, onion and sliced cheddar cheese, served with French fries and ketchup)" data-price="810"><div class="card-info"><p class="card-title">Classic King Burger</p></div></div>
-            
-            <div class="card"><img src="./assets/classic-chicken-burger.webp?v=13" alt="Classic Chicken Burger"><input type="checkbox" value="Classic Chicken Burger (chicken breast, mayonnaise, lettuce special burger sauce, mustard, egg, black pepper, cheese served with french fries and ketchup)" data-price="705"><div class="card-info"><p class="card-title">Classic Chicken Burger</p></div></div>
-            
-            <div class="card"><img src="./assets/double-cheese-burger.webp?v=13" alt="Double Cheese Burger"><input type="checkbox" value="Double Cheese Burger (Double layer freshly grounded beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="605"><div class="card-info"><p class="card-title">Double Cheese Burger</p></div></div>
-            
-            <div class="card"><img src="./assets/classic-burger.webp?v=13" alt="Classic Burger"><input type="checkbox" value="Classic Burger (freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, iceberg lettuce, caramelized onion and special burger sauce served with french fries and ketchup)" data-price="570"><div class="card-info"><p class="card-title">Classic Burger</p></div></div>
-            
-            <div class="card"><img src="./assets/beef-burger-new.webp?v=13" alt="Beef Burger"><input type="checkbox" value="Beef Burger (Freshly ground beef, vegetable oil, mayonnaise, lettuce, onion, and special burger sauce served with french fries and ketchup)" data-price="475"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
-            
-            <div class="card"><img src="./assets/cheese-burger-new.webp?v=13" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
-            
-            <div class="card"><img src="./assets/hamburger-new.webp?v=13" alt="Hamburger"><input type="checkbox" value="Hamburger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Hamburger</p></div></div>
-            
-            <div class="card"><img src="./assets/double-beef-burger-new.webp?v=13" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger (double layer freshly ground beef, vegetable oil, mayonnaise, lettuce, onion and special burger sauce served with french fries)" data-price="590"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
-            
-            <div class="card"><img src="./assets/mixed-burger.webp?v=13" alt="Mixed Burger"><input type="checkbox" value="Mixed Burger (Freshly ground Beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620"><div class="card-info"><p class="card-title">Mixed Burger</p></div></div>
-            
-            <!-- New Pizza Items -->
-            <div class="card"><img src="./assets/special-classic-pizza.webp?v=13" alt="Special Classic Pizza"><input type="checkbox" value="Special Classic Pizza (minced chicken and beef, boiled egg, garlic, olive oil, fresh tomato sauce)" data-price="795"><div class="card-info"><p class="card-title">Special Classic Pizza</p></div></div>
-            
-            <div class="card"><img src="./assets/chicken-pizza-L.webp?v=13" alt="Chicken Pizza L"><input type="checkbox" value="Chicken Pizza L (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Chicken Pizza L/S</p></div></div>
-            
-            <div class="card"><img src="./assets/pepperoni-pizza-L.webp?v=13" alt="Pepperoni Pizza L"><input type="checkbox" value="Pepperoni Pizza L/S (beef, ham, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Pepperoni Pizza L/S</p></div></div>
-            
-            <div class="card"><img src="./assets/beef-pizza-L.webp?v=13" alt="Beef Pizza L"><input type="checkbox" value="Beef Pizza L (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Beef Pizza L/S</p></div></div>
-            
-            <div class="card"><img src="./assets/hawaiian-pizza-L.webp?v=13" alt="Hawaiian Pizza L"><input type="checkbox" value="Hawaiian Pizza L (beef sausage, pineapple, cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Hawaiian Pizza L/S</p></div></div>
-            
-            <div class="card"><img src="./assets/tuna-pizza-L.webp?v=13" alt="Tuna Pizza L"><input type="checkbox" value="Tuna Pizza L (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="600"><div class="card-info"><p class="card-title">Tuna Pizza L/S</p></div></div>
-            
-            <div class="card"><img src="./assets/margarita-pizza-L.webp?v=13" alt="Margarita Pizza L"><input type="checkbox" value="Margarita Pizza L (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600"><div class="card-info"><p class="card-title">Margarita Pizza L/S</p></div></div>
-            
-            <div class="card"><img src="./assets/vegetable-pizza-L.webp?v=13" alt="Vegetable Pizza L"><input type="checkbox" value="Vegetable Pizza L (sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="600"><div class="card-info"><p class="card-title">Vegetable Pizza L/S</p></div></div>
-            
-            <!-- New Noodle Items -->
-            <div class="card"><img src="./assets/stir-fry-chicken-noodles.webp?v=13" alt="Stir Fry Chicken Noodles"><input type="checkbox" value="Stir Fry Chicken Noodles (Freshly homemade noodles with marinated chicken breast(chopped) with egg/without egg, and different fresh vegetable and spice served with chili and soya sauce)" data-price="650"><div class="card-info"><p class="card-title">Stir Fry Chicken Noodles</p></div></div>
-            
-            <div class="card"><img src="./assets/stir-fry-beef-noodles.webp?v=13" alt="Stir Fry Beef Noodles"><input type="checkbox" value="Stir Fry Beef Noodles (freshly homemade noodles marinated beef(chopped)with egg/without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="630"><div class="card-info"><p class="card-title">Stir Fry Beef Noodles</p></div></div>
-            
-            <div class="card"><img src="./assets/stir-fry-vegetable-noodles.webp?v=13" alt="Stir Fry Vegetable Noodles"><input type="checkbox" value="Stir Fry Vegetable Noodles (Fasting) Freshly homemade noodles different vegetable, with egg/without egg, different fresh vegetable and spice served with chili and soya sauce" data-price="550"><div class="card-info"><p class="card-title">Stir Fry Vegetable Noodles</p></div></div>
-            
-            <div class="card"><img src="./assets/stir-fry-fish-noodles.webp?v=13" alt="Stir Fry Fish Noodles"><input type="checkbox" value="Stir Fry Fish Noodles (freshly homemade noodles with marinated fish with egg or without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="610"><div class="card-info"><p class="card-title">Stir Fry Fish Noodles</p></div></div>
-        </div>
-
-        <!-- Kameti's Kitchen Section -->
+        <!-- KAMETI KITCHEN RESTAURANT -->
         <div class="res-title">
             <i class="fas fa-utensil-spoon"></i>
             <span data-am="ካሜቲ (Kameti's Kitchen)" data-om="Kameetii (Kameti's Kitchen)">ካሜቲ (Kameti's Kitchen)</span>
         </div>
-        <div class="menu-grid">
+        <div class="menu-grid" data-restaurant="Kameti Kitchen">
             <!-- Kameti Burger Items -->
-            <div class="card"><img src="./assets/kameti-special-burger.webp?v=13" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
-            <div class="card"><img src="./assets/kameti-cheese-burger.webp?v=13" alt="Kameti Cheese Burger"><input type="checkbox" value="Kameti Cheese Burger" data-price="480"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
-            <div class="card"><img src="./assets/kameti-beef-burger.webp?v=13" alt="Kameti Beef Burger"><input type="checkbox" value="Kameti Beef Burger" data-price="450"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
+            <div class="card"><img src="./assets/kameti-special-burger.webp?v=14.2" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500" data-restaurant="Kameti Kitchen"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
+            <div class="card"><img src="./assets/kameti-cheese-burger.webp?v=14.2" alt="Kameti Cheese Burger"><input type="checkbox" value="Kameti Cheese Burger" data-price="480" data-restaurant="Kameti Kitchen"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/kameti-beef-burger.webp?v=14.2" alt="Kameti Beef Burger"><input type="checkbox" value="Kameti Beef Burger" data-price="450" data-restaurant="Kameti Kitchen"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
             
             <!-- Kameti Pizza Items -->
-            <div class="card"><img src="./assets/kameti-large-pizza.webp?v=13" alt="Kameti Large Pizza"><input type="checkbox" value="Kameti Large Pizza" data-price="700"><div class="card-info"><p class="card-title">Large Pizza</p></div></div>
-            <div class="card"><img src="./assets/kameti-medium-pizza.webp?v=13" alt="Kameti Medium Pizza"><input type="checkbox" value="Kameti Medium Pizza" data-price="600"><div class="card-info"><p class="card-title">Medium Pizza</p></div></div>
-            <div class="card"><img src="./assets/kameti-tuna-pizza.webp?v=13" alt="Kameti Tuna Pizza"><input type="checkbox" value="Kameti Tuna Pizza" data-price="480"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
+            <div class="card"><img src="./assets/kameti-large-pizza.webp?v=14.2" alt="Kameti Large Pizza"><input type="checkbox" value="Kameti Large Pizza" data-price="700" data-restaurant="Kameti Kitchen"><div class="card-info"><p class="card-title">Large Pizza</p></div></div>
+            <div class="card"><img src="./assets/kameti-medium-pizza.webp?v=14.2" alt="Kameti Medium Pizza"><input type="checkbox" value="Kameti Medium Pizza" data-price="600" data-restaurant="Kameti Kitchen"><div class="card-info"><p class="card-title">Medium Pizza</p></div></div>
+            <div class="card"><img src="./assets/kameti-tuna-pizza.webp?v=14.2" alt="Kameti Tuna Pizza"><input type="checkbox" value="Kameti Tuna Pizza" data-price="480" data-restaurant="Kameti Kitchen"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
             
             <!-- Kameti Juice -->
-            <div class="card"><img src="./assets/kameti-special-juice.webp?v=13" alt="Kameti Special Juice"><input type="checkbox" value="Kameti Special Juice" data-price="230"><div class="card-info"><p class="card-title">Special Juice</p></div></div>
+            <div class="card"><img src="./assets/kameti-special-juice.webp?v=14.2" alt="Kameti Special Juice"><input type="checkbox" value="Kameti Special Juice" data-price="230" data-restaurant="Kameti Kitchen"><div class="card-info"><p class="card-title">Special Juice</p></div></div>
             
             <!-- Kameti Chips (150 ETB) -->
-            <div class="card"><img src="./assets/chips.webp?v=13" alt="Kameti's Chips"><input type="checkbox" value="Kameti's Chips" data-price="150"><div class="card-info"><p class="card-title">Kameti's Chips</p></div></div>
+            <div class="card"><img src="./assets/chips.webp?v=14.2" alt="Kameti's Chips"><input type="checkbox" value="Kameti's Chips" data-price="150" data-restaurant="Kameti Kitchen"><div class="card-info"><p class="card-title">Kameti's Chips</p></div></div>
         </div>
     </div>
 </div>
@@ -1440,6 +1788,12 @@
     </header>
 
     <div class="container">
+        <!-- Operating Hours Banner -->
+        <div class="hours-banner">
+            <i class="fas fa-clock"></i>
+            <span data-am="የስራ ሰዓት: 9:00 AM - 6:00 PM" data-om="Yeroo Hojii: 9:00 AM - 6:00 PM">የስራ ሰዓት: 9:00 AM - 6:00 PM</span>
+        </div>
+
         <div class="info-card">
             <h2 data-am="እንዴት እንሰራለን" data-om="Akkam Nuti Hojjennu">እንዴት እንሰራለን</h2>
             
@@ -1447,7 +1801,7 @@
                 <div class="step-number">1</div>
                 <div>
                     <h3 style="margin:0;" data-am="ምግብ ይምረጡ" data-om="Nyaata Filadhu">ምግብ ይምረጡ</h3>
-                    <p data-am="ከእታለም ኢንተርናሽናል ሆቴል ወይም ካሜቲ ኪችን የተሻለ ምግብ ይምረጡ" data-om="Etalem Interneeshinaal Hoteela ykn Kameetii Kitchen irraa nyaata filadhu">ከእታለም ኢንተርናሽናል ሆቴል ወይም ካሜቲ ኪችን የተሻለ ምግብ ይምረጡ</p>
+                    <p data-am="ከClassic Noodles, እታለም ሆቴል ወይም ካሜቲ ኪችን የተሻለ ምግብ ይምረጡ" data-om="Classic Noodles, Etalem Hoteela ykn Kameetii Kitchen irraa nyaata filadhu">ከClassic Noodles, እታለም ሆቴል ወይም ካሜቲ ኪችን የተሻለ ምግብ ይምረጡ</p>
                 </div>
             </div>
             
@@ -1480,11 +1834,11 @@
             <h2 data-am="የመላኪያ መረጃ" data-om="Odeeffannoo Ergaa">የመላኪያ መረጃ</h2>
             <ul style="padding-left:20px;">
                 <li data-am="የመጀመሪያ ማድረሻ ነፃ!" data-om="Ergaa jalqabaa bilisaa!">የመጀመሪያ ማድረሻ ነፃ!</li>
-                <li data-am="በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር" data-om="Kilomeetira 1 keessatti: 50 Birraa">በ1 ኪ.ሜ ክበብ ውስጥ: 50 ብር</li>
-                <li data-am="ከ1 ኪ.ሜ በላይ: 99 ብር" data-om="Kilomeetira 1 ol: 99 Birraa">ከ1 ኪ.ሜ በላይ: 99 ብር</li>
+                <li data-am="አሁን እዘዝ: 1 ኪ.ሜ ውስጥ 50 ብር, ከ1 ኪ.ሜ በላይ 99 ብር" data-om="Amma Ajaji: Kilomeetira 1 keessatti 50 Birraa, Kilomeetira 1 ol 99 Birraa">አሁን እዘዝ: 1 ኪ.ሜ ውስጥ 50 ብር, ከ1 ኪ.ሜ በላይ 99 ብር</li>
+                <li data-am="ቅድመ ትዕዛዝ: 50 ብር" data-om="Ordeer Duraa: 50 Birraa">ቅድመ ትዕዛዝ: 50 ብር</li>
                 <li data-am="የማድረሻ ጊዜ: 30-45 ደቂቃ" data-om="Yeroo Ga'umsaa: 30-45 Daqiiqaa">የማድረሻ ጊዜ: 30-45 ደቂቃ</li>
-                <li data-am="አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ" data-om="Bakka Tajaajilaa: Bishooftu Keessaa">አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ</li>
-                <li data-am="የሚሰራው: በየቀኑ 8:00 AM - 10:00 PM" data-om="Yeroo Hojii: Guyyaa guyyaan 8:00 AM - 10:00 PM">የሚሰራው: በየቀኑ 8:00 AM - 10:00 PM</li>
+                <li data-am="አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ (ከ10 ኪ.ሜ በታች)" data-om="Bakka Tajaajilaa: Bishooftu Keessaa (Kilomeetira 10 gadii)">አገልግሎት አካባቢ: ቢሾፍቱ ውስጥ (ከ10 ኪ.ሜ በታች)</li>
+                <li data-am="የሚሰራው: በየቀኑ 9:00 AM - 6:00 PM" data-om="Yeroo Hojii: Guyyaa guyyaan 9:00 AM - 6:00 PM">የሚሰራው: በየቀኑ 9:00 AM - 6:00 PM</li>
             </ul>
         </div>
 
@@ -1504,10 +1858,16 @@
     </header>
 
     <div class="container">
+        <!-- Operating Hours Banner -->
+        <div class="hours-banner">
+            <i class="fas fa-clock"></i>
+            <span data-am="የስራ ሰዓት: 9:00 AM - 6:00 PM" data-om="Yeroo Hojii: 9:00 AM - 6:00 PM">የስራ ሰዓት: 9:00 AM - 6:00 PM</span>
+        </div>
+
         <div class="contact-card">
             <h2 data-am="ቀጥታ ማነጋገሪያ" data-om="Walqunnamtii Gaggaarii">ቀጥታ ማነጋገሪያ</h2>
             <p><strong data-am="ስልክ፡" data-om="Bilbila:">ስልክ፡</strong> 0962636940</p>
-            <p><strong data-am="የስራ ሰዓት፡" data-om="Yeroo Hojii:">የስራ ሰዓት፡</strong> 8:00 AM - 10:00 PM</p>
+            <p><strong data-am="የስራ ሰዓት፡" data-om="Yeroo Hojii:">የስራ ሰዓት፡</strong> 9:00 AM - 6:00 PM</p>
             
             <button class="btn" onclick="callSupport()" style="margin-top:15px;" data-am="ይደውሉ" data-om="Bilbilaa">
                 <i class="fas fa-phone"></i>
@@ -1530,7 +1890,7 @@
         <div class="contact-card">
             <h2 data-am="አድራሻ" data-om="Teessoo">አድራሻ</h2>
             <p data-am="ቢሾፍቱ፣ ኢትዮጵያ" data-om="Bishooftu, Itoophiyaa">ቢሾፍቱ፣ ኢትዮጵያ</p>
-            <p><strong data-am="አገልግሎት አካባቢ፡" data-om="Bakka Tajaajilaa:">አገልግሎት አካባቢ፡</strong> <span data-am="ቢሾፍቱ ውስጥ ብቻ" data-om="Bishooftu Keessaa Qofa">ቢሾፍቱ ውስጥ ብቻ</span></p>
+            <p><strong data-am="አገልግሎት አካባቢ፡" data-om="Bakka Tajaajilaa:">አገልግሎት አካባቢ፡</strong> <span data-am="ቢሾፍቱ ውስጥ (ከ10 ኪ.ሜ በታች)" data-om="Bishooftu Keessaa (Kilomeetira 10 gadii)">ቢሾፍቱ ውስጥ (ከ10 ኪ.ሜ በታች)</span></p>
         </div>
 
         <div class="info-card">
@@ -1563,13 +1923,14 @@
 </div>
 
 <script>
-    // Restaurant coordinates
+    // Restaurant coordinates with correct values
     const RESTAURANT_COORDINATES = {
+        'Classic Noodles': { lat: 8.7512517, lng: 38.9619680 },
         'Etalem Hotel': { lat: 8.7592026, lng: 38.9458399 },
         'Kameti Kitchen': { lat: 8.7596178, lng: 38.9450543 }
     };
     
-    const DEFAULT_RESTAURANT = 'Etalem Hotel';
+    const MAX_DELIVERY_DISTANCE = 10; // 10km maximum
     
     const BOT_USERNAME = "Bishoftu_Delivery_bot";
     const TELEGRAM_ADMIN_USERNAME = "Bishoftu_Delivery_bot";
@@ -1587,9 +1948,69 @@
     let deliveryFee = 0;
     let calculatedDistance = 0;
     let isLocationRequested = false;
+    let orderType = 'normal'; // 'normal', 'preorder', or 'group'
+    let preorderTimeSlot = ''; // 'slot1', 'slot2', 'slot3'
     
-    // Recently ordered foods (will be loaded from localStorage)
-    let recentOrders = [];
+    // Recent orders storage
+    let recentOrders = JSON.parse(localStorage.getItem('recentOrders')) || [];
+    
+    // Menu items mapping for images (simplified for recent orders)
+    const menuItemsMap = {
+        // Classic Noodles Items
+        'Classic King Burger': './assets/classic-king-burger.webp',
+        'Classic Chicken Burger': './assets/classic-chicken-burger.webp',
+        'Double Cheese Burger': './assets/double-cheese-burger.webp',
+        'Classic Burger': './assets/classic-burger.webp',
+        'Beef Burger': './assets/beef-burger-new.webp',
+        'Cheese Burger': './assets/cheese-burger-new.webp',
+        'Hamburger': './assets/hamburger-new.webp',
+        'Double Beef Burger': './assets/double-beef-burger-new.webp',
+        'Mixed Burger': './assets/mixed-burger.webp',
+        'Special Classic Pizza': './assets/special-classic-pizza.webp',
+        'Chicken Pizza L/S': './assets/chicken-pizza-L.webp',
+        'Pepperoni Pizza L/S': './assets/pepperoni-pizza-L.webp',
+        'Beef Pizza L/S': './assets/beef-pizza-L.webp',
+        'Hawaiian Pizza L/S': './assets/hawaiian-pizza-L.webp',
+        'Tuna Pizza L/S': './assets/tuna-pizza-L.webp',
+        'Margarita Pizza L/S': './assets/margarita-pizza-L.webp',
+        'Vegetable Pizza L/S': './assets/vegetable-pizza-L.webp',
+        'Stir Fry Chicken Noodles': './assets/stir-fry-chicken-noodles.webp',
+        'Stir Fry Beef Noodles': './assets/stir-fry-beef-noodles.webp',
+        'Stir Fry Vegetable Noodles': './assets/stir-fry-vegetable-noodles.webp',
+        'Stir Fry Fish Noodles': './assets/stir-fry-fish-noodles.webp',
+        
+        // Etalem Hotel Items
+        'Double Special Burger': './assets/double-special-burger.webp',
+        'Special Burger': './assets/special-burger.webp',
+        'Double Beef Burger': './assets/double-beef-burger.webp',
+        'Cheese Burger': './assets/cheese-burger.webp',
+        'Normal Burger': './assets/normal-burger.webp',
+        'Tuna Burger': './assets/tuna-burger.webp',
+        'Vegetable Burger': './assets/vegetable-burger.webp',
+        'Sandwich Club': './assets/sandwich-club.webp',
+        'Chips (ቺፕስ)': './assets/chips.webp',
+        'Etalem Special Pizza': './assets/etalem-special-pizza.webp',
+        'Beef Pizza': './assets/beef-pizza.webp',
+        'Margaritta Pizza': './assets/margaritta-pizza.webp',
+        'Chicken Pizza': './assets/chicken-pizza.webp',
+        'Tuna Pizza': './assets/tuna-pizza.webp',
+        'Vegetable Pizza': './assets/vegetable-pizza.webp',
+        'Etalem Special Juice': './assets/etalem-special-juice.webp',
+        'Strawberry Juice': './assets/strawberry-juice.webp',
+        'Mixed Juice': './assets/mixed-juice.webp',
+        'Fish Kotelet': './assets/fish-kotelet.webp',
+        'Grilled Fish': './assets/grilled-fish.webp',
+        
+        // Kameti Kitchen Items
+        'Kameti Special Burger': './assets/kameti-special-burger.webp',
+        'Kameti Cheese Burger': './assets/kameti-cheese-burger.webp',
+        'Kameti Beef Burger': './assets/kameti-beef-burger.webp',
+        'Kameti Large Pizza': './assets/kameti-large-pizza.webp',
+        'Kameti Medium Pizza': './assets/kameti-medium-pizza.webp',
+        'Kameti Tuna Pizza': './assets/kameti-tuna-pizza.webp',
+        'Kameti Special Juice': './assets/kameti-special-juice.webp',
+        'Kameti\'s Chips': './assets/chips.webp'
+    };
     
     // Pull to refresh variables
     let startY = 0;
@@ -1603,131 +2024,69 @@
     const offlineIndicator = document.getElementById('offlineIndicator');
     const toast = document.getElementById('toast');
 
-    // Initialize recently ordered items
+    // Initialize recent orders
     function initRecentOrders() {
-        try {
-            const savedOrders = localStorage.getItem('recentOrders');
-            if (savedOrders) {
-                recentOrders = JSON.parse(savedOrders);
-            } else {
-                recentOrders = [];
-            }
-            
-            // Display recent orders
-            displayRecentOrders();
-        } catch (error) {
-            console.error('Error loading recent orders:', error);
-            recentOrders = [];
-        }
-    }
-    
-    // Display recent orders in the UI
-    function displayRecentOrders() {
         const recentContainer = document.getElementById('recentItems');
-        const recentSection = document.getElementById('recentOrdersSection');
-        
-        if (!recentContainer || !recentSection) return;
+        const noRecentOrders = document.getElementById('noRecentOrders');
         
         if (recentOrders.length === 0) {
-            recentContainer.innerHTML = `
-                <div style="text-align: center; padding: 20px; color: var(--text-light);" 
-                     data-am="ምንም ቅርብ ጊዜ የታዘዙ ምግቦች የሉም።" 
-                     data-om="Nyaata dhihoo keessa ordeerfame hin jiru.">
-                    ምንም ቅርብ ጊዜ የታዘዙ ምግቦች የሉም።
-                </div>
-            `;
+            noRecentOrders.style.display = 'flex';
             return;
         }
         
+        noRecentOrders.style.display = 'none';
         recentContainer.innerHTML = '';
         
-        // Show only up to 3 recent orders
-        const ordersToShow = recentOrders.slice(0, 3);
+        // Show only the last 3 orders
+        const lastThreeOrders = recentOrders.slice(-3).reverse();
         
-        ordersToShow.forEach((order, index) => {
+        lastThreeOrders.forEach((order, index) => {
             const recentItem = document.createElement('div');
             recentItem.className = 'recent-item';
+            recentItem.onclick = () => addRecentItem(order.name);
+            
+            const itemName = order.name.split('(')[0].trim();
+            const imageSrc = menuItemsMap[itemName] || './assets/double-special-burger.webp';
+            
             recentItem.innerHTML = `
-                <img src="${order.image || './assets/default-food.webp'}" alt="${order.name}">
-                <div class="recent-info">
-                    <div class="recent-name">${order.name}</div>
-                    <div class="recent-orders-count">${currentLang === 'am' ? 
-                        `ዋጋ: ${order.price} ብር • ${order.date}` : 
-                        `Gatii: ${order.price} Birraa • ${order.date}`}</div>
-                </div>
-                <button class="btn btn-small" onclick="reorderItem('${order.name}', ${order.price})">
-                    <i class="fas fa-redo"></i>
-                    <span>${currentLang === 'am' ? 'እንደገና አዘዝ' : 'Irra Deebiin Ordeer'}</span>
-                </button>
+                <img src="${imageSrc}" alt="${itemName}" class="recent-image">
+                <div class="recent-name">${itemName}</div>
             `;
             recentContainer.appendChild(recentItem);
         });
         
-        // Update language for the recent items
-        if (currentLang !== 'am') {
-            const reorderButtons = recentContainer.querySelectorAll('.btn-small span');
-            reorderButtons.forEach(btn => {
-                btn.textContent = 'Irra Deebiin Ordeer';
-            });
-        }
-    }
-    
-    // Add item to recent orders
-    function addToRecentOrders(itemName, itemPrice) {
-        // Find the item image
-        let itemImage = './assets/default-food.webp';
-        document.querySelectorAll('.card').forEach(card => {
-            const title = card.querySelector('.card-title').textContent;
-            if (title === itemName || card.querySelector('input[type="checkbox"]').value.includes(itemName)) {
-                const img = card.querySelector('img');
-                if (img && img.src) {
-                    itemImage = img.src;
-                }
+        // If less than 3 items, add placeholders
+        if (lastThreeOrders.length < 3) {
+            for (let i = lastThreeOrders.length; i < 3; i++) {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'recent-item';
+                placeholder.style.opacity = '0.5';
+                placeholder.innerHTML = `
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: #f0f0f0; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-utensils" style="color: #ccc; font-size: 1.5rem;"></i>
+                    </div>
+                    <div class="recent-name" style="color: #ccc;">---</div>
+                `;
+                recentContainer.appendChild(placeholder);
             }
-        });
-        
-        // Create order object
-        const order = {
-            name: itemName,
-            price: itemPrice,
-            image: itemImage,
-            date: new Date().toLocaleDateString('am-ET')
-        };
-        
-        // Remove if already exists (to avoid duplicates)
-        recentOrders = recentOrders.filter(o => o.name !== itemName);
-        
-        // Add to beginning of array
-        recentOrders.unshift(order);
-        
-        // Keep only last 10 orders
-        if (recentOrders.length > 10) {
-            recentOrders = recentOrders.slice(0, 10);
         }
-        
-        // Save to localStorage
-        localStorage.setItem('recentOrders', JSON.stringify(recentOrders));
-        
-        // Update UI
-        displayRecentOrders();
     }
     
-    // Reorder an item
-    function reorderItem(itemName, itemPrice) {
+    // Add recent item to cart
+    function addRecentItem(itemName) {
         // Find the checkbox for this item
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         for (let checkbox of checkboxes) {
-            if (checkbox.value.includes(itemName)) {
+            const checkboxValue = checkbox.value.split('(')[0].trim();
+            if (checkboxValue === itemName) {
                 checkbox.checked = true;
                 
                 // Animate the card
                 const card = checkbox.closest('.card');
-                if (card) {
-                    card.classList.add('item-added');
-                    setTimeout(() => {
-                        card.classList.remove('item-added');
-                    }, 300);
-                }
+                card.classList.add('item-added');
+                setTimeout(() => {
+                    card.classList.remove('item-added');
+                }, 300);
                 
                 updateCartCount();
                 showToast(`${currentLang === 'am' ? 'ተጨመረ:' : 'Dabalame:'} ${itemName}`, 2000);
@@ -1735,8 +2094,56 @@
             }
         }
         
-        // If exact match not found, show message
+        // If exact match not found, try partial match
+        for (let checkbox of checkboxes) {
+            if (checkbox.value.toLowerCase().includes(itemName.toLowerCase())) {
+                checkbox.checked = true;
+                
+                const card = checkbox.closest('.card');
+                card.classList.add('item-added');
+                setTimeout(() => {
+                    card.classList.remove('item-added');
+                }, 300);
+                
+                updateCartCount();
+                showToast(`${currentLang === 'am' ? 'ተጨመረ:' : 'Dabalame:'} ${itemName}`, 2000);
+                return;
+            }
+        }
+        
+        // If not found, show message
         showToast(currentLang === 'am' ? 'አትሙ በምናሌው ውስጥ አልተገኘም' : 'Nyaanni menu keessatti hin argamne', 3000);
+    }
+    
+    // Add order to recent orders
+    function addToRecentOrders(orderItems) {
+        // Extract individual items from order
+        const items = orderItems.split(', ');
+        
+        items.forEach(item => {
+            const itemName = item.split('(')[0].trim();
+            
+            // Check if item already exists in recent orders
+            const exists = recentOrders.some(order => order.name === itemName);
+            
+            if (!exists) {
+                recentOrders.push({
+                    name: itemName,
+                    date: new Date().toISOString()
+                });
+                
+                // Keep only last 10 orders
+                if (recentOrders.length > 10) {
+                    recentOrders = recentOrders.slice(-10);
+                }
+            }
+        });
+        
+        // Save to localStorage
+        localStorage.setItem('recentOrders', JSON.stringify(recentOrders));
+        
+        // Update UI
+        initRecentOrders();
     }
 
     // Language switching function
@@ -1759,8 +2166,8 @@
         // Update all translatable elements
         updateTextContent();
         
-        // Update recent orders display
-        displayRecentOrders();
+        // Update recent orders with new language
+        initRecentOrders();
         
         // Update cart count
         updateCartCount();
@@ -1804,6 +2211,34 @@
         document.querySelectorAll('.fire').forEach((fire, index) => {
             fire.textContent = index === 0 ? '🔥' : index === 1 ? '🔥' : '🔥';
         });
+    }
+
+    // Select order type
+    function selectOrderType(type) {
+        orderType = type;
+        
+        // Update UI
+        document.querySelectorAll('.order-type-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        if (type === 'normal') {
+            document.getElementById('normalOrderBtn').classList.add('active');
+        } else if (type === 'preorder') {
+            document.getElementById('preorderBtn').classList.add('active');
+        }
+    }
+
+    // Select preorder time slot
+    function selectPreorderTime(slot) {
+        preorderTimeSlot = slot;
+        
+        // Update UI
+        document.querySelectorAll('.time-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        
+        document.getElementById(slot + 'Option').classList.add('selected');
     }
 
     // Select payment method in modal
@@ -1895,7 +2330,7 @@
         updateStreakUI();
         initPWA();
         initPullToRefresh();
-        initRecentOrders(); // Initialize recent orders instead of trending
+        initRecentOrders();
         
         // Update cart count
         updateCartCount();
@@ -1918,7 +2353,7 @@
             }
         }, 10000);
         
-        // 1. Show PWA popup after 10 seconds (CHANGE 1: Already implemented)
+        // 1. Show PWA popup after 10 seconds
         setTimeout(() => {
             showPWApopup();
         }, 10000);
@@ -1942,6 +2377,9 @@
         
         // Set default payment method to cash (payment after delivery)
         selectPaymentMethod('cash');
+        
+        // Set default order type to normal
+        selectOrderType('normal');
     };
 
     // Initialize Pull to Refresh
@@ -2020,6 +2458,9 @@
         updateStreakUI();
         checkForUpdates();
         
+        // Update recent orders
+        initRecentOrders();
+        
         // Show success message
         refreshText.textContent = currentLang === 'am' ? 
             'ተደስቷል!' : 
@@ -2090,11 +2531,16 @@
                 
                 isLocationRequested = true;
                 
-                // Calculate distance and delivery fee
-                calculateDeliveryFee();
-                
-                // Show payment modal after getting location
-                showPaymentModal();
+                // Check if preorder was selected
+                if (orderType === 'preorder') {
+                    showPreorderModal();
+                } else {
+                    // Calculate distance and delivery fee
+                    calculateDeliveryFee();
+                    
+                    // Show payment modal after getting location
+                    showPaymentModal();
+                }
             },
             (error) => {
                 let errorMsg = currentLang === 'am' ? 'አካባቢ ማወቅ አልተቻለም' : 'Bakka beekuu hindandeenye';
@@ -2113,16 +2559,46 @@
                 
                 showToast(errorMsg, 4000);
                 
-                // Even if location fails, show payment modal
-                setTimeout(() => {
-                    // Set default delivery fee
-                    deliveryFee = 99;
-                    calculatedDistance = 0;
+                // Even if location fails, check for preorder
+                if (orderType === 'preorder') {
+                    showPreorderModal();
+                } else {
+                    // Calculate delivery fee based on order type
+                    calculateDeliveryFee();
                     showPaymentModal();
-                }, 1000);
+                }
             },
             options
         );
+    }
+
+    // Show preorder time selection modal
+    function showPreorderModal() {
+        document.getElementById('preorderModal').style.display = 'block';
+    }
+
+    // Confirm preorder time selection
+    function confirmPreorderTime() {
+        if (!preorderTimeSlot) {
+            showToast(currentLang === 'am' ? 'እባክዎ የቅድመ ትዕዛዝ ሰዓት ይምረጡ' : 'Yeroo ordeeraa duraa filadhu', 3000);
+            return;
+        }
+        
+        document.getElementById('preorderModal').style.display = 'none';
+        
+        // Calculate delivery fee (preorder is fixed 50 birr)
+        calculateDeliveryFee();
+        
+        // Show payment modal
+        showPaymentModal();
+    }
+
+    // Cancel preorder
+    function cancelPreorder() {
+        document.getElementById('preorderModal').style.display = 'none';
+        orderType = 'normal';
+        selectOrderType('normal');
+        showLocationModal();
     }
 
     // Deny location
@@ -2131,39 +2607,15 @@
         showToast(currentLang === 'am' ? 'አልፈልግም' : 'Hin barbaadu', 2000);
         isLocationRequested = false;
         
-        // Set default delivery fee
-        deliveryFee = 99;
-        calculatedDistance = 0;
-        
-        // Show payment modal
-        showPaymentModal();
-    }
-
-    // Calculate distance and delivery fee
-    function calculateDeliveryFee() {
-        if (!userLat || !userLng) {
-            deliveryFee = 99;
-            calculatedDistance = 0;
-            return;
-        }
-        
-        const restaurant = RESTAURANT_COORDINATES[DEFAULT_RESTAURANT];
-        if (!restaurant) {
-            deliveryFee = 99;
-            calculatedDistance = 0;
-            return;
-        }
-        
-        // Calculate distance in kilometers
-        calculatedDistance = calculateDistance(userLat, userLng, restaurant.lat, restaurant.lng);
-        
-        // Calculate delivery fee based on distance
-        if (isFirstOrder && FIRST_DELIVERY_FREE) {
-            deliveryFee = 0; // First order free
-        } else if (calculatedDistance <= 1) {
-            deliveryFee = 50; // Within 1km
+        // Check if preorder was selected
+        if (orderType === 'preorder') {
+            showPreorderModal();
         } else {
-            deliveryFee = 99; // Beyond 1km
+            // Calculate delivery fee based on order type
+            calculateDeliveryFee();
+            
+            // Show payment modal
+            showPaymentModal();
         }
     }
 
@@ -2180,37 +2632,166 @@
         return R * c;
     }
 
-    // Show payment modal (CHANGE 2: Now scrollable)
+    // Calculate delivery fee based on order type and distance to farthest restaurant
+    function calculateDeliveryFee() {
+        // Get selected items and their restaurants
+        const selectedItems = [];
+        const selectedRestaurants = new Set();
+        
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
+            selectedItems.push(box.value);
+            const restaurant = box.getAttribute('data-restaurant');
+            if (restaurant) {
+                selectedRestaurants.add(restaurant);
+            }
+        });
+        
+        // If no items selected, return
+        if (selectedItems.length === 0) {
+            deliveryFee = 0;
+            calculatedDistance = 0;
+            return;
+        }
+        
+        // Check for special order types
+        if (orderType === 'preorder') {
+            // Preorder: Fixed 50 birr
+            deliveryFee = 50;
+            calculatedDistance = 0;
+            return;
+        }
+        
+        // Normal order: Calculate based on distance to farthest restaurant
+        if (!userLat || !userLng) {
+            // No location provided, use maximum fee
+            deliveryFee = 99;
+            calculatedDistance = 0;
+            return;
+        }
+        
+        // Calculate distance to each selected restaurant
+        let maxDistance = 0;
+        let farthestRestaurant = '';
+        
+        selectedRestaurants.forEach(restaurantName => {
+            const restaurant = RESTAURANT_COORDINATES[restaurantName];
+            if (restaurant) {
+                const distance = calculateDistance(userLat, userLng, restaurant.lat, restaurant.lng);
+                if (distance > maxDistance) {
+                    maxDistance = distance;
+                    farthestRestaurant = restaurantName;
+                }
+            }
+        });
+        
+        calculatedDistance = maxDistance;
+        
+        // Check if beyond maximum delivery area
+        if (calculatedDistance > MAX_DELIVERY_DISTANCE) {
+            deliveryFee = 0; // Will show error in payment modal
+            return;
+        }
+        
+        // Calculate delivery fee based on distance to farthest restaurant
+        if (isFirstOrder && FIRST_DELIVERY_FREE) {
+            deliveryFee = 0; // First order free
+        } else if (calculatedDistance <= 1) {
+            deliveryFee = 50; // Within 1km
+        } else {
+            deliveryFee = 99; // Beyond 1km
+        }
+    }
+
+    // Show payment modal
     function showPaymentModal() {
         // Get selected items and total
         let foodTotal = 0;
         let selectedItems = [];
+        let selectedRestaurants = new Set();
         let selectedCount = 0;
         
         document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
             selectedItems.push(box.value);
             foodTotal += parseInt(box.getAttribute('data-price'));
             selectedCount++;
+            
+            const restaurant = box.getAttribute('data-restaurant');
+            if (restaurant) {
+                selectedRestaurants.add(restaurant);
+            }
         });
         
-        // Update order summary in modal
-        const orderSummaryDetails = document.getElementById('orderSummaryDetails');
+        // Calculate delivery fee based on order type
+        calculateDeliveryFee();
+        
+        // Update order type display
+        const orderTypeDisplay = document.getElementById('orderTypeText');
+        const preorderTimeText = document.getElementById('preorderTimeText');
+        let orderTypeText = '';
+        let timeText = '';
+        
+        if (orderType === 'normal') {
+            orderTypeText = currentLang === 'am' ? 
+                '📦 አሁን እዘዝ' : 
+                '📦 Amma Ajaji';
+        } else if (orderType === 'preorder') {
+            orderTypeText = currentLang === 'am' ? 
+                '⏰ ቅድመ ትዕዛዝ' : 
+                '⏰ Ordeer Duraa';
+            
+            // Add time slot info
+            if (preorderTimeSlot === 'slot1') {
+                timeText = currentLang === 'am' ? '4:30 PM - 6:30 PM' : '4:30 PM - 6:30 PM';
+            } else if (preorderTimeSlot === 'slot2') {
+                timeText = currentLang === 'am' ? '5:30 PM - 8:30 PM' : '5:30 PM - 8:30 PM';
+            } else if (preorderTimeSlot === 'slot3') {
+                timeText = currentLang === 'am' ? '9:30 PM - 11:00 PM' : '9:30 PM - 11:00 PM';
+            }
+        }
+        
+        orderTypeDisplay.innerHTML = orderTypeText;
+        if (timeText) {
+            preorderTimeText.innerHTML = timeText;
+            preorderTimeText.style.display = 'block';
+        } else {
+            preorderTimeText.style.display = 'none';
+        }
+        
+        // Update selected restaurants display
+        const selectedRestaurantsDisplay = document.getElementById('selectedRestaurantsList');
+        if (selectedRestaurantsDisplay) {
+            let restaurantsText = Array.from(selectedRestaurants).join(', ');
+            if (restaurantsText.length > 50) {
+                restaurantsText = restaurantsText.substring(0, 47) + '...';
+            }
+            selectedRestaurantsDisplay.innerHTML = restaurantsText || 
+                (currentLang === 'am' ? 'ምንም አልተመረጠም' : 'Hin filatamne');
+        }
+        
+        // Update delivery fee display
         const deliveryFeeDetails = document.getElementById('deliveryFeeDetails');
         const totalAmount = foodTotal + deliveryFee;
         
-        // Update delivery fee display
         if (deliveryFeeDetails) {
             let feeText = '';
-            if (isFirstOrder && FIRST_DELIVERY_FREE) {
+            
+            // Check if beyond maximum delivery distance
+            if (calculatedDistance > MAX_DELIVERY_DISTANCE && orderType === 'normal') {
                 feeText = currentLang === 'am' ? 
-                    'የመጀመሪያ ማድረሻ ነፃ!' : 
-                    'Ergaa jalqabaa bilisaa!';
+                    `🚫 ከ${MAX_DELIVERY_DISTANCE} ኪ.ሜ በላይ አይሰራም! (ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ)` : 
+                    `🚫 Kilomeetira ${MAX_DELIVERY_DISTANCE} ol hin hojjetu! (Fageenya: ${calculatedDistance.toFixed(2)} km)`;
+            } else if (orderType === 'preorder') {
+                feeText = currentLang === 'am' ? 
+                    `ቅድመ ትዕዛዝ: 50 ብር` : 
+                    `Ordeer Duraa: 50 Birraa`;
+            } else if (isFirstOrder && FIRST_DELIVERY_FREE) {
+                feeText = currentLang === 'am' ? 
+                    `የመጀመሪያ ማድረሻ ነፃ! (ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ)` : 
+                    `Ergaa jalqabaa bilisaa! (Fageenya: ${calculatedDistance.toFixed(2)} km)`;
             } else if (calculatedDistance > 0) {
                 feeText = currentLang === 'am' ? 
-                    `ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ<br>` + 
-                    `ክፍያ: ${deliveryFee} ብር` : 
-                    `Fageenya: ${calculatedDistance.toFixed(2)} km<br>` +
-                    `Kaffaltii: ${deliveryFee} Birraa`;
+                    `ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ • ክፍያ: ${deliveryFee} ብር` : 
+                    `Fageenya: ${calculatedDistance.toFixed(2)} km • Kaffaltii: ${deliveryFee} Birraa`;
             } else {
                 feeText = currentLang === 'am' ? 
                     `ክፍያ: ${deliveryFee} ብር` : 
@@ -2220,6 +2801,7 @@
         }
         
         // Update order summary
+        const orderSummaryDetails = document.getElementById('orderSummaryDetails');
         if (orderSummaryDetails) {
             let summaryText = currentLang === 'am' ? 
                 `የተመረጡ እቃዎች: ${selectedCount}<br>` +
@@ -2234,6 +2816,20 @@
             orderSummaryDetails.innerHTML = summaryText;
         }
         
+        // Update confirm button based on delivery distance
+        const confirmBtn = document.getElementById('confirmPaymentBtn');
+        if (calculatedDistance > MAX_DELIVERY_DISTANCE && orderType === 'normal') {
+            confirmBtn.disabled = true;
+            confirmBtn.style.opacity = '0.6';
+            confirmBtn.style.cursor = 'not-allowed';
+            confirmBtn.innerHTML = `<i class="fas fa-ban"></i><span>${currentLang === 'am' ? 'ከ10 ኪ.ሜ በላይ' : 'Kilomeetira 10 ol'}</span>`;
+        } else {
+            confirmBtn.disabled = false;
+            confirmBtn.style.opacity = '1';
+            confirmBtn.style.cursor = 'pointer';
+            confirmBtn.innerHTML = `<i class="fas fa-paper-plane"></i><span>${currentLang === 'am' ? 'ትዕዛዝ ላክ' : 'Ordeer Ergi'}</span>`;
+        }
+        
         // Show payment modal
         document.getElementById('paymentModal').style.display = 'block';
     }
@@ -2245,6 +2841,12 @@
 
     // Confirm payment and proceed to phone number collection
     function confirmPayment() {
+        // Check if beyond maximum delivery distance
+        if (calculatedDistance > MAX_DELIVERY_DISTANCE && orderType === 'normal') {
+            showToast(currentLang === 'am' ? `ከ${MAX_DELIVERY_DISTANCE} ኪ.ሜ በላይ አይሰራም!` : `Kilomeetira ${MAX_DELIVERY_DISTANCE} ol hin hojjetu!`, 4000);
+            return;
+        }
+        
         closePaymentModal();
         
         // After payment confirmation, show phone number modal
@@ -2289,7 +2891,7 @@
         sendOrderToTelegram();
     }
 
-    // Show PWA popup after 10 seconds (CHANGE 1: Already implemented)
+    // Show PWA popup after 10 seconds
     function showPWApopup() {
         const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
@@ -2333,6 +2935,7 @@
     function showManualInstall() {
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
         const isAndroid = /Android/.test(navigator.userAgent);
+        const isDesktop = !isIOS && !isAndroid;
         
         let instructions = '';
         
@@ -2356,6 +2959,16 @@
                 '1. Dots sadi cuqi\n' +
                 '2. "Add to Home Screen" filadhu\n' +
                 '3. "Add" cuqi';
+        } else if (isDesktop) {
+            instructions = currentLang === 'am' ? 
+                'ለኮምፒውተር/ላፕቶፕ:\n' +
+                '1. በቻሮም ላይ የመጫን አዶን ይጫኑ\n' +
+                '2. "ጫን" የሚለውን ይጫኑ\n' +
+                '3. አፕው ወደ መነሻ ማውጫዎ ይጨመራል' :
+                'Kompiutara/Laptop:\n' +
+                '1. Install button cuqi\n' +
+                '2. "Install" cuqi\n' +
+                '3. App home screen keessan irratti dabalama';
         } else {
             instructions = currentLang === 'am' ? 'እባክዎ ስልክዎን ይጠቀሙ' : 'Mobil keessan fayyadamaa';
         }
@@ -2365,42 +2978,49 @@
         hidePWApopup();
     }
 
-    // Show toast
-    function showToast(message, duration = 3000) {
-        toast.textContent = message;
-        toast.style.display = 'block';
-        toast.style.animation = 'none';
-        setTimeout(() => {
-            toast.style.animation = 'fadeInOut 3s ease';
-        }, 10);
-        
-        setTimeout(() => {
-            toast.style.display = 'none';
-        }, duration);
-    }
-
-    // Initialize PWA
+    // Initialize PWA with better cross-device support
     function initPWA() {
+        // Check if service workers are supported
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./service-worker.js?v=13')
+            // Register service worker with updated scope
+            navigator.serviceWorker.register('./service-worker.js?v=14.2', { scope: './' })
                 .then(reg => {
-                    console.log('Service Worker registered');
+                    console.log('Service Worker registered successfully:', reg.scope);
+                    
+                    // Check for updates periodically
+                    setInterval(() => {
+                        reg.update();
+                    }, 60 * 60 * 1000); // Check every hour
                 })
                 .catch(err => {
-                    console.log('Service Worker failed:', err);
+                    console.log('Service Worker registration failed:', err);
                 });
         }
 
+        // Handle beforeinstallprompt event for PWA install prompt
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
+            
+            // Show install button or notification after a delay
+            setTimeout(() => {
+                if (deferredPrompt) {
+                    showPWApopup();
+                }
+            }, 5000);
         });
 
+        // Handle app installed event
         window.addEventListener('appinstalled', () => {
             hidePWApopup();
             localStorage.setItem('pwaInstalled', 'true');
             showToast(currentLang === 'am' ? 'አፕዎ ተጫኗል!' : 'App keessan sirreessame!', 3000);
         });
+
+        // Check if app is running in standalone mode (already installed)
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            localStorage.setItem('pwaInstalled', 'true');
+        }
     }
 
     // Update online/offline status
@@ -2424,6 +3044,20 @@
                 elem.classList.toggle('active', i <= s);
             }
         }
+    }
+
+    // Show toast
+    function showToast(message, duration = 3000) {
+        toast.textContent = message;
+        toast.style.display = 'block';
+        toast.style.animation = 'none';
+        setTimeout(() => {
+            toast.style.animation = 'fadeInOut 3s ease';
+        }, 10);
+        
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, duration);
     }
 
     function openCheckout() {
@@ -2450,7 +3084,9 @@
             paymentMethod: selectedPaymentMethod,
             deliveryFee: deliveryFee,
             distance: calculatedDistance,
-            isFirstOrderFree: isFirstOrder && FIRST_DELIVERY_FREE
+            isFirstOrderFree: isFirstOrder && FIRST_DELIVERY_FREE,
+            orderType: orderType,
+            preorderTimeSlot: preorderTimeSlot
         };
         
         // Show location modal before payment modal
@@ -2467,6 +3103,9 @@
     function sendOrderToTelegram() {
         localStorage.setItem('lastOrder', JSON.stringify(orderData));
         
+        // Add to recent orders
+        addToRecentOrders(orderData.items);
+        
         // Mark first order as completed
         if (isFirstOrder) {
             localStorage.setItem('firstOrderMade', 'true');
@@ -2481,13 +3120,6 @@
             userLng = loc.lng;
             calculateDeliveryFee(); // Recalculate with saved location
         }
-        
-        // Add selected items to recent orders
-        document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
-            const itemName = box.value.split('(')[0].trim(); // Get just the item name
-            const itemPrice = parseInt(box.getAttribute('data-price'));
-            addToRecentOrders(itemName, itemPrice);
-        });
         
         const message = createOrderMessage();
         const encodedMessage = encodeURIComponent(message);
@@ -2512,21 +3144,48 @@
         
         const totalAmount = totalItemsPrice + deliveryFee;
         
+        // Get selected restaurants
+        const selectedRestaurants = new Set();
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
+            const restaurant = box.getAttribute('data-restaurant');
+            if (restaurant) selectedRestaurants.add(restaurant);
+        });
+        
         if (userLat && userLng) {
             locationInfo = `Location: ${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
             mapUrl = `Map: https://www.google.com/maps?q=${userLat},${userLng}`;
             
             deliveryPriceInfo = 
-                `Distance from restaurant: ${calculatedDistance.toFixed(2)} km\n` +
+                `Distance from farthest restaurant: ${calculatedDistance.toFixed(2)} km\n` +
                 `Food Items Total: ${totalItemsPrice} ETB\n` +
                 `Delivery Fee: ${deliveryFee} ETB ${orderData.isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
-                `TOTAL: ${totalAmount} ETB\n`;
+                `Order Type: ${orderType.toUpperCase()} ${orderType === 'preorder' ? '(50 ETB)' : ''}\n`;
+                
+            if (orderType === 'preorder' && preorderTimeSlot) {
+                let timeSlotText = '';
+                if (preorderTimeSlot === 'slot1') timeSlotText = '4:30 PM - 6:30 PM';
+                else if (preorderTimeSlot === 'slot2') timeSlotText = '5:30 PM - 8:30 PM';
+                else if (preorderTimeSlot === 'slot3') timeSlotText = '9:30 PM - 11:00 PM';
+                deliveryPriceInfo += `Preorder Time: ${timeSlotText}\n`;
+            }
+            
+            deliveryPriceInfo += `TOTAL: ${totalAmount} ETB\n`;
         } else {
             locationInfo = "Location: Not provided";
             deliveryPriceInfo = 
                 `Food Items Total: ${totalItemsPrice} ETB\n` +
                 `Delivery Fee: ${deliveryFee} ETB ${orderData.isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
-                `TOTAL: ${totalAmount} ETB\n`;
+                `Order Type: ${orderType.toUpperCase()} ${orderType === 'preorder' ? '(50 ETB)' : ''}\n`;
+                
+            if (orderType === 'preorder' && preorderTimeSlot) {
+                let timeSlotText = '';
+                if (preorderTimeSlot === 'slot1') timeSlotText = '4:30 PM - 6:30 PM';
+                else if (preorderTimeSlot === 'slot2') timeSlotText = '5:30 PM - 8:30 PM';
+                else if (preorderTimeSlot === 'slot3') timeSlotText = '9:30 PM - 11:00 PM';
+                deliveryPriceInfo += `Preorder Time: ${timeSlotText}\n`;
+            }
+            
+            deliveryPriceInfo += `TOTAL: ${totalAmount} ETB\n`;
         }
         
         // Streak Logic
@@ -2547,10 +3206,14 @@
             'Payment Method: Cash on Delivery (Pay after receiving your food)' :
             'Payment Method: Telegram Payment';
         
+        // Restaurant info
+        const restaurantInfo = `Restaurants: ${Array.from(selectedRestaurants).join(', ')}`;
+        
         return `/order\n` +
                `Name: ${orderData.name}\n` +
                `Phone: ${orderData.phone}\n` +
                `Landmark: ${orderData.landmark}\n` +
+               `${restaurantInfo}\n` +
                `${locationInfo}\n` +
                `${mapUrl}\n\n` +
                `Items:\n${orderData.items}\n\n` +
@@ -2570,6 +3233,9 @@
         userPhone = '';
         deliveryFee = 0;
         calculatedDistance = 0;
+        orderType = 'normal';
+        preorderTimeSlot = '';
+        selectOrderType('normal');
     }
 </script>
 </body> 
