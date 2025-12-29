@@ -2,8 +2,8 @@
   "name": "ቢሾፍቱ ዴሊቨሪ",
   "short_name": "BishoftuDelivery",
   "description": "ቢሾፍቱ ውስጥ ምግብ ማድረሻ - Food Delivery Service in Bishoftu",
-  "start_url": "./index.html?v=14.4&source=pwa",
-  "scope": "./",
+  "start_url": "https://bishoftudelivery.github.io/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ff4500",
   "theme_color": "#ff4500",
@@ -12,95 +12,47 @@
   "dir": "ltr",
   "icons": [
     {
-      "src": "./icons/icon-72x72.png?v=14.4",
+      "src": "https://bishoftudelivery.github.io/icons/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "./icons/icon-96x96.png?v=14.4",
+      "src": "https://bishoftudelivery.github.io/icons/icon-96x96.png",
       "sizes": "96x96",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "./icons/icon-128x128.png?v=14.4",
+      "src": "https://bishoftudelivery.github.io/icons/icon-128x128.png",
       "sizes": "128x128",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "./icons/icon-144x144.png?v=14.4",
+      "src": "https://bishoftudelivery.github.io/icons/icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "./icons/icon-152x152.png?v=14.4",
+      "src": "https://bishoftudelivery.github.io/icons/icon-152x152.png",
       "sizes": "152x152",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "./icons/icon-192x192.png?v=14.4",
+      "src": "https://bishoftudelivery.github.io/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./icons/icon-384x384.png?v=14.4",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./icons/icon-512x512.png?v=14.4",
+      "src": "https://bishoftudelivery.github.io/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "./icons/screenshot-1.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "./icons/screenshot-2.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow"
-    }
-  ],
-  "categories": ["food", "lifestyle", "shopping"],
-  "shortcuts": [
-    {
-      "name": "አዲስ ትዕዛዝ",
-      "short_name": "ትዕዛዝ",
-      "description": "አዲስ ምግብ ትዕዛዝ",
-      "url": "./index.html?action=new_order",
-      "icons": [
-        {
-          "src": "./icons/shortcut-96x96.png",
-          "sizes": "96x96",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "ትዕዛዝ ታሪክ",
-      "short_name": "ታሪክ",
-      "description": "ያለፉ ትዕዛዞች",
-      "url": "./index.html?action=order_history",
-      "icons": [
-        {
-          "src": "./icons/history-96x96.png",
-          "sizes": "96x96",
-          "type": "image/png"
-        }
-      ]
-    }
-  ]
+  "categories": ["food", "shopping", "lifestyle"]
 }
