@@ -8,73 +8,16 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title id="page-title">ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery</title>
+    <!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bishoftu Delivery">
+<link rel="apple-touch-icon" href="icons/icon-152x152.png">
     
   // Service Worker for Bishoftu Delivery - Fixed for GitHub Pages
 // Version: 14.4
-
-const CACHE_NAME = 'bishoftu-delivery-v14.4';
-const STATIC_CACHE = 'static-v14.4';
-
-// Install event
-self.addEventListener('install', event => {
-  console.log('[Service Worker] Installing...');
-  self.skipWaiting();
-});
-
-// Activate event
-self.addEventListener('activate', event => {
-  console.log('[Service Worker] Activating...');
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName.startsWith('bishoftu-delivery-') && cacheName !== CACHE_NAME) {
-            console.log('[Service Worker] Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    }).then(() => self.clients.claim())
-  );
-});
-
-// Fetch event - Cache First Strategy
-self.addEventListener('fetch', event => {
-  // Skip non-GET requests
-  if (event.request.method !== 'GET') return;
-  
-  // Handle fetch event
-  event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      
-      return fetch(event.request).then(networkResponse => {
-        // Don't cache if not a valid response
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-          return networkResponse;
-        }
-        
-        // Clone the response
-        const responseToCache = networkResponse.clone();
-        
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, responseToCache);
-        });
-        
-        return networkResponse;
-      }).catch(() => {
-        // If offline and request is for HTML, return a fallback
-        if (event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('https://bishoftudelivery.github.io/index.html');
-        }
-        
-        return new Response('You are offline. Please check your connection.');
-      });
-    })
-  );
-});
+           
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -3088,37 +3031,71 @@ function hidePWApopup() {
     }
 
     // Show PWA popup after 5 seconds (CHANGED FROM 10)
-    function showPWApopup() {
-        const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
-        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-        const isDismissed = localStorage.getItem('pwaPopupDismissed') === 'true';
-        
-        if (isInstalled || isStandalone || isDismissed) return;
-        
-        document.getElementById('pwaPopup').style.display = 'block';
-    }
+   function showPWApopup() {
+  const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+  const isDismissed = localStorage.getItem('pwaPopupDismissed') === 'true';
+  
+  if (isInstalled || isStandalone || isDismissed) return;
+  
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isAndroid = /Android/.test(navigator.userAgent);
+  
+  // Show different message based on device
+  if (isIOS) {
+    document.querySelector('.pwa-title').textContent = currentLang === 'am' 
+      ? 'ወደ መነሻ ማውጫ ጨምር' 
+      : 'Home Screen Dabaladhu';
+    document.querySelector('.pwa-message').innerHTML = currentLang === 'am'
+      ? 'ለፈጣን መዳረሻ፡<br>1. የማጋራት አዶን ይጫኑ<br>2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ<br>3. "አክል" ይጫኑ'
+      : 'Ariifachiifachuuf:<br>1. Share button cuqi<br>2. "Add to Home Screen" filadhu<br>3. "Add" cuqi';
+  }
+  
+  document.getElementById('pwaPopup').style.display = 'block';
+}
 
     // Install PWA - IMPROVED: Shows install button on Chrome
-    function installPWA() {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then(choice => {
-                if (choice.outcome === 'accepted') {
-                    localStorage.setItem('pwaInstalled', 'true');
-                    hidePWApopup();
-                    installButton.style.display = 'none';
-                    showToast(currentLang === 'am' ? 'አፕዎ ተጫኗል!' : 'App keessan sirreessame!', 3000);
-                } else {
-                    dismissPWA();
-                }
-                deferredPrompt = null;
-            });
-        } else {
-            // If no deferred prompt, show manual install instructions
-            showManualInstall();
-        }
-    }
-
+function installPWA() {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  
+  if (isIOS) {
+    // iOS requires manual installation
+    showIOSInstallInstructions();
+    hidePWApopup();
+    localStorage.setItem('pwaPopupDismissed', 'true');
+  } else if (deferredPrompt) {
+    // Android Chrome - use standard PWA install
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if (choice.outcome === 'accepted') {
+        localStorage.setItem('pwaInstalled', 'true');
+        hidePWApopup();
+        if (installButton) installButton.style.display = 'none';
+        showToast(currentLang === 'am' ? 'አፕዎ ተጫኗል!' : 'App keessan sirreessame!', 3000);
+      } else {
+        dismissPWA();
+      }
+      deferredPrompt = null;
+    });
+  } else {
+    // Fallback for other browsers
+    showManualInstall();
+  }
+}
+    function showIOSInstallInstructions() {
+  const instructions = currentLang === 'am'
+    ? 'ለአይፎን/አይፓድ:\n\n' +
+      '1. 📱 በሳፋሪ ላይ የማጋራት አዶን ይጫኑ\n' +
+      '2. ➕ "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
+      '3. ✅ "አክል" የሚለውን ይጫኑ'
+    : 'iPhone/iPad:\n\n' +
+      '1. 📱 Safari irratti share button cuqi\n' +
+      '2. ➕ "Add to Home Screen" filadhu\n' +
+      '3. ✅ "Add" cuqi';
+  
+  alert(currentLang === 'am' ? 'እንዴት አፕን እንደሚጨምሩ:\n\n' + instructions : 
+        'App maal akka dabalattu:\n\n' + instructions);
+}
     // Show floating install button
     function showInstallButton() {
         if (!deferredPrompt) return;
