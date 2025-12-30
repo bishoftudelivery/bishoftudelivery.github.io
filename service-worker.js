@@ -39,3 +39,6 @@ self.addEventListener('activate', event => {
     })
   );
 });
+self.addEventListener('fetch', (event) => {
+    // This is required to make the app "Installable" in Chrome
+});
