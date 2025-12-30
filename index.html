@@ -1958,6 +1958,7 @@
 </div>
 
 <script>
+   <script>
     // Restaurant coordinates with correct values
     const RESTAURANT_COORDINATES = {
         'Classic Noodles': { lat: 8.7512517, lng: 38.9619680 },
@@ -2085,7 +2086,7 @@
             const imageSrc = order.image || menuItemsMap[itemName] || './assets/double-special-burger.webp';
             
             recentItem.innerHTML = `
-                <img src="${imageSrc}" alt="${itemName}" class="recent-image" onerror="this.src='./assets/double-special-burger.webp'">
+                <img src="${imageSrc}" alt="${itemName}" class="recent-image" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAiIGhlaWdodD0iNzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjcwIiBoZWlnaHQ9IjcwIiBmaWxsPSIjZmY0NTAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMTIiPkZvb2Q8L3RleHQ+PC9zdmc+'">
                 <div class="recent-name">${itemName}</div>
             `;
             recentContainer.appendChild(recentItem);
@@ -2437,6 +2438,14 @@
         
         // Add click event to install button
         installButton.addEventListener('click', installPWA);
+        
+        // Add image error handling for all images
+        document.querySelectorAll('img').forEach(img => {
+            img.onerror = function() {
+                this.onerror = null;
+                this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjEzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjEzMCIgZmlsbD0iI2ZmNDUwMCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjE0Ij5Gb29kPC90ZXh0Pjwvc3ZnPg==';
+            };
+        });
     };
 
     // Initialize Pull to Refresh
@@ -3313,6 +3322,7 @@
         preorderTimeSlot = '';
         selectOrderType('normal');
     }
+</script> 
 </script>
 </body> 
 </html>
