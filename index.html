@@ -3313,6 +3313,131 @@
         preorderTimeSlot = '';
         selectOrderType('normal');
     }
+    // Initialize PWA with better cross-device support
+function initPWA() {
+    // Check if service workers are supported
+    if ('serviceWorker' in navigator) {
+        // Register service worker with updated scope
+        navigator.serviceWorker.register('./service-worker.js?v=14.3', { scope: './' })
+            .then(reg => {
+                console.log('Service Worker registered successfully:', reg.scope);
+                
+                // Check if app can be installed
+                checkPWAInstallable();
+                
+                // Check for updates periodically
+                setInterval(() => {
+                    reg.update();
+                }, 60 * 60 * 1000); // Check every hour
+            })
+            .catch(err => {
+                console.log('Service Worker registration failed:', err);
+            });
+    }
+
+    // Handle beforeinstallprompt event for PWA install prompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('beforeinstallprompt event fired');
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        // Show install button immediately
+        showInstallButton();
+        
+        // Show popup after user interaction
+        document.addEventListener('click', showPWApopupAfterInteraction, { once: true });
+    });
+
+    // Handle app installed event
+    window.addEventListener('appinstalled', () => {
+        console.log('App installed successfully');
+        hidePWApopup();
+        localStorage.setItem('pwaInstalled', 'true');
+        installButton.style.display = 'none';
+        showToast(currentLang === 'am' ? 'አፕዎ ተጫኗል!' : 'App keessan sirreessame!', 3000);
+    });
+
+    // Check if app is running in standalone mode (already installed)
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        localStorage.setItem('pwaInstalled', 'true');
+        installButton.style.display = 'none';
+    }
+}
+
+function checkPWAInstallable() {
+    // Check if app meets install criteria
+    const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    
+    if (!isInstalled && !isStandalone) {
+        // Check after 3 seconds if we can show install prompt
+        setTimeout(() => {
+            if (deferredPrompt) {
+                console.log('PWA is installable');
+            }
+        }, 3000);
+    }
+}
+
+function showPWApopupAfterInteraction() {
+    // Only show popup if app is installable
+    if (deferredPrompt) {
+        setTimeout(() => {
+            showPWApopup();
+        }, 1000);
+    }
+}
+
+// Show PWA popup after user interaction
+function showPWApopup() {
+    const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    const isDismissed = localStorage.getItem('pwaPopupDismissed') === 'true';
+    
+    console.log('Checking PWA popup:', { isInstalled, isStandalone, isDismissed, deferredPrompt });
+    
+    if (isInstalled || isStandalone || isDismissed || !deferredPrompt) return;
+    
+    document.getElementById('pwaPopup').style.display = 'block';
+}
+
+// Install PWA - IMPROVED: Shows install button on Chrome
+function installPWA() {
+    console.log('Install PWA clicked');
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(choice => {
+            console.log('User choice:', choice.outcome);
+            if (choice.outcome === 'accepted') {
+                localStorage.setItem('pwaInstalled', 'true');
+                hidePWApopup();
+                installButton.style.display = 'none';
+                showToast(currentLang === 'am' ? 'አፕዎ ተጫኗል!' : 'App keessan sirreessame!', 3000);
+            } else {
+                dismissPWA();
+            }
+            deferredPrompt = null;
+        });
+    } else {
+        // If no deferred prompt, show manual install instructions
+        console.log('No deferred prompt available');
+        showManualInstall();
+    }
+}
+
+// Show floating install button
+function showInstallButton() {
+    if (!deferredPrompt) return;
+    
+    // Check if already installed
+    const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    
+    if (!isInstalled && !isStandalone) {
+        installButton.style.display = 'flex';
+        console.log('Showing install button');
+    }
+}
 </script>
 </body> 
 </html>
