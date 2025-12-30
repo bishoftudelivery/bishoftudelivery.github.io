@@ -1958,6 +1958,7 @@
 </div>
 
 <script>
+<script>
     // Restaurant coordinates with correct values
     const RESTAURANT_COORDINATES = {
         'Classic Noodles': { lat: 8.7512517, lng: 38.9619680 },
@@ -1976,7 +1977,7 @@
     let deferredPrompt = null;
     const FIRST_DELIVERY_FREE = true;
     let isFirstOrder = localStorage.getItem('firstOrderMade') !== 'true';
-    const SITE_URL = "https://bishoftudelivery.github.io/";
+    const SITE_URL = "https://mikemoke4444-gif.github.io/delivery_app/";
     let currentLang = localStorage.getItem('preferredLang') || 'am';
     let currentPage = 'home';
     let selectedPaymentMethod = 'cash'; // Default to cash payment after delivery
@@ -1986,66 +1987,8 @@
     let orderType = 'normal'; // 'normal', 'preorder', or 'group'
     let preorderTimeSlot = ''; // 'slot1', 'slot2', 'slot3'
     
-    // Recent orders storage - IMPROVED: Store actual food items with images
+    // Recent orders storage
     let recentOrders = JSON.parse(localStorage.getItem('recentOrders')) || [];
-    
-    // Menu items mapping for images (simplified for recent orders)
-    const menuItemsMap = {
-        // Classic Noodles Items
-        'Classic King Burger': './assets/classic-king-burger.webp',
-        'Classic Chicken Burger': './assets/classic-chicken-burger.webp',
-        'Double Cheese Burger': './assets/double-cheese-burger.webp',
-        'Classic Burger': './assets/classic-burger.webp',
-        'Beef Burger': './assets/beef-burger-new.webp',
-        'Cheese Burger': './assets/cheese-burger-new.webp',
-        'Hamburger': './assets/hamburger-new.webp',
-        'Double Beef Burger': './assets/double-beef-burger-new.webp',
-        'Mixed Burger': './assets/mixed-burger.webp',
-        'Special Classic Pizza': './assets/special-classic-pizza.webp',
-        'Chicken Pizza L/S': './assets/chicken-pizza-L.webp',
-        'Pepperoni Pizza L/S': './assets/pepperoni-pizza-L.webp',
-        'Beef Pizza L/S': './assets/beef-pizza-L.webp',
-        'Hawaiian Pizza L/S': './assets/hawaiian-pizza-L.webp',
-        'Tuna Pizza L/S': './assets/tuna-pizza-L.webp',
-        'Margarita Pizza L/S': './assets/margarita-pizza-L.webp',
-        'Vegetable Pizza L/S': './assets/vegetable-pizza-L.webp',
-        'Stir Fry Chicken Noodles': './assets/stir-fry-chicken-noodles.webp',
-        'Stir Fry Beef Noodles': './assets/stir-fry-beef-noodles.webp',
-        'Stir Fry Vegetable Noodles': './assets/stir-fry-vegetable-noodles.webp',
-        'Stir Fry Fish Noodles': './assets/stir-fry-fish-noodles.webp',
-        
-        // Etalem Hotel Items
-        'Double Special Burger': './assets/double-special-burger.webp',
-        'Special Burger': './assets/special-burger.webp',
-        'Double Beef Burger': './assets/double-beef-burger.webp',
-        'Cheese Burger': './assets/cheese-burger.webp',
-        'Normal Burger': './assets/normal-burger.webp',
-        'Tuna Burger': './assets/tuna-burger.webp',
-        'Vegetable Burger': './assets/vegetable-burger.webp',
-        'Sandwich Club': './assets/sandwich-club.webp',
-        'Chips (ቺፕስ)': './assets/chips.webp',
-        'Etalem Special Pizza': './assets/etalem-special-pizza.webp',
-        'Beef Pizza': './assets/beef-pizza.webp',
-        'Margaritta Pizza': './assets/margaritta-pizza.webp',
-        'Chicken Pizza': './assets/chicken-pizza.webp',
-        'Tuna Pizza': './assets/tuna-pizza.webp',
-        'Vegetable Pizza': './assets/vegetable-pizza.webp',
-        'Etalem Special Juice': './assets/etalem-special-juice.webp',
-        'Strawberry Juice': './assets/strawberry-juice.webp',
-        'Mixed Juice': './assets/mixed-juice.webp',
-        'Fish Kotelet': './assets/fish-kotelet.webp',
-        'Grilled Fish': './assets/grilled-fish.webp',
-        
-        // Kameti Kitchen Items
-        'Kameti Special Burger': './assets/kameti-special-burger.webp',
-        'Kameti Cheese Burger': './assets/kameti-cheese-burger.webp',
-        'Kameti Beef Burger': './assets/kameti-beef-burger.webp',
-        'Kameti Large Pizza': './assets/kameti-large-pizza.webp',
-        'Kameti Medium Pizza': './assets/kameti-medium-pizza.webp',
-        'Kameti Tuna Pizza': './assets/kameti-tuna-pizza.webp',
-        'Kameti Special Juice': './assets/kameti-special-juice.webp',
-        'Kameti\'s Chips': './assets/chips.webp'
-    };
     
     // Pull to refresh variables
     let startY = 0;
@@ -2060,7 +2003,7 @@
     const toast = document.getElementById('toast');
     const installButton = document.getElementById('installButton');
 
-    // Initialize recent orders - IMPROVED: Shows actual food items with images
+    // Initialize recent orders - FIXED: Shows food names correctly
     function initRecentOrders() {
         const recentContainer = document.getElementById('recentItems');
         const noRecentOrders = document.getElementById('noRecentOrders');
@@ -2073,16 +2016,30 @@
         noRecentOrders.style.display = 'none';
         recentContainer.innerHTML = '';
         
-        // Show only the last 3 orders
-        const lastThreeOrders = recentOrders.slice(-3).reverse();
+        // Show only the last 3 unique items
+        const uniqueOrders = [];
+        const seenNames = new Set();
         
-        lastThreeOrders.forEach((order, index) => {
+        // Go backwards to get most recent unique items
+        for (let i = recentOrders.length - 1; i >= 0; i--) {
+            const order = recentOrders[i];
+            if (!seenNames.has(order.shortname)) {
+                seenNames.add(order.shortname);
+                uniqueOrders.unshift(order); // Add to beginning to maintain order
+            }
+            if (uniqueOrders.length >= 3) break;
+        }
+        
+        // Take last 3 (most recent)
+        const lastThree = uniqueOrders.slice(-3);
+        
+        lastThree.forEach(order => {
             const recentItem = document.createElement('div');
             recentItem.className = 'recent-item';
             recentItem.onclick = () => addRecentItem(order.name, order.shortname);
             
             const itemName = order.shortname || order.name;
-            const imageSrc = order.image || menuItemsMap[itemName] || './assets/double-special-burger.webp';
+            const imageSrc = order.image || './assets/double-special-burger.webp';
             
             recentItem.innerHTML = `
                 <img src="${imageSrc}" alt="${itemName}" class="recent-image" onerror="this.src='./assets/double-special-burger.webp'">
@@ -2092,8 +2049,8 @@
         });
         
         // If less than 3 items, add placeholders
-        if (lastThreeOrders.length < 3) {
-            for (let i = lastThreeOrders.length; i < 3; i++) {
+        if (lastThree.length < 3) {
+            for (let i = lastThree.length; i < 3; i++) {
                 const placeholder = document.createElement('div');
                 placeholder.className = 'recent-item';
                 placeholder.style.opacity = '0.5';
@@ -2108,7 +2065,7 @@
         }
     }
     
-    // Add recent item to cart - IMPROVED: Finds exact matches
+    // Add recent item to cart - FIXED: Finds exact matches
     function addRecentItem(itemName, shortname) {
         // Find the checkbox for this item using shortname if available
         const searchName = shortname || itemName;
@@ -2156,33 +2113,38 @@
         showToast(currentLang === 'am' ? 'አትሙ በምናሌው ውስጥ አልተገኘም' : 'Nyaanni menu keessatti hin argamne', 3000);
     }
     
-    // Add order to recent orders - IMPROVED: Stores actual food items with images
+    // Add order to recent orders - FIXED: Stores food names correctly
     function addToRecentOrders(orderItems) {
         // Extract individual items from order
         const items = orderItems.split(', ');
         
-        items.forEach(item => {
-            const itemName = item.split('(')[0].trim();
+        items.forEach(fullItem => {
+            // Get just the food name (before the price in parentheses)
+            const itemName = fullItem.split('(')[0].trim();
             
             // Find the checkbox for this item to get image and shortname
             let imageSrc = '';
-            let shortname = '';
+            let shortname = itemName;
+            
+            // Try to find the exact checkbox for this item
             document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
                 const checkboxValue = checkbox.value;
-                if (checkboxValue.startsWith(itemName)) {
+                const checkboxName = checkboxValue.split('(')[0].trim();
+                
+                if (checkboxName === itemName) {
                     imageSrc = checkbox.getAttribute('data-image') || '';
                     shortname = checkbox.getAttribute('data-shortname') || itemName;
                 }
             });
             
             // Check if item already exists in recent orders
-            const exists = recentOrders.some(order => order.name === itemName);
+            const exists = recentOrders.some(order => order.shortname === shortname);
             
             if (!exists) {
                 recentOrders.push({
                     name: itemName,
                     shortname: shortname,
-                    image: imageSrc,
+                    image: imageSrc || './assets/double-special-burger.webp',
                     date: new Date().toISOString()
                 });
                 
@@ -2379,6 +2341,21 @@
 
     // Initialize app
     window.onload = () => {
+        // Clear old recent orders data on first load
+        try {
+            const oldData = JSON.parse(localStorage.getItem('recentOrders')) || [];
+            if (oldData.length > 0 && oldData[0] && typeof oldData[0] === 'object' && 'shortname' in oldData[0]) {
+                // Data is already in correct format
+            } else {
+                // Clear old data
+                localStorage.removeItem('recentOrders');
+                recentOrders = [];
+            }
+        } catch(e) {
+            localStorage.removeItem('recentOrders');
+            recentOrders = [];
+        }
+        
         // Set initial language
         switchLanguage(currentLang);
         updateStreakUI();
@@ -2407,7 +2384,7 @@
             }
         }, 10000);
         
-        // 1. Show PWA popup after 5 seconds (CHANGED FROM 10)
+        // 1. Show PWA popup after 5 seconds
         setTimeout(() => {
             showPWApopup();
         }, 5000);
@@ -2959,7 +2936,7 @@
         document.getElementById('pwaPopup').style.display = 'block';
     }
 
-    // Install PWA - IMPROVED: Shows install button on Chrome
+    // Install PWA - FIXED: Removed e.preventDefault() to allow Chrome prompt
     function installPWA() {
         if (deferredPrompt) {
             deferredPrompt.prompt();
@@ -3050,7 +3027,7 @@
         hidePWApopup();
     }
 
-    // Initialize PWA with better cross-device support
+    // Initialize PWA with better cross-device support - FIXED: No e.preventDefault()
     function initPWA() {
         // Check if service workers are supported
         if ('serviceWorker' in navigator) {
@@ -3069,9 +3046,9 @@
                 });
         }
 
-        // Handle beforeinstallprompt event for PWA install prompt
+        // Handle beforeinstallprompt event for PWA install prompt - FIXED: No e.preventDefault()
         window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
+            // e.preventDefault(); // REMOVED to allow Chrome's native prompt
             deferredPrompt = e;
             
             // Show install button or notification after a delay
@@ -3313,338 +3290,7 @@
         preorderTimeSlot = '';
         selectOrderType('normal');
     }
-    // ====== FIX FOR RECENT ORDERS - ADD AT THE END OF FILE ======
-
-// Override the existing functions with fixed versions
-function addToRecentOrders(orderItems) {
-    // Extract individual items from order
-    const items = orderItems.split(', ');
-    
-    items.forEach(fullItemDescription => {
-        // Get just the item name (before the first parenthesis)
-        const itemName = fullItemDescription.split('(')[0].trim();
-        
-        // Find the checkbox for this exact item
-        let foundItem = null;
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            const checkboxValue = checkbox.value;
-            // Try to match the full description
-            if (checkboxValue === fullItemDescription) {
-                foundItem = {
-                    name: itemName,
-                    shortname: checkbox.getAttribute('data-shortname') || itemName,
-                    image: checkbox.getAttribute('data-image') || getDefaultImage(itemName),
-                    price: checkbox.getAttribute('data-price') || '0',
-                    restaurant: checkbox.getAttribute('data-restaurant') || 'Unknown'
-                };
-            }
-        });
-        
-        // If not found by exact match, try by name
-        if (!foundItem) {
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                const checkboxValue = checkbox.value;
-                const checkboxName = checkboxValue.split('(')[0].trim();
-                if (checkboxName === itemName && !foundItem) {
-                    foundItem = {
-                        name: itemName,
-                        shortname: checkbox.getAttribute('data-shortname') || itemName,
-                        image: checkbox.getAttribute('data-image') || getDefaultImage(itemName),
-                        price: checkbox.getAttribute('data-price') || '0',
-                        restaurant: checkbox.getAttribute('data-restaurant') || 'Unknown'
-                    };
-                }
-            });
-        }
-        
-        // If still not found, create basic item
-        if (!foundItem) {
-            foundItem = {
-                name: itemName,
-                shortname: itemName.substring(0, 20) + (itemName.length > 20 ? '...' : ''),
-                image: getDefaultImage(itemName),
-                price: '0',
-                restaurant: 'Unknown'
-            };
-        }
-        
-        // Check if this exact item (by shortname) already exists in recent orders
-        const exists = recentOrders.some(order => 
-            order.shortname === foundItem.shortname && 
-            order.restaurant === foundItem.restaurant
-        );
-        
-        if (!exists) {
-            recentOrders.push({
-                ...foundItem,
-                date: new Date().toISOString()
-            });
-            
-            // Keep only last 10 orders
-            if (recentOrders.length > 10) {
-                recentOrders = recentOrders.slice(-10);
-            }
-        }
-    });
-    
-    // Save to localStorage
-    localStorage.setItem('recentOrders', JSON.stringify(recentOrders));
-    
-    // Update UI
-    initRecentOrders();
-}
-
-function getDefaultImage(itemName) {
-    if (itemName.toLowerCase().includes('burger')) {
-        return './assets/double-special-burger.webp';
-    } else if (itemName.toLowerCase().includes('pizza')) {
-        return './assets/etalem-special-pizza.webp';
-    } else if (itemName.toLowerCase().includes('juice')) {
-        return './assets/etalem-special-juice.webp';
-    } else if (itemName.toLowerCase().includes('chips') || itemName.toLowerCase().includes('fries')) {
-        return './assets/chips.webp';
-    } else if (itemName.toLowerCase().includes('noodle')) {
-        return './assets/stir-fry-chicken-noodles.webp';
-    } else if (itemName.toLowerCase().includes('fish')) {
-        return './assets/fish-kotelet.webp';
-    } else {
-        return './assets/double-special-burger.webp';
-    }
-}
-
-function initRecentOrders() {
-    const recentContainer = document.getElementById('recentItems');
-    const noRecentOrders = document.getElementById('noRecentOrders');
-    
-    if (recentOrders.length === 0) {
-        noRecentOrders.style.display = 'flex';
-        return;
-    }
-    
-    noRecentOrders.style.display = 'none';
-    recentContainer.innerHTML = '';
-    
-    // Show only the last 3 unique items (by shortname)
-    const uniqueRecentOrders = [];
-    const seenShortnames = new Set();
-    
-    // Go through recent orders in reverse (newest first)
-    for (let i = recentOrders.length - 1; i >= 0; i--) {
-        const order = recentOrders[i];
-        if (!seenShortnames.has(order.shortname)) {
-            seenShortnames.add(order.shortname);
-            uniqueRecentOrders.push(order);
-        }
-        if (uniqueRecentOrders.length >= 3) break;
-    }
-    
-    // Display the recent items
-    uniqueRecentOrders.forEach((order, index) => {
-        const recentItem = document.createElement('div');
-        recentItem.className = 'recent-item';
-        recentItem.onclick = () => addRecentItem(order.name, order.shortname);
-        
-        const itemName = order.shortname || order.name;
-        const imageSrc = order.image || './assets/double-special-burger.webp';
-        
-        recentItem.innerHTML = `
-            <img src="${imageSrc}" alt="${itemName}" class="recent-image" 
-                 onerror="this.onerror=null; this.src='./assets/double-special-burger.webp'">
-            <div class="recent-name">${itemName}</div>
-        `;
-        recentContainer.appendChild(recentItem);
-    });
-    
-    // If less than 3 items, add placeholders
-    if (uniqueRecentOrders.length < 3) {
-        for (let i = uniqueRecentOrders.length; i < 3; i++) {
-            const placeholder = document.createElement('div');
-            placeholder.className = 'recent-item';
-            placeholder.style.opacity = '0.5';
-            placeholder.style.cursor = 'default';
-            placeholder.innerHTML = `
-                <div style="width: 70px; height: 70px; border-radius: 50%; background: #f0f0f0; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-utensils" style="color: #ccc; font-size: 1.5rem;"></i>
-                </div>
-                <div class="recent-name" style="color: #ccc;">---</div>
-            `;
-            recentContainer.appendChild(placeholder);
-        }
-    }
-}
-
-// Clear old recent orders data
-localStorage.removeItem('recentOrders');
-recentOrders = [];
-initRecentOrders();
-// ============= QUICK FIXES - ADD AT END OF FILE =============
-
-// 1. FIX PWA INSTALL PROMPT - Let Chrome show native prompt
-window.addEventListener('beforeinstallprompt', (e) => {
-    // DO NOT prevent default - let Chrome show its native prompt
-    // e.preventDefault(); // COMMENT OUT OR REMOVE THIS LINE
-    
-    // Still save the event for reference
-    deferredPrompt = e;
-    console.log('Chrome PWA install prompt available');
-});
-
-// Hide the floating install button since we want Chrome's native prompt
-document.getElementById('installButton').style.display = 'none';
-
-// 2. FIX RECENT ORDERS - Show shortnames and images
-function addToRecentOrders(orderItems) {
-    const items = orderItems.split(', ');
-    
-    items.forEach(fullItemDescription => {
-        const itemName = fullItemDescription.split('(')[0].trim();
-        
-        // Find the exact menu item
-        let foundItem = null;
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            if (checkbox.value === fullItemDescription) {
-                foundItem = {
-                    shortname: checkbox.getAttribute('data-shortname') || itemName,
-                    image: checkbox.getAttribute('data-image') || './assets/double-special-burger.webp'
-                };
-            }
-        });
-        
-        // If not found, try matching by name
-        if (!foundItem) {
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                const checkboxName = checkbox.value.split('(')[0].trim();
-                if (checkboxName === itemName && !foundItem) {
-                    foundItem = {
-                        shortname: checkbox.getAttribute('data-shortname') || itemName,
-                        image: checkbox.getAttribute('data-image') || './assets/double-special-burger.webp'
-                    };
-                }
-            });
-        }
-        
-        // If still not found, use default
-        if (!foundItem) {
-            foundItem = {
-                shortname: itemName.substring(0, 20) + (itemName.length > 20 ? '...' : ''),
-                image: './assets/double-special-burger.webp'
-            };
-        }
-        
-        // Add to recent orders if not already there
-        const exists = recentOrders.some(order => order.shortname === foundItem.shortname);
-        if (!exists) {
-            recentOrders.push({
-                name: itemName,
-                shortname: foundItem.shortname,
-                image: foundItem.image,
-                date: new Date().toISOString()
-            });
-            
-            // Keep only last 10
-            if (recentOrders.length > 10) {
-                recentOrders = recentOrders.slice(-10);
-            }
-        }
-    });
-    
-    localStorage.setItem('recentOrders', JSON.stringify(recentOrders));
-    initRecentOrders();
-}
-
-function initRecentOrders() {
-    const recentContainer = document.getElementById('recentItems');
-    const noRecentOrders = document.getElementById('noRecentOrders');
-    
-    if (recentOrders.length === 0) {
-        noRecentOrders.style.display = 'flex';
-        return;
-    }
-    
-    noRecentOrders.style.display = 'none';
-    recentContainer.innerHTML = '';
-    
-    // Get last 3 unique items
-    const seen = new Set();
-    const lastThree = [];
-    
-    for (let i = recentOrders.length - 1; i >= 0; i--) {
-        const order = recentOrders[i];
-        if (!seen.has(order.shortname)) {
-            seen.add(order.shortname);
-            lastThree.push(order);
-            if (lastThree.length >= 3) break;
-        }
-    }
-    
-    // Show them
-    lastThree.forEach(order => {
-        const recentItem = document.createElement('div');
-        recentItem.className = 'recent-item';
-        recentItem.onclick = () => {
-            // Find and select this item
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                if (checkbox.getAttribute('data-shortname') === order.shortname) {
-                    checkbox.checked = true;
-                    updateCartCount();
-                    showToast(`${currentLang === 'am' ? 'ተጨመረ:' : 'Dabalame:'} ${order.shortname}`, 2000);
-                }
-            });
-        };
-        
-        recentItem.innerHTML = `
-            <img src="${order.image}" alt="${order.shortname}" class="recent-image" 
-                 onerror="this.src='./assets/double-special-burger.webp'">
-            <div class="recent-name">${order.shortname}</div>
-        `;
-        recentContainer.appendChild(recentItem);
-    });
-    
-    // Fill empty slots
-    for (let i = lastThree.length; i < 3; i++) {
-        const placeholder = document.createElement('div');
-        placeholder.className = 'recent-item';
-        placeholder.style.opacity = '0.5';
-        placeholder.innerHTML = `
-            <div style="width: 70px; height: 70px; border-radius: 50%; background: #f0f0f0; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-utensils" style="color: #ccc; font-size: 1.5rem;"></i>
-            </div>
-            <div class="recent-name" style="color: #ccc;">---</div>
-        `;
-        recentContainer.appendChild(placeholder);
-    }
-}
-
-// 3. FIX PULL-TO-REFRESH FOR PWA
-// Add CSS fix for PWA standalone mode
-const style = document.createElement('style');
-style.textContent = `
-    @media (display-mode: standalone) {
-        body {
-            overscroll-behavior-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        #refreshContainer {
-            z-index: 10001;
-            height: 70px;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// 4. Clear old recent orders data to start fresh
-try {
-    const oldData = JSON.parse(localStorage.getItem('recentOrders')) || [];
-    if (oldData.length > 0 && !oldData[0].shortname) {
-        localStorage.removeItem('recentOrders');
-        recentOrders = [];
-        initRecentOrders();
-    }
-} catch(e) {
-    // Ignore errors
-}
-
-// ============= END QUICK FIXES =============
+</script>
 </script>
 </body> 
 </html>
