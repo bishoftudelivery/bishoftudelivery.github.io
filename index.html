@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="am" data-version="14.4" data-lang="am">
+<html lang="am" data-version="14.3" data-lang="am">
 <head>
     <meta name="google-site-verification" content="Yo225u8qpEADrbmyCChQZ9zOZ9pNeUwm1meyq8ChHh4" />
     <meta charset="UTF-8">
@@ -9,34 +9,34 @@
     <meta http-equiv="Expires" content="0">
     <title id="page-title">ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery</title>
     
-    <!-- PWA Meta Tags -->
+    <!-- PWA Meta Tags - UPDATED FOR BETTER CROSS-DEVICE SUPPORT -->
     <meta name="theme-color" content="#ff4500">
     <meta name="description" content="ቢሾፍቱ ውስጥ ምግብ ማድረሻ - Food Delivery Service in Bishoftu">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="BishoftuDelivery">
-    <link rel="manifest" href="./manifest.json?v=14.4">
+    <link rel="manifest" href="./manifest.json?v=14.3">
     
     <!-- iOS Meta Tags -->
-    <link rel="apple-touch-icon" href="./icons/icon-152x152.png?v=14.4">
-    <link rel="apple-touch-icon" sizes="57x57" href="./icons/icon-57x57.png?v=14.4">
-    <link rel="apple-touch-icon" sizes="72x72" href="./icons/icon-72x72.png?v=14.4">
-    <link rel="apple-touch-icon" sizes="114x114" href="./icons/icon-114x114.png?v=14.4">
-    <link rel="apple-touch-icon" sizes="120x120" href="./icons/icon-120x120.png?v=14.4">
-    <link rel="apple-touch-icon" sizes="144x144" href="./icons/icon-144x144.png?v=14.4">
-    <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152x152.png?v=14.4">
-    <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180x180.png?v=14.4">
+    <link rel="apple-touch-icon" href="./icons/icon-152x152.png?v=14.3">
+    <link rel="apple-touch-icon" sizes="57x57" href="./icons/icon-57x57.png?v=14.3">
+    <link rel="apple-touch-icon" sizes="72x72" href="./icons/icon-72x72.png?v=14.3">
+    <link rel="apple-touch-icon" sizes="114x114" href="./icons/icon-114x114.png?v=14.3">
+    <link rel="apple-touch-icon" sizes="120x120" href="./icons/icon-120x120.png?v=14.3">
+    <link rel="apple-touch-icon" sizes="144x144" href="./icons/icon-144x144.png?v=14.3">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152x152.png?v=14.3">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180x180.png?v=14.3">
     
     <!-- Android Chrome Meta Tags -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=14.4">
-    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192x192.png?v=14.4">
-    <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512x512.png?v=14.4">
+    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=14.3">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192x192.png?v=14.3">
+    <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512x512.png?v=14.3">
     
     <!-- Windows Meta Tags -->
     <meta name="msapplication-TileColor" content="#ff4500">
-    <meta name="msapplication-TileImage" content="./icons/icon-144x144.png?v=14.4">
+    <meta name="msapplication-TileImage" content="./icons/icon-144x144.png?v=14.3">
     <meta name="msapplication-config" content="./browserconfig.xml">
     
     <!-- Font Awesome for icons -->
@@ -874,7 +874,7 @@
             box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
         }
         
-        /* Simple PWA Popup for Chrome Users */
+        /* PWA Popup - IMPROVED FOR ALL DEVICES WITH INSTALL BUTTON */
         .pwa-popup {
             display: none;
             position: fixed;
@@ -883,10 +883,11 @@
             transform: translate(-50%, -50%);
             background: white;
             border-radius: var(--radius-lg);
-            padding: 20px;
+            padding: 25px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             z-index: 10001;
-            width: 300px;
+            width: 85%;
+            max-width: 320px;
             text-align: center;
             animation: popupIn 0.3s ease;
             border: 2px solid var(--primary);
@@ -898,23 +899,23 @@
         }
         
         .pwa-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
+            font-size: 50px;
+            margin-bottom: 15px;
             color: var(--primary);
         }
         
         .pwa-title {
             margin: 0 0 10px 0;
             color: var(--dark);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
         }
         
         .pwa-message {
-            margin: 0 0 20px 0;
+            margin: 0 0 25px 0;
             color: var(--text-light);
-            font-size: 0.9rem;
-            line-height: 1.4;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         .pwa-buttons {
@@ -924,12 +925,12 @@
         
         .pwa-btn {
             flex: 1;
-            padding: 12px 0;
+            padding: 14px 0;
             border-radius: var(--radius-sm);
             border: none;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: var(--transition);
         }
         
@@ -938,17 +939,9 @@
             color: white;
         }
         
-        .pwa-yes:hover {
-            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
-        }
-        
         .pwa-no {
             background: #f0f0f0;
             color: #666;
-        }
-        
-        .pwa-no:hover {
-            background: #e0e0e0;
         }
         
         /* Offline Indicator */
@@ -1109,10 +1102,6 @@
             .order-type-buttons {
                 flex-direction: column;
             }
-            .pwa-popup {
-                width: 280px;
-                padding: 18px;
-            }
         }
         
         @media (max-width: 480px) {
@@ -1179,10 +1168,6 @@
             .order-type-buttons {
                 flex-direction: column;
             }
-            .pwa-popup {
-                width: 260px;
-                padding: 16px;
-            }
         }
         
         @media (max-width: 360px) {
@@ -1223,10 +1208,6 @@
             .order-type-buttons {
                 flex-direction: column;
             }
-            .pwa-popup {
-                width: 240px;
-                padding: 14px;
-            }
         }
         
         /* Desktop/Laptop styles */
@@ -1247,6 +1228,9 @@
             .nav-btn {
                 padding: 12px 24px;
                 font-size: 1rem;
+            }
+            .pwa-popup {
+                max-width: 400px;
             }
         }
         
@@ -1302,6 +1286,30 @@
             font-weight: 600;
             z-index: 1;
         }
+        
+        /* Install button for PWA */
+        #installButton {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+            z-index: 999;
+            display: none;
+            transition: var(--transition);
+        }
+        
+        #installButton:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -1325,16 +1333,10 @@
 <!-- Toast Notification -->
 <div class="toast" id="toast"></div>
 
-<!-- Simple PWA Popup for Chrome Users -->
-<div id="pwaPopup" class="pwa-popup">
-    <div class="pwa-icon">📱</div>
-    <div class="pwa-title" data-am="አፕ ጫን" data-om="App Sirreessi">አፕ ጫን</div>
-    <div class="pwa-message" data-am="ፈጣን መዳረሻ ለማግኘት አፕ ያጫኑ" data-om="App sirreessaa saami argadhu">ፈጣን መዳረሻ ለማግኘት አፕ ያጫኑ</div>
-    <div class="pwa-buttons">
-        <button class="pwa-btn pwa-yes" onclick="installPWA()" data-am="ጫን" data-om="Sirreessi">ጫን</button>
-        <button class="pwa-btn pwa-no" onclick="dismissPWA()" data-am="አልጫንም" data-om="Hin Sirreessin">አልጫንም</button>
-    </div>
-</div>
+<!-- PWA Install Button (Floating) -->
+<button id="installButton" title="Install App">
+    <i class="fas fa-download"></i>
+</button>
 
 <!-- Language Switcher -->
 <div class="lang-switcher">
@@ -1611,6 +1613,17 @@
     </div>
 </div>
 
+<!-- PWA Popup - WILL SHOW AFTER 5 SECONDS (CHANGED FROM 10) -->
+<div id="pwaPopup" class="pwa-popup">
+    <div class="pwa-icon">📱</div>
+    <div class="pwa-title" data-am="አፕ አርግ" data-om="App sirreessi">አፕ አርግ</div>
+    <div class="pwa-message" data-am="ወደ ስልክዎ መነሻ ማውጫ ይጨምሩ ፈጣን መዳረሻ ያግኙ" data-om="Gaafa keessan irratti app ergaa sirreessaa saami argadhu">ወደ ስልክዎ መነሻ ማውጫ ይጨምሩ ፈጣን መዳረሻ ያግኙ</div>
+    <div class="pwa-buttons">
+        <button class="pwa-btn pwa-yes" onclick="installPWA()" data-am="ጫን" data-om="Sirreessi">ጫን</button>
+        <button class="pwa-btn pwa-no" onclick="dismissPWA()" data-am="አትጫን" data-om="Hin sirreessin">አትጫን</button>
+    </div>
+</div>
+
 <!-- HOME PAGE -->
 <div id="homePage" class="page-content active">
     <header>
@@ -1695,49 +1708,49 @@
         </div>
         <div class="menu-grid" data-restaurant="Classic Noodles">
             <!-- Classic Noodles Burger Items -->
-            <div class="card"><img src="./assets/classic-king-burger.webp?v=14.4" alt="Classic King Burger"><input type="checkbox" value="Classic King Burger (freshly grounded beef, chicken and fish, lettuce, tomato, onion and sliced cheddar cheese, served with French fries and ketchup)" data-price="810" data-restaurant="Classic Noodles" data-image="./assets/classic-king-burger.webp" data-shortname="Classic King Burger"><div class="card-info"><p class="card-title">Classic King Burger</p></div></div>
+            <div class="card"><img src="./assets/classic-king-burger.webp?v=14.3" alt="Classic King Burger"><input type="checkbox" value="Classic King Burger (freshly grounded beef, chicken and fish, lettuce, tomato, onion and sliced cheddar cheese, served with French fries and ketchup)" data-price="810" data-restaurant="Classic Noodles" data-image="./assets/classic-king-burger.webp" data-shortname="Classic King Burger"><div class="card-info"><p class="card-title">Classic King Burger</p></div></div>
             
-            <div class="card"><img src="./assets/classic-chicken-burger.webp?v=14.4" alt="Classic Chicken Burger"><input type="checkbox" value="Classic Chicken Burger (chicken breast, mayonnaise, lettuce special burger sauce, mustard, egg, black pepper, cheese served with french fries and ketchup)" data-price="705" data-restaurant="Classic Noodles" data-image="./assets/classic-chicken-burger.webp" data-shortname="Classic Chicken Burger"><div class="card-info"><p class="card-title">Classic Chicken Burger</p></div></div>
+            <div class="card"><img src="./assets/classic-chicken-burger.webp?v=14.3" alt="Classic Chicken Burger"><input type="checkbox" value="Classic Chicken Burger (chicken breast, mayonnaise, lettuce special burger sauce, mustard, egg, black pepper, cheese served with french fries and ketchup)" data-price="705" data-restaurant="Classic Noodles" data-image="./assets/classic-chicken-burger.webp" data-shortname="Classic Chicken Burger"><div class="card-info"><p class="card-title">Classic Chicken Burger</p></div></div>
             
-            <div class="card"><img src="./assets/double-cheese-burger.webp?v=14.4" alt="Double Cheese Burger"><input type="checkbox" value="Double Cheese Burger (Double layer freshly grounded beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="605" data-restaurant="Classic Noodles" data-image="./assets/double-cheese-burger.webp" data-shortname="Double Cheese Burger"><div class="card-info"><p class="card-title">Double Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/double-cheese-burger.webp?v=14.3" alt="Double Cheese Burger"><input type="checkbox" value="Double Cheese Burger (Double layer freshly grounded beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="605" data-restaurant="Classic Noodles" data-image="./assets/double-cheese-burger.webp" data-shortname="Double Cheese Burger"><div class="card-info"><p class="card-title">Double Cheese Burger</p></div></div>
             
-            <div class="card"><img src="./assets/classic-burger.webp?v=14.4" alt="Classic Burger"><input type="checkbox" value="Classic Burger (freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, iceberg lettuce, caramelized onion and special burger sauce served with french fries and ketchup)" data-price="570" data-restaurant="Classic Noodles" data-image="./assets/classic-burger.webp" data-shortname="Classic Burger"><div class="card-info"><p class="card-title">Classic Burger</p></div></div>
+            <div class="card"><img src="./assets/classic-burger.webp?v=14.3" alt="Classic Burger"><input type="checkbox" value="Classic Burger (freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, iceberg lettuce, caramelized onion and special burger sauce served with french fries and ketchup)" data-price="570" data-restaurant="Classic Noodles" data-image="./assets/classic-burger.webp" data-shortname="Classic Burger"><div class="card-info"><p class="card-title">Classic Burger</p></div></div>
             
-            <div class="card"><img src="./assets/beef-burger-new.webp?v=14.4" alt="Beef Burger"><input type="checkbox" value="Beef Burger (Freshly ground beef, vegetable oil, mayonnaise, lettuce, onion, and special burger sauce served with french fries and ketchup)" data-price="475" data-restaurant="Classic Noodles" data-image="./assets/beef-burger-new.webp" data-shortname="Beef Burger"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
+            <div class="card"><img src="./assets/beef-burger-new.webp?v=14.3" alt="Beef Burger"><input type="checkbox" value="Beef Burger (Freshly ground beef, vegetable oil, mayonnaise, lettuce, onion, and special burger sauce served with french fries and ketchup)" data-price="475" data-restaurant="Classic Noodles" data-image="./assets/beef-burger-new.webp" data-shortname="Beef Burger"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
             
-            <div class="card"><img src="./assets/cheese-burger-new.webp?v=14.4" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620" data-restaurant="Classic Noodles" data-image="./assets/cheese-burger-new.webp" data-shortname="Cheese Burger"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/cheese-burger-new.webp?v=14.3" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620" data-restaurant="Classic Noodles" data-image="./assets/cheese-burger-new.webp" data-shortname="Cheese Burger"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
             
-            <div class="card"><img src="./assets/hamburger-new.webp?v=14.4" alt="Hamburger"><input type="checkbox" value="Hamburger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620" data-restaurant="Classic Noodles" data-image="./assets/hamburger-new.webp" data-shortname="Hamburger"><div class="card-info"><p class="card-title">Hamburger</p></div></div>
+            <div class="card"><img src="./assets/hamburger-new.webp?v=14.3" alt="Hamburger"><input type="checkbox" value="Hamburger (Freshly ground beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620" data-restaurant="Classic Noodles" data-image="./assets/hamburger-new.webp" data-shortname="Hamburger"><div class="card-info"><p class="card-title">Hamburger</p></div></div>
             
-            <div class="card"><img src="./assets/double-beef-burger-new.webp?v=14.4" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger (double layer freshly ground beef, vegetable oil, mayonnaise, lettuce, onion and special burger sauce served with french fries)" data-price="590" data-restaurant="Classic Noodles" data-image="./assets/double-beef-burger-new.webp" data-shortname="Double Beef Burger"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
+            <div class="card"><img src="./assets/double-beef-burger-new.webp?v=14.3" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger (double layer freshly ground beef, vegetable oil, mayonnaise, lettuce, onion and special burger sauce served with french fries)" data-price="590" data-restaurant="Classic Noodles" data-image="./assets/double-beef-burger-new.webp" data-shortname="Double Beef Burger"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
             
-            <div class="card"><img src="./assets/mixed-burger.webp?v=14.4" alt="Mixed Burger"><input type="checkbox" value="Mixed Burger (Freshly ground Beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620" data-restaurant="Classic Noodles" data-image="./assets/mixed-burger.webp" data-shortname="Mixed Burger"><div class="card-info"><p class="card-title">Mixed Burger</p></div></div>
+            <div class="card"><img src="./assets/mixed-burger.webp?v=14.3" alt="Mixed Burger"><input type="checkbox" value="Mixed Burger (Freshly ground Beef, vegetable oil, cheddar cheese, mayonnaise, lettuce served with french fries and ketchup)" data-price="620" data-restaurant="Classic Noodles" data-image="./assets/mixed-burger.webp" data-shortname="Mixed Burger"><div class="card-info"><p class="card-title">Mixed Burger</p></div></div>
             
             <!-- Classic Noodles Pizza Items -->
-            <div class="card"><img src="./assets/special-classic-pizza.webp?v=14.4" alt="Special Classic Pizza"><input type="checkbox" value="Special Classic Pizza (minced chicken and beef, boiled egg, garlic, olive oil, fresh tomato sauce)" data-price="795" data-restaurant="Classic Noodles" data-image="./assets/special-classic-pizza.webp" data-shortname="Special Classic Pizza"><div class="card-info"><p class="card-title">Special Classic Pizza</p></div></div>
+            <div class="card"><img src="./assets/special-classic-pizza.webp?v=14.3" alt="Special Classic Pizza"><input type="checkbox" value="Special Classic Pizza (minced chicken and beef, boiled egg, garlic, olive oil, fresh tomato sauce)" data-price="795" data-restaurant="Classic Noodles" data-image="./assets/special-classic-pizza.webp" data-shortname="Special Classic Pizza"><div class="card-info"><p class="card-title">Special Classic Pizza</p></div></div>
             
-            <div class="card"><img src="./assets/chicken-pizza-L.webp?v=14.4" alt="Chicken Pizza L"><input type="checkbox" value="Chicken Pizza L (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/chicken-pizza-L.webp" data-shortname="Chicken Pizza L/S"><div class="card-info"><p class="card-title">Chicken Pizza L/S</p></div></div>
+            <div class="card"><img src="./assets/chicken-pizza-L.webp?v=14.3" alt="Chicken Pizza L"><input type="checkbox" value="Chicken Pizza L (Minced chicken, Garlic, olive oil, Fresh tomato Sauce, mozzarella cheese, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/chicken-pizza-L.webp" data-shortname="Chicken Pizza L/S"><div class="card-info"><p class="card-title">Chicken Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/pepperoni-pizza-L.webp?v=14.4" alt="Pepperoni Pizza L"><input type="checkbox" value="Pepperoni Pizza L/S (beef, ham, cheese, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/pepperoni-pizza-L.webp" data-shortname="Pepperoni Pizza L/S"><div class="card-info"><p class="card-title">Pepperoni Pizza L/S</p></div></div>
+            <div class="card"><img src="./assets/pepperoni-pizza-L.webp?v=14.3" alt="Pepperoni Pizza L"><input type="checkbox" value="Pepperoni Pizza L/S (beef, ham, cheese, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/pepperoni-pizza-L.webp" data-shortname="Pepperoni Pizza L/S"><div class="card-info"><p class="card-title">Pepperoni Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/beef-pizza-L.webp?v=14.4" alt="Beef Pizza L"><input type="checkbox" value="Beef Pizza L (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/beef-pizza-L.webp" data-shortname="Beef Pizza L/S"><div class="card-info"><p class="card-title">Beef Pizza L/S</p></div></div>
+            <div class="card"><img src="./assets/beef-pizza-L.webp?v=14.3" alt="Beef Pizza L"><input type="checkbox" value="Beef Pizza L (minced beef, garlic sauce, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/beef-pizza-L.webp" data-shortname="Beef Pizza L/S"><div class="card-info"><p class="card-title">Beef Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/hawaiian-pizza-L.webp?v=14.4" alt="Hawaiian Pizza L"><input type="checkbox" value="Hawaiian Pizza L (beef sausage, pineapple, cheese, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/hawaiian-pizza-L.webp" data-shortname="Hawaiian Pizza L/S"><div class="card-info"><p class="card-title">Hawaiian Pizza L/S</p></div></div>
+            <div class="card"><img src="./assets/hawaiian-pizza-L.webp?v=14.3" alt="Hawaiian Pizza L"><input type="checkbox" value="Hawaiian Pizza L (beef sausage, pineapple, cheese, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/hawaiian-pizza-L.webp" data-shortname="Hawaiian Pizza L/S"><div class="card-info"><p class="card-title">Hawaiian Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/tuna-pizza-L.webp?v=14.4" alt="Tuna Pizza L"><input type="checkbox" value="Tuna Pizza L (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/tuna-pizza-L.webp" data-shortname="Tuna Pizza L/S"><div class="card-info"><p class="card-title">Tuna Pizza L/S</p></div></div>
+            <div class="card"><img src="./assets/tuna-pizza-L.webp?v=14.3" alt="Tuna Pizza L"><input type="checkbox" value="Tuna Pizza L (Minced tuna, fresh tomato sauce, Mozzarella cheese, olive oil, garlic)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/tuna-pizza-L.webp" data-shortname="Tuna Pizza L/S"><div class="card-info"><p class="card-title">Tuna Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/margarita-pizza-L.webp?v=14.4" alt="Margarita Pizza L"><input type="checkbox" value="Margarita Pizza L (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/margarita-pizza-L.webp" data-shortname="Margarita Pizza L/S"><div class="card-info"><p class="card-title">Margarita Pizza L/S</p></div></div>
+            <div class="card"><img src="./assets/margarita-pizza-L.webp?v=14.3" alt="Margarita Pizza L"><input type="checkbox" value="Margarita Pizza L (Garlic, olive oil, fresh tomato sauce, mozzarella cheese, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/margarita-pizza-L.webp" data-shortname="Margarita Pizza L/S"><div class="card-info"><p class="card-title">Margarita Pizza L/S</p></div></div>
             
-            <div class="card"><img src="./assets/vegetable-pizza-L.webp?v=14.4" alt="Vegetable Pizza L"><input type="checkbox" value="Vegetable Pizza L (sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/vegetable-pizza-L.webp" data-shortname="Vegetable Pizza L/S"><div class="card-info"><p class="card-title">Vegetable Pizza L/S</p></div></div>
+            <div class="card"><img src="./assets/vegetable-pizza-L.webp?v=14.3" alt="Vegetable Pizza L"><input type="checkbox" value="Vegetable Pizza L (sauteed seasonal vegetables, garlic, olive oil, fresh tomato, sauce, paprika, mushroom, oregano)" data-price="600" data-restaurant="Classic Noodles" data-image="./assets/vegetable-pizza-L.webp" data-shortname="Vegetable Pizza L/S"><div class="card-info"><p class="card-title">Vegetable Pizza L/S</p></div></div>
             
             <!-- Classic Noodles Noodle Items -->
-            <div class="card"><img src="./assets/stir-fry-chicken-noodles.webp?v=14.4" alt="Stir Fry Chicken Noodles"><input type="checkbox" value="Stir Fry Chicken Noodles (Freshly homemade noodles with marinated chicken breast(chopped) with egg/without egg, and different fresh vegetable and spice served with chili and soya sauce)" data-price="650" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-chicken-noodles.webp" data-shortname="Stir Fry Chicken Noodles"><div class="card-info"><p class="card-title">Stir Fry Chicken Noodles</p></div></div>
+            <div class="card"><img src="./assets/stir-fry-chicken-noodles.webp?v=14.3" alt="Stir Fry Chicken Noodles"><input type="checkbox" value="Stir Fry Chicken Noodles (Freshly homemade noodles with marinated chicken breast(chopped) with egg/without egg, and different fresh vegetable and spice served with chili and soya sauce)" data-price="650" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-chicken-noodles.webp" data-shortname="Stir Fry Chicken Noodles"><div class="card-info"><p class="card-title">Stir Fry Chicken Noodles</p></div></div>
             
-            <div class="card"><img src="./assets/stir-fry-beef-noodles.webp?v=14.4" alt="Stir Fry Beef Noodles"><input type="checkbox" value="Stir Fry Beef Noodles (freshly homemade noodles marinated beef(chopped)with egg/without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="630" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-beef-noodles.webp" data-shortname="Stir Fry Beef Noodles"><div class="card-info"><p class="card-title">Stir Fry Beef Noodles</p></div></div>
+            <div class="card"><img src="./assets/stir-fry-beef-noodles.webp?v=14.3" alt="Stir Fry Beef Noodles"><input type="checkbox" value="Stir Fry Beef Noodles (freshly homemade noodles marinated beef(chopped)with egg/without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="630" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-beef-noodles.webp" data-shortname="Stir Fry Beef Noodles"><div class="card-info"><p class="card-title">Stir Fry Beef Noodles</p></div></div>
             
-            <div class="card"><img src="./assets/stir-fry-vegetable-noodles.webp?v=14.4" alt="Stir Fry Vegetable Noodles"><input type="checkbox" value="Stir Fry Vegetable Noodles (Fasting) Freshly homemade noodles different vegetable, with egg/without egg, different fresh vegetable and spice served with chili and soya sauce" data-price="550" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-vegetable-noodles.webp" data-shortname="Stir Fry Vegetable Noodles"><div class="card-info"><p class="card-title">Stir Fry Vegetable Noodles</p></div></div>
+            <div class="card"><img src="./assets/stir-fry-vegetable-noodles.webp?v=14.3" alt="Stir Fry Vegetable Noodles"><input type="checkbox" value="Stir Fry Vegetable Noodles (Fasting) Freshly homemade noodles different vegetable, with egg/without egg, different fresh vegetable and spice served with chili and soya sauce" data-price="550" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-vegetable-noodles.webp" data-shortname="Stir Fry Vegetable Noodles"><div class="card-info"><p class="card-title">Stir Fry Vegetable Noodles</p></div></div>
             
-            <div class="card"><img src="./assets/stir-fry-fish-noodles.webp?v=14.4" alt="Stir Fry Fish Noodles"><input type="checkbox" value="Stir Fry Fish Noodles (freshly homemade noodles with marinated fish with egg or without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="610" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-fish-noodles.webp" data-shortname="Stir Fry Fish Noodles"><div class="card-info"><p class="card-title">Stir Fry Fish Noodles</p></div></div>
+            <div class="card"><img src="./assets/stir-fry-fish-noodles.webp?v=14.3" alt="Stir Fry Fish Noodles"><input type="checkbox" value="Stir Fry Fish Noodles (freshly homemade noodles with marinated fish with egg or without egg and different fresh vegetable and spice served with chili and soya sauce)" data-price="610" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-fish-noodles.webp" data-shortname="Stir Fry Fish Noodles"><div class="card-info"><p class="card-title">Stir Fry Fish Noodles</p></div></div>
         </div>
 
         <!-- ETALEM HOTEL RESTAURANT -->
@@ -1747,34 +1760,34 @@
         </div>
         <div class="menu-grid" data-restaurant="Etalem Hotel">
             <!-- Etalem Burger Items -->
-            <div class="card"><img src="./assets/double-special-burger.webp?v=14.4" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700" data-restaurant="Etalem Hotel" data-image="./assets/double-special-burger.webp" data-shortname="Double Special Burger"><div class="card-info"><p class="card-title">Double Special Burger</p></div></div>
-            <div class="card"><img src="./assets/special-burger.webp?v=14.4" alt="Special Burger"><input type="checkbox" value="Special Burger" data-price="500" data-restaurant="Etalem Hotel" data-image="./assets/special-burger.webp" data-shortname="Special Burger"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
-            <div class="card"><img src="./assets/double-beef-burger.webp?v=14.4" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger" data-price="480" data-restaurant="Etalem Hotel" data-image="./assets/double-beef-burger.webp" data-shortname="Double Beef Burger"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
-            <div class="card"><img src="./assets/cheese-burger.webp?v=14.4" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger" data-price="450" data-restaurant="Etalem Hotel" data-image="./assets/cheese-burger.webp" data-shortname="Cheese Burger"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
-            <div class="card"><img src="./assets/normal-burger.webp?v=14.4" alt="Normal Burger"><input type="checkbox" value="Normal Burger" data-price="410" data-restaurant="Etalem Hotel" data-image="./assets/normal-burger.webp" data-shortname="Normal Burger"><div class="card-info"><p class="card-title">Normal Burger</p></div></div>
-            <div class="card"><img src="./assets/tuna-burger.webp?v=14.4" alt="Tuna Burger"><input type="checkbox" value="Tuna Burger" data-price="350" data-restaurant="Etalem Hotel" data-image="./assets/tuna-burger.webp" data-shortname="Tuna Burger"><div class="card-info"><p class="card-title">Tuna Burger</p></div></div>
-            <div class="card"><img src="./assets/vegetable-burger.webp?v=14.4" alt="Vegetable Burger"><input type="checkbox" value="Vegetable Burger" data-price="250" data-restaurant="Etalem Hotel" data-image="./assets/vegetable-burger.webp" data-shortname="Vegetable Burger"><div class="card-info"><p class="card-title">Vegetable Burger</p></div></div>
-            <div class="card"><img src="./assets/sandwich-club.webp?v=14.4" alt="Sandwich Club"><input type="checkbox" value="Sandwich Club" data-price="400" data-restaurant="Etalem Hotel" data-image="./assets/sandwich-club.webp" data-shortname="Sandwich Club"><div class="card-info"><p class="card-title">Sandwich Club</p></div></div>
+            <div class="card"><img src="./assets/double-special-burger.webp?v=14.3" alt="Double Special Burger"><input type="checkbox" value="Double Special Burger" data-price="700" data-restaurant="Etalem Hotel" data-image="./assets/double-special-burger.webp" data-shortname="Double Special Burger"><div class="card-info"><p class="card-title">Double Special Burger</p></div></div>
+            <div class="card"><img src="./assets/special-burger.webp?v=14.3" alt="Special Burger"><input type="checkbox" value="Special Burger" data-price="500" data-restaurant="Etalem Hotel" data-image="./assets/special-burger.webp" data-shortname="Special Burger"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
+            <div class="card"><img src="./assets/double-beef-burger.webp?v=14.3" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger" data-price="480" data-restaurant="Etalem Hotel" data-image="./assets/double-beef-burger.webp" data-shortname="Double Beef Burger"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
+            <div class="card"><img src="./assets/cheese-burger.webp?v=14.3" alt="Cheese Burger"><input type="checkbox" value="Cheese Burger" data-price="450" data-restaurant="Etalem Hotel" data-image="./assets/cheese-burger.webp" data-shortname="Cheese Burger"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/normal-burger.webp?v=14.3" alt="Normal Burger"><input type="checkbox" value="Normal Burger" data-price="410" data-restaurant="Etalem Hotel" data-image="./assets/normal-burger.webp" data-shortname="Normal Burger"><div class="card-info"><p class="card-title">Normal Burger</p></div></div>
+            <div class="card"><img src="./assets/tuna-burger.webp?v=14.3" alt="Tuna Burger"><input type="checkbox" value="Tuna Burger" data-price="350" data-restaurant="Etalem Hotel" data-image="./assets/tuna-burger.webp" data-shortname="Tuna Burger"><div class="card-info"><p class="card-title">Tuna Burger</p></div></div>
+            <div class="card"><img src="./assets/vegetable-burger.webp?v=14.3" alt="Vegetable Burger"><input type="checkbox" value="Vegetable Burger" data-price="250" data-restaurant="Etalem Hotel" data-image="./assets/vegetable-burger.webp" data-shortname="Vegetable Burger"><div class="card-info"><p class="card-title">Vegetable Burger</p></div></div>
+            <div class="card"><img src="./assets/sandwich-club.webp?v=14.3" alt="Sandwich Club"><input type="checkbox" value="Sandwich Club" data-price="400" data-restaurant="Etalem Hotel" data-image="./assets/sandwich-club.webp" data-shortname="Sandwich Club"><div class="card-info"><p class="card-title">Sandwich Club</p></div></div>
             
             <!-- Etalem Chips -->
-            <div class="card"><img src="./assets/chips.webp?v=14.4" alt="Chips"><input type="checkbox" value="Chips (ቺፕስ)" data-price="250" data-restaurant="Etalem Hotel" data-image="./assets/chips.webp" data-shortname="Chips"><div class="card-info"><p class="card-title">Chips (ቺፕስ)</p></div></div>
+            <div class="card"><img src="./assets/chips.webp?v=14.3" alt="Chips"><input type="checkbox" value="Chips (ቺፕስ)" data-price="250" data-restaurant="Etalem Hotel" data-image="./assets/chips.webp" data-shortname="Chips"><div class="card-info"><p class="card-title">Chips (ቺፕስ)</p></div></div>
             
             <!-- Etalem Pizza Items -->
-            <div class="card"><img src="./assets/etalem-special-pizza.webp?v=14.4" alt="Etalem Special Pizza"><input type="checkbox" value="Etalem Special Pizza" data-price="650" data-restaurant="Etalem Hotel" data-image="./assets/etalem-special-pizza.webp" data-shortname="Etalem Special Pizza"><div class="card-info"><p class="card-title">Etalem Special Pizza</p></div></div>
-            <div class="card"><img src="./assets/beef-pizza.webp?v=14.4" alt="Beef Pizza"><input type="checkbox" value="Beef Pizza" data-price="600" data-restaurant="Etalem Hotel" data-image="./assets/beef-pizza.webp" data-shortname="Beef Pizza"><div class="card-info"><p class="card-title">Beef Pizza</p></div></div>
-            <div class="card"><img src="./assets/margaritta-pizza.webp?v=14.4" alt="Margaritta Pizza"><input type="checkbox" value="Margaritta Pizza" data-price="650" data-restaurant="Etalem Hotel" data-image="./assets/margaritta-pizza.webp" data-shortname="Margaritta Pizza"><div class="card-info"><p class="card-title">Margaritta Pizza</p></div></div>
-            <div class="card"><img src="./assets/chicken-pizza.webp?v=14.4" alt="Chicken Pizza"><input type="checkbox" value="Chicken Pizza" data-price="700" data-restaurant="Etalem Hotel" data-image="./assets/chicken-pizza.webp" data-shortname="Chicken Pizza"><div class="card-info"><p class="card-title">Chicken Pizza</p></div></div>
-            <div class="card"><img src="./assets/tuna-pizza.webp?v=14.4" alt="Tuna Pizza"><input type="checkbox" value="Tuna Pizza" data-price="550" data-restaurant="Etalem Hotel" data-image="./assets/tuna-pizza.webp" data-shortname="Tuna Pizza"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
-            <div class="card"><img src="./assets/vegetable-pizza.webp?v=14.4" alt="Vegetable Pizza"><input type="checkbox" value="Vegetable Pizza" data-price="350" data-restaurant="Etalem Hotel" data-image="./assets/vegetable-pizza.webp" data-shortname="Vegetable Pizza"><div class="card-info"><p class="card-title">Vegetable Pizza</p></div></div>
+            <div class="card"><img src="./assets/etalem-special-pizza.webp?v=14.3" alt="Etalem Special Pizza"><input type="checkbox" value="Etalem Special Pizza" data-price="650" data-restaurant="Etalem Hotel" data-image="./assets/etalem-special-pizza.webp" data-shortname="Etalem Special Pizza"><div class="card-info"><p class="card-title">Etalem Special Pizza</p></div></div>
+            <div class="card"><img src="./assets/beef-pizza.webp?v=14.3" alt="Beef Pizza"><input type="checkbox" value="Beef Pizza" data-price="600" data-restaurant="Etalem Hotel" data-image="./assets/beef-pizza.webp" data-shortname="Beef Pizza"><div class="card-info"><p class="card-title">Beef Pizza</p></div></div>
+            <div class="card"><img src="./assets/margaritta-pizza.webp?v=14.3" alt="Margaritta Pizza"><input type="checkbox" value="Margaritta Pizza" data-price="650" data-restaurant="Etalem Hotel" data-image="./assets/margaritta-pizza.webp" data-shortname="Margaritta Pizza"><div class="card-info"><p class="card-title">Margaritta Pizza</p></div></div>
+            <div class="card"><img src="./assets/chicken-pizza.webp?v=14.3" alt="Chicken Pizza"><input type="checkbox" value="Chicken Pizza" data-price="700" data-restaurant="Etalem Hotel" data-image="./assets/chicken-pizza.webp" data-shortname="Chicken Pizza"><div class="card-info"><p class="card-title">Chicken Pizza</p></div></div>
+            <div class="card"><img src="./assets/tuna-pizza.webp?v=14.3" alt="Tuna Pizza"><input type="checkbox" value="Tuna Pizza" data-price="550" data-restaurant="Etalem Hotel" data-image="./assets/tuna-pizza.webp" data-shortname="Tuna Pizza"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
+            <div class="card"><img src="./assets/vegetable-pizza.webp?v=14.3" alt="Vegetable Pizza"><input type="checkbox" value="Vegetable Pizza" data-price="350" data-restaurant="Etalem Hotel" data-image="./assets/vegetable-pizza.webp" data-shortname="Vegetable Pizza"><div class="card-info"><p class="card-title">Vegetable Pizza</p></div></div>
             
             <!-- Etalem Juice Items -->
-            <div class="card"><img src="./assets/etalem-special-juice.webp?v=14.4" alt="Etalem Special Juice"><input type="checkbox" value="Etalem Special Juice" data-price="200" data-restaurant="Etalem Hotel" data-image="./assets/etalem-special-juice.webp" data-shortname="Etalem Special Juice"><div class="card-info"><p class="card-title">Etalem Special Juice</p></div></div>
-            <div class="card"><img src="./assets/strawberry-juice.webp?v=14.4" alt="Strawberry Juice"><input type="checkbox" value="Strawberry Juice" data-price="250" data-restaurant="Etalem Hotel" data-image="./assets/strawberry-juice.webp" data-shortname="Strawberry Juice"><div class="card-info"><p class="card-title">Strawberry Juice</p></div></div>
-            <div class="card"><img src="./assets/mixed-juice.webp?v=14.4" alt="Mixed Juice"><input type="checkbox" value="Mixed Juice" data-price="200" data-restaurant="Etalem Hotel" data-image="./assets/mixed-juice.webp" data-shortname="Mixed Juice"><div class="card-info"><p class="card-title">Mixed Juice</p></div></div>
+            <div class="card"><img src="./assets/etalem-special-juice.webp?v=14.3" alt="Etalem Special Juice"><input type="checkbox" value="Etalem Special Juice" data-price="200" data-restaurant="Etalem Hotel" data-image="./assets/etalem-special-juice.webp" data-shortname="Etalem Special Juice"><div class="card-info"><p class="card-title">Etalem Special Juice</p></div></div>
+            <div class="card"><img src="./assets/strawberry-juice.webp?v=14.3" alt="Strawberry Juice"><input type="checkbox" value="Strawberry Juice" data-price="250" data-restaurant="Etalem Hotel" data-image="./assets/strawberry-juice.webp" data-shortname="Strawberry Juice"><div class="card-info"><p class="card-title">Strawberry Juice</p></div></div>
+            <div class="card"><img src="./assets/mixed-juice.webp?v=14.3" alt="Mixed Juice"><input type="checkbox" value="Mixed Juice" data-price="200" data-restaurant="Etalem Hotel" data-image="./assets/mixed-juice.webp" data-shortname="Mixed Juice"><div class="card-info"><p class="card-title">Mixed Juice</p></div></div>
             
             <!-- Etalem Fish Items -->
-            <div class="card"><img src="./assets/fish-kotelet.webp?v=14.4" alt="Fish Kotelet"><input type="checkbox" value="Fish Kotelet" data-price="400" data-restaurant="Etalem Hotel" data-image="./assets/fish-kotelet.webp" data-shortname="Fish Kotelet"><div class="card-info"><p class="card-title">Fish Kotelet</p></div></div>
-            <div class="card"><img src="./assets/grilled-fish.webp?v=14.4" alt="Grilled Fish"><input type="checkbox" value="Grilled Fish" data-price="400" data-restaurant="Etalem Hotel" data-image="./assets/grilled-fish.webp" data-shortname="Grilled Fish"><div class="card-info"><p class="card-title">Grilled Fish</p></div></div>
+            <div class="card"><img src="./assets/fish-kotelet.webp?v=14.3" alt="Fish Kotelet"><input type="checkbox" value="Fish Kotelet" data-price="400" data-restaurant="Etalem Hotel" data-image="./assets/fish-kotelet.webp" data-shortname="Fish Kotelet"><div class="card-info"><p class="card-title">Fish Kotelet</p></div></div>
+            <div class="card"><img src="./assets/grilled-fish.webp?v=14.3" alt="Grilled Fish"><input type="checkbox" value="Grilled Fish" data-price="400" data-restaurant="Etalem Hotel" data-image="./assets/grilled-fish.webp" data-shortname="Grilled Fish"><div class="card-info"><p class="card-title">Grilled Fish</p></div></div>
         </div>
 
         <!-- KAMETI KITCHEN RESTAURANT -->
@@ -1784,20 +1797,20 @@
         </div>
         <div class="menu-grid" data-restaurant="Kameti Kitchen">
             <!-- Kameti Burger Items -->
-            <div class="card"><img src="./assets/kameti-special-burger.webp?v=14.4" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-special-burger.webp" data-shortname="Special Burger"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
-            <div class="card"><img src="./assets/kameti-cheese-burger.webp?v=14.4" alt="Kameti Cheese Burger"><input type="checkbox" value="Kameti Cheese Burger" data-price="480" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-cheese-burger.webp" data-shortname="Cheese Burger"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
-            <div class="card"><img src="./assets/kameti-beef-burger.webp?v=14.4" alt="Kameti Beef Burger"><input type="checkbox" value="Kameti Beef Burger" data-price="450" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-beef-burger.webp" data-shortname="Beef Burger"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
+            <div class="card"><img src="./assets/kameti-special-burger.webp?v=14.3" alt="Kameti Special Burger"><input type="checkbox" value="Kameti Special Burger" data-price="500" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-special-burger.webp" data-shortname="Special Burger"><div class="card-info"><p class="card-title">Special Burger</p></div></div>
+            <div class="card"><img src="./assets/kameti-cheese-burger.webp?v=14.3" alt="Kameti Cheese Burger"><input type="checkbox" value="Kameti Cheese Burger" data-price="480" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-cheese-burger.webp" data-shortname="Cheese Burger"><div class="card-info"><p class="card-title">Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/kameti-beef-burger.webp?v=14.3" alt="Kameti Beef Burger"><input type="checkbox" value="Kameti Beef Burger" data-price="450" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-beef-burger.webp" data-shortname="Beef Burger"><div class="card-info"><p class="card-title">Beef Burger</p></div></div>
             
             <!-- Kameti Pizza Items -->
-            <div class="card"><img src="./assets/kameti-large-pizza.webp?v=14.4" alt="Kameti Large Pizza"><input type="checkbox" value="Kameti Large Pizza" data-price="700" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-large-pizza.webp" data-shortname="Large Pizza"><div class="card-info"><p class="card-title">Large Pizza</p></div></div>
-            <div class="card"><img src="./assets/kameti-medium-pizza.webp?v=14.4" alt="Kameti Medium Pizza"><input type="checkbox" value="Kameti Medium Pizza" data-price="600" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-medium-pizza.webp" data-shortname="Medium Pizza"><div class="card-info"><p class="card-title">Medium Pizza</p></div></div>
-            <div class="card"><img src="./assets/kameti-tuna-pizza.webp?v=14.4" alt="Kameti Tuna Pizza"><input type="checkbox" value="Kameti Tuna Pizza" data-price="480" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-tuna-pizza.webp" data-shortname="Tuna Pizza"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
+            <div class="card"><img src="./assets/kameti-large-pizza.webp?v=14.3" alt="Kameti Large Pizza"><input type="checkbox" value="Kameti Large Pizza" data-price="700" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-large-pizza.webp" data-shortname="Large Pizza"><div class="card-info"><p class="card-title">Large Pizza</p></div></div>
+            <div class="card"><img src="./assets/kameti-medium-pizza.webp?v=14.3" alt="Kameti Medium Pizza"><input type="checkbox" value="Kameti Medium Pizza" data-price="600" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-medium-pizza.webp" data-shortname="Medium Pizza"><div class="card-info"><p class="card-title">Medium Pizza</p></div></div>
+            <div class="card"><img src="./assets/kameti-tuna-pizza.webp?v=14.3" alt="Kameti Tuna Pizza"><input type="checkbox" value="Kameti Tuna Pizza" data-price="480" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-tuna-pizza.webp" data-shortname="Tuna Pizza"><div class="card-info"><p class="card-title">Tuna Pizza</p></div></div>
             
             <!-- Kameti Juice -->
-            <div class="card"><img src="./assets/kameti-special-juice.webp?v=14.4" alt="Kameti Special Juice"><input type="checkbox" value="Kameti Special Juice" data-price="230" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-special-juice.webp" data-shortname="Special Juice"><div class="card-info"><p class="card-title">Special Juice</p></div></div>
+            <div class="card"><img src="./assets/kameti-special-juice.webp?v=14.3" alt="Kameti Special Juice"><input type="checkbox" value="Kameti Special Juice" data-price="230" data-restaurant="Kameti Kitchen" data-image="./assets/kameti-special-juice.webp" data-shortname="Special Juice"><div class="card-info"><p class="card-title">Special Juice</p></div></div>
             
             <!-- Kameti Chips (150 ETB) -->
-            <div class="card"><img src="./assets/chips.webp?v=14.4" alt="Kameti's Chips"><input type="checkbox" value="Kameti's Chips" data-price="150" data-restaurant="Kameti Kitchen" data-image="./assets/chips.webp" data-shortname="Kameti's Chips"><div class="card-info"><p class="card-title">Kameti's Chips</p></div></div>
+            <div class="card"><img src="./assets/chips.webp?v=14.3" alt="Kameti's Chips"><input type="checkbox" value="Kameti's Chips" data-price="150" data-restaurant="Kameti Kitchen" data-image="./assets/chips.webp" data-shortname="Kameti's Chips"><div class="card-info"><p class="card-title">Kameti's Chips</p></div></div>
         </div>
     </div>
 </div>
@@ -1945,9 +1958,6 @@
 </div>
 
 <script>
-    // UPDATED SITE URL
-    const SITE_URL = "https://bishoftudelivery.github.io/";
-    
     // Restaurant coordinates with correct values
     const RESTAURANT_COORDINATES = {
         'Classic Noodles': { lat: 8.7512517, lng: 38.9619680 },
@@ -1966,6 +1976,7 @@
     let deferredPrompt = null;
     const FIRST_DELIVERY_FREE = true;
     let isFirstOrder = localStorage.getItem('firstOrderMade') !== 'true';
+    const SITE_URL = "https://bishoftudelivery.github.io/";
     let currentLang = localStorage.getItem('preferredLang') || 'am';
     let currentPage = 'home';
     let selectedPaymentMethod = 'cash'; // Default to cash payment after delivery
@@ -1975,7 +1986,7 @@
     let orderType = 'normal'; // 'normal', 'preorder', or 'group'
     let preorderTimeSlot = ''; // 'slot1', 'slot2', 'slot3'
     
-    // Recent orders storage - UPDATED: Store with short names
+    // Recent orders storage - IMPROVED: Store actual food items with images
     let recentOrders = JSON.parse(localStorage.getItem('recentOrders')) || [];
     
     // Menu items mapping for images (simplified for recent orders)
@@ -2012,7 +2023,7 @@
         'Tuna Burger': './assets/tuna-burger.webp',
         'Vegetable Burger': './assets/vegetable-burger.webp',
         'Sandwich Club': './assets/sandwich-club.webp',
-        'Chips': './assets/chips.webp',
+        'Chips (ቺፕስ)': './assets/chips.webp',
         'Etalem Special Pizza': './assets/etalem-special-pizza.webp',
         'Beef Pizza': './assets/beef-pizza.webp',
         'Margaritta Pizza': './assets/margaritta-pizza.webp',
@@ -2026,13 +2037,13 @@
         'Grilled Fish': './assets/grilled-fish.webp',
         
         // Kameti Kitchen Items
-        'Special Burger': './assets/kameti-special-burger.webp',
-        'Cheese Burger': './assets/kameti-cheese-burger.webp',
-        'Beef Burger': './assets/kameti-beef-burger.webp',
-        'Large Pizza': './assets/kameti-large-pizza.webp',
-        'Medium Pizza': './assets/kameti-medium-pizza.webp',
-        'Tuna Pizza': './assets/kameti-tuna-pizza.webp',
-        'Special Juice': './assets/kameti-special-juice.webp',
+        'Kameti Special Burger': './assets/kameti-special-burger.webp',
+        'Kameti Cheese Burger': './assets/kameti-cheese-burger.webp',
+        'Kameti Beef Burger': './assets/kameti-beef-burger.webp',
+        'Kameti Large Pizza': './assets/kameti-large-pizza.webp',
+        'Kameti Medium Pizza': './assets/kameti-medium-pizza.webp',
+        'Kameti Tuna Pizza': './assets/kameti-tuna-pizza.webp',
+        'Kameti Special Juice': './assets/kameti-special-juice.webp',
         'Kameti\'s Chips': './assets/chips.webp'
     };
     
@@ -2047,9 +2058,9 @@
     // Elements
     const offlineIndicator = document.getElementById('offlineIndicator');
     const toast = document.getElementById('toast');
-    const pwaPopup = document.getElementById('pwaPopup');
+    const installButton = document.getElementById('installButton');
 
-    // Initialize recent orders - IMPROVED: Shows short names and images
+    // Initialize recent orders - IMPROVED: Shows actual food items with images
     function initRecentOrders() {
         const recentContainer = document.getElementById('recentItems');
         const noRecentOrders = document.getElementById('noRecentOrders');
@@ -2097,13 +2108,13 @@
         }
     }
     
-    // Add recent item to cart - IMPROVED: Uses shortname
+    // Add recent item to cart - IMPROVED: Finds exact matches
     function addRecentItem(itemName, shortname) {
-        // Find the checkbox for this item using shortname
+        // Find the checkbox for this item using shortname if available
         const searchName = shortname || itemName;
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         
-        // Try to find by shortname
+        // First try exact match with shortname
         for (let checkbox of checkboxes) {
             const checkboxShortname = checkbox.getAttribute('data-shortname');
             if (checkboxShortname === searchName) {
@@ -2122,38 +2133,54 @@
             }
         }
         
+        // If exact match not found, try partial match with full name
+        for (let checkbox of checkboxes) {
+            const checkboxValue = checkbox.value;
+            const checkboxName = checkboxValue.split('(')[0].trim();
+            if (checkboxName.toLowerCase().includes(searchName.toLowerCase())) {
+                checkbox.checked = true;
+                
+                const card = checkbox.closest('.card');
+                card.classList.add('item-added');
+                setTimeout(() => {
+                    card.classList.remove('item-added');
+                }, 300);
+                
+                updateCartCount();
+                showToast(`${currentLang === 'am' ? 'ተጨመረ:' : 'Dabalame:'} ${searchName}`, 2000);
+                return;
+            }
+        }
+        
         // If not found, show message
         showToast(currentLang === 'am' ? 'አትሙ በምናሌው ውስጥ አልተገኘም' : 'Nyaanni menu keessatti hin argamne', 3000);
     }
     
-    // Add order to recent orders - IMPROVED: Stores short names
+    // Add order to recent orders - IMPROVED: Stores actual food items with images
     function addToRecentOrders(orderItems) {
         // Extract individual items from order
         const items = orderItems.split(', ');
         
         items.forEach(item => {
-            // Get the shortname from the checkbox
-            let shortname = '';
-            let imageSrc = '';
-            let fullItemName = item.split('(')[0].trim();
+            const itemName = item.split('(')[0].trim();
             
+            // Find the checkbox for this item to get image and shortname
+            let imageSrc = '';
+            let shortname = '';
             document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
                 const checkboxValue = checkbox.value;
-                if (checkboxValue.startsWith(fullItemName)) {
-                    shortname = checkbox.getAttribute('data-shortname') || fullItemName;
+                if (checkboxValue.startsWith(itemName)) {
                     imageSrc = checkbox.getAttribute('data-image') || '';
+                    shortname = checkbox.getAttribute('data-shortname') || itemName;
                 }
             });
             
-            // Use shortname if available, otherwise use the item name
-            const displayName = shortname || fullItemName;
-            
             // Check if item already exists in recent orders
-            const exists = recentOrders.some(order => order.name === displayName);
+            const exists = recentOrders.some(order => order.name === itemName);
             
-            if (!exists && displayName) {
+            if (!exists) {
                 recentOrders.push({
-                    name: displayName,
+                    name: itemName,
                     shortname: shortname,
                     image: imageSrc,
                     date: new Date().toISOString()
@@ -2345,6 +2372,11 @@
         window.location.href = 'tel:+251962636940';
     }
 
+    // Contact support
+    function contactSupport() {
+        openTelegramForSupport();
+    }
+
     // Initialize app
     window.onload = () => {
         // Set initial language
@@ -2375,6 +2407,11 @@
             }
         }, 10000);
         
+        // 1. Show PWA popup after 5 seconds (CHANGED FROM 10)
+        setTimeout(() => {
+            showPWApopup();
+        }, 5000);
+        
         // Check online/offline status
         window.addEventListener('online', updateOnlineStatus);
         window.addEventListener('offline', updateOnlineStatus);
@@ -2397,6 +2434,9 @@
         
         // Set default order type to normal
         selectOrderType('normal');
+        
+        // Add click event to install button
+        installButton.addEventListener('click', installPWA);
     };
 
     // Initialize Pull to Refresh
@@ -2504,21 +2544,11 @@
         isRefreshing = false;
     }
 
-    // Check for updates and clear cache
+    // Check for updates
     function checkForUpdates() {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.ready.then(reg => {
-                // Force update and clear cache on refresh
-                reg.update().then(() => {
-                    // Clear all caches
-                    if ('caches' in window) {
-                        caches.keys().then(cacheNames => {
-                            cacheNames.forEach(cacheName => {
-                                caches.delete(cacheName);
-                            });
-                        });
-                    }
-                });
+                reg.update();
             });
         }
     }
@@ -2885,7 +2915,7 @@
         document.getElementById('phoneModal').style.display = 'block';
     }
 
-    // Submit phone number
+    // Submit phone number - FIXED: Always redirects to Telegram after submission
     function submitPhoneNumber() {
         const phoneInput = document.getElementById('userPhone');
         userPhone = phoneInput.value.trim();
@@ -2904,7 +2934,7 @@
         document.getElementById('phoneModal').style.display = 'none';
         showToast(currentLang === 'am' ? 'ስልክ ቁጥር ተመዝግቧል!' : 'Lakkoofsa bilbila barreeffame!', 2000);
         
-        // Proceed to send to Telegram
+        // Proceed to send to Telegram - FIXED: This will now always execute
         sendOrderToTelegram();
     }
 
@@ -2918,22 +2948,18 @@
         sendOrderToTelegram();
     }
 
-    // Show PWA popup for Chrome users
+    // Show PWA popup after 5 seconds (CHANGED FROM 10)
     function showPWApopup() {
         const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-        const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        const isDismissed = localStorage.getItem('pwaPopupDismissed') === 'true';
         
-        // Only show if Chrome, not installed, not in standalone mode, and we have deferred prompt
-        if (!isInstalled && !isStandalone && isChrome && deferredPrompt) {
-            // Show after a short delay
-            setTimeout(() => {
-                pwaPopup.style.display = 'block';
-            }, 2000);
-        }
+        if (isInstalled || isStandalone || isDismissed) return;
+        
+        document.getElementById('pwaPopup').style.display = 'block';
     }
 
-    // Install PWA - Simple Chrome-only version
+    // Install PWA - IMPROVED: Shows install button on Chrome
     function installPWA() {
         if (deferredPrompt) {
             deferredPrompt.prompt();
@@ -2941,47 +2967,101 @@
                 if (choice.outcome === 'accepted') {
                     localStorage.setItem('pwaInstalled', 'true');
                     hidePWApopup();
+                    installButton.style.display = 'none';
                     showToast(currentLang === 'am' ? 'አፕዎ ተጫኗል!' : 'App keessan sirreessame!', 3000);
                 } else {
-                    // User dismissed, don't save anything so it can show again next time
+                    dismissPWA();
                 }
                 deferredPrompt = null;
             });
+        } else {
+            // If no deferred prompt, show manual install instructions
+            showManualInstall();
         }
     }
 
-    // Dismiss PWA popup
+    // Show floating install button
+    function showInstallButton() {
+        if (!deferredPrompt) return;
+        
+        // Check if already installed
+        const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+        
+        if (!isInstalled && !isStandalone) {
+            installButton.style.display = 'flex';
+        }
+    }
+
+    // Dismiss PWA
     function dismissPWA() {
         hidePWApopup();
-        // Don't save dismissal - will show again next time if not installed
-        showToast(currentLang === 'am' ? 'አልጫንም' : 'Hin Sirreessin', 2000);
+        localStorage.setItem('pwaPopupDismissed', 'true');
+        showToast(currentLang === 'am' ? 'እሺ፣ በኋላ ላይ እንደገና እናሳይዎታለን' : 'OK, booda irratti ni agarsiifna', 2000);
     }
 
     function hidePWApopup() {
-        pwaPopup.style.display = 'none';
+        document.getElementById('pwaPopup').style.display = 'none';
     }
 
-    // Initialize PWA with Chrome detection
+    function showManualInstall() {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const isAndroid = /Android/.test(navigator.userAgent);
+        const isDesktop = !isIOS && !isAndroid;
+        
+        let instructions = '';
+        
+        if (isIOS) {
+            instructions = currentLang === 'am' ? 
+                'ለአይፎን/አይፓድ:\n' +
+                '1. በሳፋሪ ላይ የማጋራት አዶን ይጫኑ\n' +
+                '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
+                '3. "አክል" የሚለውን ይጫኑ' :
+                'iPhone/iPad:\n' +
+                '1. Share button cuqi\n' +
+                '2. "Add to Home Screen" filadhu\n' +
+                '3. "Add" cuqi';
+        } else if (isAndroid) {
+            instructions = currentLang === 'am' ? 
+                'ለአንድሮይድ:\n' +
+                '1. በቻሮም ላይ ሶስት ነጥብ ይጫኑ\n' +
+                '2. "ወደ መነሻ ማውጫ ጨምር" ይምረጡ\n' +
+                '3. "አክል" የሚለውን ይጫኑ' :
+                'Android:\n' +
+                '1. Dots sadi cuqi\n' +
+                '2. "Add to Home Screen" filadhu\n' +
+                '3. "Add" cuqi';
+        } else if (isDesktop) {
+            instructions = currentLang === 'am' ? 
+                'ለኮምፒውተር/ላፕቶፕ:\n' +
+                '1. በቻሮም ላይ የመጫን አዶን ይጫኑ\n' +
+                '2. "ጫን" የሚለውን ይጫኑ\n' +
+                '3. አፕው ወደ መነሻ ማውጫዎ ይጨመራል' :
+                'Kompiutara/Laptop:\n' +
+                '1. Install button cuqi\n' +
+                '2. "Install" cuqi\n' +
+                '3. App home screen keessan irratti dabalama';
+        } else {
+            instructions = currentLang === 'am' ? 'እባክዎ ስልክዎን ይጠቀሙ' : 'Mobil keessan fayyadamaa';
+        }
+        
+        alert(currentLang === 'am' ? 'እንዴት አፕን እንደሚጨምሩ:\n\n' + instructions : 
+              'App maal akka dabalattu:\n\n' + instructions);
+        hidePWApopup();
+    }
+
+    // Initialize PWA with better cross-device support
     function initPWA() {
         // Check if service workers are supported
         if ('serviceWorker' in navigator) {
             // Register service worker with updated scope
-            navigator.serviceWorker.register('./service-worker.js?v=14.4', { scope: './' })
+            navigator.serviceWorker.register('./service-worker.js?v=14.3', { scope: './' })
                 .then(reg => {
                     console.log('Service Worker registered successfully:', reg.scope);
                     
                     // Check for updates periodically
                     setInterval(() => {
-                        reg.update().then(() => {
-                            // Clear cache on update
-                            if ('caches' in window) {
-                                caches.keys().then(cacheNames => {
-                                    cacheNames.forEach(cacheName => {
-                                        caches.delete(cacheName);
-                                    });
-                                });
-                            }
-                        });
+                        reg.update();
                     }, 60 * 60 * 1000); // Check every hour
                 })
                 .catch(err => {
@@ -2994,9 +3074,12 @@
             e.preventDefault();
             deferredPrompt = e;
             
-            // Show install popup for Chrome users after a delay
+            // Show install button or notification after a delay
             setTimeout(() => {
-                showPWApopup();
+                if (deferredPrompt) {
+                    showPWApopup();
+                    showInstallButton();
+                }
             }, 3000);
         });
 
@@ -3004,12 +3087,14 @@
         window.addEventListener('appinstalled', () => {
             hidePWApopup();
             localStorage.setItem('pwaInstalled', 'true');
+            installButton.style.display = 'none';
             showToast(currentLang === 'am' ? 'አፕዎ ተጫኗል!' : 'App keessan sirreessame!', 3000);
         });
 
         // Check if app is running in standalone mode (already installed)
         if (window.matchMedia('(display-mode: standalone)').matches) {
             localStorage.setItem('pwaInstalled', 'true');
+            installButton.style.display = 'none';
         }
     }
 
@@ -3089,11 +3174,11 @@
         }
     }
 
-    // Send order to Telegram (after getting phone number)
+    // Send order to Telegram (after getting phone number) - FIXED: Always redirects
     function sendOrderToTelegram() {
         localStorage.setItem('lastOrder', JSON.stringify(orderData));
         
-        // Add to recent orders - NOW USING SHORT NAMES
+        // Add to recent orders
         addToRecentOrders(orderData.items);
         
         // Mark first order as completed
@@ -3115,7 +3200,7 @@
         const encodedMessage = encodeURIComponent(message);
         const telegramUrl = `https://t.me/${BOT_USERNAME}?text=${encodedMessage}`;
         
-        // Open Telegram
+        // FIXED: Always open Telegram
         window.open(telegramUrl, '_blank');
         
         setTimeout(() => {
@@ -3228,6 +3313,338 @@
         preorderTimeSlot = '';
         selectOrderType('normal');
     }
+    // ====== FIX FOR RECENT ORDERS - ADD AT THE END OF FILE ======
+
+// Override the existing functions with fixed versions
+function addToRecentOrders(orderItems) {
+    // Extract individual items from order
+    const items = orderItems.split(', ');
+    
+    items.forEach(fullItemDescription => {
+        // Get just the item name (before the first parenthesis)
+        const itemName = fullItemDescription.split('(')[0].trim();
+        
+        // Find the checkbox for this exact item
+        let foundItem = null;
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            const checkboxValue = checkbox.value;
+            // Try to match the full description
+            if (checkboxValue === fullItemDescription) {
+                foundItem = {
+                    name: itemName,
+                    shortname: checkbox.getAttribute('data-shortname') || itemName,
+                    image: checkbox.getAttribute('data-image') || getDefaultImage(itemName),
+                    price: checkbox.getAttribute('data-price') || '0',
+                    restaurant: checkbox.getAttribute('data-restaurant') || 'Unknown'
+                };
+            }
+        });
+        
+        // If not found by exact match, try by name
+        if (!foundItem) {
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                const checkboxValue = checkbox.value;
+                const checkboxName = checkboxValue.split('(')[0].trim();
+                if (checkboxName === itemName && !foundItem) {
+                    foundItem = {
+                        name: itemName,
+                        shortname: checkbox.getAttribute('data-shortname') || itemName,
+                        image: checkbox.getAttribute('data-image') || getDefaultImage(itemName),
+                        price: checkbox.getAttribute('data-price') || '0',
+                        restaurant: checkbox.getAttribute('data-restaurant') || 'Unknown'
+                    };
+                }
+            });
+        }
+        
+        // If still not found, create basic item
+        if (!foundItem) {
+            foundItem = {
+                name: itemName,
+                shortname: itemName.substring(0, 20) + (itemName.length > 20 ? '...' : ''),
+                image: getDefaultImage(itemName),
+                price: '0',
+                restaurant: 'Unknown'
+            };
+        }
+        
+        // Check if this exact item (by shortname) already exists in recent orders
+        const exists = recentOrders.some(order => 
+            order.shortname === foundItem.shortname && 
+            order.restaurant === foundItem.restaurant
+        );
+        
+        if (!exists) {
+            recentOrders.push({
+                ...foundItem,
+                date: new Date().toISOString()
+            });
+            
+            // Keep only last 10 orders
+            if (recentOrders.length > 10) {
+                recentOrders = recentOrders.slice(-10);
+            }
+        }
+    });
+    
+    // Save to localStorage
+    localStorage.setItem('recentOrders', JSON.stringify(recentOrders));
+    
+    // Update UI
+    initRecentOrders();
+}
+
+function getDefaultImage(itemName) {
+    if (itemName.toLowerCase().includes('burger')) {
+        return './assets/double-special-burger.webp';
+    } else if (itemName.toLowerCase().includes('pizza')) {
+        return './assets/etalem-special-pizza.webp';
+    } else if (itemName.toLowerCase().includes('juice')) {
+        return './assets/etalem-special-juice.webp';
+    } else if (itemName.toLowerCase().includes('chips') || itemName.toLowerCase().includes('fries')) {
+        return './assets/chips.webp';
+    } else if (itemName.toLowerCase().includes('noodle')) {
+        return './assets/stir-fry-chicken-noodles.webp';
+    } else if (itemName.toLowerCase().includes('fish')) {
+        return './assets/fish-kotelet.webp';
+    } else {
+        return './assets/double-special-burger.webp';
+    }
+}
+
+function initRecentOrders() {
+    const recentContainer = document.getElementById('recentItems');
+    const noRecentOrders = document.getElementById('noRecentOrders');
+    
+    if (recentOrders.length === 0) {
+        noRecentOrders.style.display = 'flex';
+        return;
+    }
+    
+    noRecentOrders.style.display = 'none';
+    recentContainer.innerHTML = '';
+    
+    // Show only the last 3 unique items (by shortname)
+    const uniqueRecentOrders = [];
+    const seenShortnames = new Set();
+    
+    // Go through recent orders in reverse (newest first)
+    for (let i = recentOrders.length - 1; i >= 0; i--) {
+        const order = recentOrders[i];
+        if (!seenShortnames.has(order.shortname)) {
+            seenShortnames.add(order.shortname);
+            uniqueRecentOrders.push(order);
+        }
+        if (uniqueRecentOrders.length >= 3) break;
+    }
+    
+    // Display the recent items
+    uniqueRecentOrders.forEach((order, index) => {
+        const recentItem = document.createElement('div');
+        recentItem.className = 'recent-item';
+        recentItem.onclick = () => addRecentItem(order.name, order.shortname);
+        
+        const itemName = order.shortname || order.name;
+        const imageSrc = order.image || './assets/double-special-burger.webp';
+        
+        recentItem.innerHTML = `
+            <img src="${imageSrc}" alt="${itemName}" class="recent-image" 
+                 onerror="this.onerror=null; this.src='./assets/double-special-burger.webp'">
+            <div class="recent-name">${itemName}</div>
+        `;
+        recentContainer.appendChild(recentItem);
+    });
+    
+    // If less than 3 items, add placeholders
+    if (uniqueRecentOrders.length < 3) {
+        for (let i = uniqueRecentOrders.length; i < 3; i++) {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'recent-item';
+            placeholder.style.opacity = '0.5';
+            placeholder.style.cursor = 'default';
+            placeholder.innerHTML = `
+                <div style="width: 70px; height: 70px; border-radius: 50%; background: #f0f0f0; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-utensils" style="color: #ccc; font-size: 1.5rem;"></i>
+                </div>
+                <div class="recent-name" style="color: #ccc;">---</div>
+            `;
+            recentContainer.appendChild(placeholder);
+        }
+    }
+}
+
+// Clear old recent orders data
+localStorage.removeItem('recentOrders');
+recentOrders = [];
+initRecentOrders();
+// ============= QUICK FIXES - ADD AT END OF FILE =============
+
+// 1. FIX PWA INSTALL PROMPT - Let Chrome show native prompt
+window.addEventListener('beforeinstallprompt', (e) => {
+    // DO NOT prevent default - let Chrome show its native prompt
+    // e.preventDefault(); // COMMENT OUT OR REMOVE THIS LINE
+    
+    // Still save the event for reference
+    deferredPrompt = e;
+    console.log('Chrome PWA install prompt available');
+});
+
+// Hide the floating install button since we want Chrome's native prompt
+document.getElementById('installButton').style.display = 'none';
+
+// 2. FIX RECENT ORDERS - Show shortnames and images
+function addToRecentOrders(orderItems) {
+    const items = orderItems.split(', ');
+    
+    items.forEach(fullItemDescription => {
+        const itemName = fullItemDescription.split('(')[0].trim();
+        
+        // Find the exact menu item
+        let foundItem = null;
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            if (checkbox.value === fullItemDescription) {
+                foundItem = {
+                    shortname: checkbox.getAttribute('data-shortname') || itemName,
+                    image: checkbox.getAttribute('data-image') || './assets/double-special-burger.webp'
+                };
+            }
+        });
+        
+        // If not found, try matching by name
+        if (!foundItem) {
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                const checkboxName = checkbox.value.split('(')[0].trim();
+                if (checkboxName === itemName && !foundItem) {
+                    foundItem = {
+                        shortname: checkbox.getAttribute('data-shortname') || itemName,
+                        image: checkbox.getAttribute('data-image') || './assets/double-special-burger.webp'
+                    };
+                }
+            });
+        }
+        
+        // If still not found, use default
+        if (!foundItem) {
+            foundItem = {
+                shortname: itemName.substring(0, 20) + (itemName.length > 20 ? '...' : ''),
+                image: './assets/double-special-burger.webp'
+            };
+        }
+        
+        // Add to recent orders if not already there
+        const exists = recentOrders.some(order => order.shortname === foundItem.shortname);
+        if (!exists) {
+            recentOrders.push({
+                name: itemName,
+                shortname: foundItem.shortname,
+                image: foundItem.image,
+                date: new Date().toISOString()
+            });
+            
+            // Keep only last 10
+            if (recentOrders.length > 10) {
+                recentOrders = recentOrders.slice(-10);
+            }
+        }
+    });
+    
+    localStorage.setItem('recentOrders', JSON.stringify(recentOrders));
+    initRecentOrders();
+}
+
+function initRecentOrders() {
+    const recentContainer = document.getElementById('recentItems');
+    const noRecentOrders = document.getElementById('noRecentOrders');
+    
+    if (recentOrders.length === 0) {
+        noRecentOrders.style.display = 'flex';
+        return;
+    }
+    
+    noRecentOrders.style.display = 'none';
+    recentContainer.innerHTML = '';
+    
+    // Get last 3 unique items
+    const seen = new Set();
+    const lastThree = [];
+    
+    for (let i = recentOrders.length - 1; i >= 0; i--) {
+        const order = recentOrders[i];
+        if (!seen.has(order.shortname)) {
+            seen.add(order.shortname);
+            lastThree.push(order);
+            if (lastThree.length >= 3) break;
+        }
+    }
+    
+    // Show them
+    lastThree.forEach(order => {
+        const recentItem = document.createElement('div');
+        recentItem.className = 'recent-item';
+        recentItem.onclick = () => {
+            // Find and select this item
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                if (checkbox.getAttribute('data-shortname') === order.shortname) {
+                    checkbox.checked = true;
+                    updateCartCount();
+                    showToast(`${currentLang === 'am' ? 'ተጨመረ:' : 'Dabalame:'} ${order.shortname}`, 2000);
+                }
+            });
+        };
+        
+        recentItem.innerHTML = `
+            <img src="${order.image}" alt="${order.shortname}" class="recent-image" 
+                 onerror="this.src='./assets/double-special-burger.webp'">
+            <div class="recent-name">${order.shortname}</div>
+        `;
+        recentContainer.appendChild(recentItem);
+    });
+    
+    // Fill empty slots
+    for (let i = lastThree.length; i < 3; i++) {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'recent-item';
+        placeholder.style.opacity = '0.5';
+        placeholder.innerHTML = `
+            <div style="width: 70px; height: 70px; border-radius: 50%; background: #f0f0f0; margin-bottom: 8px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-utensils" style="color: #ccc; font-size: 1.5rem;"></i>
+            </div>
+            <div class="recent-name" style="color: #ccc;">---</div>
+        `;
+        recentContainer.appendChild(placeholder);
+    }
+}
+
+// 3. FIX PULL-TO-REFRESH FOR PWA
+// Add CSS fix for PWA standalone mode
+const style = document.createElement('style');
+style.textContent = `
+    @media (display-mode: standalone) {
+        body {
+            overscroll-behavior-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        #refreshContainer {
+            z-index: 10001;
+            height: 70px;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// 4. Clear old recent orders data to start fresh
+try {
+    const oldData = JSON.parse(localStorage.getItem('recentOrders')) || [];
+    if (oldData.length > 0 && !oldData[0].shortname) {
+        localStorage.removeItem('recentOrders');
+        recentOrders = [];
+        initRecentOrders();
+    }
+} catch(e) {
+    // Ignore errors
+}
+
+// ============= END QUICK FIXES =============
 </script>
 </body> 
 </html>
