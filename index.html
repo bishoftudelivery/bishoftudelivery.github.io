@@ -1712,7 +1712,7 @@
             
             <div class="card"><img src="./assets/classic-chicken-burger.webp?v=14.3" alt="Classic Chicken Burger"><input type="checkbox" value="Classic Chicken Burger " data-price="705" data-restaurant="Classic Noodles" data-image="./assets/classic-chicken-burger.webp" data-shortname="Classic Chicken Burger"><div class="card-info"><p class="card-title">Classic Chicken Burger</p></div></div>
             
-            <div class="card"><img src="./assets/double-cheese-burger.webp?v=14.3" alt="Double Cheese Burger"><input type="checkbox" value="Double Cheese " data-price="605" data-restaurant="Classic Noodles" data-image="./assets/double-cheese-burger.webp" data-shortname="Double Cheese Burger"><div class="card-info"><p class="card-title">Double Cheese Burger</p></div></div>
+            <div class="card"><img src="./assets/double-cheese-burger.webp?v=14.3" alt="Double Cheese Burger"><input type="checkbox" value="Double Cheese Burger " data-price="605" data-restaurant="Classic Noodles" data-image="./assets/double-cheese-burger.webp" data-shortname="Double Cheese Burger"><div class="card-info"><p class="card-title">Double Cheese Burger</p></div></div>
             
             <div class="card"><img src="./assets/classic-burger.webp?v=14.3" alt="Classic Burger"><input type="checkbox" value="Classic Burger " data-price="570" data-restaurant="Classic Noodles" data-image="./assets/classic-burger.webp" data-shortname="Classic Burger"><div class="card-info"><p class="card-title">Classic Burger</p></div></div>
             
@@ -1724,7 +1724,7 @@
             
             <div class="card"><img src="./assets/double-beef-burger-new.webp?v=14.3" alt="Double Beef Burger"><input type="checkbox" value="Double Beef Burger " data-price="590" data-restaurant="Classic Noodles" data-image="./assets/double-beef-burger-new.webp" data-shortname="Double Beef Burger"><div class="card-info"><p class="card-title">Double Beef Burger</p></div></div>
             
-            <div class="card"><img src="./assets/mixed-burger.webp?v=14.3" alt="Mixed Burger"><input type="checkbox" value="Mixed Burger" data-price="620" data-restaurant="Classic Noodles" data-image="./assets/mixed-burger.webp" data-shortname="Mixed Burger"><div class="card-info"><p class="card-title">Mixed Burger</p></div></div>
+            <div class="card"><img src="./assets/mixed-burger.webp?v=14.3" alt="Mixed Burger"><input type="checkbox" value="Mixed Burger " data-price="620" data-restaurant="Classic Noodles" data-image="./assets/mixed-burger.webp" data-shortname="Mixed Burger"><div class="card-info"><p class="card-title">Mixed Burger</p></div></div>
             
             <!-- Classic Noodles Pizza Items -->
             <div class="card"><img src="./assets/special-classic-pizza.webp?v=14.3" alt="Special Classic Pizza"><input type="checkbox" value="Special Classic Pizza " data-price="795" data-restaurant="Classic Noodles" data-image="./assets/special-classic-pizza.webp" data-shortname="Special Classic Pizza"><div class="card-info"><p class="card-title">Special Classic Pizza</p></div></div>
@@ -1748,7 +1748,7 @@
             
             <div class="card"><img src="./assets/stir-fry-beef-noodles.webp?v=14.3" alt="Stir Fry Beef Noodles"><input type="checkbox" value="Stir Fry Beef Noodles " data-price="630" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-beef-noodles.webp" data-shortname="Stir Fry Beef Noodles"><div class="card-info"><p class="card-title">Stir Fry Beef Noodles</p></div></div>
             
-            <div class="card"><img src="./assets/stir-fry-vegetable-noodles.webp?v=14.3" alt="Stir Fry Vegetable Noodles"><input type="checkbox" value="Stir Fry Vegetable Noodles (Fasting) " data-price="550" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-vegetable-noodles.webp" data-shortname="Stir Fry Vegetable Noodles"><div class="card-info"><p class="card-title">Stir Fry Vegetable Noodles</p></div></div>
+            <div class="card"><img src="./assets/stir-fry-vegetable-noodles.webp?v=14.3" alt="Stir Fry Vegetable Noodles"><input type="checkbox" value="Stir Fry Vegetable Noodles (Fasting) Freshly homemade noodles different vegetable, with egg/without egg, different fresh vegetable and spice served with chili and soya sauce" data-price="550" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-vegetable-noodles.webp" data-shortname="Stir Fry Vegetable Noodles"><div class="card-info"><p class="card-title">Stir Fry Vegetable Noodles</p></div></div>
             
             <div class="card"><img src="./assets/stir-fry-fish-noodles.webp?v=14.3" alt="Stir Fry Fish Noodles"><input type="checkbox" value="Stir Fry Fish Noodles " data-price="610" data-restaurant="Classic Noodles" data-image="./assets/stir-fry-fish-noodles.webp" data-shortname="Stir Fry Fish Noodles"><div class="card-info"><p class="card-title">Stir Fry Fish Noodles</p></div></div>
         </div>
@@ -1956,6 +1956,7 @@
         <span>ትዕዛዝ አጠናቅ</span>
     </button>
 </div>
+
 <script>
     // Restaurant coordinates with correct values
     const RESTAURANT_COORDINATES = {
@@ -1975,7 +1976,7 @@
     let deferredPrompt = null;
     const FIRST_DELIVERY_FREE = true;
     let isFirstOrder = localStorage.getItem('firstOrderMade') !== 'true';
-    const SITE_URL = "https://mikemoke4444-gif.github.io/delivery_app/";
+    const SITE_URL = "https://bishoftudelivery.github.io/";
     let currentLang = localStorage.getItem('preferredLang') || 'am';
     let currentPage = 'home';
     let selectedPaymentMethod = 'cash'; // Default to cash payment after delivery
@@ -1985,8 +1986,66 @@
     let orderType = 'normal'; // 'normal', 'preorder', or 'group'
     let preorderTimeSlot = ''; // 'slot1', 'slot2', 'slot3'
     
-    // Recent orders storage
+    // Recent orders storage - IMPROVED: Store actual food items with images
     let recentOrders = JSON.parse(localStorage.getItem('recentOrders')) || [];
+    
+    // Menu items mapping for images (simplified for recent orders)
+    const menuItemsMap = {
+        // Classic Noodles Items
+        'Classic King Burger': './assets/classic-king-burger.webp',
+        'Classic Chicken Burger': './assets/classic-chicken-burger.webp',
+        'Double Cheese Burger': './assets/double-cheese-burger.webp',
+        'Classic Burger': './assets/classic-burger.webp',
+        'Beef Burger': './assets/beef-burger-new.webp',
+        'Cheese Burger': './assets/cheese-burger-new.webp',
+        'Hamburger': './assets/hamburger-new.webp',
+        'Double Beef Burger': './assets/double-beef-burger-new.webp',
+        'Mixed Burger': './assets/mixed-burger.webp',
+        'Special Classic Pizza': './assets/special-classic-pizza.webp',
+        'Chicken Pizza L/S': './assets/chicken-pizza-L.webp',
+        'Pepperoni Pizza L/S': './assets/pepperoni-pizza-L.webp',
+        'Beef Pizza L/S': './assets/beef-pizza-L.webp',
+        'Hawaiian Pizza L/S': './assets/hawaiian-pizza-L.webp',
+        'Tuna Pizza L/S': './assets/tuna-pizza-L.webp',
+        'Margarita Pizza L/S': './assets/margarita-pizza-L.webp',
+        'Vegetable Pizza L/S': './assets/vegetable-pizza-L.webp',
+        'Stir Fry Chicken Noodles': './assets/stir-fry-chicken-noodles.webp',
+        'Stir Fry Beef Noodles': './assets/stir-fry-beef-noodles.webp',
+        'Stir Fry Vegetable Noodles': './assets/stir-fry-vegetable-noodles.webp',
+        'Stir Fry Fish Noodles': './assets/stir-fry-fish-noodles.webp',
+        
+        // Etalem Hotel Items
+        'Double Special Burger': './assets/double-special-burger.webp',
+        'Special Burger': './assets/special-burger.webp',
+        'Double Beef Burger': './assets/double-beef-burger.webp',
+        'Cheese Burger': './assets/cheese-burger.webp',
+        'Normal Burger': './assets/normal-burger.webp',
+        'Tuna Burger': './assets/tuna-burger.webp',
+        'Vegetable Burger': './assets/vegetable-burger.webp',
+        'Sandwich Club': './assets/sandwich-club.webp',
+        'Chips (ቺፕስ)': './assets/chips.webp',
+        'Etalem Special Pizza': './assets/etalem-special-pizza.webp',
+        'Beef Pizza': './assets/beef-pizza.webp',
+        'Margaritta Pizza': './assets/margaritta-pizza.webp',
+        'Chicken Pizza': './assets/chicken-pizza.webp',
+        'Tuna Pizza': './assets/tuna-pizza.webp',
+        'Vegetable Pizza': './assets/vegetable-pizza.webp',
+        'Etalem Special Juice': './assets/etalem-special-juice.webp',
+        'Strawberry Juice': './assets/strawberry-juice.webp',
+        'Mixed Juice': './assets/mixed-juice.webp',
+        'Fish Kotelet': './assets/fish-kotelet.webp',
+        'Grilled Fish': './assets/grilled-fish.webp',
+        
+        // Kameti Kitchen Items
+        'Kameti Special Burger': './assets/kameti-special-burger.webp',
+        'Kameti Cheese Burger': './assets/kameti-cheese-burger.webp',
+        'Kameti Beef Burger': './assets/kameti-beef-burger.webp',
+        'Kameti Large Pizza': './assets/kameti-large-pizza.webp',
+        'Kameti Medium Pizza': './assets/kameti-medium-pizza.webp',
+        'Kameti Tuna Pizza': './assets/kameti-tuna-pizza.webp',
+        'Kameti Special Juice': './assets/kameti-special-juice.webp',
+        'Kameti\'s Chips': './assets/chips.webp'
+    };
     
     // Pull to refresh variables
     let startY = 0;
@@ -2001,7 +2060,7 @@
     const toast = document.getElementById('toast');
     const installButton = document.getElementById('installButton');
 
-    // Initialize recent orders - FIXED: Shows food names correctly
+    // Initialize recent orders - IMPROVED: Shows actual food items with images
     function initRecentOrders() {
         const recentContainer = document.getElementById('recentItems');
         const noRecentOrders = document.getElementById('noRecentOrders');
@@ -2014,30 +2073,16 @@
         noRecentOrders.style.display = 'none';
         recentContainer.innerHTML = '';
         
-        // Show only the last 3 unique items
-        const uniqueOrders = [];
-        const seenNames = new Set();
+        // Show only the last 3 orders
+        const lastThreeOrders = recentOrders.slice(-3).reverse();
         
-        // Go backwards to get most recent unique items
-        for (let i = recentOrders.length - 1; i >= 0; i--) {
-            const order = recentOrders[i];
-            if (!seenNames.has(order.shortname)) {
-                seenNames.add(order.shortname);
-                uniqueOrders.unshift(order); // Add to beginning to maintain order
-            }
-            if (uniqueOrders.length >= 3) break;
-        }
-        
-        // Take last 3 (most recent)
-        const lastThree = uniqueOrders.slice(-3);
-        
-        lastThree.forEach(order => {
+        lastThreeOrders.forEach((order, index) => {
             const recentItem = document.createElement('div');
             recentItem.className = 'recent-item';
             recentItem.onclick = () => addRecentItem(order.name, order.shortname);
             
             const itemName = order.shortname || order.name;
-            const imageSrc = order.image || './assets/double-special-burger.webp';
+            const imageSrc = order.image || menuItemsMap[itemName] || './assets/double-special-burger.webp';
             
             recentItem.innerHTML = `
                 <img src="${imageSrc}" alt="${itemName}" class="recent-image" onerror="this.src='./assets/double-special-burger.webp'">
@@ -2047,8 +2092,8 @@
         });
         
         // If less than 3 items, add placeholders
-        if (lastThree.length < 3) {
-            for (let i = lastThree.length; i < 3; i++) {
+        if (lastThreeOrders.length < 3) {
+            for (let i = lastThreeOrders.length; i < 3; i++) {
                 const placeholder = document.createElement('div');
                 placeholder.className = 'recent-item';
                 placeholder.style.opacity = '0.5';
@@ -2063,7 +2108,7 @@
         }
     }
     
-    // Add recent item to cart - FIXED: Finds exact matches
+    // Add recent item to cart - IMPROVED: Finds exact matches
     function addRecentItem(itemName, shortname) {
         // Find the checkbox for this item using shortname if available
         const searchName = shortname || itemName;
@@ -2111,38 +2156,33 @@
         showToast(currentLang === 'am' ? 'አትሙ በምናሌው ውስጥ አልተገኘም' : 'Nyaanni menu keessatti hin argamne', 3000);
     }
     
-    // Add order to recent orders - FIXED: Stores food names correctly
+    // Add order to recent orders - IMPROVED: Stores actual food items with images
     function addToRecentOrders(orderItems) {
         // Extract individual items from order
         const items = orderItems.split(', ');
         
-        items.forEach(fullItem => {
-            // Get just the food name (before the price in parentheses)
-            const itemName = fullItem.split('(')[0].trim();
+        items.forEach(item => {
+            const itemName = item.split('(')[0].trim();
             
             // Find the checkbox for this item to get image and shortname
             let imageSrc = '';
-            let shortname = itemName;
-            
-            // Try to find the exact checkbox for this item
+            let shortname = '';
             document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
                 const checkboxValue = checkbox.value;
-                const checkboxName = checkboxValue.split('(')[0].trim();
-                
-                if (checkboxName === itemName) {
+                if (checkboxValue.startsWith(itemName)) {
                     imageSrc = checkbox.getAttribute('data-image') || '';
                     shortname = checkbox.getAttribute('data-shortname') || itemName;
                 }
             });
             
             // Check if item already exists in recent orders
-            const exists = recentOrders.some(order => order.shortname === shortname);
+            const exists = recentOrders.some(order => order.name === itemName);
             
             if (!exists) {
                 recentOrders.push({
                     name: itemName,
                     shortname: shortname,
-                    image: imageSrc || './assets/double-special-burger.webp',
+                    image: imageSrc,
                     date: new Date().toISOString()
                 });
                 
@@ -2339,21 +2379,6 @@
 
     // Initialize app
     window.onload = () => {
-        // Clear old recent orders data on first load
-        try {
-            const oldData = JSON.parse(localStorage.getItem('recentOrders')) || [];
-            if (oldData.length > 0 && oldData[0] && typeof oldData[0] === 'object' && 'shortname' in oldData[0]) {
-                // Data is already in correct format
-            } else {
-                // Clear old data
-                localStorage.removeItem('recentOrders');
-                recentOrders = [];
-            }
-        } catch(e) {
-            localStorage.removeItem('recentOrders');
-            recentOrders = [];
-        }
-        
         // Set initial language
         switchLanguage(currentLang);
         updateStreakUI();
@@ -2382,7 +2407,7 @@
             }
         }, 10000);
         
-        // 1. Show PWA popup after 5 seconds
+        // 1. Show PWA popup after 5 seconds (CHANGED FROM 10)
         setTimeout(() => {
             showPWApopup();
         }, 5000);
@@ -2934,7 +2959,7 @@
         document.getElementById('pwaPopup').style.display = 'block';
     }
 
-    // Install PWA - FIXED: Removed e.preventDefault() to allow Chrome prompt
+    // Install PWA - IMPROVED: Shows install button on Chrome
     function installPWA() {
         if (deferredPrompt) {
             deferredPrompt.prompt();
@@ -3025,7 +3050,7 @@
         hidePWApopup();
     }
 
-    // Initialize PWA with better cross-device support - FIXED: No e.preventDefault()
+    // Initialize PWA with better cross-device support
     function initPWA() {
         // Check if service workers are supported
         if ('serviceWorker' in navigator) {
@@ -3044,9 +3069,9 @@
                 });
         }
 
-        // Handle beforeinstallprompt event for PWA install prompt - FIXED: No e.preventDefault()
+        // Handle beforeinstallprompt event for PWA install prompt
         window.addEventListener('beforeinstallprompt', (e) => {
-            // e.preventDefault(); // REMOVED to allow Chrome's native prompt
+            e.preventDefault();
             deferredPrompt = e;
             
             // Show install button or notification after a delay
