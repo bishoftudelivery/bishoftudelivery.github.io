@@ -1563,10 +1563,20 @@
 </div>
 
 <script>
-    // Restaurant coordinates
+    // Restaurant coordinates with delivery zones
     const RESTAURANT_COORDINATES = {
-        'Etalem Hotel': { lat: 8.7592026, lng: 38.9458399 },
-        'Kameti Kitchen': { lat: 8.7596178, lng: 38.9450543 }
+        'Etalem Hotel': { 
+            lat: 8.7592026, 
+            lng: 38.9458399 
+        },
+        'Kameti Kitchen': { 
+            lat: 8.7596178, 
+            lng: 38.9450543 
+        },
+        'Classic Noodles': { 
+            lat: 8.7512394, 
+            lng: 38.9619381 
+        }
     };
     
     const DEFAULT_RESTAURANT = 'Etalem Hotel';
@@ -1587,6 +1597,10 @@
     let deliveryFee = 0;
     let calculatedDistance = 0;
     let isLocationRequested = false;
+    
+    // New variables for distance-based delivery
+    let canDeliver = true; // Controls if delivery is possible
+    let deliveryMessage = ''; // Stores delivery fee message
     
     // Recently ordered foods (will be loaded from localStorage)
     let recentOrders = [];
@@ -1739,6 +1753,103 @@
         showToast(currentLang === 'am' ? 'አትሙ በምናሌው ውስጥ አልተገኘም' : 'Nyaanni menu keessatti hin argamne', 3000);
     }
 
+    // Function to calculate distance in kilometers (Haversine formula)
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371; // Earth's radius in kilometers
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    }
+
+    // Function to calculate delivery fee based on distance
+    function calculateDeliveryFeeByDistance(distance) {
+        // SIMPLE SYSTEM:
+        // - Up to 1 km: 50 birr
+        // - More than 1 km but less than 10 km: 99 birr
+        // - More than 10 km: Not served (return null)
+        
+        if (isFirstOrder && FIRST_DELIVERY_FREE) {
+            return {
+                fee: 0,
+                distance: distance,
+                served: true,
+                message: currentLang === 'am' ? 
+                    'የመጀመሪያ ማድረሻ ነፃ!' : 
+                    'Ergaa jalqabaa bilisaa!'
+            };
+        }
+        
+        if (distance <= 1) {
+            return {
+                fee: 50,
+                distance: distance,
+                served: true,
+                message: currentLang === 'am' ? 
+                    `በ${distance.toFixed(2)} ኪ.ሜ ውስጥ (50 ብር)` : 
+                    `Kilomeetira ${distance.toFixed(2)} keessatti (50 Birraa)`
+            };
+        } else if (distance <= 10) {
+            return {
+                fee: 99,
+                distance: distance,
+                served: true,
+                message: currentLang === 'am' ? 
+                    `በ${distance.toFixed(2)} ኪ.ሜ (99 ብር)` : 
+                    `Kilomeetira ${distance.toFixed(2)} (99 Birraa)`
+            };
+        } else {
+            return {
+                fee: 0,
+                distance: distance,
+                served: false,
+                message: currentLang === 'am' ? 
+                    `በ${distance.toFixed(2)} ኪ.ሜ (ከ10 ኪ.ሜ በላይ - አገልግሎት የለም)` : 
+                    `Kilomeetira ${distance.toFixed(2)} (Kilomeetira 10 ol - Tajaajila hin jiru)`
+            };
+        }
+    }
+
+    // Calculate distance and delivery fee
+    function calculateDeliveryFee() {
+        if (!userLat || !userLng) {
+            deliveryFee = 99;
+            calculatedDistance = 0;
+            canDeliver = true;
+            return;
+        }
+        
+        const restaurant = RESTAURANT_COORDINATES[DEFAULT_RESTAURANT];
+        if (!restaurant) {
+            deliveryFee = 99;
+            calculatedDistance = 0;
+            canDeliver = true;
+            return;
+        }
+        
+        // Calculate distance
+        calculatedDistance = calculateDistance(userLat, userLng, restaurant.lat, restaurant.lng);
+        
+        // Get delivery fee info
+        const feeInfo = calculateDeliveryFeeByDistance(calculatedDistance);
+        
+        deliveryFee = feeInfo.fee;
+        canDeliver = feeInfo.served;
+        deliveryMessage = feeInfo.message;
+        
+        // If too far, show alert
+        if (!canDeliver) {
+            showToast(currentLang === 'am' ? 
+                `ያምልጡ! በ${calculatedDistance.toFixed(2)} ኪ.ሜ ርቀት ላይ ነዎት። ከ10 ኪ.ሜ በላይ አገልግሎት አንሰጥም።` : 
+                `Dhiifama! Fageenya ${calculatedDistance.toFixed(2)} km irra jirtu. Kilomeetira 10 ol tajaajila hin kenninu.`, 
+            5000);
+        }
+    }
+
     // Language switching function
     function switchLanguage(lang) {
         currentLang = lang;
@@ -1888,62 +1999,6 @@
         openTelegramForSupport();
     }
 
-    // Initialize app
-    window.onload = () => {
-        // Set initial language
-        switchLanguage(currentLang);
-        updateStreakUI();
-        initPWA();
-        initPullToRefresh();
-        initRecentOrders(); // Initialize recent orders instead of trending
-        
-        // Update cart count
-        updateCartCount();
-        
-        // Add event listeners to checkboxes
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', updateCartCount);
-        });
-        
-        // Update stats with random numbers (for demo)
-        setInterval(() => {
-            const ordersToday = document.getElementById('ordersToday');
-            const activeRiders = document.getElementById('activeRiders');
-            if (ordersToday) {
-                const current = parseInt(ordersToday.textContent);
-                ordersToday.textContent = current + Math.floor(Math.random() * 3);
-            }
-            if (activeRiders) {
-                activeRiders.textContent = 2 + Math.floor(Math.random() * 2);
-            }
-        }, 10000);
-        
-        // 1. Show PWA popup after 10 seconds (CHANGE 1: Already implemented)
-        setTimeout(() => {
-            showPWApopup();
-        }, 10000);
-        
-        // Check online/offline status
-        window.addEventListener('online', updateOnlineStatus);
-        window.addEventListener('offline', updateOnlineStatus);
-        updateOnlineStatus();
-        
-        // Check for updates
-        checkForUpdates();
-        
-        // Try to get saved location
-        const savedLocation = sessionStorage.getItem('userLocation');
-        if (savedLocation) {
-            const loc = JSON.parse(savedLocation);
-            userLat = loc.lat;
-            userLng = loc.lng;
-            isLocationRequested = true;
-        }
-        
-        // Set default payment method to cash (payment after delivery)
-        selectPaymentMethod('cash');
-    };
-
     // Initialize Pull to Refresh
     function initPullToRefresh() {
         document.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -2081,17 +2136,25 @@
             (position) => {
                 userLat = position.coords.latitude;
                 userLng = position.coords.longitude;
-                showToast(currentLang === 'am' ? 'አካባቢዎ ተመዝግቧል!' : 'Bakka keessan barreeffame!', 3000);
                 
+                // Save to session storage
                 sessionStorage.setItem('userLocation', JSON.stringify({
                     lat: userLat,
-                    lng: userLng
+                    lng: userLng,
+                    timestamp: Date.now()
                 }));
                 
                 isLocationRequested = true;
                 
                 // Calculate distance and delivery fee
                 calculateDeliveryFee();
+                
+                // Show toast with distance
+                if (canDeliver) {
+                    showToast(currentLang === 'am' ? 
+                        `አካባቢዎ ተመዝግቧል! ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ` : 
+                        `Bakka keessan barreeffame! Fageenya: ${calculatedDistance.toFixed(2)} km`, 3000);
+                }
                 
                 // Show payment modal after getting location
                 showPaymentModal();
@@ -2113,11 +2176,12 @@
                 
                 showToast(errorMsg, 4000);
                 
-                // Even if location fails, show payment modal
+                // Even if location fails, show payment modal with default fee
                 setTimeout(() => {
                     // Set default delivery fee
                     deliveryFee = 99;
                     calculatedDistance = 0;
+                    canDeliver = true;
                     showPaymentModal();
                 }, 1000);
             },
@@ -2134,53 +2198,13 @@
         // Set default delivery fee
         deliveryFee = 99;
         calculatedDistance = 0;
+        canDeliver = true;
         
         // Show payment modal
         showPaymentModal();
     }
 
-    // Calculate distance and delivery fee
-    function calculateDeliveryFee() {
-        if (!userLat || !userLng) {
-            deliveryFee = 99;
-            calculatedDistance = 0;
-            return;
-        }
-        
-        const restaurant = RESTAURANT_COORDINATES[DEFAULT_RESTAURANT];
-        if (!restaurant) {
-            deliveryFee = 99;
-            calculatedDistance = 0;
-            return;
-        }
-        
-        // Calculate distance in kilometers
-        calculatedDistance = calculateDistance(userLat, userLng, restaurant.lat, restaurant.lng);
-        
-        // Calculate delivery fee based on distance
-        if (isFirstOrder && FIRST_DELIVERY_FREE) {
-            deliveryFee = 0; // First order free
-        } else if (calculatedDistance <= 1) {
-            deliveryFee = 50; // Within 1km
-        } else {
-            deliveryFee = 99; // Beyond 1km
-        }
-    }
-
-    // Calculate distance between two coordinates in kilometers
-    function calculateDistance(lat1, lon1, lat2, lon2) {
-        const R = 6371; // Earth's radius in km
-        const dLat = (lat2 - lat1) * Math.PI / 180;
-        const dLon = (lon2 - lon1) * Math.PI / 180;
-        const a = 
-            Math.sin(dLat/2) * Math.sin(dLat/2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-            Math.sin(dLon/2) * Math.sin(dLon/2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        return R * c;
-    }
-
-    // Show payment modal (CHANGE 2: Now scrollable)
+    // Show payment modal (Now scrollable)
     function showPaymentModal() {
         // Get selected items and total
         let foodTotal = 0;
@@ -2193,46 +2217,82 @@
             selectedCount++;
         });
         
-        // Update order summary in modal
-        const orderSummaryDetails = document.getElementById('orderSummaryDetails');
-        const deliveryFeeDetails = document.getElementById('deliveryFeeDetails');
+        // Calculate total amount
         const totalAmount = foodTotal + deliveryFee;
         
-        // Update delivery fee display
+        // Update delivery fee display in modal
+        const deliveryFeeDetails = document.getElementById('deliveryFeeDetails');
         if (deliveryFeeDetails) {
             let feeText = '';
-            if (isFirstOrder && FIRST_DELIVERY_FREE) {
-                feeText = currentLang === 'am' ? 
-                    'የመጀመሪያ ማድረሻ ነፃ!' : 
-                    'Ergaa jalqabaa bilisaa!';
-            } else if (calculatedDistance > 0) {
-                feeText = currentLang === 'am' ? 
-                    `ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ<br>` + 
-                    `ክፍያ: ${deliveryFee} ብር` : 
-                    `Fageenya: ${calculatedDistance.toFixed(2)} km<br>` +
-                    `Kaffaltii: ${deliveryFee} Birraa`;
+            
+            if (calculatedDistance > 0) {
+                if (!canDeliver) {
+                    feeText = currentLang === 'am' ? 
+                        `🚫 አገልግሎት የለም!<br>` +
+                        `📍 ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ<br>` +
+                        `📛 ከ10 ኪ.ሜ በላይ አይሰራም` : 
+                        `🚫 Tajaajila hin jiru!<br>` +
+                        `📍 Fageenya: ${calculatedDistance.toFixed(2)} km<br>` +
+                        `📛 Kilomeetira 10 ol hin hojiin`;
+                } else if (isFirstOrder && FIRST_DELIVERY_FREE) {
+                    feeText = currentLang === 'am' ? 
+                        `🎉 የመጀመሪያ ማድረሻ ነፃ!<br>` +
+                        `📍 ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ<br>` +
+                        `💰 ክፍያ: <s>${deliveryFee > 0 ? deliveryFee + ' ብር' : ''}</s> 0 ብር` : 
+                        `🎉 Ergaa jalqabaa bilisaa!<br>` +
+                        `📍 Fageenya: ${calculatedDistance.toFixed(2)} km<br>` +
+                        `💰 Kaffaltii: <s>${deliveryFee > 0 ? deliveryFee + ' Birraa' : ''}</s> 0 Birraa`;
+                } else {
+                    feeText = currentLang === 'am' ? 
+                        `📍 ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ<br>` +
+                        `💰 ክፍያ: ${deliveryFee} ብር<br>` +
+                        `📝 ${calculatedDistance <= 1 ? 'እስከ 1 ኪ.ሜ: 50 ብር' : 'ከ1 ኪ.ሜ በላይ: 99 ብር'}` : 
+                        `📍 Fageenya: ${calculatedDistance.toFixed(2)} km<br>` +
+                        `💰 Kaffaltii: ${deliveryFee} Birraa<br>` +
+                        `📝 ${calculatedDistance <= 1 ? 'Kilomeetira 1 hanga: 50 Birraa' : 'Kilomeetira 1 ol: 99 Birraa'}`;
+                }
             } else {
                 feeText = currentLang === 'am' ? 
-                    `ክፍያ: ${deliveryFee} ብር` : 
-                    `Kaffaltii: ${deliveryFee} Birraa`;
+                    `📍 ርቀት: የማይታወቅ<br>` +
+                    `💰 ክፍያ: ${deliveryFee} ብር<br>` +
+                    `ℹ️ አካባቢ አልተገለጸም` : 
+                    `📍 Fageenya: Hin beekamne<br>` +
+                    `💰 Kaffaltii: ${deliveryFee} Birraa<br>` +
+                    `ℹ️ Bakka hin ibsamne`;
             }
+            
             deliveryFeeDetails.innerHTML = feeText;
         }
         
         // Update order summary
+        const orderSummaryDetails = document.getElementById('orderSummaryDetails');
         if (orderSummaryDetails) {
             let summaryText = currentLang === 'am' ? 
-                `የተመረጡ እቃዎች: ${selectedCount}<br>` +
-                `የምግብ ዋጋ: ${foodTotal} ብር<br>` +
-                `የመላኪያ ክፍያ: ${deliveryFee} ብር<br>` +
-                `<strong>ጠቅላላ: ${totalAmount} ብር</strong>` :
-                `Nyaata filataman: ${selectedCount}<br>` +
-                `Gatii nyaataa: ${foodTotal} Birraa<br>` +
-                `Kaffaltii ergaa: ${deliveryFee} Birraa<br>` +
-                `<strong>Waliigala: ${totalAmount} Birraa</strong>`;
+                `🛒 የተመረጡ እቃዎች: ${selectedCount}<br>` +
+                `🍔 የምግብ ዋጋ: ${foodTotal} ብር<br>` +
+                `🚚 የመላኪያ ክፍያ: ${deliveryFee} ብር<br>` +
+                `💰 <strong>ጠቅላላ: ${totalAmount} ብር</strong>` :
+                `🛒 Nyaata filataman: ${selectedCount}<br>` +
+                `🍔 Gatii nyaataa: ${foodTotal} Birraa<br>` +
+                `🚚 Kaffaltii ergaa: ${deliveryFee} Birraa<br>` +
+                `💰 <strong>Waliigala: ${totalAmount} Birraa</strong>`;
             
             orderSummaryDetails.innerHTML = summaryText;
         }
+        
+        // Store order data
+        orderData = { 
+            name: "Customer",
+            phone: userPhone || "Not Provided",
+            landmark: "Not Provided",
+            items: selectedItems.join(", "), 
+            foodTotal,
+            paymentMethod: selectedPaymentMethod,
+            deliveryFee: deliveryFee,
+            distance: calculatedDistance,
+            canDeliver: canDeliver,
+            isFirstOrderFree: isFirstOrder && FIRST_DELIVERY_FREE
+        };
         
         // Show payment modal
         document.getElementById('paymentModal').style.display = 'block';
@@ -2245,6 +2305,15 @@
 
     // Confirm payment and proceed to phone number collection
     function confirmPayment() {
+        // Check if delivery is possible
+        if (!canDeliver) {
+            showToast(currentLang === 'am' ? 
+                'ይቅርታ! በርቀትዎ ምክንያት አገልግሎት አንሰጥም።' : 
+                'Dhiifama! Fageenyakeetti tajaajila hin kenninu.', 
+            5000);
+            return;
+        }
+        
         closePaymentModal();
         
         // After payment confirmation, show phone number modal
@@ -2289,7 +2358,7 @@
         sendOrderToTelegram();
     }
 
-    // Show PWA popup after 10 seconds (CHANGE 1: Already implemented)
+    // Show PWA popup after 10 seconds
     function showPWApopup() {
         const isInstalled = localStorage.getItem('pwaInstalled') === 'true';
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
@@ -2426,6 +2495,81 @@
         }
     }
 
+    // Initialize app
+    window.onload = () => {
+        // Set initial language
+        switchLanguage(currentLang);
+        updateStreakUI();
+        initPWA();
+        initPullToRefresh();
+        initRecentOrders(); // Initialize recent orders instead of trending
+        
+        // Update cart count
+        updateCartCount();
+        
+        // Add event listeners to checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', updateCartCount);
+        });
+        
+        // Update stats with random numbers (for demo)
+        setInterval(() => {
+            const ordersToday = document.getElementById('ordersToday');
+            const activeRiders = document.getElementById('activeRiders');
+            if (ordersToday) {
+                const current = parseInt(ordersToday.textContent);
+                ordersToday.textContent = current + Math.floor(Math.random() * 3);
+            }
+            if (activeRiders) {
+                activeRiders.textContent = 2 + Math.floor(Math.random() * 2);
+            }
+        }, 10000);
+        
+        // 1. Show PWA popup after 10 seconds
+        setTimeout(() => {
+            showPWApopup();
+        }, 10000);
+        
+        // Check online/offline status
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        updateOnlineStatus();
+        
+        // Check for updates
+        checkForUpdates();
+        
+        // Try to get saved location
+        const savedLocation = sessionStorage.getItem('userLocation');
+        if (savedLocation) {
+            try {
+                const loc = JSON.parse(savedLocation);
+                // Check if location is less than 1 hour old
+                if (Date.now() - loc.timestamp < 3600000) {
+                    userLat = loc.lat;
+                    userLng = loc.lng;
+                    isLocationRequested = true;
+                    
+                    // Calculate distances with saved location
+                    calculateDeliveryFee();
+                    
+                    // Show toast with distance
+                    setTimeout(() => {
+                        if (canDeliver) {
+                            showToast(currentLang === 'am' ? 
+                                `የተቀመጠ አካባቢ አለ! ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ` : 
+                                `Bakka dhaabame jira! Fageenya: ${calculatedDistance.toFixed(2)} km`, 3000);
+                        }
+                    }, 1000);
+                }
+            } catch (e) {
+                console.error('Error loading saved location:', e);
+            }
+        }
+        
+        // Set default payment method to cash (payment after delivery)
+        selectPaymentMethod('cash');
+    };
+
     function openCheckout() {
         let foodTotal = 0;
         let selected = [];
@@ -2450,6 +2594,7 @@
             paymentMethod: selectedPaymentMethod,
             deliveryFee: deliveryFee,
             distance: calculatedDistance,
+            canDeliver: canDeliver,
             isFirstOrderFree: isFirstOrder && FIRST_DELIVERY_FREE
         };
         
@@ -2465,6 +2610,15 @@
 
     // Send order to Telegram (after getting phone number)
     function sendOrderToTelegram() {
+        // Check if delivery is possible before sending
+        if (!canDeliver) {
+            showToast(currentLang === 'am' ? 
+                'ይቅርታ! በርቀትዎ ምክንያት አገልግሎት አንሰጥም።' : 
+                'Dhiifama! Fageenyakeetti tajaajila hin kenninu.', 
+            5000);
+            return;
+        }
+        
         localStorage.setItem('lastOrder', JSON.stringify(orderData));
         
         // Mark first order as completed
@@ -2476,10 +2630,14 @@
         // Use saved location if available
         const savedLocation = sessionStorage.getItem('userLocation');
         if (savedLocation && !userLat && !userLng) {
-            const loc = JSON.parse(savedLocation);
-            userLat = loc.lat;
-            userLng = loc.lng;
-            calculateDeliveryFee(); // Recalculate with saved location
+            try {
+                const loc = JSON.parse(savedLocation);
+                userLat = loc.lat;
+                userLng = loc.lng;
+                calculateDeliveryFee(); // Recalculate with saved location
+            } catch (e) {
+                console.error('Error loading saved location:', e);
+            }
         }
         
         // Add selected items to recent orders
@@ -2513,20 +2671,20 @@
         const totalAmount = totalItemsPrice + deliveryFee;
         
         if (userLat && userLng) {
-            locationInfo = `Location: ${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
-            mapUrl = `Map: https://www.google.com/maps?q=${userLat},${userLng}`;
+            locationInfo = `📍 Location: ${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
+            mapUrl = `🗺️ Map: https://www.google.com/maps?q=${userLat},${userLng}`;
             
             deliveryPriceInfo = 
-                `Distance from restaurant: ${calculatedDistance.toFixed(2)} km\n` +
-                `Food Items Total: ${totalItemsPrice} ETB\n` +
-                `Delivery Fee: ${deliveryFee} ETB ${orderData.isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
-                `TOTAL: ${totalAmount} ETB\n`;
+                `📏 Distance from restaurant: ${calculatedDistance.toFixed(2)} km\n` +
+                `🍔 Food Items Total: ${totalItemsPrice} ETB\n` +
+                `🚚 Delivery Fee: ${deliveryFee} ETB ${orderData.isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
+                `💰 TOTAL: ${totalAmount} ETB\n`;
         } else {
-            locationInfo = "Location: Not provided";
+            locationInfo = "📍 Location: Not provided";
             deliveryPriceInfo = 
-                `Food Items Total: ${totalItemsPrice} ETB\n` +
-                `Delivery Fee: ${deliveryFee} ETB ${orderData.isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
-                `TOTAL: ${totalAmount} ETB\n`;
+                `🍔 Food Items Total: ${totalItemsPrice} ETB\n` +
+                `🚚 Delivery Fee: ${deliveryFee} ETB ${orderData.isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
+                `💰 TOTAL: ${totalAmount} ETB\n`;
         }
         
         // Streak Logic
@@ -2544,21 +2702,21 @@
         
         // Payment method info
         const paymentMethodInfo = selectedPaymentMethod === 'cash' ? 
-            'Payment Method: Cash on Delivery (Pay after receiving your food)' :
-            'Payment Method: Telegram Payment';
+            '💳 Payment Method: Cash on Delivery (Pay after receiving your food)' :
+            '💳 Payment Method: Telegram Payment';
         
         return `/order\n` +
-               `Name: ${orderData.name}\n` +
-               `Phone: ${orderData.phone}\n` +
-               `Landmark: ${orderData.landmark}\n` +
+               `👤 Name: ${orderData.name}\n` +
+               `📱 Phone: ${orderData.phone}\n` +
+               `🏠 Landmark: ${orderData.landmark}\n` +
                `${locationInfo}\n` +
                `${mapUrl}\n\n` +
-               `Items:\n${orderData.items}\n\n` +
+               `🛒 Items:\n${orderData.items}\n\n` +
                `${deliveryPriceInfo}\n` +
                `${paymentMethodInfo}\n` +
-               `Time: ${new Date().toLocaleString('am-ET')}\n` +
-               `Order ID: BD${Date.now().toString().slice(-8)}\n\n` +
-               `This is a TEST order for user interest gathering`;
+               `⏰ Time: ${new Date().toLocaleString('am-ET')}\n` +
+               `🆔 Order ID: BD${Date.now().toString().slice(-8)}\n\n` +
+               `ℹ️ This is a TEST order for user interest gathering`;
     }
 
     function clearForm() {
@@ -2570,6 +2728,7 @@
         userPhone = '';
         deliveryFee = 0;
         calculatedDistance = 0;
+        canDeliver = true;
     }
 </script>
 </body> 
