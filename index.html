@@ -1599,7 +1599,8 @@
     // New variables for distance-based delivery
     let canDeliver = true; // Controls if delivery is possible
     let deliveryMessage = ''; // Stores delivery fee message
-    let selectedRestaurant = ''; // Store which restaurant the user is ordering from
+    let selectedRestaurants = []; // Store which restaurants the user is ordering from
+    let farthestRestaurant = ''; // Store the farthest restaurant
     
     // Recently ordered foods (will be loaded from localStorage)
     let recentOrders = [];
@@ -1813,27 +1814,33 @@
         }
     }
 
-    // Calculate distance and delivery fee - FIXED VERSION
+    // Calculate distance and delivery fee - BASED ON FARTHEST RESTAURANT
     function calculateDeliveryFee() {
-        if (!userLat || !userLng || !selectedRestaurant) {
+        if (!userLat || !userLng || selectedRestaurants.length === 0) {
             deliveryFee = 99;
             calculatedDistance = 0;
             canDeliver = true;
             return;
         }
         
-        const restaurant = RESTAURANT_COORDINATES[selectedRestaurant];
-        if (!restaurant) {
-            deliveryFee = 99;
-            calculatedDistance = 0;
-            canDeliver = true;
-            return;
-        }
+        // Find the farthest restaurant from user
+        let maxDistance = 0;
+        farthestRestaurant = '';
         
-        // Calculate distance to the SELECTED restaurant
-        calculatedDistance = calculateDistance(userLat, userLng, restaurant.lat, restaurant.lng);
+        selectedRestaurants.forEach(restaurantName => {
+            const restaurant = RESTAURANT_COORDINATES[restaurantName];
+            if (restaurant) {
+                const distance = calculateDistance(userLat, userLng, restaurant.lat, restaurant.lng);
+                if (distance > maxDistance) {
+                    maxDistance = distance;
+                    farthestRestaurant = restaurantName;
+                }
+            }
+        });
         
-        // Get delivery fee info
+        calculatedDistance = maxDistance;
+        
+        // Get delivery fee info based on farthest distance
         const feeInfo = calculateDeliveryFeeByDistance(calculatedDistance);
         
         deliveryFee = feeInfo.fee;
@@ -1849,15 +1856,12 @@
         }
     }
 
-    // Determine which restaurant the user is ordering from
-    function getSelectedRestaurant() {
-        let restaurantCounts = {
-            'Etalem Hotel': 0,
-            'Kameti Kitchen': 0,
-            'Classic Noodles': 0
-        };
+    // Determine which restaurants the user is ordering from
+    function getSelectedRestaurants() {
+        selectedRestaurants = [];
+        const restaurantMap = {};
         
-        // Count items from each restaurant
+        // Check which restaurants have selected items
         document.querySelectorAll('input[type="checkbox"]:checked').forEach(box => {
             const card = box.closest('.card');
             if (card) {
@@ -1872,36 +1876,26 @@
                     if (restaurantTitle.classList.contains('res-title')) {
                         const restaurantName = restaurantTitle.querySelector('span').textContent;
                         
+                        let actualRestaurantName = '';
                         if (restaurantName.includes('እታለም') || restaurantName.includes('Etalem')) {
-                            restaurantCounts['Etalem Hotel']++;
+                            actualRestaurantName = 'Etalem Hotel';
                         } else if (restaurantName.includes('ካሜቲ') || restaurantName.includes('Kameti')) {
-                            restaurantCounts['Kameti Kitchen']++;
+                            actualRestaurantName = 'Kameti Kitchen';
                         } else if (restaurantName.includes('አዲስ') || restaurantName.includes('Classic')) {
-                            restaurantCounts['Classic Noodles']++;
+                            actualRestaurantName = 'Classic Noodles';
+                        }
+                        
+                        if (actualRestaurantName && !restaurantMap[actualRestaurantName]) {
+                            restaurantMap[actualRestaurantName] = true;
+                            selectedRestaurants.push(actualRestaurantName);
                         }
                     }
                 }
             }
         });
         
-        // Find restaurant with most items selected
-        let mainRestaurant = '';
-        let maxCount = 0;
-        
-        for (const [restaurant, count] of Object.entries(restaurantCounts)) {
-            if (count > maxCount) {
-                maxCount = count;
-                mainRestaurant = restaurant;
-            }
-        }
-        
-        // If no items selected or tie, use Etalem as default
-        if (!mainRestaurant) {
-            mainRestaurant = 'Etalem Hotel';
-        }
-        
-        selectedRestaurant = mainRestaurant;
-        return mainRestaurant;
+        // If no items selected, use empty array
+        return selectedRestaurants;
     }
 
     // Language switching function
@@ -2200,17 +2194,28 @@
                 
                 isLocationRequested = true;
                 
-                // Determine which restaurant is being ordered from
-                getSelectedRestaurant();
+                // Determine which restaurants are being ordered from
+                getSelectedRestaurants();
                 
-                // Calculate distance and delivery fee
+                // Calculate distance and delivery fee based on farthest restaurant
                 calculateDeliveryFee();
                 
                 // Show toast with distance
                 if (canDeliver) {
+                    let restaurantText = '';
+                    if (selectedRestaurants.length === 1) {
+                        restaurantText = currentLang === 'am' ? 
+                            `(${selectedRestaurants[0]})` : 
+                            `(${selectedRestaurants[0]})`;
+                    } else {
+                        restaurantText = currentLang === 'am' ? 
+                            `(ከ${selectedRestaurants.length} ሬስቶራንት - ርቀቱ ከ${farthestRestaurant})` : 
+                            `(${selectedRestaurants.length} Restoraantii irraa - Fageenyi ${farthestRestaurant} irraa)`;
+                    }
+                    
                     showToast(currentLang === 'am' ? 
-                        `አካባቢዎ ተመዝግቧል! ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ (${selectedRestaurant})` : 
-                        `Bakka keessan barreeffame! Fageenya: ${calculatedDistance.toFixed(2)} km (${selectedRestaurant})`, 3000);
+                        `አካባቢዎ ተመዝግቧል! ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ ${restaurantText}` : 
+                        `Bakka keessan barreeffame! Fageenya: ${calculatedDistance.toFixed(2)} km ${restaurantText}`, 3000);
                 }
                 
                 // Show payment modal after getting location
@@ -2263,8 +2268,8 @@
 
     // Show payment modal (Now scrollable)
     function showPaymentModal() {
-        // First determine which restaurant is being ordered from
-        const mainRestaurant = getSelectedRestaurant();
+        // First determine which restaurants are being ordered from
+        getSelectedRestaurants();
         
         // Get selected items and total
         let foodTotal = 0;
@@ -2289,41 +2294,41 @@
                 if (!canDeliver) {
                     feeText = currentLang === 'am' ? 
                         `🚫 አገልግሎት የለም!<br>` +
-                        `📍 ሬስቶራንት: ${selectedRestaurant}<br>` +
-                        `📏 ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ<br>` +
+                        `📍 ሬስቶራንት: ${selectedRestaurants.length} ቦታዎች<br>` +
+                        `📏 ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ (ከ${farthestRestaurant})<br>` +
                         `📛 ከ10 ኪ.ሜ በላይ አይሰራም` : 
                         `🚫 Tajaajila hin jiru!<br>` +
-                        `📍 Restoraantii: ${selectedRestaurant}<br>` +
-                        `📏 Fageenya: ${calculatedDistance.toFixed(2)} km<br>` +
+                        `📍 Restoraantii: ${selectedRestaurants.length} bakka<br>` +
+                        `📏 Fageenya: ${calculatedDistance.toFixed(2)} km (${farthestRestaurant} irraa)<br>` +
                         `📛 Kilomeetira 10 ol hin hojiin`;
                 } else if (isFirstOrder && FIRST_DELIVERY_FREE) {
                     feeText = currentLang === 'am' ? 
                         `🎉 የመጀመሪያ ማድረሻ ነፃ!<br>` +
-                        `📍 ሬስቶራንት: ${selectedRestaurant}<br>` +
-                        `📏 ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ<br>` +
+                        `📍 ሬስቶራንት: ${selectedRestaurants.length} ቦታዎች<br>` +
+                        `📏 ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ (ከ${farthestRestaurant})<br>` +
                         `💰 ክፍያ: <s>${deliveryFee > 0 ? deliveryFee + ' ብር' : ''}</s> 0 ብር` : 
                         `🎉 Ergaa jalqabaa bilisaa!<br>` +
-                        `📍 Restoraantii: ${selectedRestaurant}<br>` +
-                        `📏 Fageenya: ${calculatedDistance.toFixed(2)} km<br>` +
+                        `📍 Restoraantii: ${selectedRestaurants.length} bakka<br>` +
+                        `📏 Fageenya: ${calculatedDistance.toFixed(2)} km (${farthestRestaurant} irraa)<br>` +
                         `💰 Kaffaltii: <s>${deliveryFee > 0 ? deliveryFee + ' Birraa' : ''}</s> 0 Birraa`;
                 } else {
                     feeText = currentLang === 'am' ? 
-                        `📍 ሬስቶራንት: ${selectedRestaurant}<br>` +
-                        `📏 ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ<br>` +
+                        `📍 ሬስቶራንት: ${selectedRestaurants.length} ቦታዎች<br>` +
+                        `📏 ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ (ከ${farthestRestaurant})<br>` +
                         `💰 ክፍያ: ${deliveryFee} ብር<br>` +
                         `📝 ${calculatedDistance <= 1 ? 'እስከ 1 ኪ.ሜ: 50 ብር' : 'ከ1 ኪ.ሜ በላይ: 99 ብር'}` : 
-                        `📍 Restoraantii: ${selectedRestaurant}<br>` +
-                        `📏 Fageenya: ${calculatedDistance.toFixed(2)} km<br>` +
+                        `📍 Restoraantii: ${selectedRestaurants.length} bakka<br>` +
+                        `📏 Fageenya: ${calculatedDistance.toFixed(2)} km (${farthestRestaurant} irraa)<br>` +
                         `💰 Kaffaltii: ${deliveryFee} Birraa<br>` +
                         `📝 ${calculatedDistance <= 1 ? 'Kilomeetira 1 hanga: 50 Birraa' : 'Kilomeetira 1 ol: 99 Birraa'}`;
                 }
             } else {
                 feeText = currentLang === 'am' ? 
-                    `📍 ሬስቶራንት: ${selectedRestaurant}<br>` +
+                    `📍 ሬስቶራንት: ${selectedRestaurants.length} ቦታዎች<br>` +
                     `📏 ርቀት: የማይታወቅ<br>` +
                     `💰 ክፍያ: ${deliveryFee} ብር<br>` +
                     `ℹ️ አካባቢ አልተገለጸም` : 
-                    `📍 Restoraantii: ${selectedRestaurant}<br>` +
+                    `📍 Restoraantii: ${selectedRestaurants.length} bakka<br>` +
                     `📏 Fageenya: Hin beekamne<br>` +
                     `💰 Kaffaltii: ${deliveryFee} Birraa<br>` +
                     `ℹ️ Bakka hin ibsamne`;
@@ -2335,17 +2340,37 @@
         // Update order summary
         const orderSummaryDetails = document.getElementById('orderSummaryDetails');
         if (orderSummaryDetails) {
-            let summaryText = currentLang === 'am' ? 
-                `🛒 የተመረጡ እቃዎች: ${selectedCount}<br>` +
-                `🏢 ሬስቶራንት: ${selectedRestaurant}<br>` +
-                `🍔 የምግብ ዋጋ: ${foodTotal} ብር<br>` +
-                `🚚 የመላኪያ ክፍያ: ${deliveryFee} ብር<br>` +
-                `💰 <strong>ጠቅላላ: ${totalAmount} ብር</strong>` :
-                `🛒 Nyaata filataman: ${selectedCount}<br>` +
-                `🏢 Restoraantii: ${selectedRestaurant}<br>` +
-                `🍔 Gatii nyaataa: ${foodTotal} Birraa<br>` +
-                `🚚 Kaffaltii ergaa: ${deliveryFee} Birraa<br>` +
-                `💰 <strong>Waliigala: ${totalAmount} Birraa</strong>`;
+            let summaryText = '';
+            
+            if (selectedRestaurants.length > 1) {
+                summaryText = currentLang === 'am' ? 
+                    `🛒 የተመረጡ እቃዎች: ${selectedCount}<br>` +
+                    `🏢 ሬስቶራንት: ${selectedRestaurants.length} ቦታዎች<br>` +
+                    `📏 ርቀት (ረጅሙ): ${calculatedDistance.toFixed(2)} ኪ.ሜ (ከ${farthestRestaurant})<br>` +
+                    `🍔 የምግብ ዋጋ: ${foodTotal} ብር<br>` +
+                    `🚚 የመላኪያ ክፍያ: ${deliveryFee} ብር<br>` +
+                    `💰 <strong>ጠቅላላ: ${totalAmount} ብር</strong>` :
+                    `🛒 Nyaata filataman: ${selectedCount}<br>` +
+                    `🏢 Restoraantii: ${selectedRestaurants.length} bakka<br>` +
+                    `📏 Fageenya (dheeraa): ${calculatedDistance.toFixed(2)} km (${farthestRestaurant} irraa)<br>` +
+                    `🍔 Gatii nyaataa: ${foodTotal} Birraa<br>` +
+                    `🚚 Kaffaltii ergaa: ${deliveryFee} Birraa<br>` +
+                    `💰 <strong>Waliigala: ${totalAmount} Birraa</strong>`;
+            } else {
+                summaryText = currentLang === 'am' ? 
+                    `🛒 የተመረጡ እቃዎች: ${selectedCount}<br>` +
+                    `🏢 ሬስቶራንት: ${selectedRestaurants[0] || 'የማይታወቅ'}<br>` +
+                    `📏 ርቀት: ${calculatedDistance.toFixed(2)} ኪ.ሜ<br>` +
+                    `🍔 የምግብ ዋጋ: ${foodTotal} ብር<br>` +
+                    `🚚 የመላኪያ ክፍያ: ${deliveryFee} ብር<br>` +
+                    `💰 <strong>ጠቅላላ: ${totalAmount} ብር</strong>` :
+                    `🛒 Nyaata filataman: ${selectedCount}<br>` +
+                    `🏢 Restoraantii: ${selectedRestaurants[0] || 'Hin beekamne'}<br>` +
+                    `📏 Fageenya: ${calculatedDistance.toFixed(2)} km<br>` +
+                    `🍔 Gatii nyaataa: ${foodTotal} Birraa<br>` +
+                    `🚚 Kaffaltii ergaa: ${deliveryFee} Birraa<br>` +
+                    `💰 <strong>Waliigala: ${totalAmount} Birraa</strong>`;
+            }
             
             orderSummaryDetails.innerHTML = summaryText;
         }
@@ -2360,7 +2385,8 @@
             paymentMethod: selectedPaymentMethod,
             deliveryFee: deliveryFee,
             distance: calculatedDistance,
-            restaurant: selectedRestaurant,
+            restaurants: selectedRestaurants,
+            farthestRestaurant: farthestRestaurant,
             canDeliver: canDeliver,
             isFirstOrderFree: isFirstOrder && FIRST_DELIVERY_FREE
         };
@@ -2620,9 +2646,6 @@
                     userLng = loc.lng;
                     isLocationRequested = true;
                     
-                    // Note: We can't calculate distance here because we don't know which restaurant yet
-                    // That will be done when the user checks out
-                    
                     showToast(currentLang === 'am' ? 
                         'የተቀመጠ አካባቢ አለ!' : 
                         'Bakka dhaabame jira!', 3000);
@@ -2651,8 +2674,8 @@
             return;
         }
         
-        // First determine which restaurant is being ordered from
-        getSelectedRestaurant();
+        // First determine which restaurants are being ordered from
+        getSelectedRestaurants();
         
         orderData = { 
             name: "Customer",
@@ -2663,7 +2686,8 @@
             paymentMethod: selectedPaymentMethod,
             deliveryFee: deliveryFee,
             distance: calculatedDistance,
-            restaurant: selectedRestaurant,
+            restaurants: selectedRestaurants,
+            farthestRestaurant: farthestRestaurant,
             canDeliver: canDeliver,
             isFirstOrderFree: isFirstOrder && FIRST_DELIVERY_FREE
         };
@@ -2744,16 +2768,28 @@
             locationInfo = `📍 Location: ${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
             mapUrl = `🗺️ Map: https://www.google.com/maps?q=${userLat},${userLng}`;
             
+            let restaurantInfo = '';
+            if (selectedRestaurants.length === 1) {
+                restaurantInfo = `🏢 Restaurant: ${selectedRestaurants[0]}\n`;
+            } else {
+                restaurantInfo = `🏢 Restaurants: ${selectedRestaurants.join(', ')}\n` +
+                               `📍 Farthest: ${farthestRestaurant}\n`;
+            }
+            
             deliveryPriceInfo = 
-                `🏢 Restaurant: ${selectedRestaurant}\n` +
-                `📏 Distance: ${calculatedDistance.toFixed(2)} km\n` +
+                `${restaurantInfo}` +
+                `📏 Distance (farthest): ${calculatedDistance.toFixed(2)} km\n` +
                 `🍔 Food Items Total: ${totalItemsPrice} ETB\n` +
                 `🚚 Delivery Fee: ${deliveryFee} ETB ${orderData.isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
                 `💰 TOTAL: ${totalAmount} ETB\n`;
         } else {
             locationInfo = "📍 Location: Not provided";
+            let restaurantInfo = selectedRestaurants.length === 1 ? 
+                `🏢 Restaurant: ${selectedRestaurants[0]}\n` :
+                `🏢 Restaurants: ${selectedRestaurants.join(', ')}\n`;
+            
             deliveryPriceInfo = 
-                `🏢 Restaurant: ${selectedRestaurant}\n` +
+                `${restaurantInfo}` +
                 `🍔 Food Items Total: ${totalItemsPrice} ETB\n` +
                 `🚚 Delivery Fee: ${deliveryFee} ETB ${orderData.isFirstOrderFree ? '(FIRST ORDER FREE!)' : ''}\n` +
                 `💰 TOTAL: ${totalAmount} ETB\n`;
@@ -2801,7 +2837,8 @@
         deliveryFee = 0;
         calculatedDistance = 0;
         canDeliver = true;
-        selectedRestaurant = '';
+        selectedRestaurants = [];
+        farthestRestaurant = '';
     }
 </script>
 </body> 
