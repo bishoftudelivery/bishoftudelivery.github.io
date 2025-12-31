@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="am" data-version="14.3" data-lang="am">
 <head>
+    <head>
     <meta name="google-site-verification" content="Yo225u8qpEADrbmyCChQZ9zOZ9pNeUwm1meyq8ChHh4" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    
+    <!-- AGGRESSIVE CACHE CONTROL - ADD THESE -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="Thu, 01 Jan 1970 00:00:00 GMT">
+    
     <title id="page-title">ቢሾፍቱ ዴሊቨሪ | Bishoftu Delivery</title>
     
-    <!-- PWA Meta Tags - UPDATED FOR BETTER CROSS-DEVICE SUPPORT -->
+    <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#ff4500">
     <meta name="description" content="ቢሾፍቱ ውስጥ ምግብ ማድረሻ - Food Delivery Service in Bishoftu">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="BishoftuDelivery">
+    
+    <!-- Add version parameter to manifest -->
     <link rel="manifest" href="./manifest.json?v=14.3">
     
-    <!-- iOS Meta Tags -->
+    <!-- iOS Meta Tags with version -->
     <link rel="apple-touch-icon" href="./icons/icon-152x152.png?v=14.3">
     <link rel="apple-touch-icon" sizes="57x57" href="./icons/icon-57x57.png?v=14.3">
     <link rel="apple-touch-icon" sizes="72x72" href="./icons/icon-72x72.png?v=14.3">
@@ -28,7 +35,7 @@
     <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152x152.png?v=14.3">
     <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180x180.png?v=14.3">
     
-    <!-- Android Chrome Meta Tags -->
+    <!-- Android Chrome Meta Tags with version -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" type="image/x-icon" href="./icons/favicon.ico?v=14.3">
     <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192x192.png?v=14.3">
@@ -39,8 +46,16 @@
     <meta name="msapplication-TileImage" content="./icons/icon-144x144.png?v=14.3">
     <meta name="msapplication-config" content="./browserconfig.xml">
     
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome with version -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css?v=14.3">
+    
+    <!-- Your existing styles here... -->
+    <!-- ADD THESE 3 LINES -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- ... rest of your code ... -->
     
     <style>
         :root { 
@@ -1313,6 +1328,23 @@
     </style>
 </head>
 <body>
+    <!-- Add this RIGHT AFTER the opening <body> tag -->
+<body oncontextmenu="return false;" onkeydown="if(event.keyCode==123||(event.ctrlKey&&event.shiftKey&&(event.keyCode==73||event.keyCode==74||event.keyCode==67))||(event.ctrlKey&&event.keyCode==85))return false;">
+    
+<!-- Add this RIGHT BEFORE the closing </body> tag -->
+<script>
+// Simple protection - disable right click and dev tools
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    if(e.keyCode == 123 || 
+       (e.ctrlKey && e.shiftKey && e.keyCode == 73) ||
+       (e.ctrlKey && e.shiftKey && e.keyCode == 74) ||
+       (e.ctrlKey && e.keyCode == 85)) {
+        return false;
+    }
+};
+</script>
 
 <!-- Testing Notice -->
 <div class="testing-notice" data-am="ፍላጎት ማሰባሰቢያ ነው። ለቢሾፍቱ ምግብ ማድረሻ ሀሳብ ነው።" data-om="Kun tajaajila nyaataa Bishooftu irratti madaala fedha fayyadamaa. Yaada qofaa dha.">
@@ -1882,6 +1914,15 @@
             <p data-am="የእርስዎን መረጃ ለሶስተኛ ወገን አንሰጥም። ትዕዛዝዎ በቴሌግራም ለአስተዳዳሪዎቻችን ብቻ ይላካል።" data-om="Odeeffannoo keessan dursaa sadaffaa hin kenninu. Ordeeraa keessan Telegiraamiin hoggantota keenya qofa geessa.">የእርስዎን መረጃ ለሶስተኛ ወገን አንሰጥም። ትዕዛዝዎ በቴሌግራም ለአስተዳዳሪዎቻችን ብቻ ይላካል።</p>
             <p data-am="ክፍያዎች በቀጥታ በገንዘብ ይከናወናሉ።" data-om="Kaffaltiin qarshii qofa hojietama.">ክፍያዎች በቀጥታ በገንዘብ ይከናወናሉ።</p>
         </div>
+        <!-- Add this to your contact or about page -->
+<div class="info-card">
+    <h2 data-am="አፕ አዘምን" data-om="App Jijjiirraa">አፕ አዘምን</h2>
+    <p data-am="አፕዎን ወደ አዲስ ስሪት ለማዘምን የሚከተለውን ቁልፍ ይጫኑ" data-om="App keessan gara haaraa jijjiirruu fedhaa cuqi kana cuqi">አፕዎን ወደ አዲስ ስሪት ለማዘምን የሚከተለውን ቁልፍ ይጫኑ</p>
+    <button class="btn" onclick="forceUpdate()" style="margin-top:10px;">
+        <i class="fas fa-sync-alt"></i>
+        <span data-am="አዘምን ይፈልጋሉ?" data-om="Jijjiirraa Barbaadduu?">አዘምን ይፈልጋሉ?</span>
+    </button>
+</div>
     </div>
 </div>
 
@@ -1958,6 +1999,69 @@
 </div>
 
 <script>
+    // Add to your main JavaScript
+(function() {
+    'use strict';
+    
+    // Prevent right-click (optional)
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        showToast('Right-click disabled', 2000);
+    });
+    
+    // Prevent Ctrl+U, Ctrl+S, Ctrl+Shift+I, F12
+    document.addEventListener('keydown', function(e) {
+        if (
+            e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'i') ||
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && e.key === 'I')
+        ) {
+            e.preventDefault();
+            showToast('This action is not allowed', 2000);
+            return false;
+        }
+    });
+    
+    // Detect dev tools opening
+    let devToolsOpen = false;
+    const threshold = 160;
+    const checkDevTools = () => {
+        const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+        const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+        devToolsOpen = widthThreshold || heightThreshold;
+        
+        if (devToolsOpen) {
+            console.clear();
+            document.body.innerHTML = '<div style="padding: 20px; text-align: center;"><h1>Access Restricted</h1><p>Developer tools are not allowed on this site.</p></div>';
+            throw new Error('Dev tools detected');
+        }
+    };
+    
+    setInterval(checkDevTools, 1000);
+    
+    // Obfuscate console output
+    const originalConsole = window.console;
+    window.console = {
+        log: function() {
+            // Convert to base64 or obfuscate
+            const args = Array.from(arguments).map(arg => {
+                if (typeof arg === 'string') {
+                    return btoa(arg).split('').reverse().join('');
+                }
+                return arg;
+            });
+            originalConsole.log.apply(originalConsole, args);
+        },
+        warn: originalConsole.warn,
+        error: originalConsole.error,
+        info: function() {
+            // Don't show info in production
+        },
+        debug: function() {
+            // Don't show debug in production
+        }
+    };
+})();
     // Restaurant coordinates with correct values
     const RESTAURANT_COORDINATES = {
         'Classic Noodles': { lat: 8.7512517, lng: 38.9619680 },
@@ -3313,6 +3417,70 @@
         preorderTimeSlot = '';
         selectOrderType('normal');
     }
+    // Add this function to check for updates
+function checkForAppUpdates() {
+    if ('serviceWorker' in navigator) {
+        // Check for service worker updates every time
+        navigator.serviceWorker.ready.then(registration => {
+            registration.update();
+        });
+        
+        // Listen for controller change (new SW activated)
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            console.log('New service worker activated, reloading page...');
+            showToast(currentLang === 'am' ? 
+                'አፕ ወደ አዲስ ስሪት ተሻሽሏል!' : 
+                'App gara haaraa jijjiirrame!', 3000);
+            
+            // Reload the page after a short delay
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        });
+    }
+}
+
+// Call this on page load
+window.addEventListener('load', () => {
+    checkForAppUpdates();
+    
+    // Also check periodically (every 5 minutes)
+    setInterval(checkForAppUpdates, 5 * 60 * 1000);
+});
+// Force update function
+function forceUpdate() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then(registration => {
+            if (registration) {
+                registration.update().then(() => {
+                    showToast(currentLang === 'am' ? 
+                        'ወደ አዲስ ስሪት በመሄድ ላይ...' : 
+                        'Gara haaraa deemaa jira...', 2000);
+                });
+            }
+        });
+    } else {
+        window.location.reload(true); // Force reload bypassing cache
+    }
+}
 </script>
 </body> 
+<footer>
+
+<!-- Add this to your existing footer or create one -->
+<div style="text-align: center; padding: 15px; background: #f8f9fa; border-top: 1px solid #ddd; margin-top: 30px;">
+    <div style="font-size: 0.8rem; color: #666;">
+        <strong>© 2024 Bishoftu Delivery</strong>
+        <br>
+        <small data-am="ሁሉም መብቶች የተጠበቁ ናቸው። ይህ ኮድ የግል ንብረት ነው።" 
+               data-om="Mirgi hundi ni eegama. Koodiin kun dhuunfaa dha.">
+            All rights reserved. This code is proprietary.
+        </small>
+        <br>
+        <small style="color: #999;">
+            Version 14.3 • Protected by copyright law
+        </small>
+    </div>
+</div>
+</footer>
 </html>
